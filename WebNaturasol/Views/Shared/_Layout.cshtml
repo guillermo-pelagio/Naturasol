@@ -1,0 +1,755 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- ENCABEZADO DE PAGINA -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Intranet</title>
+    <link rel="stylesheet" href="~/Content/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/vendors/css/vendor.bundle.base.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <script src="https://kit.fontawesome.com/e31b334914.js" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+    <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="~/Content/DataTables/css/responsive.dataTables.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/js/select.dataTables.min.css">
+    <link rel="stylesheet" href="~/Content/css/vertical-layout-light/style.css">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.webvisor.org/metrika/tag_ww.js", "ym");
+
+        ym(99290885, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true,
+            trackHash: true
+        });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/99290885" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
+</head>
+<body class='sidebar-icon-only'>
+    <div id=overlay class="align-items-center h-100 justify-content-center" style="display:none">
+        <div class="row align-items-center" id="imgLoad">
+            <div class="offset-lg-6 col-lg-4 col-md-4 col-sm-12">
+                <img src="~/Content/images/loading.gif" alt="Cargando">
+            </div>
+        </div>
+    </div>
+    <div class="container-scroller">
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center" style="background-color: #ECEFF1">
+                <!--<a class="navbar-brand brand-logo mr-5" href="@Url.Action("consultar_ticket", "tickets")"><img src="~/Content/images/logo.png" class="mr-2" alt="logo" /></a>-->
+                <!--<a class="navbar-brand brand-logo-mini" href="@Url.Action("consultar_ticket", "tickets")"><img src="~/Content/images/logo.png" alt="logo" /></a>-->
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end" style="background-color: #ECEFF1">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                            <i class="fa-solid fa-user-large fa-lg menu-icon"></i>
+                            <label class="col-form-label" style="padding-top: 1.5rem; font-size: small;">@Session["nombreCompleto"]</label>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="@Url.Action("mi_cuenta","Inicio")">
+                                <i class="fa-solid fa-circle-info text-primary"></i>
+                                Mi cuenta
+                            </a>
+                            <a class="dropdown-item" href="@Url.Action("cerrar_sesion","Inicio")">
+                                <i class="ti-power-off text-primary"></i>
+                                Cerrar sesión
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <div class="container-fluid page-body-wrapper">
+            <div class="theme-setting-wrapper">
+                <div id="theme-settings" class="settings-panel">
+                    <i class="settings-close ti-close"></i>
+                    <p class="settings-heading">SIDEBAR SKINS</p>
+                    <div class="sidebar-bg-options selected" id="sidebar-light-theme"><div class="img-ss rounded-circle bg-light border mr-3"></div>Light</div>
+                    <div class="sidebar-bg-options" id="sidebar-dark-theme"><div class="img-ss rounded-circle bg-dark border mr-3"></div>Dark</div>
+                    <p class="settings-heading mt-2">HEADER SKINS</p>
+                    <div class="color-tiles mx-0 px-4">
+                        <div class="tiles success"></div>
+                        <div class="tiles warning"></div>
+                        <div class="tiles danger"></div>
+                        <div class="tiles info"></div>
+                        <div class="tiles dark"></div>
+                        <div class="tiles default"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="right-sidebar" class="settings-panel">
+                <i class="settings-close ti-close"></i>
+                <ul class="nav nav-tabs border-top" id="setting-panel" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="setting-content">
+                    <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+                        <div class="add-items d-flex px-3 mb-0">
+                            <form class="form w-100">
+                                <div class="form-group d-flex">
+                                    <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                                    <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task">Add</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="list-wrapper px-3">
+                            <ul class="d-flex flex-column-reverse todo-list">
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Team review meeting at 3.00 PM
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Prepare for presentation
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox">
+                                            Resolve all the low priority tickets due today
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li class="completed">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox" checked>
+                                            Schedule meeting for next week
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                                <li class="completed">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input class="checkbox" type="checkbox" checked>
+                                            Project review
+                                        </label>
+                                    </div>
+                                    <i class="remove ti-close"></i>
+                                </li>
+                            </ul>
+                        </div>
+                        <h4 class="px-3 text-muted mt-5 font-weight-light mb-0">Events</h4>
+                        <div class="events pt-4 px-3">
+                            <div class="wrapper d-flex mb-2">
+                                <i class="ti-control-record text-primary mr-2"></i>
+                                <span>Feb 11 2018</span>
+                            </div>
+                            <p class="mb-0 font-weight-thin text-gray">Creating component page build a js</p>
+                            <p class="text-gray mb-0">The total number of sessions</p>
+                        </div>
+                        <div class="events pt-4 px-3">
+                            <div class="wrapper d-flex mb-2">
+                                <i class="ti-control-record text-primary mr-2"></i>
+                                <span>Feb 7 2018</span>
+                            </div>
+                            <p class="mb-0 font-weight-thin text-gray">Meeting with Alisa</p>
+                            <p class="text-gray mb-0 ">Call Sarah Graves</p>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="chats-section" role="tabpanel" aria-labelledby="chats-section">
+                        <div class="d-flex align-items-center justify-content-between border-bottom">
+                            <p class="settings-heading border-top-0 mb-3 pl-3 pt-0 border-bottom-0 pb-0">Friends</p>
+                            <small class="settings-heading border-top-0 mb-3 pt-0 border-bottom-0 pb-0 pr-3 font-weight-normal">See All</small>
+                        </div>
+                        <ul class="chat-list">
+                            <li class="list active">
+                                <div class="profile"><img src="~/Content/images/faces/face1.jpg" alt="image"><span class="online"></span></div>
+                                <div class="info">
+                                    <p>Thomas Douglas</p>
+                                    <p>Available</p>
+                                </div>
+                                <small class="text-muted my-auto">19 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="~/Content/images/faces/face2.jpg" alt="image"><span class="offline"></span></div>
+                                <div class="info">
+                                    <div class="wrapper d-flex">
+                                        <p>Catherine</p>
+                                    </div>
+                                    <p>Away</p>
+                                </div>
+                                <div class="badge badge-success badge-pill my-auto mx-2">4</div>
+                                <small class="text-muted my-auto">23 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="~/Content/images/faces/face3.jpg" alt="image"><span class="online"></span></div>
+                                <div class="info">
+                                    <p>Daniel Russell</p>
+                                    <p>Available</p>
+                                </div>
+                                <small class="text-muted my-auto">14 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="~/Content/images/faces/face4.jpg" alt="image"><span class="offline"></span></div>
+                                <div class="info">
+                                    <p>James Richardson</p>
+                                    <p>Away</p>
+                                </div>
+                                <small class="text-muted my-auto">2 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="~/Content/images/faces/face5.jpg" alt="image"><span class="online"></span></div>
+                                <div class="info">
+                                    <p>Madeline Kennedy</p>
+                                    <p>Available</p>
+                                </div>
+                                <small class="text-muted my-auto">5 min</small>
+                            </li>
+                            <li class="list">
+                                <div class="profile"><img src="~/Content/images/faces/face6.jpg" alt="image"><span class="online"></span></div>
+                                <div class="info">
+                                    <p>Sarah Graves</p>
+                                    <p>Available</p>
+                                </div>
+                                <small class="text-muted my-auto">47 min</small>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <!--
+    <li class="nav-item">
+        <a class="nav-link" href="@Url.Action("consultar_ticket", "tickets")">
+            <i class="icon-grid menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <i class="icon-layout menu-icon"></i>
+            <span class="menu-title">UI Elements</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+            <i class="icon-columns menu-icon"></i>
+            <span class="menu-title">Form elements</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="form-elements">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Basic Elements</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+            <i class="icon-bar-graph menu-icon"></i>
+            <span class="menu-title">Charts</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="charts">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/charts/chartjs.html">ChartJs</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#tables" aria-expanded="false" aria-controls="tables">
+            <i class="icon-grid-2 menu-icon"></i>
+            <span class="menu-title">Tables</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="tables">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/tables/basic-table.html">Basic table</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
+            <i class="icon-contract menu-icon"></i>
+            <span class="menu-title">Icons</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="icons">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/icons/mdi.html">Mdi icons</a></li>
+            </ul>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+            <i class="icon-head menu-icon"></i>
+            <span class="menu-title">User Pages</span>
+            <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="auth">
+            <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/login.html"> Login </a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/samples/register.html"> Register </a></li>
+            </ul>
+        </div>
+    </li>
+    -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#dashboard" aria-expanded="false" aria-controls="dashboard">
+                            <i class="fa-solid fa-chart-line menu-icon"></i>
+                            <span class="menu-title">Inicio</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="dashboard">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="@Url.Action("inicio", "inicio")">Inicio</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    @if ((Convert.ToString(Session["permisosArea"]).Contains("ALMACEN")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#inventory" aria-expanded="false" aria-controls="inventory">
+                                <i class="fa-solid fa-boxes-stacked menu-icon"></i>
+                                <span class="menu-title">Almacen</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="inventory">
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Inventario")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="@Url.Action("consultar_inventario", "inventario")">Inventario</a></li>
+                                    </ul>
+                                }
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Kardex")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="@Url.Action("consultar_kardex", "inventario")">Kardex</a></li>
+                                    </ul>
+                                }
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Seguimiento ST")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="@Url.Action("st_ts", "inventario")">Seguimiento ST</a></li>
+                                    </ul>
+                                }
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Reportes de inventario")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item" id="reporteAlmacen"> <a class="nav-link" href="@Url.Action("reportes_inventario", "inventario")">Reportes</a></li>
+                                    </ul>
+                                }
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("AUDITORIA"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#auditoria" aria-expanded="false" aria-controls="auditoria">
+                                <i class="fa-solid fa-glasses menu-icon"></i>
+                                <span class="menu-title">Auditoria</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="auditoria">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_auditoria", "auditoria")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("CALIDAD"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#quality" aria-expanded="false" aria-controls="quality">
+                                <i class="fa-solid fa-medal menu-icon"></i>
+                                <span class="menu-title">Calidad</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="quality">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("gestion_lotes", "calidad")">Gestión lotes</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("entradas_lote", "calidad")">Entradas por compra</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_calidad", "calidad")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("COMPRAS"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#supplier" aria-expanded="false" aria-controls="suppliers">
+                                <i class="fa-solid fa-cart-shopping menu-icon"></i>
+                                <span class="menu-title">Compras</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="supplier">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_compras", "compras")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("CONTABILIDAD"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#account" aria-expanded="false" aria-controls="account">
+                                <i class="fa-solid fa-file-invoice-dollar menu-icon"></i>
+                                <span class="menu-title">Contabilidad</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <!--
+            <div class="collapse" id="account">
+                <ul class="nav flex-column sub-menu">
+                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("facturas_proveedores", "costos")">Pendientes portal</a></li>
+                </ul>
+            </div>
+            -->
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("COSTOS"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#cost" aria-expanded="false" aria-controls="cost">
+                                <i class="fa-solid fa-money-bill-transfer menu-icon"></i>
+                                <span class="menu-title">Costos</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="cost">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_costos", "costos")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("CXP"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 60)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#bank" aria-expanded="false" aria-controls="bank">
+                                <i class="fa-solid fa-piggy-bank menu-icon"></i>
+                                <span class="menu-title">CXP</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="bank">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("facturas_proveedores", "cxp")">Pendientes portal</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_cxp", "cxp")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("FINANZAS"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#financial" aria-expanded="false" aria-controls="financial">
+                                <i class="fa-solid fa-chart-pie menu-icon"></i>
+                                <span class="menu-title">Finanzas</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="financial">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_finanzas", "finanzas")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("SGC"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#file" aria-expanded="false" aria-controls="file">
+                                <i class="fa-solid fa-file-pdf menu-icon"></i>
+                                <span class="menu-title">SGC</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="file">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("especificaciones", "SGC")">Especificaciones</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("LOGISTICA"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#logistic" aria-expanded="false" aria-controls="logistic">
+                                <i class="fa-solid fa-truck-fast menu-icon"></i>
+                                <span class="menu-title">Logistica</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+
+                            <div class="collapse" id="logistic">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("calendario_entregas", "logistica")">Calendario</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_logistica", "logistica")">Reportes</a></li>
+                                </ul>
+                            </div>
+
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("MANTENIMIENTO"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#manteinance" aria-expanded="false" aria-controls="manteinance">
+                                <i class="fa-solid fa-brush menu-icon"></i>
+                                <span class="menu-title">Mantenimiento</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+
+                            <div class="collapse" id="manteinance">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("inventario", "mantenimiento")">Inventario</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("catalogos", "mantenimiento")">Catalogos</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("mantenimientos", "mantenimiento")">Mantenimientos</a></li>
+                                </ul>
+                            </div>
+
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("PLANEACION"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#planeacion" aria-expanded="false" aria-controls="planeacion">
+                                <i class="fa-solid fa-calculator menu-icon"></i>
+                                <span class="menu-title">Planeación</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="planeacion">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("calendario_entregas", "planeacion")" target="_blank">Calendario entregas</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_planeacion", "planeacion")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if ((Convert.ToString(Session["permisosArea"]).Contains("PRODUCCION")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#produccion" aria-expanded="false" aria-controls="produccion">
+                                <i class="fa-solid fa-screwdriver-wrench menu-icon"></i>
+                                <span onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiZTA2YmUxZGEtOGM2ZS00ODFkLWIxZjEtMDdmNzQ2MTM5MTk2IiwidCI6IjMxODc5MWZlLTk3ZjctNGRkNC1iZmQxLTcwNTM4NzI1YjliYiJ9','_blank')" class="menu-title">Producción</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="produccion">
+                                @if (((Convert.ToString(Session["permisos"]).Contains("ROVE"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("rove", "produccion")">ROVE</a></li>
+                                    </ul>
+                                }
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Orden de fabricación")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("orden_fabricacion", "produccion")">Orden de fabricación</a></li>
+                                    </ul>
+                                }
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Solvencia")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item" id="reporteAlmacen"> <a class="nav-link" href="@Url.Action("solvencia_material", "inventario")">Generacion solvencia</a></li>
+                                    </ul>
+                                }
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Reportes de producción")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item" id="reporteProduccion"> <a class="nav-link" href="@Url.Action("reportes_produccion", "produccion")">Reportes</a></li>
+                                    </ul>
+                                }
+                            </div>
+                        </li>
+                    }
+                    @if ((Convert.ToString(Session["permisosArea"]).Contains("RRHH")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#rrhh" aria-expanded="false" aria-controls="rrhh">
+                                <i class="fa-solid fa-people-arrows menu-icon"></i>
+                                <span class="menu-title">RR.HH.</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="rrhh">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("ausencias", "rrhh")">Ausencias</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("asistencia", "rrhh")">Asistencia</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("TRANSPORTES"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#bus" aria-expanded="false" aria-controls="bus">
+                                <i class="fa-solid fa-van-shuttle menu-icon"></i>
+                                <span class="menu-title">Transportes</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="bus">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_transportes", "transportes")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("TRAFICO"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#trafic" aria-expanded="false" aria-controls="trafic">
+                                <i class="fa-solid fa-globe menu-icon"></i>
+                                <span class="menu-title">Trafico</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="trafic">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_internacional", "internacional")">Reportes</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToString(Session["permisosArea"]).Contains("VENTAS"))) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
+                                <i class="fa-solid fa-square-poll-vertical menu-icon"></i>
+                                <span onclick="window.open('https://app.powerbi.com/view?r=eyJrIjoiMDRlZjRmNTEtNjhkMS00MTRlLWEyNTktODU4YjZhY2UxNGM0IiwidCI6IjMxODc5MWZlLTk3ZjctNGRkNC1iZmQxLTcwNTM4NzI1YjliYiJ9','_blank')" class="menu-title">Ventas</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="charts">
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Cotizaciones")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="@Url.Action("cotizaciones", "ventas")">Cotizaciones</a></li>
+                                    </ul>
+                                }
+                                @if ((Convert.ToString(Session["permisos"]).Contains("Reportes de ventas")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                                {
+                                    <ul class="nav flex-column sub-menu">
+                                        <li class="nav-item"> <a class="nav-link" href="@Url.Action("reportes_ventas", "ventas")">Reportes</a></li>
+                                    </ul>
+                                }
+                            </div>
+                        </li>
+                    }
+                    @if (((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#form-users" aria-expanded="false" aria-controls=form-"users">
+                                <i class="fa-solid fa-user menu-icon"></i>
+                                <span class="menu-title">Usuarios</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="form-users">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("usuarios", "usuarios")">Usuarios</a></li>
+                                </ul>
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("permisos", "permisos")">Permisos</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </nav>
+            @RenderBody()
+
+
+            <script src="~/Content/popper.min.js"></script>
+            <script src="~/Content/vendors/js/vendor.bundle.base.js"></script>
+            <script src="~/Content/vendors/chart.js/Chart.min.js"></script>
+            <script src="~/Content/vendors/datatables.net/jquery.dataTables.js"></script>
+            <script src="~/Content/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+            <script src="~/Content/js/dataTables.select.min.js"></script>
+            <script src="~/Content/js/off-canvas.js"></script>
+            <script src="~/Content/js/hoverable-collapse.js"></script>
+            <script src="~/Content/js/template.js"></script>
+            <script src="~/Content/js/settings.js"></script>
+            <script src="~/Content/js/todolist.js"></script>
+            <script src="~/Content/js/dashboard.js"></script>
+            <script src="~/Content/js/Chart.roundedBarCharts.js"></script>
+            <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+            <script src="~/Scripts/DataTables/dataTables.responsive.js"></script>
+            <script src="~/Scripts/DataTables/dataTables.buttons.js"></script>
+
+            <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+            <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+            <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+            <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>            
+
+
+
+
+            <script>
+                /*
+                setInterval(myTimer, 60000);
+
+                function myTimer() {
+                    if (Convert.ToInt32(Session["departamento"]) == null) {
+                        alert("Sesion caducada");
+                        window.location.reload(false);
+                    }
+                }
+                */
+
+
+            </script>
+            @RenderSection("scripts", required: true)
+</body>
+</html>
+

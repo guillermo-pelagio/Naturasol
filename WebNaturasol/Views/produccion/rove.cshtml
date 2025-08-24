@@ -1,0 +1,2742 @@
+﻿@{
+    ViewBag.Title = "rove";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-registro-tab" data-toggle="pill" href="#pills-registro" role="tab" aria-controls="pills-registro" aria-selected="false">Nuevo registro</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-consumo-tab" data-toggle="pill" href="#pills-consumo" role="tab" aria-controls="pills-consumo" aria-selected="false">Consumos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-liberacion-tab" data-toggle="pill" href="#pills-liberacion" role="tab" aria-controls="pills-liberacion" aria-selected="false">Liberaciones</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-paros-tab" data-toggle="pill" href="#pills-paros" role="tab" aria-controls="pills-paros" aria-selected="false">Paros </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-formatos-tab" data-toggle="pill" href="#pills-formatos" role="tab" aria-controls="pills-formatos" aria-selected="false">Formatos operación </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+
+                            <div class="tab-pane fade show active" id="pills-registro" role="tabpanel" aria-labelledby="pills-registro-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label for="nombreTicketEdit" class="col-sm-3 col-form-label"># OF:</label>
+                                                    <div class="col-sm-9">
+                                                        <input style="display:none" class="form-control" id="idLiberacion" readonly>
+                                                        <input style="display:none" class="form-control" id="numeroOFLiberacionInicial2" readonly>
+                                                        <select class="custom-select" id="numeroOFLiberacionInicial">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div id="formROVE">
+                                                    <div class="row">
+                                                        <div class="col"><hr style="background-color: green"></div>
+                                                        <div class="col-auto" style="color: green;">GENERAL</div>
+                                                        <div class="col"><hr style="background-color: green"></div>
+                                                    </div>
+                                                    <div class="form-group row" id="producirdivLiberacion" style="display:none">
+                                                        <label class="col-sm-3 col-form-label"></label>
+                                                        <div class="col-sm-3">
+                                                            <label class="col-form-label" id="articuloOFInicial" style="padding-top: 0; padding-bottom: 0; font-size: small; color: green; font-weight: bold;"></label>
+                                                        </div>
+                                                        <label class="col-sm-3 col-form-label"></label>
+                                                        <!--<div class="col-sm-3">
+                                                            <label class="col-form-label" id="lineaOFInicial" style="padding-top: 0; padding-bottom: 0; font-size: small; color: green; font-weight: bold;"></label>
+                                                        </div>-->
+                                                        <div class="col-sm-3">
+                                                            <select class="custom-select" id="lineaOFInicial">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Planificada:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="cantidadPlanificada" readonly>
+                                                        </div>
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Completada:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="cantidadCompletada" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="form-group row">
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Supervisor:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="supervisorInicial">
+                                                        </div>
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Operador:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="operadorInicial">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">HC ideal Operador:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="idealOP" readonly>
+                                                        </div>
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">HC real Operador:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="number" class="form-control" id="realOP">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">HC ideal Ayudante:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="idealAYU" readonly>
+                                                        </div>
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">HC real Ayudante:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="number" class="form-control" id="realAYU">
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <div class="col"><hr style="background-color: green"></div>
+                                                        <div class="col-auto" style="color: green;">PRODUCCIÓN</div>
+                                                        <div class="col"><hr style="background-color: green"></div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="form-group row">
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Cantidad producida:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="number" class="form-control" id="producidaInicial" onchange="producidaModificada()">
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" placeholder="lote" id="loteEditLiberacion">
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="uomEditLiberacion" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Merma producida:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="number" class="form-control" id="mermaProducidaInicial">
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="uomEditLiberacionMerma" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="gpmTeorica" class="col-sm-3 col-form-label">Piezas/min teorica:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="gpmTeorica" readonly>
+                                                        </div>
+                                                        <label for="gpmReal" class="col-sm-3 col-form-label">Piezas/min real:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="number" class="form-control" id="gpmReal">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Capacidad/Hr teorica:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="capacidadTeorica" readonly>
+                                                        </div>
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Eficiencia:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="eficienciaP" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="finalizacionTicketEdit" class="col-sm-3 col-form-label">Tiempo productivo (mins):</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="tiempoProductivo" readonly>
+                                                        </div>
+                                                        <label for="departamentoTicketEdit" class="col-sm-3 col-form-label">Tiempo perdido (mins):</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="text" class="form-control" id="tiempoPerdido" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="btnRegistrarLiberacionROVE" onclick="registrarLiberacionROVE2()" class="btn btn-success">Guardar</button>
+                                                    </div>
+                                                    <br />
+                                                    <div class="row">
+                                                        <div class="col"><hr style="background-color: green"></div>
+                                                        <div class="col-auto" style="color: green;">PAROS</div>
+                                                        <div class="col"><hr style="background-color: green"></div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="form-group row">
+                                                        <label for="correoTicketEdit" class="col-sm-3 col-form-label">Inicio:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="datetime-local" class="form-control" id="inicioParo" format-value="yyyy-MM-ddTHH:mm">
+                                                        </div>
+                                                        <label for="correoTicketEdit" class="col-sm-3 col-form-label">Fin:</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="datetime-local" class="form-control" id="finParo" format-value="yyyy-MM-ddTHH:mm">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="loteEdit" class="col-sm-3 col-form-label">Área:</label>
+                                                        <div class="col-sm-3">
+                                                            <input style="display:none" class="form-control" id="areaParoEdit2" readonly>
+                                                            <select class="custom-select" id="areaParoEdit">
+                                                                <option value='0'>Selecciona una opción</option>
+                                                                <option value="M">MANTENIMIENTO</option>
+                                                                <option value="R">PROYECTOS</option>
+                                                                <option value="C">CADENA DE SUMINISTRO</option>
+                                                                <option value="H">RH</option>
+                                                                <option value="X">EXTERNO</option>
+                                                                <option value="O">COMPRAS</option>
+                                                                <option value="L">CALIDAD</option>
+                                                                <option value="D">CEIDENA</option>
+                                                                <option value="P">PRODUCCIÓN</option>
+                                                                <option value="U">AUSENTISMO DE PERSONAL</option>
+                                                                <option value="N">SANIDAD</option>
+                                                                <option value="S">PROCESOS</option>
+                                                                <option value="G">SEGURIDAD E HIGIENE</option>
+                                                                <option value="T">SISTEMAS</option>
+                                                            </select>
+                                                        </div>
+                                                        <label for="finalizacionTicketEdit" class="col-sm-3 col-form-label">Código paro:</label>
+                                                        <div class="col-sm-3">
+                                                            <input style="display:none" class="form-control" id="codigoParoEdit2" readonly>
+                                                            <select class="custom-select" id="codigoParoEdit">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Causa:</label>
+                                                        <div class="col-sm-8">
+                                                            <textarea class="form-control" id="causaParoEdit" rows="5"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <br />
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="btnRegistrarParosROVE" onclick="registrarParoROVE2()" class="btn btn-success">Guardar</button>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col"><hr style="background-color: green"></div>
+                                                        <div class="col-auto" style="color: green;">CONSUMOS</div>
+                                                        <div class="col"><hr style="background-color: green"></div>
+                                                    </div>
+                                                    <br />
+
+
+                                                    <div id="divComponentes">
+
+                                                    </div>
+                                                    <br />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade " id="pills-consumo" role="tabpanel" aria-labelledby="pills-consumo-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div>
+
+                                                    <!--
+                                                    @if ((Convert.ToInt32(Session["puesto"]) < 3) || (Convert.ToInt32(Session["puesto"]) == 100))
+                                                    {
+                                                        <button type="button" id="btnNuevoConsumoROVE" onclick="crearNuevoConsumoROVE()" class="btn btn-success">Nuevo registro</button>
+                                                    }-->
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaConsumosROVE" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Acciones</th>
+                                                                <th>Estatus</th>
+                                                                <th>Creacion</th>
+                                                                <th>Turno</th>
+                                                                <th>Documento</th>
+                                                                <th>Planta</th>
+                                                                <th>Linea</th>
+                                                                <th>Componente</th>
+                                                                <th>Descripción</th>
+                                                                <th>Cantidad</th>
+                                                                <th>U.M.</th>
+                                                                <th>Lote</th>
+                                                                <th>Merma</th>
+                                                                <th>Supervisor</th>
+                                                                <th>Operador</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-liberacion" role="tabpanel" aria-labelledby="pills-liberacion-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div>
+
+                                                    <!--
+                                                        @if ((Convert.ToInt32(Session["puesto"]) < 2) || (Convert.ToInt32(Session["puesto"]) == 100))
+                                                        {
+                                                            <button type="button" id="btnNuevoLiberacionROVE" onclick="crearNuevoLiberacionROVE()" class="btn btn-success">Nuevo registro</button>
+                                                        }
+                                                        -->
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaLiberacionesROVE" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Acciones</th>
+                                                                <th>Estatus</th>
+                                                                <th>Creacion</th>
+                                                                <th>Turno</th>
+                                                                <th>Documento</th>
+                                                                <th>Planta</th>
+                                                                <th>Linea</th>
+                                                                <th>Artículo</th>
+                                                                <th>Descripción</th>
+                                                                <th>Cantidad</th>
+                                                                <th>U.M.</th>
+                                                                <th>Lote</th>
+                                                                <th>Merma</th>
+                                                                <th>Operador</th>
+                                                                <th>Supervisor</th>
+                                                                <th>Tiempo perdido</th>
+                                                                <th>Headcount Op</th>
+                                                                <th>HeadcountAy</th>
+                                                                <th>Eficiencia %</th>
+                                                                <th>Comentarios</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody></tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-paros" role="tabpanel" aria-labelledby="pills-paros-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div>
+
+                                                    <!--
+                                                    @if ((Convert.ToInt32(Session["puesto"]) < 2) || (Convert.ToInt32(Session["puesto"]) == 100))
+                                                    {
+                                                        <button type="button" id="btnNuevoLiberacionROVE" onclick="crearNuevoParoROVE()" class="btn btn-success">Nuevo registro</button>
+                                                    }-->
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaParos" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Acciones</th>
+                                                                <th>Estatus</th>
+                                                                <th>Planta</th>
+                                                                <th>Linea</th>
+                                                                <th>O.F.</th>
+                                                                <th>Hora inicio</th>
+                                                                <th>Hora fín</th>
+                                                                <th>Turno</th>
+                                                                <th>Tiempo muerto (Mins)</th>
+                                                                <th>Área</th>
+                                                                <th>Código paro</th>
+                                                                <th>Causa</th>
+                                                                <th>Supervisor</th>
+                                                                <th>Operador</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-formatos" role="tabpanel" aria-labelledby="pills-formatos-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaFormatos" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Abrir formato</th>
+                                                                <th>Nombre</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--VISTA DE MODAL DE CREACION DE CONSUMOS-->
+<div class="modal fade" id="modalDetalleConsumos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" id="encabezadoDetalleConsumos" style="background-color: lightgreen">
+                <h5 class="modal-title" id="modalConsumo">Realizar consumo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="nombreTicketEdit" class="col-sm-4 col-form-label"># OF:</label>
+                    <div class="col-sm-8">
+                        <input style="display:none" class="form-control" id="idConsumo" readonly>
+                        <input style="display:none" class="form-control" id="numeroOFConsumoEdit2" readonly>
+                        <select class="custom-select" id="numeroOFConsumoEdit">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" id="producirdiv" style="display:none">
+                    <label class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <label class="col-form-label" id="articuloProducir" style="padding-top: 0; padding-bottom: 0; font-size: small; color: green; font-weight: bold;"></label>
+                    </div>
+                </div>
+                <!--
+                <div id="divComponentes">
+
+                </div>-->
+                <br />
+                <div class="modal-footer">
+                    <button type="button" id="btnConsultarInventario" class="btn btn-secondary" onclick="consultarInventario()">Consultar inventario</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--VISTA DE MODAL DE CREACION DE LIBERACIONES-->
+<div class="modal fade" id="modalDetalleLiberaciones" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" id="modalDetalleLiberaciones" style="background-color: lightgreen">
+                <h5 class="modal-title" id="modalLiberaciones">Realizar liberación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="nombreTicketEdit" class="col-sm-4 col-form-label"># OF:</label>
+                    <div class="col-sm-8">
+                        <input style="display:none" class="form-control" id="idLiberacion" readonly>
+                        <input style="display:none" class="form-control" id="numeroOFLiberacionEdit2" readonly>
+                        <select class="custom-select" id="numeroOFLiberacionEdit">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" id="producirdivLiberacion" style="display:none">
+                    <label class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <label class="col-form-label" id="articuloOFEdit" style="padding-top: 0; padding-bottom: 0; font-size: small; color: green; font-weight: bold;"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Cantidad:</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="cantidadLiberacionEdit">
+                    </div>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="uomEditLiberacion" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Lote:</label>
+                    <div class="col-sm-8">
+                        <input style="display:none" class="form-control" id="loteLiberacionEdit2" readonly>
+                        <input type="text" class="form-control" id="loteLiberacionEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="finalizacionTicketEdit" class="col-sm-4 col-form-label">Comentarios:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosLiberacionEdit" rows="5"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Supervisor:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="supervisorEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Velocidad linea:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="valocidadEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Merma en Kg:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="mermaLiberacionEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Peso promedio en Kg:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="pesoEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Sobrepeso:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="sobrepesoEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Headcount:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="headcountEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Eficiencia %:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="eficienciaLiberacionEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Merma en %:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="mermapLiberacionEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Cajas/hora:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="cajasLiberacionEdit">
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnRegistrarLiberacionROVE" onclick="registrarLiberacionROVE()" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--VISTA DE MODAL DE CREACION DE PAROS-->
+<div class="modal fade" id="modalDetalleParos" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" id="modalDetalleParos" style="background-color: lightgreen">
+                <h5 class="modal-title" id="modalParos">Registro de paro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="nombreTicketEdit" class="col-sm-4 col-form-label"># OF:</label>
+                    <div class="col-sm-8">
+                        <input style="display:none" class="form-control" id="numeroOFParoEdit2" readonly>
+                        <select class="custom-select" id="numeroOFParoEdit">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" id="producirdivParo">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label"></label>
+                    <div class="col-sm-8">
+                        <label class="col-form-label" id="articuloOFParoEdit" style="padding-top: 0; padding-bottom: 0; font-size: small; color: green; font-weight: bold;"></label>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Inicio:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="inicioDateParoEdit">
+                        <input type="time" class="form-control" id="inicioTimeParoEdit">
+                    </div>
+                </div>
+                <br />
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Fín:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="finDateParoEdit">
+                        <input type="time" class="form-control" id="finTimeParoEdit">
+                    </div>
+                </div>
+                <br />
+                <!--
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Área:</label>
+                    <div class="col-sm-8">
+                        <input style="display:none" class="form-control" id="areaParoEdit2" readonly>
+                        <select class="custom-select" id="areaParoEdit">
+                            <option value="1">MANTENIMIENTO</option>
+                            <option value="2">PROYECTOS</option>
+                            <option value="3">CADENA DE SUMINISTRO</option>
+                            <option value="4">RH</option>
+                            <option value="5">EXTERNO</option>
+                            <option value="6">COMPRAS</option>
+                            <option value="7">CALIDAD</option>
+                            <option value="8">CEIDENA</option>
+                            <option value="9">PRODUCCIÓN</option>
+                            <option value="10">AUSENTISMO DE PERSONAL</option>
+                            <option value="11">SANIDAD</option>
+                            <option value="12">PROCESOS</option>
+                            <option value="13">SEGURIDAD E HIGIENE</option>
+                            <option value="14">SISTEMAS</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="finalizacionTicketEdit" class="col-sm-4 col-form-label">Código paro:</label>
+                    <div class="col-sm-8">
+                        <input style="display:none" class="form-control" id="codigoParoEdit2" readonly>
+                        <select class="custom-select" id="codigoParoEdit">
+                            <option value="M1">	FALLA DE EQUIPOS, FALTA DE REFACCIONES, MANTENIMIENTOS NO PROGRAMADOS, MANTENIMIENTO CORRECTIVO</option>
+                            <option value="M2"> INSTALACIONES O MEJORAS DE EQUIPOS</option>
+                            <option value="C1"> CAMBIOS AL PROGRAMA</option>
+                            <option value="C2"> FALTA DE MATERIALES (ATRASO EN SURTIMIENTO, FUERA DE ESPECIFICACIÓN POR FALTA DE SEGUIMIENTO A PEPS)</option>
+                            <option value="C3"> FALTA DE MATERIALES (NO PLANEADOS)</option>
+                            <option value="R1"> FALTA DE PERSONAL POR PLANTILLA INCOMPLETA</option>
+                            <option value="E1"> FALTA DE ENERGIA ELECTRICA</option>
+                            <option value="E2"> DESASTRE NATURAL</option>
+                            <option value="D1"> FALTA DE SERVICIOS (AGUA, GAS, ETC.)</option>
+                            <option value="D2"> FALTA DE MATERIALES POR FALTA DE COMPRA</option>
+                            <option value="Q1"> PNC POR FALTA DE CRITERIOS DE LIBERACIÓN</option>
+                            <option value="Q2"> ATRASO EN LIBERACIÓN</option>
+                            <option value="Q3"> PRUEBAS NO PLANEADAS POR DESARROLLO DE NUEVOS PRODUCTOS</option>
+                            <option value="P1"> PNC POR MAL AJUSTE OPERATIVO</option>
+                            <option value="P2"> PAROS OPERATIVOS</option>
+                            <option value="P3"> AJUSTES DE OPERACIÓN</option>
+                            <option value="P4"> FALTA DE PERSONAL POR AUSENTISMO</option>
+                            <option value="P5"> RELLENO DE ACEITE</option>
+                            <option value="P6"> ATRASO EN LIMPIEZA Y RETIRO DE LODOS</option>
+                            <option value="P7"> ATRASO POR LIMPIEZA</option>
+                            <option value="P8"> ATRASO EN TIEMPO DE LIMPIEZA POR SANIDAD</option>
+                            <option value="P9"> AJUSTES DE CONDICIONES DE OPERACIÓN, CAPACITACIÓN, MEJORAS DEL PROCESO</option>
+                            <option value="P10"> RIESGO DE TRABAJO</option>
+                            <option value="S1"> ARRANQUE DE PROCESO</option>
+                            <option value="S2"> FIN DE PROCESO</option>
+                            <option value="S3"> LIMPIEZA PROGRAMADA</option>
+                            <option value="S4"> TIEMPO PROGRAMADO PARA LIMPIEZA Y RETIRO DE LODOS</option>
+                            <option value="S5"> PESADO DE MATERIALES</option>
+                            <option value="F1"> FALTA DE SISTEMA SAP</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Causa:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="causaParoEdit" rows="5"></textarea>
+                    </div>
+                </div>
+                    -->
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Estatus:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="estatusParoEdit">
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnRegistrarParoROVE" onclick="registrarParoROVE()" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+
+        $("#formROVE").hide();
+
+        $('#areaParoEdit').on('change', function()
+        {
+            $('#codigoParoEdit').empty();
+            var componente = {
+                areaParo: $("#areaParoEdit").val()
+            }
+
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("obtener_codigoParo", "produccion")',
+                    type: "POST",
+                    data: componente,
+                    success: function (resultado50) {
+                        $('#codigoParoEdit').append(resultado50);
+                    },
+                    error: function (xhr, status, error) {
+
+
+                    },
+                });
+        });
+
+        $('#numeroOFConsumoEdit').on('change', function()
+        {
+            $('#componenteOFEdit').empty();
+            $('#loteEdit').empty();
+            $('#divComponentes').empty();
+            $("#uomEdit").val("");
+
+            $('#producirdiv').show();
+
+            var componente = {
+                DocNum: $("#numeroOFConsumoEdit").val()
+            }
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("obtener_articulo", "produccion")',
+                    type: "POST",
+                    data: componente,
+                    success: function (resultado) {
+                        $("#articuloProducir").text(resultado);
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_componentes", "produccion")',
+                                type: "POST",
+                                data: componente,
+                                success: function (resultado) {
+                                    $('#divComponentes').append(resultado);
+                                },
+                                error: function (xhr, status, error) {
+
+
+                                },
+                            });
+                    },
+                    error: function (xhr, status, error) {
+
+
+                    },
+                });
+        });
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_of", "produccion")',
+                                type: "POST",
+                                success: function (resultado) {
+                                    $('#numeroOFLiberacionInicial').append(resultado);
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        /***************************************************************************CREACION**************************************************** */
+        function producidaModificada() {
+            var eficiencia = 0;
+            if ($("#producidaInicial").val() == "") {
+                eficiencia = 0
+            }
+            else {
+                eficiencia = (parseFloat($("#producidaInicial").val() / parseFloat($("#capacidadTeorica").val())) * 100).toFixed(4);
+
+            }
+            $("#eficienciaP").val(eficiencia+" %");
+
+            $("#tiempoProductivo").val(((parseFloat(eficiencia) * 60) / 100).toFixed(4));
+
+            $("#tiempoPerdido").val(60 - (((eficiencia) * 60) / 100).toFixed(4));
+        }
+
+        //BOTON DE CREACION DE CONSUMO
+        function crearNuevoConsumoROVE()
+        {
+            $('#numeroOFConsumoEdit').empty();
+            $('#componenteOFEdit').empty();
+            $('#loteEdit').empty();
+
+            $("#uomEdit").val("");
+            $("#numeroOFConsumoEdit2").val("");
+            $("#cantidadEdit").val("");
+            $("#mermaEdit").val("");
+            $("#causamermaEdit").val("");
+            $("#pncEdit").val("");
+            $("#comentariosEdit").val("");
+
+            $('#numeroOFConsumoEdit2').hide();
+            $('#producirdiv').hide();
+            $('#numeroOFConsumoEdit').show();
+            $('#componenteOFEdit').show();
+            $('#loteEdit').show();
+
+            $("#btnConsultarInventario").show();
+
+            jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_of", "produccion")',
+                                type: "POST",
+                                success: function (resultado) {
+                                    $('#numeroOFConsumoEdit').append(resultado);
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+
+                        $("#modalConsumo").text("Realizar consumo");
+                        $("#modalDetalleConsumos").modal("show");
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        //CAMBIO DE OF
+        $('#numeroOFConsumoEdit').on('change', function()
+        {
+            $('#componenteOFEdit').empty();
+            $('#loteEdit').empty();
+            $('#divComponentes').empty();
+            $("#uomEdit").val("");
+
+            $('#producirdiv').show();
+
+            var componente = {
+                DocNum: $("#numeroOFConsumoEdit").val()
+            }
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("obtener_articulo", "produccion")',
+                    type: "POST",
+                    data: componente,
+                    success: function (resultado) {
+                        $("#articuloProducir").text(resultado);
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_componentes", "produccion")',
+                                type: "POST",
+                                data: componente,
+                                success: function (resultado) {
+                                    $('#divComponentes').append(resultado);
+                                },
+                                error: function (xhr, status, error) {
+
+
+                                },
+                            });
+                    },
+                    error: function (xhr, status, error) {
+
+
+                    },
+                });
+        });
+
+        $('#componenteOFEdit').on('change', function()
+        {
+            $('#loteEdit').empty();
+            $("#uomEdit").val("");
+
+            var componente = {
+                Code: $("#componenteOFEdit").val(),
+                DocNum: $("#numeroOFConsumoEdit").val()
+            }
+
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("obtener_lote", "produccion")',
+                    type: "POST",
+                    data: componente,
+                    success: function (resultado) {
+                        $('#loteEdit').append(resultado);
+                    },
+                    error: function (xhr, status, error) {
+
+
+                    },
+                });
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("obtener_um", "produccion")',
+                    type: "POST",
+                    data: componente,
+                    success: function (resultado) {
+                        $('#uomEdit').val(resultado);
+                    },
+                    error: function (xhr, status, error) {
+
+
+                    },
+                });
+        });
+
+        tablaConsumosROVE = $("#tablaConsumosROVE").DataTable(
+            {
+                paging: true,
+                ordering: false,
+                info: true,
+                lengthChange: false,
+                pageLength: 25,
+                "language":
+                {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                },
+
+                "ajax":
+                {
+                    url: '@Url.Action("obtener_consumos_rove", "produccion")',
+                    type: "GET",
+                    dataType: "json",
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Consumos producción',
+                        exportOptions:
+                        {
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,13,14]
+                        }
+                    },],
+                "columns": [
+                    {
+                        data: 'acciones',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'estatus', "render": function (estatus) {
+                            if (estatus == "-1") {
+                                return '<span class="badge badge-danger">RECHAZADO</span>'
+                            }
+                            if (estatus == "0") {
+                                return '<span class="badge badge-light">SIN APROBACION</span>'
+                            }
+                            else if (estatus == "1") {
+                                return '<span class="badge badge-warning">APROBADO SUPERVISOR</span>'
+                            }
+                            else if (estatus == "2") {
+                                return '<span class="badge badge-secondary">APROBADO ANALISTA</span>'
+                            }
+                            else if (estatus == "3") {
+                                return '<span class="badge badge-success">CREADO EN SAP</span>'
+                            }
+                            else if (estatus == "4") {
+                                return '<span class="badge badge-outline-danger">ERROR EN SAP</span>'
+                            }
+                        }
+                    },
+                    {
+                        data: 'fechaCreacion'
+                    },
+                    {
+                        data: 'turno'
+                    },
+                    {
+                        data: 'DocNum'
+                    },
+                    {
+                        data: 'linea'
+                    },
+                    {
+                        data: 'cecos'
+                    },
+                    {
+                        data: 'ItemCode'
+                    },
+                    {
+                        data: 'ItemName'
+                    },
+                    {
+                        data: 'Quantity'
+                    },
+                    {
+                        data: 'UM'
+                    },
+                    {
+                        data: 'BatchNumber'
+                    },
+                    {
+                        data: 'Merma'
+                    },
+                    {
+                        data: 'supervisor'
+                    },
+                    {
+                        data: 'operador'
+                    }]
+            });
+
+        $("#tablaConsumosROVE").on("click", '#btn-editar-consumo', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaConsumosROVE.row(filaseleccionada).data();
+            abrirdetalleConsumo(datos);
+        });
+
+
+        function abrirdetalleConsumo(datos)
+        {
+            $('#loteEdit').empty();
+            $("#uomEdit").val("");
+            $("#divComponentes").empty();
+            jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        var componente = {
+                            DocNum: datos.DocNum
+                        }
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_articulo", "produccion")',
+                                type: "POST",
+                                data: componente,
+                                success: function (resultado) {
+                                    var componente2 = {
+                                        Code: datos.ItemCode,
+                                        DocNum: datos.DocNum
+                                    }
+                                    jQuery.ajax(
+                                        {
+                                            url: '@Url.Action("obtener_um", "produccion")',
+                                            type: "POST",
+                                            data: componente2,
+                                            success: function (resultado2) {
+
+                                                $("#articuloProducir").text(resultado);
+                                                $('#producirdiv').show();
+
+                                                $("#numeroOFConsumoEdit2").val(datos.DocNum);
+                                                $("#cantidadEdit").val(datos.Quantity);
+                                                $("#mermaEdit").val(datos.Merma);
+                                                $("#causamermaEdit").val(datos.CausaMerma);
+                                                $("#pncEdit").val(datos.PNC);
+                                                $("#comentariosEdit").val(datos.Comentarios);
+
+                                                $('#numeroOFConsumoEdit2').show();
+                                                $('#numeroOFConsumoEdit').hide();
+                                                $('#componenteOFEdit').hide();
+                                                $('#loteEdit').hide();
+
+                                                $("#btnConsultarInventario").hide();
+
+                                                $("#modalConsumo").text("Visualizar consumo");
+                                                $("#modalDetalleConsumos").modal("show");
+
+                                                $('#uomEdit').val(resultado2);
+                                            },
+                                            error: function (xhr, status, error) {
+
+
+                                            },
+                                        });
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        /***************************************************************************CONSULTA DE INVENTARIO**************************************************** */
+        function consultarInventario()
+        {
+            if ($("#componenteOFEdit").val() == 0)
+            {
+                swal("", "Selecciona un artículo!", "error")
+                    .then((value) =>
+                    {});
+            }
+            else
+            {
+                jQuery.ajax(
+                {
+                    url: '@Url.Action("validar_sesion", "Inicio")',
+                    type: "POST",
+                    dataType: "json",
+                    success: function(resultado)
+                    {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1)
+                        {
+                            if ($("#componenteOFEdit").val() != null)
+                            {
+                                var busqueda = {
+                                    Artículo: $("#componenteOFEdit").val().substring(0, 12),
+                                    Almacén: "",
+                                    Lote: "",
+                                }
+
+                                jQuery.ajax(
+                                {
+                                    url: '@Url.Action("obtener_inventario", "inventario")',
+                                    type: "POST",
+                                    data: busqueda,
+                                    success: function(resultado)
+                                    {
+                                        window.open('/inventario/consultar_inventario/', "_blank");
+                                    },
+                                    error: function(xhr, status, error) {},
+                                });
+                            }
+                            else
+                            {
+                                swal("", "Elige un artículo!", "warning")
+                                    .then((value) =>
+                                    {});
+                            }
+                        }
+                        else
+                        {
+                            alert('Sesion caducada');
+                            window.location.reload(false);
+                        }
+                    },
+                    error: function()
+                    {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Sesión expirada!", "error")
+                            .then((value) =>
+                            {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+            }
+        }
+
+        /***************************************************************************LIBERACION DE OF**************************************************** */
+        $('#numeroOFLiberacionInicial').on('change', function()
+        {
+            $("#formROVE").hide();
+            $("#articuloOFEdit").text("");
+            $('#loteLiberacionEdit').empty();
+            $("#uomEditLiberacion").text("");
+            $("#uomEditLiberacionMerma").text("");            
+            $('#divComponentes').empty();
+
+            var componente = {
+                DocNum: $("#numeroOFLiberacionInicial").val()
+            }
+            jQuery.ajax(
+            {
+                url: '@Url.Action("obtener_articulo", "produccion")',
+                type: "POST",
+                data: componente,
+                success: function(resultado)
+                {
+                    $("#formROVE").show();
+                    //$("#articuloOFEdit").text(resultado);
+                    $("#articuloOFInicial").text(resultado.split('__')[0]);
+                    $("#cantidadPlanificada").val(resultado.split('__')[1].split(' - ')[0]);
+                    $("#cantidadCompletada").val(resultado.split('__')[1].split(' - ')[1]);
+                    $("#lineaOFInicial").text(resultado.split('__')[2].split(' - ')[0]);
+                    $("#capacidadTeorica").val(resultado.split('__')[2].split(' - ')[1] == "" ? resultado.split('__')[2].split(' - ')[2] : resultado.split('__')[2].split(' - ')[1]);
+                    $("#idealOP").val(resultado.split('__')[2].split(' - ')[3]);
+                    $("#idealAYU").val(resultado.split('__')[2].split(' - ')[4]);
+                    $("#gpmTeorica").val(resultado.split('__')[2].split(' - ')[5]);
+
+                    jQuery.ajax(
+                        {
+                            url: '@Url.Action("obtener_maquinas", "produccion")',
+                            type: "POST",
+                            data: componente,
+                            success: function (resultado50) {
+                                $('#lineaOFInicial').append(resultado50);
+
+                                jQuery.ajax(
+                                    {
+                                        url: '@Url.Action("obtener_componentes", "produccion")',
+                                        type: "POST",
+                                        data: componente,
+                                        success: function (resultado3) {
+                                            $('#divComponentes').append(resultado3);
+
+                                            jQuery.ajax(
+                                                {
+                                                    url: '@Url.Action("obtener_fecha", "produccion")',
+                                                    type: "POST",
+                                                    success: function (resultado3) {
+                                                        $("#producirdivLiberacion").show();
+                                                        //$("#loteLiberacionEdit").val(resultado3);
+
+                                                        var componente2 = {
+                                                            Code: resultado.substring(0, 12)
+                                                        }
+                                                        jQuery.ajax(
+                                                            {
+                                                                url: '@Url.Action("obtener_um", "produccion")',
+                                                                type: "POST",
+                                                                data: componente2,
+                                                                success: function (resultado2) {
+                                                                    $('#uomEditLiberacion').val(resultado2);
+                                                                    $("#uomEditLiberacionMerma").val(resultado2);
+                                                                },
+                                                                error: function (xhr, status, error) {
+
+
+                                                                },
+                                                            });
+                                                    },
+                                                    error: function (xhr, status, error) {
+                                                    },
+                                                });
+                                        },
+                                        error: function (xhr, status, error) {
+
+
+                                        },
+                                    });
+                            },
+                            error: function (xhr, status, error) {
+
+
+                            },
+                        });
+                },
+                error: function(xhr, status, error) {
+
+
+                },
+            })
+        });
+
+        $('#lineaOFInicial').on('change', function () {
+
+            var componente22 = {
+                DocNum: $("#numeroOFLiberacionInicial").val(),
+                Linea: $("#lineaOFInicial option:selected").text()
+            }
+
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("obtener_capacidades", "produccion")',
+                    type: "POST",
+                    data: componente22,
+                    success: function (resultado) {
+
+                        $("#capacidadTeorica").val(resultado.split('__')[2].split(' - ')[1] == "" ? resultado.split('__')[2].split(' - ')[2] : resultado.split('__')[2].split(' - ')[1]);
+                        $("#idealOP").val(resultado.split('__')[2].split(' - ')[3]);
+                        $("#idealAYU").val(resultado.split('__')[2].split(' - ')[4]);
+                        $("#gpmTeorica").val(resultado.split('__')[2].split(' - ')[5]);
+                    },
+                    error: function (xhr, status, error) {
+
+
+                    },
+
+                });
+        });
+
+        $('#numeroOFLiberacionEdit').on('change', function ()
+        {
+            $("#articuloOFEdit").text("");
+            $('#loteLiberacionEdit').empty();
+            $("#uomEditLiberacion").text("");
+            $("#uomEditLiberacionMerma").text("");
+            var componente = {
+                DocNum: $("#numeroOFLiberacionEdit").val()
+            }
+            jQuery.ajax(
+            {
+                url: '@Url.Action("obtener_articulo", "produccion")',
+                type: "POST",
+                data: componente,
+                success: function(resultado)
+                {
+                    $("#articuloOFEdit").text(resultado);
+                    /*$("#articuloOFEdit").text(resultado.split('__')[0]);
+                    $("#cantidadPlanificada").text(resultado.split('__')[1].split(' - ')[0]);
+                    $("#cantidadCompletada").text(resultado.split('__')[1].split(' - ')[1]);*/
+                    jQuery.ajax(
+                    {
+                        url: '@Url.Action("obtener_fecha", "produccion")',
+                        type: "POST",
+                        success: function(resultado3)
+                        {
+                            $("#producirdivLiberacion").show();
+                            $("#loteLiberacionEdit").val(resultado3);
+
+                            var componente2 = {
+                                Code: resultado.substring(0, 12)
+                                    }
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("obtener_um", "produccion")',
+                                    type: "POST",
+                                    data: componente2,
+                                    success: function (resultado2) {
+                                        $('#uomEditLiberacion').val(resultado2);
+                                        $("#uomEditLiberacionMerma").val(resultado2);
+                                    },
+                                    error: function (xhr, status, error) {
+
+
+                                    },
+                                });
+                        },
+                        error: function(xhr, status, error) {
+                        },
+                    });
+                },
+                error: function(xhr, status, error) {
+
+
+                },
+            })
+        });
+
+        function crearNuevoLiberacionROVE()
+        {
+            $('#numeroOFLiberacionEdit').empty();
+            $("#producirdivLiberacion").hide();
+
+            $("#articuloOFEdit").text("");
+            $("#uomEditLiberacion").text("");
+            $("#uomEditLiberacionMerma").text("");
+
+            $("#numeroOFLiberacionEdit2").val("");
+            $("#numeroOFLiberacionEdit").empty();
+            $("#cantidadLiberacionEdit").val("");
+            $("#loteLiberacionEdit2").val("");
+            $("#loteLiberacionEdit").empty;
+            $("#comentariosLiberacionEdit").val("");
+            $("#supervisorEdit").val("");
+            $("#valocidadEdit").val("");
+            $("#mermaLiberacionEdit").val("");
+            $("#pesoEdit").val("");
+            $("#sobrepesoEdit").val("");
+            $("#headcountEdit").val("");
+            $("#eficienciaLiberacionEdit").val("");
+            $("#mermapLiberacionEdit").val("");
+            $("#cajasLiberacionEdit").val("");
+
+            $('#numeroOFLiberacionEdit').show();
+            $('#loteLiberacionEdit').show();
+            $('#numeroOFLiberacionEdit2').hide();
+            $('#loteLiberacionEdit2').hide();
+
+            $("#btnRegistrarLiberacionROVE").show();
+
+            $("#modalLiberaciones").text("Crear liberación");
+            $("#modalDetalleLiberaciones").modal("show");
+
+            jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_of", "produccion")',
+                                type: "POST",
+                                success: function (resultado) {
+                                    $('#numeroOFLiberacionEdit').append(resultado);
+                                    $('#numeroOFLiberacionInicial').append(resultado);
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                        $("#modalDetalleLiberaciones").modal("show");
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function registrarLiberacionROVE()
+        {
+            var isCorrect = true;
+
+            if ($("#numeroOFLiberacionEdit").val() == 0)
+            {
+                swal("", "Debes indicar una OF", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#cantidadLiberacionEdit").val() == 0)
+            {
+                swal("", "Debes indicar la cantidad", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#loteLiberacionEdit").val() == 0)
+            {
+                swal("", "Debes indicar un lote", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect)
+            {
+
+                var liberacionRove = {
+                    DocNum: $("#numeroOFLiberacionEdit").val(),
+                    Quantity: $("#cantidadLiberacionEdit").val(),
+                    BatchNumber: $("#loteLiberacionEdit").val(),
+                    Comentarios: $("#comentariosLiberacionEdit").val(),
+                    Supervisor: $("#supervisorEdit").val(),
+                    VelocidadLinea: $("#valocidadEdit").val(),
+                    Merma: $("#mermaLiberacionEdit").val(),
+                    MermaP: $("#mermapLiberacionEdit").val(),
+                    Eficiencia: $("#eficienciaLiberacionEdit").val(),
+                    Cajas: $("#cajasLiberacionEdit").val(),
+                    Peso: $("#pesoEdit").val(),
+                    Sobrepeso: $("#sobrepesoEdit").val(),
+                    Headcount: $("#headcountEdit").val()
+                }
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                {
+                    url: '@Url.Action("guardar_liberaciones_rove", "produccion")',
+                    type: "POST",
+                    data: JSON.stringify(
+                    {
+                        liberacionROVE: liberacionRove
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(resultado)
+                    {
+                        if (resultado == -1)
+                        {
+                            swal("", "Datos incorrectos!", "error");
+                        }
+                        else
+                        {
+                            swal("", "Liberación insertada correctamente!", "success")
+                                .then((value) =>
+                                {
+                                    window.location.reload(false);
+                                });
+                        }
+                    },
+                    error: function()
+                    {
+                        swal("", "Error al insertar la liberación!", "error");
+                    },
+                });
+                $('#overlay').css('display', 'none');
+            }
+
+        }
+
+        function registrarLiberacionROVE2()
+        {
+            var isCorrect = true;
+
+            if ($("#numeroOFLiberacionInicial").val() == 0)
+            {
+                swal("", "Debes indicar una OF", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#producidaInicial").val() == 0)
+            {
+                swal("", "Debes indicar la cantidad", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#TurnoInicial").val() == 0) {
+                swal("", "Debes indicar un turno", "warning");
+                isCorrect = false;
+            }
+
+
+            if ($("#operadorInicial").val() == "")
+            {
+                swal("", "Debes indicar el nombre del operador", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#supervisorInicial").val() == "")
+            {
+                swal("", "Debes indicar el nombre del supervisor", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#realOP").val() == "")
+            {
+                swal("", "Debes indicar el headcount real", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#realAYU").val() == "") {
+                swal("", "Debes indicar el headcount real", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#loteEditLiberacion").val() == "") {
+                swal("", "Debes indicar el lote", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#lineaOFInicial").val() == 0)
+            {
+                swal("", "Debes indicar una linea", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect)
+            {
+
+                var liberacionRove = {
+                    DocNum: $("#numeroOFLiberacionInicial").val(),
+                    Quantity: $("#producidaInicial").val(),
+
+                    //Linea: $("#lineaOFInicial").text(),
+                    //Linea: $("#lineaOFInicial").val(),
+                    Linea: $("#lineaOFInicial option:selected").text(),
+                    Supervisor: $("#supervisorInicial").val(),
+                    Operador: $("#operadorInicial").val(),
+                    Turnos: $("#TurnoInicial").val(),
+                    Headcount: $("#realOP").val(),
+                    Headcount2: $("#realAYU").val(),
+                    GPMReal: $("#gpmReal").val(),
+
+                    BatchNumber: $("#loteEditLiberacion").val(),
+                    Eficiencia: $("#eficienciaP").val(),
+                    VelocidadLinea: $("#tiempoPerdido").val(),
+                    Merma: $("#mermaProducidaInicial").val(),
+                    /*MermaP: $("#mermapLiberacionEdit").val(),
+                    Eficiencia: $("#eficienciaLiberacionEdit").val(),
+                    Cajas: $("#cajasLiberacionEdit").val(),
+                    Peso: $("#pesoEdit").val(),
+                    Sobrepeso: $("#sobrepesoEdit").val(),
+                    Headcount: $("#headcountEdit").val()
+                    */
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                {
+                    url: '@Url.Action("guardar_liberaciones_rove2", "produccion")',
+                    type: "POST",
+                    data: JSON.stringify(
+                    {
+                        liberacionROVE: liberacionRove
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(resultado)
+                    {
+                        if (resultado == -1)
+                        {
+                            swal("", "Datos incorrectos!", "error");
+                        }
+                        else
+                        {
+                            swal("", "Liberación insertada correctamente!", "success");
+                            $("#producidaInicial").val("");
+                            $("#loteEditLiberacion").val("");
+                            $("#mermaProducidaInicial").val("");
+                            $("#gpmReal").val("");
+                           /*$("#btnRegistrarLiberacionROVE").remove();*/
+                        }
+                    },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert("some error" + XMLHttpRequest.statusText);
+                            alert("some error" + textStatus);
+                            alert("some error" + errorThrown);
+
+                            swal("", "Error al insertar la liberación!", "error");
+                    },
+                });
+                $('#overlay').css('display', 'none');
+            }
+
+        }
+
+        tablaLiberacionesROVE = $("#tablaLiberacionesROVE").DataTable(
+            {
+                paging: true,
+                ordering: false,
+                info: true,
+                lengthChange: false,
+                pageLength: 25,
+                "language":
+                {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                },
+
+                "ajax":
+                {
+                    url: '@Url.Action("obtener_liberaciones_rove", "produccion")',
+                    type: "GET",
+                    dataType: "json",
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Liberaciones producción',
+                        exportOptions:
+                        {
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15,16,17,18]
+                        }
+                    },],
+                "columns": [
+                    {
+                        data: 'acciones',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'estatus', "render": function (estatus) {
+                            if (estatus == "-1") {
+                                return '<span class="badge badge-danger">RECHAZADO</span>'
+                            }
+                            if (estatus == "0") {
+                                return '<span class="badge badge-light">SIN APROBACION</span>'
+                            }
+                            else if (estatus == "1") {
+                                return '<span class="badge badge-warning">APROBADO SUPERVISOR</span>'
+                            }
+                            else if (estatus == "2") {
+                                return '<span class="badge badge-secondary">APROBADO ANALISTA</span>'
+                            }
+                            else if (estatus == "3") {
+                                return '<span class="badge badge-success">CREADO EN SAP</span>'
+                            }
+                            else {
+                                return '<span class="badge badge-outline-danger">ERROR EN SAP</span>'
+                            }
+                        }
+                    },
+                    {
+                        data: 'fechaCreacion'
+                    },
+                    {
+                        data: 'turno'
+                    },
+                    {
+                        data: 'DocNum'
+                    },
+                    {
+                        data: 'Linea'
+                    },
+                    {
+                        data: 'cecos'
+                    },
+                    {
+                        data: 'ItemCode'
+                    },
+                    {
+                        data: 'ItemName'
+                    },
+                    {
+                        data: 'Quantity'
+                    },
+                    {
+                        data: 'UOM'
+                    },
+                    {
+                        data: 'BatchNumber'
+                    },
+                    {
+                        data: 'Merma'
+                    },
+                    {
+                        data: 'Operador'
+                    },
+                    {
+                        data: 'Supervisor'
+                    },
+                    {
+                        data: 'VelocidadLinea'
+                    },
+                    {
+                        data: 'Headcount'
+                    },
+                    {
+                        data: 'Headcount2'
+                    },
+                    {
+                        data: 'Eficiencia'
+                    },
+                    {
+                        data: 'Comentarios'
+                    }
+                ],
+                "createdRow": function (row, data, dataIndex) {
+                    if (data.PFinalizado > 90) {
+                        $('td', row).css("background-color", "#a8fbc9");
+                    }
+                },
+            });
+
+
+        $("#tablaLiberacionesROVE").on("click", '#btn-editar-liberacion', function()
+        {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaLiberacionesROVE.row(filaseleccionada).data();
+            editarLiberacion(datos);
+        });
+
+        function editarLiberacion(datos)
+        {
+            jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        var componente = {
+                            DocNum: datos.DocNum
+                        }
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_articulo", "produccion")',
+                                type: "POST",
+                                data: componente,
+                                success: function (resultado) {
+
+                                    var componente2 = {
+                                        Code: resultado.substring(0, 12)
+                                    }
+                                    jQuery.ajax(
+                                        {
+                                            url: '@Url.Action("obtener_um", "produccion")',
+                                            type: "POST",
+                                            data: componente2,
+                                            success: function (resultado2) {
+                                                $('#uomEditLiberacion').val(resultado2);
+                                                $("#uomEditLiberacionMerma").val(resultado2);
+                                            },
+                                            error: function (xhr, status, error) {
+
+
+                                            },
+                                        });
+
+                                    $("#articuloOFEdit").text(resultado);
+                                    $('#producirdivLiberacion').show();
+
+                                    $("#numeroOFLiberacionEdit2").val(datos.DocNum);
+                                    $("#cantidadLiberacionEdit").val(datos.Quantity);
+                                    $("#loteLiberacionEdit2").val(datos.BatchNumber);
+                                    $("#comentariosLiberacionEdit").val(datos.Comentarios);
+                                    $("#supervisorEdit").val(datos.Supervisor);
+                                    $("#valocidadEdit").val(datos.VelocidadLinea);
+                                    $("#mermaLiberacionEdit").val(datos.Merma);
+                                    $("#pesoEdit").val(datos.Peso);
+                                    $("#sobrepesoEdit").val(datos.Sobrepeso);
+                                    $("#headcountEdit").val(datos.Headcount);
+
+                                    $('#numeroOFLiberacionEdit2').show();
+                                    $('#loteLiberacionEdit2').show();
+                                    $('#numeroOFLiberacionEdit').hide();
+                                    $('#loteLiberacionEdit').hide();
+
+                                    $("#btnRegistrarLiberacionROVE").hide();
+
+                                    $("#modalLiberaciones").text("Visualizar liberación");
+                                    $("#modalDetalleLiberaciones").modal("show");
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        /*-----------------------------------------------------------------------------------------*/
+
+        function crearNuevoParoROVE()
+        {
+            $('#producirdivParo').hide();
+            $('#numeroOFParoEdit2').empty();
+
+            $("#numeroOFParoEdit").val("");
+            $("#inicioDateParoEdit").val("");
+            $("#inicioTimeParoEdit").val("");
+            $("#finDateParoEdit").val("");
+            $("#finTimeParoEdit").val("");
+            $("#areaParodit").val("");
+            $("#codigoParoEdit").val("");
+            $("#causaParoEdit").val("");
+            $("#estatusParoEdit").val("");
+
+            $('#numeroOFParoEdit2').hide();
+            $('#numeroOFParoEdit').show();
+            $('#btnRegistrarParoROVE').show();
+
+            $("#modalParos").text("Crear paro");
+            $("#modalDetalleParos").modal("show");
+
+            jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        jQuery.ajax(
+                        {
+                            url: '@Url.Action("obtener_of", "produccion")',
+                            type: "POST",
+                            success: function(resultado)
+                            {
+                                $('#numeroOFParoEdit').append(resultado);
+                            },
+                            error: function(xhr, status, error) {
+
+                            },
+                        })
+
+                        $("#modalDetalleParos").modal("show");
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function registrarParoROVE2()
+        {
+            var isCorrect = true;
+
+            if ($("#lineaOFInicial").val() == 0) {
+                swal("", "Debes indicar una linea", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#numeroOFLiberacionInicial").val() == 0)
+            {
+                swal("", "Debes indicar una OF", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#inicioParo").val() == 0)
+            {
+                swal("", "Debes indicar el inicio de paro", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#areaParoEdit").val() == 0) {
+                swal("", "Debes indicar un area", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#codigoParoEdit").val() == 0) {
+                swal("", "Debes indicar un código de paro", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#causaParoEdit").val() == 0) {
+                swal("", "Debes indicar una causa de paro", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#finParo").val() == 0)
+            {
+                swal("", "Debes indicar un fin de paro", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect)
+            {
+
+                var paroRove = {
+                    DocNum: $("#numeroOFLiberacionInicial").val(),
+                    inicioDateParo: $("#inicioParo").val(),
+                    //inicioTimeParo: $("#inicioTimeParoEdit").val(),
+                    finDateParo: $("#finParo").val(),
+                    areaParo: $("#areaParoEdit").val(),
+                    codigoParo: $("#codigoParoEdit").val(),
+                    causaParo: $("#causaParoEdit").val(),
+                    lineaParo: $("#lineaOFInicial option:selected").text(),
+                    supervisorParo: $("#supervisorInicial").val(),
+                    operadorParo: $("#operadorInicial").val()
+                    /*
+                    finTimeParo: $("#finTimeParoEdit").val(),
+                    areaParo: $("#areaParoEdit").val(),
+                    codigoParo: $("#codigoParoEdit").val(),
+
+                    estatusParo: $("#estatusParoEdit").val()
+                    */
+                }
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                {
+                    url: '@Url.Action("guardar_paros_rove", "produccion")',
+                    type: "POST",
+                    data: JSON.stringify(
+                    {
+                        parosROVE: paroRove
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(resultado)
+                    {
+                        if (resultado == -1)
+                        {
+                            swal("", "Datos incorrectos!", "error");
+                        }
+                        else
+                        {
+                            $("#inicioParo").val("");
+                            $("#finParo").val("");
+                            $("#areaParoEdit").val(0);
+                            $("#codigoParoEdit").val(0);
+                            $("#causaParoEdit").val("");
+
+                            swal("", "Paro insertado correctamente!", "success");
+                        }
+
+                    },
+                    error: function()
+                    {
+                        swal("", "Error al insertar el paro!", "error");
+                    },
+                });
+                $('#overlay').css('display', 'none');
+            }
+
+        }
+
+        function registrarParoROVE()
+        {
+            var isCorrect = true;
+
+            if ($("#numeroOFParoEdit").val() == 0)
+            {
+                swal("", "Debes indicar una OF", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#inicioDateParoEdit").val() == 0)
+            {
+                swal("", "Debes indicar la cantidad", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#inicioTimeParoEdit").val() == 0)
+            {
+                swal("", "Debes indicar un inicio de paro", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#codigoParoEdit").val() == 0) {
+                swal("", "Debes indicar un código de paro", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#causaParoEdit").val() == 0) {
+                swal("", "Debes indicar una causa de paro", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect)
+            {
+
+                var paroRove = {
+                    DocNum: $("#numeroOFParoEdit").val(),
+                    inicioDateParo: $("#inicioDateParoEdit").val(),
+                    inicioTimeParo: $("#inicioTimeParoEdit").val(),
+                    finDateParo: $("#finDateParoEdit").val(),
+                    finTimeParo: $("#finTimeParoEdit").val(),
+                    areaParo: $("#areaParoEdit").val(),
+                    codigoParo: $("#codigoParoEdit").val(),
+                    causaParo: $("#causaParoEdit").val(),
+                    estatusParo: $("#estatusParoEdit").val()
+                }
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                {
+                    url: '@Url.Action("guardar_paros_rove", "produccion")',
+                    type: "POST",
+                    data: JSON.stringify(
+                    {
+                        parosROVE: paroRove
+                    }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function(resultado)
+                    {
+                        if (resultado == -1)
+                        {
+                            swal("", "Datos incorrectos!", "error");
+                        }
+                        else
+                        {
+                            swal("", "Paro insertado correctamente!", "success")
+                                .then((value) =>
+                                {
+                                    window.location.reload(false);
+                                });
+                        }
+
+                    },
+                    error: function()
+                    {
+                        swal("", "Error al insertar el paro!", "error");
+                    },
+                });
+                $('#overlay').css('display', 'none');
+            }
+
+        }
+
+        $('#numeroOFParoEdit').on('change', function()
+        {
+            $('#articuloOFParoEdit').empty();
+            var componente = {
+                DocNum: $("#numeroOFParoEdit").val()
+            }
+            jQuery.ajax(
+            {
+                url: '@Url.Action("obtener_articulo", "produccion")',
+                type: "POST",
+                data: componente,
+                success: function(resultado)
+                {
+                    $('#articuloOFParoEdit').text(resultado);
+                    $('#producirdivParo').show();
+                },
+                error: function(xhr, status, error) {
+
+
+                },
+            });
+        });
+
+        tablaParos = $("#tablaParos").DataTable(
+            {
+                paging: true,
+                ordering: false,
+                info: true,
+                lengthChange: false,
+                pageLength: 25,
+                "language":
+                {
+                    "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+                },
+
+                "ajax":
+                {
+                    url: '@Url.Action("obtener_paros_rove", "produccion")',
+                    type: "GET",
+                    dataType: "json",
+                },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'excelHtml5',
+                        title: 'Paros producción',
+                        exportOptions:
+                        {
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8,9,10,11,12,13]
+                        }
+                    },],
+                "columns": [
+                    {
+                        data: 'acciones',
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: 'estatus', "render": function (estatus) {
+                            if (estatus == "-1") {
+                                return '<span class="badge badge-danger">RECHAZADO</span>'
+                            }
+                            if (estatus == "0") {
+                                return '<span class="badge badge-light">SIN APROBACION</span>'
+                            }
+                            else if (estatus == "1") {
+                                return '<span class="badge badge-warning">APROBADO SUPERVISOR</span>'
+                            }
+                            else if (estatus == "2") {
+                                return '<span class="badge badge-secondary">APROBADO ANALISTA</span>'
+                            }
+                            else if (estatus == "3") {
+                                return '<span class="badge badge-success">CREADO EN SAP</span>'
+                            }
+                            else {
+                            }
+                        }
+                    },
+                    {
+                        data: 'planta'
+                    },
+                    {
+                        data: 'lineaParo'
+                    },
+                    {
+                        data: 'DocNum'
+                    },
+                    {
+                        data: 'inicioDateParo'
+                    },
+                    {
+                        data: 'finDateParo'
+                    },
+                    {
+                        data: 'turno'
+                    },
+                    {
+                        data: 'tiempoMuerto'
+                    },
+                    {
+                        data: 'areaParo'
+                    },
+                    {
+                        data: 'codigoParo'
+                    },
+                    {
+                        data: 'causaParo'
+                    },
+                    {
+                        data: 'supervisorParo'
+                    },
+                    {
+                        data: 'operadorParo'
+                    }],
+                "createdRow": function (row, data, dataIndex) {
+                    if (data.PFinalizado > 90) {
+                        $('td', row).css("background-color", "#a8fbc9");
+                    }
+                },
+            });
+
+        $("#tablaParos").on("click", '#btn-editar-paro', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaParos.row(filaseleccionada).data();
+            abrirdetalleParos(datos);
+        });
+
+
+        function abrirdetalleParos(datos)
+        {
+            jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        var componente = {
+                            DocNum: datos.DocNum
+                        }
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_articulo", "produccion")',
+                                type: "POST",
+                                data: componente,
+                                success: function (resultado) {
+                                    $("#articuloOFParoEdit").text(resultado);
+                                    $('#producirdivParo').show();
+
+                                    $("#numeroOFParoEdit2").val(datos.DocNum);
+                                    $("#inicioDateParoEdit").val(datos.inicioDateParo);
+                                    $("#inicioTimeParoEdit").val(datos.inicioTimeParo);
+                                    $("#finDateParoEdit").val(datos.finDateParo);
+                                    $("#finTimeParoEdit").val(datos.finTimeParo);
+                                    $("#areaParodit").val(datos.areaParo);
+                                    $("#codigoParoEdit").val(datos.codigoParo);
+                                    $("#causaParoEdit").val(datos.causaParo);
+                                    $("#estatusParoEdit").val(datos.estatusParo);
+
+                                    $('#numeroOFParoEdit2').show();
+                                    $('#numeroOFParoEdit').hide();
+
+                                    $("#btnRegistrarParoROVE").hide()
+
+                                    $("#modalParos").text("Visualizar paro");
+                                    $("#modalDetalleParos").modal("show");
+
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function guardarConsumoLinea(linea) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+
+                        var isCorrect = true;
+                        /*
+                        if ($("#loteEdit" + linea).val() == 0) {
+                            alert(linea);
+                            alert($("#loteEdit" + linea).val());
+                            swal("", "Debes indicar un lote", "warning");
+                            isCorrect = false;
+                        }
+                        */
+                        if (($("#cantidadEdit" + linea).val() == 0) && $("#mermaEdit" + linea).val() ==0) {
+                            swal("", "Debes indicar una cantidad de consumo o merma", "warning");
+                            isCorrect = false;
+                        }
+                        if ($("#loteEdit" + linea).val() == 0) {
+                            swal("", "Debes indicar un lote", "warning");
+                            isCorrect = false;
+                        }
+
+                        if ($("#lineaOFInicial").val() == 0) {
+                            swal("", "Debes indicar una linea", "warning");
+                            isCorrect = false;
+                        }
+                        /*
+                        if (parseFloat($("#loteEdit"+linea).val().split('(')[1].split('-')[0]) < parseFloat($("#cantidadEdit"+linea).val())) {
+                            swal("", "La cantidad del lote es menor a la consumida", "warning");
+                            isCorrect = false;
+                        }
+                        */
+                        //if ($("#numeroOFConsumoEdit").val() == 0)
+                        if ($("#numeroOFLiberacionInicial").val() == 0)
+                        {
+                            swal("", "La OF no cargo correctamente, intentalo de nuevo", "warning");
+                            isCorrect = false;
+                        }
+
+                        if (isCorrect) {
+                            var consumoRove = {
+                                //DocNum: $("#numeroOFConsumoEdit").val(),
+                                DocNum: $("#numeroOFLiberacionInicial").val(),
+                                ItemCode: $("#componenteOFEdit" + linea).val().split(' - ')[0],
+                                Quantity: $("#cantidadEdit" + linea).val() == "" ? "0" : $("#cantidadEdit" + linea).val(),
+                                Merma: $("#mermaEdit" + linea).val(),
+
+                                linea: $("#lineaOFInicial option:selected").text(),
+                                supervisor: $("#supervisorInicial").val(),
+                                operador: $("#operadorInicial").val(),
+
+                                BatchNumber: $("#loteEdit" + linea + " option:selected").text().substring(0, $("#loteEdit" + linea + " option:selected").text().indexOf(" ("))
+                            }
+                            $('#overlay').css('display', 'flex');
+
+
+
+
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("confirmar_existencia_lote2", "produccion")',
+                                    type: "POST",
+                                    data: JSON.stringify(
+                                        {
+                                            consumoROVE: consumoRove
+                                        }),
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (resultado) {
+                                        if (resultado == 0) {
+                                            swal("", "Lote insuficiente!", "error");
+                                        }
+                                        else {
+                                            jQuery.ajax(
+                                                {
+                                                    url: '@Url.Action("guardar_consumo_rove", "produccion")',
+                                                    type: "POST",
+                                                    data: JSON.stringify(
+                                                        {
+                                                            consumoROVE: consumoRove
+                                                        }),
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
+                                                    success: function (resultado) {
+                                                        if (resultado == -1) {
+                                                            swal("", "Datos incorrectos!", "error");
+                                                        }
+                                                        else {
+                                                            //$("#btnGuardarL" + linea).remove();
+                                                            swal("", "Consumo guardado correctamente!", "success");
+                                                        }
+                                                    },
+                                                    error: function () {
+                                                        swal("", "Error al insertar el consumo!", "error");
+                                                    },
+                                                });
+                                        }
+                                    },
+                                    error: function () {
+                                        swal("", "Error al actualizar el estatus!", "error");
+                                    },
+                                });
+
+                            $('#overlay').css('display', 'none');
+                        }
+
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function validarConsumo(linea, estatus) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+
+                            var consumoRove = {
+                                idConsumoROVE: linea,
+                                estatus : estatus
+                            }
+                        $('#overlay').css('display', 'flex');
+
+
+                        if (estatus != -1) {
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("confirmar_existencia_lote", "produccion")',
+                                    type: "POST",
+                                    data: JSON.stringify(
+                                        {
+                                            consumoROVE: consumoRove
+                                        }),
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (resultado) {
+                                        if (resultado == 0) {
+                                            swal("", "Lote insuficiente!", "error");
+                                        }
+                                        else {
+                                            jQuery.ajax(
+                                                {
+                                                    url: '@Url.Action("validar_consumo_rove", "produccion")',
+                                                    type: "POST",
+                                                    data: JSON.stringify(
+                                                        {
+                                                            consumoROVE: consumoRove
+                                                        }),
+                                                    dataType: "json",
+                                                    contentType: "application/json; charset=utf-8",
+                                                    success: function (resultado) {
+                                                        if (resultado == -1) {
+                                                            swal("", "Datos incorrectos!", "error");
+                                                        }
+                                                        else {
+                                                            $("#btn-rechazar-consumo" + linea).remove();
+                                                            $("#btn-validar-consumo" + linea).remove();
+                                                        }
+                                                    },
+                                                    error: function () {
+                                                        swal("", "Error al validar el consumo!", "error");
+                                                    },
+                                                });
+                                        }
+                                    },
+                                    error: function () {
+                                        swal("", "Error al actualizar el estatus!", "error");
+                                    },
+                                });
+                        }
+                        else {
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("validar_consumo_rove", "produccion")',
+                                    type: "POST",
+                                    data: JSON.stringify(
+                                        {
+                                            consumoROVE: consumoRove
+                                        }),
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (resultado) {
+                                        if (resultado == -1) {
+                                            swal("", "Datos incorrectos!", "error");
+                                        }
+                                        else {
+                                            $("#btn-rechazar-consumo" + linea).remove();
+                                            $("#btn-validar-consumo" + linea).remove();
+                                        }
+                                    },
+                                    error: function () {
+                                        swal("", "Error al validar el consumo!", "error");
+                                    },
+                                });
+                        }
+                            $('#overlay').css('display', 'none');
+
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function validarLiberacion(linea, estatus) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+
+                            var liberacionRove = {
+                                idLiberacionROVE: linea,
+                                estatus : estatus
+                            }
+                        $('#overlay').css('display', 'flex');
+
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("validar_liberacion_rove", "produccion")',
+                                type: "POST",
+                                data: JSON.stringify(
+                                    {
+                                        liberacionROVE: liberacionRove
+                                    }),
+                                dataType: "json",
+                                contentType: "application/json; charset=utf-8",
+                                success: function (resultado) {
+                                    if (resultado == -1) {
+                                        swal("", "Datos incorrectos!", "error");
+                                    }
+                                    else {
+                                        $("#btn-rechazar-liberacion" + linea).remove();
+                                        $("#btn-validar-liberacion" + linea).remove();
+                                    }
+                                },
+                                error: function () {
+                                    swal("", "Error al validar el liberacion!", "error");
+                                },
+                            });
+
+                            $('#overlay').css('display', 'none');
+
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function validarParo(linea, estatus) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+
+                            var paroRove = {
+                                idParo: linea,
+                                estatus : estatus
+                            }
+                            $('#overlay').css('display', 'flex');
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("validar_paro_rove", "produccion")',
+                                    type: "POST",
+                                    data: JSON.stringify(
+                                        {
+                                            paroROVE: paroRove
+                                        }),
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (resultado) {
+                                        if (resultado == -1) {
+                                            swal("", "Datos incorrectos!", "error");
+                                        }
+                                        else {
+                                                $("#btn-rechazar-paro" + linea).remove();
+                                                $("#btn-validar-paro" + linea).remove();
+                                        }
+                                    },
+                                    error: function () {
+                                        swal("", "Error al validar el paro!", "error");
+                                    },
+                                });
+                            $('#overlay').css('display', 'none');
+
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        tablaFormatos = $("#tablaFormatos").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_formatos", "produccion")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                {
+                    data: 'linkFormato', "render": function (linkFormato) {
+                        if (linkFormato != '') {
+                            return '<button type="button" id="btn-ir-formato" class="btn btn-info" style="padding: 0.5rem; border-radius: 5px;"><i class="fa-solid fa-link"></i></button>'
+                        }
+                    }
+                },
+                { data: 'nombreFormato' }
+            ],
+        });
+
+        $("#tablaFormatos").on("click", '#btn-ir-formato', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaFormatos.row(filaseleccionada).data();
+            abrirFormato(datos.linkFormato);
+        });
+
+        function abrirFormato(linkFormato)
+        {
+            jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        window.open(linkFormato, '_blank');
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+        });
+
+    </script>
+}

@@ -1,0 +1,519 @@
+﻿
+@{
+    ViewBag.Title = "orden_produccion";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-resumen-tab" data-toggle="pill" href="#pills-resumen" role="tab" aria-controls="pills-resumen" aria-selected="true">Resumen OF</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-consumo-tab" data-toggle="pill" href="#pills-consumo" role="tab" aria-controls="pills-consumo" aria-selected="false">Consumo MP</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-liberacion-tab" data-toggle="pill" href="#pills-liberacion" role="tab" aria-controls="pills-liberacion" aria-selected="false">Liberación PT</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!--VISTA DE RESUMEN DE OF-->
+                            <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                <div class="col-lg-12 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body">                                            
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="tablaOF" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Acciones</th>
+                                                            <th>O.F.</th>
+                                                            <th>Tipo</th>
+                                                            <th>Artículo</th>
+                                                            <th>Planificado</th>
+                                                            <th>Liberado</th>
+                                                            <th>% Completado</th>
+                                                            <th>Estatus</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA LISTA DE TICKETS-->
+                            <div class="tab-pane fade" id="pills-consumo" role="tabpanel" aria-labelledby="pills-consumo-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaConsumos" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <!--<th>Acciones</th>-->
+                                                                <th>O.F</th>
+                                                                <th>Artículo Elaborar</th>
+                                                                <th>Artículo Consumir</th>
+                                                                <th>Requerido</th>
+                                                                <th>Consumido</th>
+                                                                <th>% OF Completado</th>
+                                                                <th>% MP Consumido</th>
+                                                                <th>Consumo ROVE</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="pills-liberacion" role="tabpanel" aria-labelledby="pills-liberacion-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaLiberacion" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <!--<th>Acciones</th>-->
+                                                                <th>O.F.</th>
+                                                                <th>Tipo</th>
+                                                                <th>Artículo</th>
+                                                                <th>Planificado</th>
+                                                                <th>Liberado</th>
+                                                                <th>% Completado</th>
+                                                                <th>Estatus</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--VISTA DE MODAL DE OF-->
+<div class="modal fade" id="modalDetalleOF" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" id="encabezadoDetalleOF" style="background-color: lightgreen">
+                <h5 class="modal-title" id="exampleModalLabel">Detalle OF</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="nombreTicketEdit" class="col-sm-4 col-form-label"># OF:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="numeroOFEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Artículo:</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="articuloOFEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Cantidad planificada:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cantidadPlanificadaEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Cantidad completada:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="cantidadCompletadaEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Costo de MP:</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="costoMPEdit" readonly>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type='button' id='btn-mp-of' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;' onclick="consultarCostoMP()"><i class="fa-solid fa-dollar-sign" aria-hidden='true'></i></button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="finalizacionTicketEdit" class="col-sm-4 col-form-label">Costo de PT:</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="costoPTEdit" readonly>
+                    </div>
+                    <div class="col-sm-3">
+                        <button type='button' id='btn-pt-of' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;' onclick="consultarCostoPT()"><i class="fa-solid fa-dollar-sign" aria-hidden='true'></i></button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="finalizacionTicketEdit" class="col-sm-4 col-form-label">Desviacion total:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="desviacionEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="finalizacionTicketEdit" class="col-sm-4 col-form-label">Comentarios:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosOFEdit" rows="5" readonly></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnGuardarLote" onclick="guardadoLote()" class="btn btn-success">Guardar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    <script>
+
+        //LISTADO DE OF'S
+        tablaOF = $("#tablaOF").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_OF", "produccion")',
+                type: "GET",
+                dataType: "json",
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Resumen OF',
+                    exportOptions:
+                    {
+                        columns: [1, 2, 3, 4, 5, 6, 7]
+                    }
+                },],
+            "columns": [
+                {
+                    "defaultContent": "<button type='button' id='btn-resumen-of' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-book' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                },
+                { data: 'DocNum' },
+                {
+                    data: 'Type', "render": function (estatus) {
+                        if (estatus == 'S') {
+                            return '<span class="badge badge-success">Estandar</span>'
+                        }
+                        else if (estatus == 'D') {
+                            return '<span class="badge badge-danger">Desmonte</span>'
+                        }
+                        else if (estatus == 'P') {
+                            return '<span class="badge badge-warning">Especial</span>'
+                        }
+                    }
+                },
+                { data: 'ItemCode' },
+                { data: 'PlannedQty' },
+                { data: 'ReleasedQty' },
+                { data: 'PFinalizado' },
+                {
+                    data: 'Status', "render": function (estatus) {
+                        if (estatus == 'P') {
+                            return '<span class="badge badge-secondary">Planificado</span>'
+                        }
+                        else if (estatus == 'R') {
+                            return '<span class="badge badge-success">Liberado</span>'
+                        }
+                        else if (estatus == 'C') {
+                            return '<span class="badge badge-danger">Cancelado</span>'
+                        }
+                        else {
+                            return '<span class="badge badge-primary">Finalizado</span>'
+                        }
+                    }
+                }
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.PFinalizado > 90) {
+                    $('td', row).css("background-color", "#a8fbc9");
+                }
+            },
+        });
+
+        $("#tablaOF").on("click", '#btn-resumen-of', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaOF.row(filaseleccionada).data();
+            modalDetalleOF(datos);
+        });
+
+        function modalDetalleOF(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+
+                        $("#numeroOFEdit").val(datos.DocNum);
+                        $("#articuloOFEdit").val(datos.ItemCode);
+                        $("#cantidadPlanificadaEdit").val(datos.PlannedQty);
+                        $("#cantidadCompletadaEdit").val(datos.ReleasedQty);
+                        $("#costoMPEdit").val(datos.Consumos);
+                        $("#costoPTEdit").val(datos.Liberaciones);
+                        $("#desviacionEdit").val(datos.Desviacion);
+                        $("#comentariosOFEdit").val(datos.Comments);
+
+                        $("#modalDetalleOF").modal("show");
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function consultarCostoMP()
+                            {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var busqueda = {
+                            DocNum: $("#numeroOFEdit").val().substring(0, 12),
+                        }
+
+                        jQuery.ajax({
+                            url: '@Url.Action("contabilizacion_stocks_mp", "produccion")',
+                            type: "POST",
+                            data: busqueda,
+                            success: function (resultado) {
+                                window.open('/produccion/contabilizacion_stocks/', "_blank");
+                            },
+                            error: function (xhr, status, error) {
+                            },
+                        })
+
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function consultarCostoPT() {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var busqueda = {
+                            DocNum: $("#numeroOFEdit").val().substring(0, 12),
+                        }
+
+                        jQuery.ajax({
+                            url: '@Url.Action("contabilizacion_stocks_pt", "produccion")',
+                            type: "POST",
+                            data: busqueda,
+                            success: function (resultado) {
+                                window.open('/produccion/contabilizacion_stocks/', "_blank");
+                            },
+                            error: function (xhr, status, error) {
+                            },
+                        })
+
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        /*-----------------------------------------------------------------------------------------*/
+
+        tablaConsumos = $("#tablaConsumos").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_consumos", "produccion")',
+                type: "GET",
+                dataType: "json",
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Consumos producción',
+                    exportOptions:
+                    {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    }
+                },],
+            "columns": [
+                /*{
+                    "defaultContent": "<button type='button' id='btn-realizar-consumo' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-screwdriver-wrench' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                },*/
+                { data: 'DocNum' },
+                { data: 'ItemCode' },
+                { data: 'Code' },
+                { data: 'PlannedQty' },
+                { data: 'IssuedQty' },
+                { data: 'POF' },
+                { data: 'PCO' },
+                { data: 'ConsumoRove' }
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.PCO < data.POF) {
+                    $('td', row).css("background-color", "#e7a3a3");
+                }
+            },
+        });
+
+        /*-----------------------------------------------------------------------------------------*/
+
+        tablaLiberacion = $("#tablaLiberacion").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_liberaciones", "produccion")',
+                type: "GET",
+                dataType: "json",
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Liberaciones producción',
+                    exportOptions:
+                    {
+                        columns: [0, 1, 2, 3, 4, 5, 6]
+                    }
+                },],
+            "columns": [
+                /*{
+                    "defaultContent": "<button type='button' id='btn-liberar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-boxes-packing' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                },*/
+                { data: 'DocNum' },
+                {
+                    data: 'Type', "render": function (estatus) {
+                        if (estatus == 'S') {
+                            return '<span class="badge badge-success">Estandar</span>'
+                        }
+                        else if (estatus == 'D') {
+                            return '<span class="badge badge-danger">Desmonte</span>'
+                        }
+                        else if (estatus == 'P') {
+                            return '<span class="badge badge-warning">Especial</span>'
+                        }
+                    }
+                },
+                { data: 'ItemCode' },
+                { data: 'PlannedQty' },
+                { data: 'ReleasedQty' },
+                { data: 'PFinalizado' },
+                {
+                    data: 'Status', "render": function (estatus) {
+                        if (estatus == 'P') {
+                            return '<span class="badge badge-secondary">Planificado</span>'
+                        }
+                        else if (estatus == 'R') {
+                            return '<span class="badge badge-success">Liberado</span>'
+                        }
+                        else if (estatus == 'C') {
+                            return '<span class="badge badge-danger">Cancelado</span>'
+                        }
+                        else {
+                            return '<span class="badge badge-primary">Finalizado</span>'
+                        }
+                    }
+                }
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.PFinalizado > 90) {
+                    $('td', row).css("background-color", "#a8fbc9");
+                }
+            },
+        });
+
+    </script>
+}

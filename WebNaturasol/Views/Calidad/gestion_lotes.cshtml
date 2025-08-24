@@ -1,0 +1,451 @@
+﻿
+@{
+    ViewBag.Title = "gestion_lotes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="text-align: center">Manejo de lotes</h3>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                <button type="button" class="btn btn-primary" onclick="buscarArticulo()" data-dismiss="modal" style="width: 8rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="Buscar">Filtrar</button>
+                                <div class="col-lg-12 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="tablaLotes" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Acciones</th>
+                                                            <th>Articulo</th>
+                                                            <th>Descripcion</th>
+                                                            <th>Lote</th>
+                                                            <th>Cantidad</th>
+                                                            <th>Lote proveedor</th>
+                                                            <th>Estatus lote</th>
+                                                            <th>Tipo caducidad</th>
+                                                            <th>Almacen</th>
+                                                            <th>Nombre almacen</th>
+                                                            <th>Familia</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--VISTA DE MODAL-->
+<div class="modal fade" id="modalBuscarInventario" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+
+            <div class="modal-header" style="background-color: lightgreen" id="encabezadoBuscarInventario">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar inventario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Artículo:</label>
+                    <div class="col-sm-8">
+                        <input type="text" maxlength="12" class="form-control" id="articuloInventario">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Descripción:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="descripcionInventario">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Almácen:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="almacenInventario">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Lote:</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="loteInventario">
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnBuscarArticulo" onclick="busquedaArticulo()" class="btn btn-success">Consultar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--VISTA DE MODAL DE OF-->
+<div class="modal fade" id="modalDetalleLote" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" id="encabezadoDetalleOF" style="background-color: lightgreen">
+                <h5 class="modal-title" id="exampleModalLabel">Detalle Lote</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="nombreTicketEdit" class="col-sm-4 col-form-label">Artículo:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="itemCodeEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nombreTicketEdit" class="col-sm-4 col-form-label">Lote SAP:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="loteSAPEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Lote proveedor:</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="loteProveedorEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Fecha de caducidad:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="fechaCaducidadEdit">
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" id="btnGuardarCotizacion" onclick="guardadoLotes()" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        /*
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                alert('Your Public IP Address: '+ data.ip);
+            })
+            .catch(error => {
+                console.error('Error fetching IP:', error);
+            });
+        */
+        function buscarArticulo() {
+            $("#modalBuscarInventario").modal("show");
+        }
+
+        //LISTADO DE OF'S
+        tablaLotes = $("#tablaLotes").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Lotes-Entradas',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+                    }
+                },
+            ],
+
+            "ajax": {
+                url: '@Url.Action("obtener_lotes", "calidad")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                { data: 'acciones' },
+                { data: 'ItemCode' },
+                { data: 'ItemName' },
+                { data: 'BatchNum' },
+                { data: 'Quantity' },
+                { data: 'LoteProveedor' },
+                {
+                    data: 'Status', "render": function (Status) {
+                        if (Status == "0") {
+                            return '<span class="badge badge-success">LIBERADO</span>'
+                        }
+                        else if (Status == "1") {
+                            return '<span class="badge badge-danger">RECHAZADO</span>'
+                        }
+                        else if (Status == "2") {
+                            return '<span class="badge badge-warning">BLOQUEADO</span>'
+                        }
+                        else {
+                        }
+                    }
+                },
+                { data: 'tipoCaducidad' },
+                { data: 'WhsCode' },
+                { data: 'nombreAlmacen' },
+                { data: 'familia' },
+            ],
+        });
+
+        $("#tablaLotes").on("click", '#btnAceptar', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaLotes.row(filaseleccionada).data();
+            datos.Status = 0;
+            cambiarEstatus(datos);
+        });
+
+        $("#tablaLotes").on("click", '#btnAceptar2', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaLotes.row(filaseleccionada).data();
+            datos.Status = 0;
+            cambiarEstatus(datos);
+        });
+
+        $("#tablaLotes").on("click", '#btnRechazar', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaLotes.row(filaseleccionada).data();
+            datos.Status = 2;
+            cambiarEstatus(datos);
+        });
+
+        $("#tablaLotes").on("click", '#btn-resumen-lote', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaLotes.row(filaseleccionada).data();
+            modalDetalleLote(datos);
+        });
+
+        function modalDetalleLote(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+
+                        $("#itemCodeEdit").val(datos.ItemCode);
+                        $("#loteSAPEdit").val(datos.BatchNum);
+                        $("#loteProveedorEdit").val(datos.LoteProveedor);
+                        $("#fechaCaducidadEdit").val(datos.ExpDate);
+
+                        $("#modalDetalleLote").modal("show");
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        function cambiarEstatus(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $('#overlay').css('display', 'flex');
+                        var componente2 = {
+                            Status: datos.Status,
+                            ItemCode: datos.ItemCode,
+                            BatchNum: datos.BatchNum
+                        }
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("actualizar_estatus", "calidad")',
+                                type: "POST",
+                                data: componente2,
+                                success: function (resultado) {
+                                    if (resultado == -1) {
+                                        swal("", "Datos incorrectos!", "error");
+                                    }
+                                    else {
+                                        /*$("#btn-rechazar-consumo" + linea).remove();
+                                        $("#btn-validar-consumo" + linea).remove();*/
+                                        swal("", "Estatus actualizado", "success")
+                                            .then((value) => {
+                                                window.location.reload(false);
+                                            });
+                                    }
+                                },
+                                error: function () {
+                                    swal("", "Error al actualizar el estatus!", "error");
+                                },
+                            });
+                        $('#overlay').css('display', 'none');
+
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        }
+
+        //GUARDADO DE COTIZACION
+        function guardadoLotes()
+        {
+            var isCorrect = true;
+
+            var currentDate = new Date();
+            var selectedDate = new Date($("#fechaCaducidadEdit").val());
+
+            if ($("#fechaCaducidadEdit").val() == "") {
+            swal("", "La fecha de vigencia de lote no puede ser vacia", "warning");
+            isCorrect = false;
+        }
+
+        if (selectedDate<currentDate) {
+            swal("", "La fecha de vigencia no puede ser anterior a hoy", "warning");
+            isCorrect = false;
+        }
+
+            if ($("#loteProveedorEdit").val() == 0) {
+                swal("", "Debes indicar un lote de proveedor", "warning");
+                isCorrect = false;
+            }
+
+
+        if (isCorrect)
+        {
+            var lotesData = {
+                ExpDate: $("#fechaCaducidadEdit").val(),
+                LoteProveedor: $("#loteProveedorEdit").val(),
+                ItemCode: $("#itemCodeEdit").val(),
+                BatchNum: $("#loteSAPEdit").val()
+                }
+
+                $('#overlay').css('display', 'flex');
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("actualizar_lote", "calidad")',
+                    type: "POST",
+                    data: JSON.stringify(
+                        {
+                            detalleLote: lotesData
+                        }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        if (resultado == -1) {
+                            swal("", "Datos incorrectos!", "error");
+                        }
+                        else {
+                            if ($("#idCotizacion").val() != 0) {
+                                swal("", "Lote actualizado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                            else {
+                                swal("", "Cotización insertada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        }
+
+                    },
+                    error: function () {
+                        swal("", "Error al insertar el paro!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+                $('#overlay').css('display', 'none');
+            }
+        }
+
+        function busquedaArticulo()
+        {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var busqueda = {
+                            Artículo: $("#articuloInventario").val(),
+                            Almacén: $("#almacenInventario").val(),
+                            Descripción: $("#descripcionInventario").val(),
+                            Lote: $("#loteInventario").val(),
+                        }
+
+                        jQuery.ajax({
+                            url: '@Url.Action("obtener_lotes", "calidad")',
+                            type: "POST",
+                            data: busqueda,
+                            success: function (resultado) {
+                                window.location.reload(false);
+                            },
+                            error: function (xhr, status, error) {
+                            },
+                        })                        
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        };
+
+    </script>
+}

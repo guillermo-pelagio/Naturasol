@@ -1,0 +1,582 @@
+﻿
+@{
+    ViewBag.Title = "usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Crear usuario</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Consultar usuario</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!--VISTA DE CREACION DE USUARIO-->
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                <div class="form-group row">
+                                    <label for="nombreUsuario" class="col-sm-3 col-form-label">*Nombre</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="nombreUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Apellido paterno</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="paternoUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="maternoUsuario" class="col-sm-3 col-form-label">*Apellido materno</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="maternoUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="correoUsuario" class="col-sm-3 col-form-label">*Correo electrónico</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="correoUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="nameUsuario" class="col-sm-3 col-form-label">*ID usuario</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="nameUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="contrasenaUsuario" class="col-sm-3 col-form-label">*Contraseña</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="contrasenaUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ubicacionUsuario" class="col-sm-3 col-form-label">*Planta</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="ubicacionUsuario">
+                                            <option value="0">TODAS</option>
+                                            <option value="1">UNTABLES</option>
+                                            <option value="2">BARRAS</option>
+                                            <option value="3">SEMILLAS</option>
+                                            <option value="4">CEDIS</option>
+                                            <option value="5">TULTEPARK</option>
+                                            <option value="6">CORPORATIVO</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="departamentoUsuario" class="col-sm-3 col-form-label">*Departamento</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="departamentoUsuario">
+                                            <option value="9">Almacén</option>
+                                            <option value="12">Cobranza</option>
+                                            <option value="3">Compras</option>
+                                            <option value="4">Contabilidad</option>
+                                            <option value="14">Costos</option>
+                                            <option value="5">Importaciones</option>
+                                            <option value="7">Facturación</option>
+                                            <option value="13">Finanzas</option>
+                                            <option value="6">Logistica</option>
+                                            <option value="10">Producción</option>
+                                            <option value="8">Recursos Humanos</option>
+                                            <option value="1">Sistemas</option>
+                                            <option value="11">Tesoreria</option>
+                                            <option value="2">Ventas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="puestoUsuario" class="col-sm-3 col-form-label">*Perfil</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="puestoUsuario">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="padding-bottom: 5rem">
+                                    <label for="estatusUsuario" class="col-sm-3 col-form-label">Estatus</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="estatusUsuario">
+                                            <option value="1">Activo</option>
+                                            <option value="0">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-success" onclick="guardarUsuario()">Guardar</button>
+                                    <button class="btn btn-danger" onclick="limpiarUsuario()">Limpiar</button>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE USUARIOS-->
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaUsuarios" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Correo</th>
+                                                                <th>ID usuario</th>
+                                                                <th>Ubicación</th>
+                                                                <th>Estatus</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE USUARIO-->
+<div class="modal fade" id="modalDetalle" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" id="encabezadoDetalleUsuario" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel">Detalle de usuario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="nombreUsuarioEdit" class="col-sm-4 col-form-label">*Nombre de usuario</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idUsuarioEdit" readonly>
+                        <input type="text" class="form-control" id="nombreUsuarioEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="paternoUsuarioEdit" class="col-sm-4 col-form-label">*Apellido paterno</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="paternoUsuarioEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="maternoUsuarioEdit" class="col-sm-4 col-form-label">*Apellido materno</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="maternoUsuarioEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoUsuarioEdit" class="col-sm-4 col-form-label">*Correo electrónico</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="correoUsuarioEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nameUsuarioEdit" class="col-sm-4 col-form-label">*Correo Nombre ID</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="nameUsuarioEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="ubicacionUsuarioEdit" class="col-sm-4 col-form-label">*Planta</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="ubicacionUsuarioEdit">
+                            <option value="0">TODAS</option>
+                            <option value="1">UNTABLES</option>
+                            <option value="2">BARRAS</option>
+                            <option value="3">SEMILLAS</option>
+                            <option value="4">CEDIS</option>
+                            <option value="5">TULTEPARK</option>
+                            <option value="6">CORPORATIVO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoUsuarioEdit" class="col-sm-4 col-form-label">*Departamento</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="departamentoUsuarioEdit">
+                            <option value="9">Almacén</option>
+                            <option value="12">Cobranza</option>
+                            <option value="3">Compras</option>
+                            <option value="4">Contabilidad</option>
+                            <option value="14">Costos</option>
+                            <option value="5">Importaciones</option>
+                            <option value="7">Facturación</option>
+                            <option value="13">Finanzas</option>
+                            <option value="6">Logistica</option>
+                            <option value="10">Producción</option>
+                            <option value="8">Recursos Humanos</option>
+                            <option value="1">Sistemas</option>
+                            <option value="11">Tesoreria</option>
+                            <option value="2">Ventas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="puestoUsuarioEdit" class="col-sm-4 col-form-label">*Perfil</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="puestoUsuarioEdit">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="estatusUsuarioEdit" class="col-sm-4 col-form-label">Estatus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusUsuarioEdit">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                            <option value="2">Pendiente de activación</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contrasenaUsuarioEdit" class="col-sm-4 col-form-label">Contraseña</label>
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" id="contrasenaUsuarioEdit">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnCerrarModalUsuario" onclick="actualizarUsuario()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        var tablausuarios;
+
+        tablausuarios = $("#tablaUsuarios").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            "ajax": {
+                url: '@Url.Action("obtener_usuarios", "Usuarios")',
+                type: "GET",
+                dataType: "json",
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Usuarios',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                },
+            ],
+            "columns": [
+
+                { data: 'nombreCompleto'},
+                { data: 'correo' },
+                { data: 'nameUsuario' },
+                {
+                    data: 'ubicacion', "render": function (ubicacion) {
+                        if (ubicacion == 1) {
+                            return "UNTABLES"
+                        }
+                        else if (ubicacion == 2) {
+                            return "BARRAS"
+                        }
+                        else if (ubicacion == 3) {
+                            return "SEMILLAS"
+                        }
+                        else if (ubicacion == 4) {
+                            return "CEDIS"
+                        }
+                        else if (ubicacion == 5) {
+                            return "TULTEPARK"
+                        }
+                        else if (ubicacion == 6) {
+                            return "CORPORATIVO"
+                        }
+                        else {
+                            return "SIN PLANTA"
+                        }
+                    }
+                },
+                {
+                    data: 'estatus', "render": function (condicion) {
+                        if (condicion == 1) {
+                            return '<span class="badge badge-success">Activo</span>'
+                        }
+                        else if (condicion==2) {
+                            return '<span class="badge badge-warning">Pendiente activación</span>'
+                        }
+                        else {
+                            return '<span class="badge badge-danger">Baja</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-usuario' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ]
+        });
+
+        function abrirDetalle(datos)
+        {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $("#nombreUsuarioEdit").val(datos.nombre);
+                        $("#paternoUsuarioEdit").val(datos.apellidoPaterno);
+                        $("#maternoUsuarioEdit").val(datos.apellidoMaterno);
+                        $("#ubicacionUsuarioEdit").val(datos.ubicacion);
+                        $("#correoUsuarioEdit").val(datos.correo);
+                        $("#departamentoUsuarioEdit").val(datos.departamento);
+                        $("#contrasenaUsuarioEdit").val(datos.contrasena);
+                        $("#estatusUsuarioEdit").val(datos.estatus);
+                        $("#idUsuarioEdit").val(datos.idUsuario);
+                        $("#puestoUsuarioEdit").val(datos.puesto);
+                        
+                        $("#modalDetalle").modal("show");
+                        var element = document.getElementById("encabezadoDetalleUsuario");
+
+                        if (datos.estatus == 1) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.add("modal-header-activo");
+                        }
+                        else {
+                            element.classList.remove("modal-header-activo");
+                            element.classList.add("modal-header-inactivo");
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        $("#tablaUsuarios").on("click", '#btn-editar-usuario', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablausuarios.row(filaseleccionada).data();
+            abrirDetalle(datos);
+        })
+
+        $('#tablaUsuarios').on('click', 'tbody tr', function () {
+            tablausuarios.row(this).edit();
+        });
+
+        function limpiarUsuario()
+        {
+            $("#contrasenaUsuario").val("");
+            $("#departamentoUsuario").val(0);
+            $("#ubicacionUsuario").val(0);
+            $("#correoUsuario").val("");
+            $("#maternoUsuario").val("");
+            $("#paternoUsuario").val("");
+            $("#puestoUsuario").val("");
+            $("#nombreUsuario").val("");
+            $("#estatusUsuario").val(0);
+        }
+
+        function guardarUsuario()
+        {
+            var isCorrect = true;
+
+            if ($("#contrasenaUsuario").val().length == 0) {
+                swal("", "Debes indicar una contraseña", "warning");
+                isCorrect = false;
+            }
+            if ($("#correoUsuario").val().length == 0) {
+                swal("", "Debes indicar un correo", "warning");
+                isCorrect = false;
+            }
+            if ($("#nameUsuario").val().length == 0) {
+                swal("", "Debes indicar un ID de usuario", "warning");
+                isCorrect = false;
+            }
+            if ($("#maternoUsuario").val().length == 0) {
+                swal("", "Debes indicar un apellido materno", "warning");
+                isCorrect = false;
+            }
+            if ($("#paternoUsuario").val().length == 0) {
+                swal("", "Debes indicar un apellido paterno", "warning");
+                isCorrect = false;
+            }
+            if ($("#nombreUsuario").val().length == 0) {
+                swal("", "Debes indicar un nombre", "warning");
+                isCorrect = false;
+            }
+            if ($("#puestoUsuario").val().length == 0) {
+                swal("", "Debes indicar un puesto", "warning");
+                isCorrect = false;
+            }
+            if ($("#ubicacionUsuario").val().length == 0) {
+                swal("", "Debes indicar una ubicación", "warning");
+                isCorrect = false;
+            }
+            if ($("#departamentoUsuario").val().length == 0) {
+                swal("", "Debes indicar un departamento", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Usuario = {
+                    nombre: $("#nombreUsuario").val(),
+                    apellidoPaterno: $("#paternoUsuario").val(),
+                    apellidoMaterno: $("#maternoUsuario").val(),
+                    correo: $("#correoUsuario").val(),
+                    nameUsuario: $("#nameUsuario").val(),
+                    ubicacion: $("#ubicacionUsuario").val(),
+                    departamento: $("#departamentoUsuario").val(),
+                    contrasena: $("#contrasenaUsuario").val(),
+                    puesto: $("#puestoUsuario").val(),
+                    estatus: $("#estatusUsuario").val(),
+                    usuarioCreacion: 0
+                }
+
+                $('#overlay').css('display', 'flex');
+
+                jQuery.ajax({
+                    url: '@Url.Action("guardar_usuarios", "Usuarios")',
+                    type: "POST",
+                    data: JSON.stringify({ usuario: Usuario }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        if (resultado == 1) {
+                            $('#overlay').css('display', 'none');
+                            swal("", "Usuario registrado correctamente!", "success")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                        else {
+                            $('#overlay').css('display', 'none');
+                            swal("", "Ya existe un usuario con ese correo!", "warning")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al insertar el usuario!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+
+        function actualizarUsuario()
+        {
+            var isCorrect = true;
+
+            if ($("#contrasenaUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar una contraseña", "warning");
+                isCorrect = false;
+            }
+            if ($("#correoUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un correo", "warning");
+                isCorrect = false;
+            }
+            if ($("#nameUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un nombre de usuario", "warning");
+                isCorrect = false;
+            }
+            if ($("#maternoUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un apellido materno", "warning");
+                isCorrect = false;
+            }
+            if ($("#paternoUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un apellido paterno", "warning");
+                isCorrect = false;
+            }
+            if ($("#nombreUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un nombre", "warning");
+                isCorrect = false;
+            }
+            if ($("#puestoUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un puesto", "warning");
+                isCorrect = false;
+            }
+            if ($("#ubicacionUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar una ubicación", "warning");
+                isCorrect = false;
+            }
+            if ($("#departamentoUsuarioEdit").val() == 0) {
+                swal("", "Debes indicar un departamento", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Usuario = {
+                    idUsuario: $("#idUsuarioEdit").val(),
+                    nombre: $("#nombreUsuarioEdit").val(),
+                    apellidoPaterno: $("#paternoUsuarioEdit").val(),
+                    apellidoMaterno: $("#maternoUsuarioEdit").val(),
+                    correo: $("#correoUsuarioEdit").val(),
+                    ubicacion: $("#ubicacionUsuarioEdit").val(),
+                    departamento: $("#departamentoUsuarioEdit").val(),
+                    puesto: $("#puestoUsuarioEdit").val(),
+                    contrasena: $("#contrasenaUsuarioEdit").val(),
+                    nameUsuario: $("#nameUsuarioEdit").val(),
+                    estatus: $("#estatusUsuarioEdit").val(),
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax({
+                    url: '@Url.Action("actualizar_usuarios", "Usuarios")',
+                    type: "POST",
+                    data: JSON.stringify({ usuario: Usuario }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Usuario actualizado correctamente!", "success")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al actualizar el usuario!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+    </script>
+}

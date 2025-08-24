@@ -1,0 +1,734 @@
+﻿
+@{
+    ViewBag.Title = "cotizaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-2024-tab" data-toggle="pill" href="#pills-2024" role="tab" aria-controls="pills-2024" aria-selected="false">2024</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-2025-tab" data-toggle="pill" href="#pills-2025" role="tab" aria-controls="pills-2025" aria-selected="false">2025</a>
+                            </li>
+                        </ul>
+                        <h3 style="text-align: center">Cotizaciones</h3>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-2024" role="tabpanel" aria-labelledby="pills-2024-tab">
+                                <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                    @if ((Convert.ToInt32(Session["puesto"]) == 100))
+                                    {
+                                        <button type="button" class="btn btn-primary" onclick="crearCotizacion()" data-dismiss="modal" style="width: 10rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="Crear cotizacion">Crear cotización</button>
+                                    }
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaCotizacion" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Acciones</th>
+                                                                <th>KAM</th>
+                                                                <th>Cliente</th>
+                                                                <th>Estatus</th>
+                                                                <th>Categoria</th>
+                                                                <th>Descripción</th>
+                                                                <th>Fecha creación</th>
+                                                                <th>Fecha presentación</th>
+                                                                <th>Motivo rechazo</th>
+                                                                <th>Otros motivos</th>
+                                                                <th>Fecha respuesta</th>
+                                                                <th>Fecha lanzamiento</th>
+                                                                <th>Comentarios</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                            <div class="tab-pane fade" id="pills-2025" role="tabpanel" aria-labelledby="pills-2025-tab">
+                                <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                    @if ((Convert.ToInt32(Session["puesto"]) == 100))
+                                    {
+                                        <button type="button" class="btn btn-primary" onclick="crearCotizacion()" data-dismiss="modal" style="width: 10rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="Crear cotizacion">Crear cotización</button>
+                                    }
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaCotizacion2025" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Acciones</th>
+                                                                <th>KAM</th>
+                                                                <th>Cliente</th>
+                                                                <th>Estatus</th>
+                                                                <th>Categoria</th>
+                                                                <th>Descripción</th>
+                                                                <th>Fecha creación</th>
+                                                                <th>Fecha presentación</th>
+                                                                <th>Motivo rechazo</th>
+                                                                <th>Otros motivos</th>
+                                                                <th>Fecha respuesta</th>
+                                                                <th>Fecha lanzamiento</th>
+                                                                <th>Comentarios</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--VISTA DE MODAL-->
+<div class="modal fade" id="modalCrearCotizacion" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: lightskyblue" id="encabezadoCrearCotizacion">
+                <h5 class="modal-title" id="tituloModalCotizacion">Crear cotizacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha alta cotización:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="fechaAltaCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row" id="divKam">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">KAM:</label>
+                    <input type="hidden" class="form-control" id="idCotizacion">
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="kamCotizacion">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">HECTOR IBARROLA</option>
+                            <option value="2">GRECIA LEY</option>
+                            <option value="3">KARINA MONDRAGON</option>
+                            <option value="4">SAMUEL PEÑA</option>
+                            <option value="5">DAVID ALBA</option>
+                            <option value="6">ROBERTO CERVANTES</option>
+                            <option value="7">JAVIER CARRASCO</option>
+                            <option value="8">ELIU DOMINGUEZ</option>
+                            <!--option value="9">MONTSERRAT BUENDIA</option>->
+        <option value="10">LILIA BECERRIL</option>
+        <!--<option value="11">ALBERTO BECERRIL</option>-->
+                            <option value="12">IVAN CHAGOYA</option>
+                            <option value="13">CASIMIRO FLORES</option>
+                            <option value="14">LEONARDO YAÑEZ</option>
+                            <option value="15">ANDREA VILLANUEVA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" style="display:none" id="divKam2">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">KAM:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="kamCotizacion2">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Cliente:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="clienteCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Categoria:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="categoriaCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Descripción:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="descripcionCotizacion" rows="3"></textarea>
+                    </div>
+                </div>
+                </br>
+                <div class="form-group row" id="divFechaPresentacion" style="display:none">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha presentación:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="presentacionCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row" id="divEstatus" style="display:none">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Estatus:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusCotizacion">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">APROBADO</option>
+                            <option value="2">RECHAZADO</option>
+                            <option value="3">EN REVISIÓN</option>
+                            <option value="4">POR PRESENTAR</option>
+                            <option value="5">SUSTITUIDO</option>
+                            <option value="6">EN ESPERA DE MUESTRAS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row" style="display:none;" id="divRechazo">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Motivo rechazo:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="motivoRechazoCotizacion">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">NO DAMOS EL PERFIL</option>
+                            <option value="2">FALTA DE ESPACIO DE ANAQUEL</option>
+                            <option value="3">PRECIO</option>
+                            <option value="4">OTRO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" id="divOtroMotivo" style="display:none">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Otro motivo:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosOtroMotivo" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row" style="display: none;" id="divFechaRespuesta">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha respuesta:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="respuestaCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row" style="display: none;" id="divFechaLanzamiento">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha lanzamiento:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="lanzamientoCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row" id="divComentarios" style="display:none">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Comentarios:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosCotizacion" rows="3"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    @if ((Convert.ToInt32(Session["puesto"]) == 10) || (Convert.ToInt32(Session["puesto"]) == 100))
+                    {
+                        <button type="button" id="btnGuardarCotizacion" onclick="guardadoCotizacion()" class="btn btn-success">Guardar</button>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        function crearCotizacion() {
+            $('#divKam').show();
+            $('#divKam2').hide();
+            $('#divFechaPresentacion').hide();
+            $('#divEstatus').hide();
+            $('#divRechazo').hide();
+            $('#divOtroMotivo').hide();
+            $('#divComentarios').hide();
+
+            $("#tituloModalCotizacion").text("Crear cotización");
+            $("#modalCrearCotizacion").modal("show");
+            $('#kamCotizacion2').attr("disabled", false);
+            $('#clienteCotizacion').prop('readonly', false);
+            $('#categoriaCotizacion').prop('readonly', false);
+            $('#descripcionCotizacion').prop('readonly', false);
+            $('#fechaAltaCotizacion').prop('readonly', false);
+
+            $('#kamCotizacion2').val(0);
+            $('#clienteCotizacion').val('');
+            $('#descripcionCotizacion').val('');
+            $('#fechaAltaCotizacion').val(null);
+
+
+            $('#motivoRechazoCotizacion').val(0);
+            $('#estatusCotizacion').val(0);
+        }
+
+        tablaCotizacion = $("#tablaCotizacion").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Cotizaciones',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                    }
+                },
+            ],
+
+            "ajax": {
+                url: '@Url.Action("obtener_cotizacion", "ventas")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                {
+                    data: 'estatusDescripcion', "render": function (estatusDescripcion) {
+                        if ((estatusDescripcion != "APROBADO") && (estatusDescripcion != "RECHAZADO")) {
+                            return '<button type="button" id="btn-editar-cotizacion" class="btn btn-dark" style="padding: 0.5rem; border-radius: 5px;"><i class="fa-solid fa-pencil"></i></button>'
+                        }
+                        else  {
+                            return ''
+                        }
+                    },
+                    orderable: false,
+                    searchable: false
+                },
+                { data: 'KAMDescripcion' },
+                { data: 'Cliente' },
+                {
+                    data: 'estatusDescripcion', "render": function (estatusDescripcion) {
+                        if (estatusDescripcion == "APROBADO") {
+                            return '<span class="badge badge-success">APROBADO</span>'
+                        }
+                        else if (estatusDescripcion == "EN REVISIÓN") {
+                            return '<span class="badge badge-secondary">EN REVISIÓN</span>'
+                        }
+                        else if (estatusDescripcion == "POR PRESENTAR") {
+                            return '<span class="badge badge-primary">POR PRESENTAR</span>'
+                        }
+                        else if (estatusDescripcion == "EN ESPERA DE MUESTRAS") {
+                            return '<span class="badge badge-info">EN ESPERA DE MUESTRAS</span>'
+                        }
+                        else if (estatusDescripcion == "SIN MOVIMIENTO") {
+                            return '<span class="badge badge-warning">SIN MOVIMIENTO</span>'
+                        }
+                        else if (estatusDescripcion == "SUSTITUIDO") {
+                            return '<span class="badge badge-light">SUSTITUIDO</span>'
+                        }
+                        else if (estatusDescripcion == "RECHAZADO") {
+                            return '<span class="badge badge-danger">RECHAZADO</span>'
+                        }
+                    }
+                },
+                { data: 'categoria' },
+                { data: 'descripcion' },
+                { data: 'fechaCreacion' },
+                { data: 'fechaPresentacion' },
+                { data: 'motivoRechazoDescripcion' },
+                { data: 'comentariosOtroMotivo' },
+                { data: 'fechaRespuesta' },
+                { data: 'fechaLanzamiento' },
+                { data: 'comentarios' }
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.estatusDescripcion == "APROBADO") {
+                    $('td', row).css("background-color", "lightgreen");
+                }
+                if (data.estatusDescripcion == "RECHAZADO") {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+            },
+        });
+
+        tablaCotizacion2025 = $("#tablaCotizacion2025").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Cotizaciones',
+                    exportOptions: {
+                        columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+                    }
+                },
+            ],
+
+            "ajax": {
+                url: '@Url.Action("obtener_cotizacion_2025", "ventas")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                {
+                    data: 'estatusDescripcion', "render": function (estatusDescripcion) {
+                        if ((estatusDescripcion != "APROBADO") && (estatusDescripcion != "RECHAZADO")) {
+                            return '<button type="button" id="btn-editar-cotizacion" class="btn btn-dark" style="padding: 0.5rem; border-radius: 5px;"><i class="fa-solid fa-pencil"></i></button>'
+                        }
+                        else  {
+                            return ''
+                        }
+                    },
+                    orderable: false,
+                    searchable: false
+                },
+                { data: 'KAMDescripcion' },
+                { data: 'Cliente' },
+                {
+                    data: 'estatusDescripcion', "render": function (estatusDescripcion) {
+                        if (estatusDescripcion == "APROBADO") {
+                            return '<span class="badge badge-success">APROBADO</span>'
+                        }
+                        else if (estatusDescripcion == "EN REVISIÓN") {
+                            return '<span class="badge badge-secondary">EN REVISIÓN</span>'
+                        }
+                        else if (estatusDescripcion == "POR PRESENTAR") {
+                            return '<span class="badge badge-primary">POR PRESENTAR</span>'
+                        }
+                        else if (estatusDescripcion == "EN ESPERA DE MUESTRAS") {
+                            return '<span class="badge badge-info">EN ESPERA DE MUESTRAS</span>'
+                        }
+                        else if (estatusDescripcion == "SIN MOVIMIENTO") {
+                            return '<span class="badge badge-warning">SIN MOVIMIENTO</span>'
+                        }
+                        else if (estatusDescripcion == "SUSTITUIDO") {
+                            return '<span class="badge badge-light">SUSTITUIDO</span>'
+                        }
+                        else if (estatusDescripcion == "RECHAZADO") {
+                            return '<span class="badge badge-danger">RECHAZADO</span>'
+                        }
+                    }
+                },
+                { data: 'categoria' },
+                { data: 'descripcion' },
+                { data: 'fechaCreacion' },
+                { data: 'fechaPresentacion' },
+                { data: 'motivoRechazoDescripcion' },
+                { data: 'comentariosOtroMotivo' },
+                { data: 'fechaRespuesta' },
+                { data: 'fechaLanzamiento' },
+                { data: 'comentarios' }
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.estatusDescripcion == "APROBADO") {
+                    $('td', row).css("background-color", "lightgreen");
+                }
+                if (data.estatusDescripcion == "RECHAZADO") {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+            },
+        });
+
+        //CAMBIO DE ESTATUS EN COTIZACION
+        $('#estatusCotizacion').on('change', function () {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+
+                        if ($("#estatusCotizacion").val() == 1) {
+                            $('#divRechazo').hide();
+                            $('#divFechaRespuesta').hide();
+                            $('#divFechaLanzamiento').show();
+                        }
+                        else if ($("#estatusCotizacion").val() == 2) {
+                            $('#divRechazo').show();
+                            $('#divFechaRespuesta').hide();
+                            $('#divFechaLanzamiento').hide();
+                        }
+                        else if ($("#estatusCotizacion").val() == 3) {
+                            $('#divRechazo').hide();
+                            $('#divFechaRespuesta').show();
+                            $('#divFechaLanzamiento').hide();
+                        }
+                        else {
+                            $('#divRechazo').hide();
+                            $('#divFechaRespuesta').hide();
+                            $('#divFechaLanzamiento').hide();
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        });
+
+        //CAMBIO EN MOTIVO DE RECHAZO
+        $('#motivoRechazoCotizacion').on('change', function () {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+
+                        if ($("#motivoRechazoCotizacion").val() == 4) {
+                            $('#divOtroMotivo').show();
+                        }
+                        else {
+                            $('#divOtroMotivo').hide();
+                        }
+
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+        });
+
+        //GUARDADO DE COTIZACION
+        function guardadoCotizacion()
+        {
+            var isCorrect = true;
+
+            var currentDate = new Date();
+            var olderDate = new Date('2024-01-01');
+            var selectedDate = new Date($("#fechaAltaCotizacion").val());
+
+
+            if ($("#fechaAltaCotizacion").val() == "") {
+            swal("", "La fecha de alta no puede ser vacia", "warning");
+            isCorrect = false;
+        }
+
+        if (selectedDate>currentDate) {
+            swal("", "La fecha de alta no puede ser posterior a hoy", "warning");
+            isCorrect = false;
+        }
+
+        if (selectedDate < olderDate) {
+            swal("", "La fecha de alta no puede ser inferior a 2024", "warning");
+            isCorrect = false;
+        }
+
+        if (($("#kamCotizacion").val() == 0) && ($("#idCotizacion").val() == 0))
+            {
+            swal("", "Debes indicar un KAM", "warning");
+            isCorrect = false;
+        }
+
+        if ($("#clienteCotizacion").val() == 0)
+            {
+            swal("", "Debes indicar un cliente", "warning");
+            isCorrect = false;
+        }
+
+        if ($("#descripcionCotizacion").val() == 0)
+            {
+            swal("", "Debes indicar una descripción", "warning");
+            isCorrect = false;
+        }
+
+        if ($("#categoriaCotizacion").val() == 0) {
+            swal("", "Debes indicar una categoria", "warning");
+            isCorrect = false;
+        }
+
+        if (isCorrect)
+        {
+            var kamSleccionado = 0;
+            if ($("#idCotizacion").val() != 0) {
+                kamSleccionado = $("#kamCotizacion2").val();
+            }
+                else {
+                kamSleccionado = $("#kamCotizacion").val();
+            }
+
+            var cotizacionData = {
+                    KAM: kamSleccionado,
+                    idCotizacion: $("#idCotizacion").val(),
+                    fechaCreacion: $("#fechaAltaCotizacion").val(),
+                    Cliente: $("#clienteCotizacion").val(),
+                    descripcion: $("#descripcionCotizacion").val(),
+                    categoria: $("#categoriaCotizacion").val(),
+
+                    fechaPresentacion: $("#presentacionCotizacion").val(),
+                    estatus: $("#estatusCotizacion").val(),
+                    motivoRechazo: $("#motivoRechazoCotizacion").val(),
+                    comentariosOtroMotivo: $("#comentariosOtroMotivo").val(),
+                    fechaRespuesta: $("#respuestaCotizacion").val(),
+                    fechaLanzamiento: $("#lanzamientoCotizacion").val(),
+                    comentarios: $("#comentariosCotizacion").val(),
+                }
+
+                $('#overlay').css('display', 'flex');
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("guardar_cotizacion", "ventas")',
+                    type: "POST",
+                    data: JSON.stringify(
+                        {
+                            cotizacionWEB: cotizacionData
+                        }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        if (resultado == -1) {
+                            swal("", "Datos incorrectos!", "error");
+                        }
+                        else {
+                            if ($("#idCotizacion").val() != 0) {
+                                swal("", "Cotización actualizada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                            else {
+                                swal("", "Cotización insertada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        }
+
+                    },
+                    error: function () {
+                        swal("", "Error al insertar el paro!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+                $('#overlay').css('display', 'none');
+            }
+        }
+
+        //EDICION DE COTIZACION
+        $("#tablaCotizacion").on("click", '#btn-editar-cotizacion', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaCotizacion.row(filaseleccionada).data();
+            abrirdetalleCotizacion(datos);
+        });
+
+        //EDICION DE COTIZACION
+        $("#tablaCotizacion2025").on("click", '#btn-editar-cotizacion', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaCotizacion2025.row(filaseleccionada).data();
+            abrirdetalleCotizacion(datos);
+        });
+
+        //DETALLE DE COTIZACION
+        function abrirdetalleCotizacion(datos)
+        {
+            $('#divKam').show();
+            $('#divKam2').hide();
+            $('#divFechaPresentacion').hide();
+            $('#divEstatus').hide();
+            $('#divRechazo').hide();
+            $('#divOtroMotivo').hide();
+            $('#divComentarios').hide();
+
+            $("#modalCrearCotizacion").modal("show");
+
+            $('#kamCotizacion2').attr("disabled", false);
+            $('#clienteCotizacion').prop('readonly', false);
+            $('#descripcionCotizacion').prop('readonly', false);
+            $('#fechaAltaCotizacion').prop('readonly', false);
+
+            $('#estatusCotizacion').val(0);
+            $('#motivoRechazoCotizacion').val(0);
+
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("validar_sesion", "Inicio")',
+                    type: "POST",
+                    dataType: "json",
+                    success: function (resultado) {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1) {
+                            $('#kamCotizacion2').val(datos.KAMDescripcion);
+                            $('#clienteCotizacion').val(datos.Cliente);
+                            $('#descripcionCotizacion').val(datos.descripcion);
+                            $('#idCotizacion').val(datos.idCotizacion);
+
+                            $('#presentacionCotizacion').val(datos.fechaPresentacion);
+                            $('#categoriaCotizacion').val(datos.categoria);
+                            $('#estatusCotizacion').val(datos.estatus);
+                            $('#estatusCotizacion').change()
+                            $('#motivoRechazoCotizacion').val(datos.motivoRechazo);
+                            $('#motivoRechazoCotizacion').change()
+                            $('#comentariosOtroMotivo').val(datos.comentariosOtroMotivo);
+                            $('#respuestaCotizacion').val(datos.fechaRespuesta);
+                            $('#lanzamientoCotizacion').val(datos.fechaLanzamiento);
+                            $('#comentariosCotizacion').val(datos.comentarios);
+
+                            document.getElementById("fechaAltaCotizacion").value = datos.fechaCreacion;
+
+                            $('#divKam2').show();
+                            $('#divComentarios').show();
+                            $('#divFechaPresentacion').show();
+                            $('#divEstatus').show();
+                            $('#divKam').hide();
+                            $('#kamCotizacion2').attr("disabled", true);
+                            /*
+                            $('#clienteCotizacion').prop('readonly', true);
+                            $('#descripcionCotizacion').prop('readonly', true);
+                            $('#fechaAltaCotizacion').prop('readonly', true);
+                            $('#categoriaCotizacion').prop('readonly', true);
+                            */
+                            $("#tituloModalCotizacion").text("Editar cotización");
+                            $("#modalCrearCotizacion").modal("show");
+                        }
+                        else {
+                            alert('Sesion caducada');
+                            window.location.reload(false);
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Sesión expirada!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+        }
+
+    </script>
+}

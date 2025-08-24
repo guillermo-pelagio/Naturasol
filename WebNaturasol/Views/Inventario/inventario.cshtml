@@ -1,0 +1,2708 @@
+﻿
+@{
+    ViewBag.Title = "inventario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-equipos-tab" data-toggle="pill" href="#pills-equipos" role="tab" aria-controls="pills-equipos" aria-selected="false">Equipos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-accesorios-tab" data-toggle="pill" href="#pills-accesorios" role="tab" aria-controls="pills-accesorios" aria-selected="false">Accesorios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-correos-tab" data-toggle="pill" href="#pills-correos" role="tab" aria-controls="pills-correos" aria-selected="false">Correos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-lineas-tab" data-toggle="pill" href="#pills-lineas" role="tab" aria-controls="pills-lineas" aria-selected="false">Líneas telefónicas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-telefonos-tab" data-toggle="pill" href="#pills-telefonos" role="tab" aria-controls="pills-telefonos" aria-selected="false">Teléfonos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-sitios-tab" data-toggle="pill" href="#pills-sitios" role="tab" aria-controls="pills-sitios" aria-selected="false">Sitios</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!--VISTA DE LISTADO DE EQUIPOS-->
+                            <div class="tab-pane fade" id="pills-equipos" role="tabpanel" aria-labelledby="pills-equipos-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-equipos-tab">
+                                    <button type="button" class="btn btn-primary" onclick="nuevoEquipo()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaEquipos" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Usuario</th>
+                                                                <th>Hostname</th>
+                                                                <th>CH</th>
+                                                                <th>CS</th>
+                                                                <th>Modelo</th>
+                                                                <th>Serie</th>
+                                                                <th>RAM</th>
+                                                                <th>Estatus</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE ACCESORIOS-->
+                            <div class="tab-pane fade" id="pills-accesorios" role="tabpanel" aria-labelledby="pills-accesorios-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-accesorios-tab">
+                                    <button type="button" class="btn btn-primary" onclick="nuevoAccesorio()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaAccesorios" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Usuario</th>
+                                                                <th>Tipo</th>
+                                                                <th>Modelo</th>
+                                                                <th>Marca</th>
+                                                                <th>CS</th>
+                                                                <th>Serie</th>
+                                                                <th>Estatus</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE LINEAS TELEFONICAS-->
+                            <div class="tab-pane fade" id="pills-lineas" role="tabpanel" aria-labelledby="pills-lineas-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-lineas-tab">
+                                    <button type="button" class="btn btn-primary" onclick="nuevaLinea()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaLineas" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Usuario</th>
+                                                                <th>Linea</th>
+                                                                <th>SIM</th>
+                                                                <th>CS</th>
+                                                                <th>CL</th>
+                                                                <th>Estatus</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE TELEFONOS-->
+                            <div class="tab-pane fade" id="pills-telefonos" role="tabpanel" aria-labelledby="pills-telefonos-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-telefonos-tab">
+                                    <button type="button" class="btn btn-primary" onclick="nuevoTelefono()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaTelefono" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Usuario</th>
+                                                                <th>Modelo</th>
+                                                                <th>Linea</th>
+                                                                <th>IMEI</th>
+                                                                <th>CL</th>
+                                                                <th>CI</th>
+                                                                <th>Estatus</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE LICENCIAS-->
+                            <div class="tab-pane fade" id="pills-licencias" role="tabpanel" aria-labelledby="pills-licencias-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-licencias-tab">
+                                    <button type="button" class="btn btn-primary" onclick="nuevaLicencia()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaLicencias" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Key</th>
+                                                                <th>Programa</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE SITIOS-->
+                            <div class="tab-pane fade" id="pills-sitios" role="tabpanel" aria-labelledby="pills-sitios-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-sitios-tab">
+                                    <button type="button" class="btn btn-primary" onclick="nuevoSitio()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaSitios" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sitio</th>
+                                                                <th>Usuario</th>
+                                                                <th>Contraseña</th>
+                                                                <th>Comentarios</th>
+                                                                <th>Estatus</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE CORREO-->
+                            <div class="tab-pane fade" id="pills-correos" role="tabpanel" aria-labelledby="pills-correos-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-correos-tab">
+                                    <button type="button" class="btn btn-primary" onclick="nuevoCorreo()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaCorreos" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Correo</th>
+                                                                <th>Nombre</th>
+                                                                <th>CC</th>
+                                                                <th>Departamento</th>
+                                                                <th>Ubicación</th>
+                                                                <th>Estatus</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE EQUIPOS-->
+<div class="modal fade" id="modalDetalleEquipo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetalleEquipo" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-computer"></i> Datos del equipo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="fechaEquipo" class="col-sm-4 col-form-label">Fecha adquisición</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idEquipo" readonly>
+                        <input type="date" class="form-control" id="fechaEquipo">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="nombreEquipo" class="col-sm-4 col-form-label">* Nombre de equipo</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="nombreEquipo" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="usuarioEquipo" class="col-sm-4 col-form-label">Usuario</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="usuarioEquipo" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contrasenaEquipo" class="col-sm-4 col-form-label">Contrasena</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="contrasenaEquipo" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="antivirusEquipo" class="col-sm-4 col-form-label">Antivirus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="antivirusEquipo">
+                            <option value="0">No</option>
+                            <option value="1">Si</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="ramEquipo" class="col-sm-4 col-form-label">RAM (GB)</label>
+                    <div class="col-sm-8">
+                        <input type="number" placeholder="0.00" step="0.01" min="0" max="1000000" class="form-control" id="ramEquipo">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="hddEquipo" class="col-sm-4 col-form-label">HDD (GB)</label>
+                    <div class="col-sm-8">
+                        <input type="number" placeholder="0.00" step="0.01" min="0" max="1000000" class="form-control" id="hddEquipo">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="ssdEquipo" class="col-sm-4 col-form-label">SDD (GB)</label>
+                    <div class="col-sm-8">
+                        <input type="number" placeholder="0.00" step="0.01" min="0" max="1000000" class="form-control" id="ssdEquipo">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="modeloEquipo" class="col-sm-4 col-form-label">Modelo</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="modeloEquipo" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="marcaEquipo" class="col-sm-4 col-form-label">Marca</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="marcaEquipo" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="soEquipo" class="col-sm-4 col-form-label">S.O.</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="soEquipo">
+                            <option value="0">Seleccione un opción</option>
+                            <option value="1">Windows 11</option>
+                            <option value="2">Windows 10</option>
+                            <option value="3">Windows 8</option>
+                            <option value="4">Windows 7</option>
+                            <option value="5">MacOS</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="procesadorEquipo" class="col-sm-4 col-form-label">Procesador</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="procesadorEquipo" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="serieEquipo" class="col-sm-4 col-form-label">Serie</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="serieEquipo" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="usuarioAsignadoEquipo" class="col-sm-4 col-form-label">Usuario asignado</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="usuarioAsignadoEquipo">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="estatusEquipo" class="col-sm-4 col-form-label">Estatus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusEquipo">
+                            <option value="1">Asignado</option>
+                            <option value="0">Descompuesto</option>
+                            <option value="2">Libre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="comentariosEquipo" class="col-sm-4 col-form-label">Comentarios</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosEquipo" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarEquipo" onclick="guardarEquipo()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE ACCESORIOS-->
+<div class="modal fade" id="modalDetalleAccesorio" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetalleAccesorio" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-computer-mouse"></i> Datos del accesorio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="tipoAccesorio" class="col-sm-4 col-form-label">Tipo</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="tipoAccesorio">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">Teclado</option>
+                            <option value="2">Adaptador de red</option>
+                            <option value="3">Monitor</option>
+                            <option value="4">USB</option>
+                            <option value="5">Mouse</option>
+                            <option value="6">Eliminador</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fechaAccesorio" class="col-sm-4 col-form-label">Fecha adquisición</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="fechaAccesorio">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="serieAccesorio" class="col-sm-4 col-form-label">Serie</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idAccesorio" readonly>
+                        <input type="text" class="form-control" id="serieAccesorio" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="modeloAccesorio" class="col-sm-4 col-form-label">Modelo</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="modeloAccesorio" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="marcaAccesorio" class="col-sm-4 col-form-label">Marca</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="marcaAccesorio" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="usuarioAccesorio" class="col-sm-4 col-form-label">Usuario asignado</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="usuarioAccesorio">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="estatusAccesorio" class="col-sm-4 col-form-label">Estatus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusAccesorio">
+                            <option value="1">Asignado</option>
+                            <option value="0">Descompuesto</option>
+                            <option value="2">Libre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="comentariosAccesorios" class="col-sm-4 col-form-label">Comentarios</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosAccesorios" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarAccesorio" onclick="guardarAccesorio()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE LINEAS-->
+<div class="modal fade" id="modalDetalleLinea" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetalleLinea" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-sim-card"></i> Datos de la Linea</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="simLinea" class="col-sm-4 col-form-label">SIM</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idLinea" readonly>
+                        <input type="text" class="form-control" id="simLinea" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="numeroLinea" class="col-sm-4 col-form-label">* Número</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="numeroLinea" maxlength="16">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="usuarioLinea" class="col-sm-4 col-form-label">Usuario asignado</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="usuarioLinea">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="estatusLinea" class="col-sm-4 col-form-label">Estatus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusLinea">
+                            <option value="1">Asignado</option>
+                            <option value="2">Libre</option>
+                            <option value="0">Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="comentariosLineas" class="col-sm-4 col-form-label">Comentarios</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosLineas" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarTelefono" onclick="guardarLinea()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE TELEFONOS-->
+<div class="modal fade" id="modalDetalleTelefono" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetalleTelefono" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-mobile-screen"></i> Datos de teléfono</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="imeiTelefono" class="col-sm-4 col-form-label">IMEI</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idTelefono" readonly>
+                        <input type="text" class="form-control" id="imeiTelefono" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="modeloTelefono" class="col-sm-4 col-form-label">Modelo</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="modeloTelefono" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lineaTelefono" class="col-sm-4 col-form-label">Linea</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="lineaTelefono">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="planTelefono" class="col-sm-4 col-form-label">Plan contratado</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="planTelefono" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="costoTelefono" class="col-sm-4 col-form-label">Costo</label>
+                    <div class="col-sm-8">
+                        <input type="number" placeholder="0.0000" step="0.0001" min="0" max="1000000" class="form-control" id="costoTelefono">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="vencimientoTelefono" class="col-sm-4 col-form-label">Fecha vencimiento</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="vencimientoTelefono">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoGoogle" class="col-sm-4 col-form-label">Correo Google</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="correoGoogle" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contrasenaGoogle" class="col-sm-4 col-form-label">Contraseña correo</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="contrasenaGoogle" maxlength="32">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="usuarioTelefono" class="col-sm-4 col-form-label">Usuario asignado</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="usuarioTelefono">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="estatusTelefono" class="col-sm-4 col-form-label">Estatus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusTelefono">
+                            <option value="1">Asignado</option>
+                            <option value="2">Libre</option>
+                            <option value="0">Descompuesto</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="comentariosTelefono" class="col-sm-4 col-form-label">Comentarios</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosTelefono" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarTelefono" onclick="guardarTelefono()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE LICENCIAS-->
+<div class="modal fade" id="modalDetalleLicencia" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetalleLicencia" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-file-certificate"></i> Datos de licencia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="keyLicencia" class="col-sm-4 col-form-label">Key</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idLicencia" readonly>
+                        <input type="text" class="form-control" id="keyLicencia">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tipoPrograma" class="col-sm-4 col-form-label">Programa</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="tipoPrograma">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">SAP</option>
+                            <option value="2">Windows</option>
+                            <option value="3">Office</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarLicencia" onclick="guardarLicencia()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE SITIOS-->
+<div class="modal fade" id="modalDetalleSitio" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetalleSitio" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-brands fa-internet-explorer"></i> Datos del sitio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="direccionSitio" class="col-sm-4 col-form-label">* Dirección del sitio</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="direccionSitio" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="usuarioSitio" class="col-sm-4 col-form-label">Usuario</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idSitio" readonly>
+                        <input type="text" class="form-control" id="usuarioSitio" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contrasenaSitio" class="col-sm-4 col-form-label">Contraseña</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="contrasenaSitio" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="comentarioSitio" class="col-sm-4 col-form-label">Comentarios</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentarioSitio" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="estatusSitio" class="col-sm-4 col-form-label">Estatus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusSitio">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarSitio" onclick="guardarSitio()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE CORREO-->
+<div class="modal fade" id="modalDetalleCorreo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetalleCorreo" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa-solid fa-at"></i> Datos de correo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="usuarioCorreo" class="col-sm-4 col-form-label">Usuario</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="usuarioCorreo">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoElectronico" class="col-sm-4 col-form-label">* Cuenta de correo</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idCorreo" readonly>
+                        <input type="text" class="form-control" id="correoElectronico" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="contrasenaCorreo" class="col-sm-4 col-form-label">Contraseña</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="contrasenaCorreo" maxlength="64">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="estatusCorreo" class="col-sm-4 col-form-label">Estatus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusCorreo">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="comentarioCorreo" class="col-sm-4 col-form-label">Comentarios</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentarioCorreo" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarCorreo" onclick="guardarCorreo()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        var tablaEquipos;
+        var tablaCorreos;
+        var tablaSitios;
+        var tablaAccesorios;
+        var tablaLineas;
+        var tablaTelefono;
+
+        function nuevoEquipo() {
+            $("#modalDetalleEquipo").modal("show");
+        }
+
+        function nuevoAccesorio() {
+            $("#modalDetalleAccesorio").modal("show");
+        }
+
+        function nuevaLinea() {
+            $("#modalDetalleLinea").modal("show");
+        }
+
+        function nuevoTelefono() {
+            $("#modalDetalleTelefono").modal("show");
+        }
+
+        function nuevaLicencia() {
+            $("#modalDetalleLicencia").modal("show");
+        }
+
+        /*****************************************************EQUIPOS*****************************************************/
+        jQuery.ajax({
+            url: '@Url.Action("lista_usuarios", "Usuarios")',
+            type: "POST",
+            success: function (resultado) {
+                $('#usuarioAsignadoEquipo').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al buscar los usuarios! Comuniquese a sistemas", "error");
+            },
+        });
+
+        $("#tablaEquipos").on("click", '#btn-editar-equipo', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaEquipos.row(filaseleccionada).data();
+            abrirDetalleEquipo(datos);
+        });
+
+        $("#tablaEquipos").on("click", '#btn-responsiva', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaEquipos.row(filaseleccionada).data();
+
+            if (datos.usuarioAsignado != 0)
+            {
+                jQuery.ajax({
+                    url: '@Url.Action("validar_sesion", "Usuarios")',
+                    type: "POST",
+                    dataType: "json",
+                    success: function (resultado)
+                    {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1)
+                        {
+                            var equipoAsignacion = {
+                                usuarioAsignado: datos.usuarioAsignado
+                            }
+                            $('#overlay').css('display', 'flex');
+                            jQuery.ajax({
+                                url: '@Url.Action("verificar_responsiva", "Equipos")',
+                                type: "POST",
+                                data: JSON.stringify({ equipo: equipoAsignacion }),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (resultado)
+                                {
+                                    if (resultado == 1)
+                                    {
+                                        window.open('/responsiva/generar_responsiva/', "_blank");
+                                    }
+                                    else
+                                    {
+                                        swal("", "Error al abrir la responsiva!", "error")
+                                            .then((value) =>
+                                            {
+                                                window.location.reload(false);
+                                            });
+                                    }
+                                },
+                                error: function ()
+                                {
+                                    swal("", "Error al generar la responsiva!", "error")
+                                        .then((value) =>
+                                        {
+                                            window.location.reload(false);
+                                        });
+                                },
+                            });
+                            $('#overlay').css('display', 'none');
+                        }
+                        else
+                        {
+                            alert('Sesion caducada');
+                            window.location.reload(false);
+                        }
+                    },
+                    error: function ()
+                    {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al validar la sesión!", "error")
+                            .then((value) =>
+                            {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+            }
+            else
+            {
+                swal("", "No tiene usuario asignado, no puedes generar responsiva!", "error");
+            }
+        });
+
+        function abrirDetalleEquipo(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $("#idEquipo").val(datos.idEquipo);
+                        $("#fechaEquipo").val(datos.fechaAdquisicion);
+                        $("#nombreEquipo").val(datos.hostname);
+                        $("#usuarioAsignadoEquipo").val(datos.usuarioAsignado);
+                        $("#usuarioEquipo").val(datos.usuario);
+                        $("#contrasenaEquipo").val(datos.contrasena);
+                        $("#antivirusEquipo").val(datos.antivirus);
+                        $("#ramEquipo").val(datos.ram);
+                        $("#hddEquipo").val(datos.romHDD);
+                        $("#ssdEquipo").val(datos.romSDD);
+                        $("#modeloEquipo").val(datos.modelo);
+                        $("#marcaEquipo").val(datos.marca);
+                        $("#soEquipo").val(datos.so);
+                        $("#procesadorEquipo").val(datos.procesador);
+                        $("#serieEquipo").val(datos.serie);
+                        $("#comentariosEquipo").val(datos.comentarios);
+                        $("#estatusEquipo").val(datos.estatus);
+
+                        $("#modalDetalleEquipo").modal("show");
+                        var element = document.getElementById("encabezadoDetalleEquipo");
+
+                        if (datos.estatus == 1) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.remove("modal-header-warning");
+                            element.classList.add("modal-header-activo");
+                        }
+                        else if (datos.estatus == 2) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.remove("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.add("modal-header-warning");
+                        }
+                        else {
+                            element.classList.remove("modal-header-warning");
+                            element.classList.remove("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.add("modal-header-inactivo");
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        //LISTADO DE EQUIPOS
+        tablaEquipos = $("#tablaEquipos").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_equipos", "Equipos")',
+                type: "GET",
+                dataType: "json",
+            },
+
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Inventario de equipos',
+                    exportOptions: {
+                        columns: [0, 1, 4, 5, 6, 7]
+                    }
+                },
+            ],
+
+            "columns": [
+                { data: 'nombreCompleto' },
+                { data: 'hostname' },
+                { data: 'cantidadSerie', visible: false },
+                { data: 'cantidadHostname', visible: false},
+                { data: 'modelo' },
+                { data: 'serie' },
+                { data: 'ram' },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == 1) {
+                            return '<span class="badge badge-success">Asignado</span>'
+                        }
+                        else if (estatus == 0) {
+                            return '<span class="badge badge-danger">Descompuesto</span>'
+                        }
+                        else if (estatus == 2) {
+                            return '<span class="badge badge-warning">Libre</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button title='Detalles' type='button' id='btn-editar-equipo' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button><button title='Responsiva' type='button' id='btn-responsiva' class='btn btn-danger' style='padding: 0.5rem; margin-left: 0.5rem; border-radius: 5px;'><i class='fa fa-file-contract' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ],
+
+            "createdRow": function (row, data, dataIndex) {
+                if (data.cantidadHostname > 1) {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+                if (data.cantidadSerie > 1) {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+            },
+
+        });
+
+        function nuevoEquipo() {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var element = document.getElementById("encabezadoDetalleEquipo");
+                        $("#idEquipo").val(0);
+                        $("#fechaEquipo").val("");
+                        $("#nombreEquipo").val("");
+                        $("#usuarioEquipo").val("");
+                        $("#usuarioAsignadoEquipo").val(0);
+                        $("#contrasenaEquipo").val("");
+                        $("#antivirusEquipo").val(0);
+                        $("#ramEquipo").val("");
+                        $("#hddEquipo").val("");
+                        $("#ssdEquipo").val("");
+                        $("#modeloEquipo").val("");
+                        $("#marcaEquipo").val("");
+                        $("#soEquipo").val(0);
+                        $("#procesadorEquipo").val("");
+                        $("#serieEquipo").val("");
+                        $("#comentariosEquipo").val("");
+                        $("#estatusEquipo").val(0);
+
+                        element.classList.remove("modal-header-inactivo");
+                        element.classList.remove("modal-header-activo");
+                        element.classList.remove("modal-header-warning");
+                        element.classList.add("modal-header-inicial");
+                        $("#modalDetalleEquipo").modal("show");
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        function guardarEquipo()
+        {
+            var isCorrect = true;
+
+            if ($("#nombreEquipo").val().length == 0) {
+                swal("", "Debes indicar un nombre de equipo", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#idEquipo").val()==0) {
+                if (isCorrect) {
+
+                    var equipoAsignacion = {
+                        fechaAdquisicion: $("#fechaEquipo").val(),
+                        hostname: $("#nombreEquipo").val(),
+                        usuario: $("#usuarioEquipo").val(),
+                        usuarioAsignado: $("#usuarioAsignadoEquipo").val(),
+                        contrasena: $("#contrasenaEquipo").val(),
+                        usuario: $("#usuarioEquipo").val(),
+                        antivirus: $("#antivirusEquipo").val(),
+                        ram: $("#ramEquipo").val(),
+                        romHDD: $("#hddEquipo").val(),
+                        romSDD: $("#ssdEquipo").val(),
+                        modelo: $("#modeloEquipo").val(),
+                        marca: $("#marcaEquipo").val(),
+                        so: $("#soEquipo").val(),
+                        procesador: $("#procesadorEquipo").val(),
+                        serie: $("#serieEquipo").val(),
+                        comentarios: $("#comentariosEquipo").val(),
+                        estatus: $("#estatusEquipo").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("guardar_equipo", "Equipos")',
+                        type: "POST",
+                        data: JSON.stringify({ equipo: equipoAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "Serie/Hostname ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Equipo insertado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el equipo!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+            else {
+                if (isCorrect) {
+                    var equipoAsignacion = {
+                        fechaAdquisicion: $("#fechaEquipo").val(),
+                        hostname: $("#nombreEquipo").val(),
+                        usuario: $("#usuarioEquipo").val(),
+                        usuarioAsignado: $("#usuarioAsignadoEquipo").val(),
+                        contrasena: $("#contrasenaEquipo").val(),
+                        antivirus: $("#antivirusEquipo").val(),
+                        ram: $("#ramEquipo").val(),
+                        romHDD: $("#hddEquipo").val(),
+                        romSDD: $("#ssdEquipo").val(),
+                        modelo: $("#modeloEquipo").val(),
+                        marca: $("#marcaEquipo").val(),
+                        so: $("#soEquipo").val(),
+                        procesador: $("#procesadorEquipo").val(),
+                        serie: $("#serieEquipo").val(),
+                        comentarios: $("#comentariosEquipo").val(),
+                        estatus: $("#estatusEquipo").val(),
+                        idEquipo: $("#idEquipo").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("actualizar_equipo", "Equipos")',
+                        type: "POST",
+                        data: JSON.stringify({ equipo: equipoAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "Serie/Hostname ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Equipo actualizado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al actualizar el equipo!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+        }
+
+        /*****************************************************ACCESORIOS*****************************************************/
+        jQuery.ajax({
+            url: '@Url.Action("lista_usuarios", "Usuarios")',
+            type: "POST",
+            success: function (resultado) {
+                $('#usuarioAccesorio').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al buscar los usuarios! Comuniquese a sistemas", "error");
+            },
+        });
+
+        $("#tablaAccesorios").on("click", '#btn-editar-accesorio', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaAccesorios.row(filaseleccionada).data();
+            abrirDetalleAccesorio(datos);
+        });
+
+        $("#tablaAccesorios").on("click", '#btn-responsiva', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaAccesorios.row(filaseleccionada).data();
+
+            if (datos.usuarioAsignado != 0)
+            {
+                jQuery.ajax({
+                    url: '@Url.Action("validar_sesion", "Usuarios")',
+                    type: "POST",
+                    dataType: "json",
+                    success: function (resultado)
+                    {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1)
+                        {
+                            var accesorioAsignacion = {
+                                usuarioAsignado: datos.usuarioAsignado
+                            }
+                            $('#overlay').css('display', 'flex');
+                            jQuery.ajax({
+                                url: '@Url.Action("verificar_responsiva", "Accesorios")',
+                                type: "POST",
+                                data: JSON.stringify({ accesorio: accesorioAsignacion }),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (resultado)
+                                {
+                                    if (resultado == 1)
+                                    {
+                                        window.open('/responsiva/generar_responsiva/', "_blank");
+                                    }
+                                    else
+                                    {
+                                        swal("", "Error al abrir la responsiva!", "error")
+                                            .then((value) =>
+                                            {
+                                                window.location.reload(false);
+                                            });
+                                    }
+                                },
+                                error: function ()
+                                {
+                                    swal("", "Error al generar la responsiva!", "error")
+                                        .then((value) =>
+                                        {
+                                            window.location.reload(false);
+                                        });
+                                },
+                            });
+                            $('#overlay').css('display', 'none');
+                        }
+                        else
+                        {
+                            alert('Sesion caducada');
+                            window.location.reload(false);
+                        }
+                    },
+                    error: function ()
+                    {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al validar la sesión!", "error")
+                            .then((value) =>
+                            {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+            }
+            else
+            {
+                swal("", "No tiene usuario asignado, no puedes generar responsiva!", "error");
+            }
+        });
+
+        function abrirDetalleAccesorio(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $("#idAccesorio").val(datos.idAccesorio);
+                        $("#tipoAccesorio").val(datos.tipo);
+                        $("#fechaAccesorio").val(datos.fechaAdquisicion);
+                        $("#serieAccesorio").val(datos.serie);
+                        $("#modeloAccesorio").val(datos.modelo);
+                        $("#marcaAccesorio").val(datos.marca);
+                        $("#usuarioAccesorio").val(datos.usuarioAsignado);
+                        $("#estatusAccesorio").val(datos.estatus);
+                        $("#comentariosAccesorios").val(datos.comentarios);
+
+                        $("#modalDetalleAccesorio").modal("show");
+                        var element = document.getElementById("encabezadoDetalleAccesorio");
+
+                        if (datos.estatus == 1) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.remove("modal-header-warning");
+                            element.classList.add("modal-header-activo");
+                        }
+                        else if (datos.estatus == 2) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.remove("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.add("modal-header-warning");
+                        }
+                        else {
+                            element.classList.remove("modal-header-warning");
+                            element.classList.remove("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.add("modal-header-inactivo");
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        //LISTADO DE ACCESORIOS
+        tablaAccesorios = $("#tablaAccesorios").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Inventario de accesorios',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 5, 6]
+                    }
+                },
+            ],
+
+            "ajax": {
+                url: '@Url.Action("obtener_accesorios", "Accesorios")',
+                type: "GET",
+                dataType: "json",
+            },
+
+            "columns": [
+                { data: 'nombreCompleto' },
+                {
+                    data: 'tipo', "render": function (condicion) {
+                        if (condicion == 1) {
+                            return "Teclado"
+                        }
+                        else if (condicion == 2) {
+                            return "Adaptador de red"
+                        }
+                        else if (condicion == 3) {
+                            return "Pantalla"
+                        }
+                        else if (condicion == 4) {
+                            return "USB"
+                        }
+                        else if (condicion == 5) {
+                            return "Mouse"
+                        }
+                        else {
+                            return "No asignado"
+                        }
+                    }
+                },
+                { data: 'modelo' },
+                { data: 'marca' },
+                { data: 'cantidadSerie', visible:false },
+                { data: 'serie' },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == 1) {
+                            return '<span class="badge badge-success">Asignado</span>'
+                        }
+                        else if (estatus == 0) {
+                            return '<span class="badge badge-danger">Descompuesto</span>'
+                        }
+                        else if (estatus == 2) {
+                            return '<span class="badge badge-warning">Libre</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-accesorio' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button><button title='Responsiva' type='button' id='btn-responsiva' class='btn btn-danger' style='padding: 0.5rem; margin-left: 0.5rem; border-radius: 5px;'><i class='fa fa-file-contract' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ],
+
+            "createdRow": function (row, data, dataIndex) {
+                if (data.cantidadSerie > 1) {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+            },
+        });
+
+        function nuevoAccesorio() {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var element = document.getElementById("encabezadoDetalleAccesorio");
+
+                        $("#idAccesorio").val(0);
+                        $("#tipoAccesorio").val(0);
+                        $("#fechaAccesorio").val("");
+                        $("#serieAccesorio").val("");
+                        $("#modeloAccesorio").val("");
+                        $("#marcaAccesorio").val("");
+                        $("#usuarioAccesorio").val(0);
+                        $("#estatusAccesorio").val(0);
+                        $("#comentariosAccesorios").val("");
+
+                        element.classList.remove("modal-header-inactivo");
+                        element.classList.remove("modal-header-activo");
+                        element.classList.remove("modal-header-warning");
+                        element.classList.add("modal-header-inicial");
+                        $("#modalDetalleAccesorio").modal("show");
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        function guardarAccesorio()
+        {
+            var isCorrect = true;
+
+            if ($("#tipoAccesorio").val() == 0) {
+                swal("", "Debes indicar un tipo de accesorio", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#idAccesorio").val()==0) {
+                if (isCorrect) {
+
+                    var accesorioAsignacion = {
+                        tipo: $("#tipoAccesorio").val(),
+                        fechaAdquisicion: $("#fechaAccesorio").val(),
+                        serie: $("#serieAccesorio").val(),
+                        modelo: $("#modeloAccesorio").val(),
+                        marca: $("#marcaAccesorio").val(),
+                        usuarioAsignado: $("#usuarioAccesorio").val(),
+                        estatus: $("#estatusAccesorio").val(),
+                        comentarios: $("#comentariosAccesorios").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("guardar_accesorio", "Accesorios")',
+                        type: "POST",
+                        data: JSON.stringify({ accesorio: accesorioAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "Serie ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Accesorio insertado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            } s
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el accesorio!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+            else {
+                if (isCorrect) {
+                    var accesorioAsignacion = {
+                        tipo: $("#tipoAccesorio").val(),
+                        fechaAdquisicion: $("#fechaAccesorio").val(),
+                        serie: $("#serieAccesorio").val(),
+                        modelo: $("#modeloAccesorio").val(),
+                        marca: $("#marcaAccesorio").val(),
+                        usuarioAsignado: $("#usuarioAccesorio").val(),
+                        estatus: $("#estatusAccesorio").val(),
+                        comentarios: $("#comentariosAccesorios").val(),
+                        idAccesorio: $("#idAccesorio").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("actualizar_accesorio", "Accesorios")',
+                        type: "POST",
+                        data: JSON.stringify({ accesorio: accesorioAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "Serie ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Accesorio actualizado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al actualizar el accesorio!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+        }
+
+        /*****************************************************LINEAS TELEFONICAS*****************************************************/
+        jQuery.ajax({
+            url: '@Url.Action("lista_usuarios", "Usuarios")',
+            type: "POST",
+            success: function (resultado) {
+                $('#usuarioLinea').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al buscar los usuarios! Comuniquese a sistemas", "error");
+            },
+        });
+
+        $("#tablaLineas").on("click", '#btn-editar-linea', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaLineas.row(filaseleccionada).data();
+            abrirDetalleLineas(datos);
+        });
+
+        $("#tablaLineas").on("click", '#btn-responsiva', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaLineas.row(filaseleccionada).data();
+
+            if (datos.usuarioAsignado != 0)
+            {
+                jQuery.ajax({
+                    url: '@Url.Action("validar_sesion", "Usuarios")',
+                    type: "POST",
+                    dataType: "json",
+                    success: function (resultado)
+                    {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1)
+                        {
+                            var lineaAsignacion = {
+                                usuarioAsignado: datos.usuarioAsignado
+                            }
+                            $('#overlay').css('display', 'flex');
+                            jQuery.ajax({
+                                url: '@Url.Action("verificar_responsiva", "LineasTelefonicas")',
+                                type: "POST",
+                                data: JSON.stringify({ linea: lineaAsignacion }),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (resultado)
+                                {
+                                    if (resultado == 1)
+                                    {
+                                        window.open('/responsiva/generar_responsiva/', "_blank");
+                                    }
+                                    else
+                                    {
+                                        swal("", "Error al abrir la responsiva!", "error")
+                                            .then((value) =>
+                                            {
+                                                window.location.reload(false);
+                                            });
+                                    }
+                                },
+                                error: function ()
+                                {
+                                    swal("", "Error al generar la responsiva!", "error")
+                                        .then((value) =>
+                                        {
+                                            window.location.reload(false);
+                                        });
+                                },
+                            });
+                            $('#overlay').css('display', 'none');
+                        }
+                        else
+                        {
+                            alert('Sesion caducada');
+                            window.location.reload(false);
+                        }
+                    },
+                    error: function ()
+                    {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al validar la sesión!", "error")
+                            .then((value) =>
+                            {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+            }
+            else
+            {
+                swal("", "No tiene usuario asignado, no puedes generar responsiva!", "error");
+            }
+        });
+
+        function abrirDetalleLineas(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $("#idLinea").val(datos.idLinea);
+                        $("#usuarioLinea").val(datos.usuarioAsignado);
+                        $("#numeroLinea").val(datos.numeroTelefono);
+                        $("#simLinea").val(datos.sim);
+                        $("#estatusLinea").val(datos.estatus);
+                        $("#comentariosLineas").val(datos.comentarios);
+
+                        $("#modalDetalleLinea").modal("show");
+                        var element = document.getElementById("encabezadoDetalleLinea");
+
+                        if (datos.estatus == 1) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.remove("modal-header-warning");
+                            element.classList.add("modal-header-activo");
+                        }
+                        else if (datos.estatus == 2) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.remove("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.add("modal-header-warning");
+                        }
+                        else {
+                            element.classList.remove("modal-header-warning");
+                            element.classList.remove("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.add("modal-header-inactivo");
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        //LISTADO DE LINEAS
+        tablaLineas = $("#tablaLineas").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Inventario lineas telefonicas',
+                    exportOptions: {
+                        columns: [0, 1, 2, 5]
+                    }
+                },
+            ],
+
+            "ajax": {
+                url: '@Url.Action("obtener_lineasTelefonicas", "LineasTelefonicas")',
+                type: "GET",
+                dataType: "json",
+            },
+
+            "columns": [
+                { data: 'nombreCompleto' },
+                { data: 'numeroTelefono' },
+                { data: 'sim' },
+                { data: 'cantidadSim', visible: false },
+                { data: 'cantidadLinea', visible: false },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == 1) {
+                            return '<span class="badge badge-success">Asignado</span>'
+                        }
+                        else if (estatus == 0) {
+                            return '<span class="badge badge-danger">Cancelado</span>'
+                        }
+                        else if (estatus == 2) {
+                            return '<span class="badge badge-warning">Libre</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-linea' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button><button title='Responsiva' type='button' id='btn-responsiva' class='btn btn-danger' style='padding: 0.5rem; margin-left: 0.5rem; border-radius: 5px;'><i class='fa fa-file-contract' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.cantidadSim > 1) {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+                if (data.cantidadLinea > 1) {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+            },
+        });
+
+        function nuevaLinea() {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var element = document.getElementById("encabezadoDetalleLinea");
+
+                        $("#idLinea").val(0);
+                        $("#usuarioLinea").val(0);
+                        $("#numeroLinea").val("");
+                        $("#simLinea").val("");
+                        $("#estatusLinea").val(0);
+                        $("#comentariosLineas").val("");
+
+                        element.classList.remove("modal-header-inactivo");
+                        element.classList.remove("modal-header-activo");
+                        element.classList.remove("modal-header-warning");
+                        element.classList.add("modal-header-inicial");
+                        $("#modalDetalleLinea").modal("show");
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        function guardarLinea()
+        {
+            var isCorrect = true;
+
+            if ($("#numeroLinea").val() == 0) {
+                swal("", "Debes indicar un número de linea", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#idLinea").val()==0) {
+                if (isCorrect) {
+
+                    var lineaAsignacion = {
+
+                        usuarioAsignado: $("#usuarioLinea").val(),
+                        numeroTelefono: $("#numeroLinea").val(),
+                        sim: $("#simLinea").val(),
+                        estatus: $("#estatusLinea").val(),
+                        comentarios: $("#comentariosLineas").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("guardar_lineaTelefonica", "LineasTelefonicas")',
+                        type: "POST",
+                        data: JSON.stringify({ linea: lineaAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "SIM/Número ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Linea insertada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al insertar la linea!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    })
+                    $('#overlay').css('display', 'none');
+                }
+            }
+            else {
+                if (isCorrect) {
+                    var lineaAsignacion = {
+                        usuarioAsignado: $("#usuarioLinea").val(),
+                        numeroTelefono: $("#numeroLinea").val(),
+                        sim: $("#simLinea").val(),
+                        estatus: $("#estatusLinea").val(),
+                        comentarios: $("#comentariosLineas").val(),
+                        idLinea: $("#idLinea").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("actualizar_lineaTelefonica", "LineasTelefonicas")',
+                        type: "POST",
+                        data: JSON.stringify({ linea: lineaAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "SIM/Número ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Linea actualizada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al actualizar la linea!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+        }
+
+        /*****************************************************TELEFONOS *****************************************************/
+        jQuery.ajax({
+            url: '@Url.Action("lista_usuarios", "Usuarios")',
+            type: "POST",
+            success: function (resultado) {
+                $('#usuarioTelefono').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al buscar los usuarios! Comuniquese a sistemas", "error");
+            },
+        });
+
+        jQuery.ajax({
+            url: '@Url.Action("lista_lineas", "LineasTelefonicas")',
+            type: "POST",
+            success: function (resultado) {
+                $('#lineaTelefono').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al buscar los usuarios! Comuniquese a sistemas", "error");
+            },
+        });
+
+
+        $("#tablaTelefono").on("click", '#btn-editar-telefono', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaTelefono.row(filaseleccionada).data();
+            abrirDetalleTelefono(datos);
+        });
+
+        $("#tablaTelefono").on("click", '#btn-responsiva', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaTelefono.row(filaseleccionada).data();
+
+            if (datos.usuarioAsignado != 0)
+            {
+                jQuery.ajax({
+                    url: '@Url.Action("validar_sesion", "Usuarios")',
+                    type: "POST",
+                    dataType: "json",
+                    success: function (resultado)
+                    {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1)
+                        {
+                            var telefonoAsignacion = {
+                                usuarioAsignado: datos.usuarioAsignado
+                            }
+                            $('#overlay').css('display', 'flex');
+                            jQuery.ajax({
+                                url: '@Url.Action("verificar_responsiva", "Telefonos")',
+                                type: "POST",
+                                data: JSON.stringify({ telefono: telefonoAsignacion }),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (resultado)
+                                {
+                                    if (resultado == 1)
+                                    {
+                                        window.open('/responsiva/generar_responsiva/', "_blank");
+                                    }
+                                    else
+                                    {
+                                        swal("", "Error al abrir la responsiva!", "error")
+                                            .then((value) =>
+                                            {
+                                                window.location.reload(false);
+                                            });
+                                    }
+                                },
+                                error: function ()
+                                {
+                                    swal("", "Error al generar la responsiva!", "error")
+                                        .then((value) =>
+                                        {
+                                            window.location.reload(false);
+                                        });
+                                },
+                            });
+                            $('#overlay').css('display', 'none');
+                        }
+                        else
+                        {
+                            alert('Sesion caducada');
+                            window.location.reload(false);
+                        }
+                    },
+                    error: function ()
+                    {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al validar la sesión!", "error")
+                            .then((value) =>
+                            {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+            }
+            else
+            {
+                swal("", "No tiene usuario asignado, no puedes generar responsiva!", "error");
+            }
+        });
+
+        function abrirDetalleTelefono(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $("#idTelefono").val(datos.idTelefono);
+                        $("#imeiTelefono").val(datos.imei);
+                        $("#modeloTelefono").val(datos.modelo);
+                        $("#lineaTelefono").val(datos.idLinea);
+                        $("#planTelefono").val(datos.planContratado);
+                        $("#costoTelefono").val(datos.costo);
+                        $("#vencimientoTelefono").val(datos.fechaVencimientoPlan);
+                        $("#correoGoogle").val(datos.correoGoogle);
+                        $("#contrasenaGoogle").val(datos.contrasenaGoogle);
+                        $("#usuarioTelefono").val(datos.usuarioAsignado);
+                        $("#estatusTelefono").val(datos.estatus);
+                        $("#comentariosTelefono").val(datos.comentarios);
+
+                        $("#modalDetalleTelefono").modal("show");
+                        var element = document.getElementById("encabezadoDetalleTelefono");
+                        if (datos.estatus == 1) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.remove("modal-header-warning");
+                            element.classList.add("modal-header-activo");
+                        }
+                        else if (datos.estatus == 2) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.remove("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.add("modal-header-warning");
+                        }
+                        else {
+                            element.classList.remove("modal-header-warning");
+                            element.classList.remove("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.add("modal-header-inactivo");
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        //LISTADO DE TELEFONOS
+        tablaTelefono = $("#tablaTelefono").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Inventario telefonos',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 6]
+                    }
+                },
+            ],
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_telefono", "Telefonos")',
+                type: "GET",
+                dataType: "json",
+            },
+
+            "columns": [
+                { data: 'nombreCompleto' },
+                { data: 'modelo' },
+                { data: 'numeroTelefono' },
+                { data: 'imei' },
+                { data: 'cantidadLinea', visible: false },
+                { data: 'cantidadImei', visible: false },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == 1) {
+                            return '<span class="badge badge-success">Asignado</span>'
+                        }
+                        else if (estatus == 0) {
+                            return '<span class="badge badge-danger">Descompuesto</span>'
+                        }
+                        else if (estatus == 2) {
+                            return '<span class="badge badge-warning">Libre</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-telefono' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button><button title='Responsiva' type='button' id='btn-responsiva' class='btn btn-danger' style='padding: 0.5rem; margin-left: 0.5rem; border-radius: 5px;'><i class='fa fa-file-contract' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.cantidadLinea > 1) {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+                if (data.cantidadImei > 1) {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+            },
+        });
+
+        function nuevoTelefono() {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var element = document.getElementById("encabezadoDetalleTelefono");
+
+                        $("#idTelefono").val(0);
+                        $("#imeiTelefono").val("");
+                        $("#modeloTelefono").val("");
+                        $("#lineaTelefono").val(0);
+                        $("#planTelefono").val("");
+                        $("#costoTelefono").val("");
+                        $("#vencimientoTelefono").val("");
+                        $("#correoGoogle").val("");
+                        $("#contrasenaGoogle").val("");
+                        $("#usuarioTelefono").val(0);
+                        $("#estatusTelefono").val(0);
+                        $("#comentariosTelefono").val("");
+
+                        element.classList.remove("modal-header-inactivo");
+                        element.classList.remove("modal-header-activo");
+                        element.classList.remove("modal-header-warning");
+                        element.classList.add("modal-header-inicial");
+                        $("#modalDetalleTelefono").modal("show");
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        function guardarTelefono()
+        {
+            var isCorrect = true;
+
+            if ($("#imeiTelefono").val() == "") {
+                swal("", "Debes indicar un IMEI", "warning");
+                isCorrect = false;
+            }
+            if ($("#lineaTelefono").val() == 0)
+            {
+                swal("", "Debes indicar un número de telefóno", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#idTelefono").val()==0) {
+                if (isCorrect) {
+
+                    var telefonoAsignacion = {
+                        imei : $("#imeiTelefono").val(),
+                        modelo :$("#modeloTelefono").val(),
+                        idLinea : $("#lineaTelefono").val(),
+                        planContratado : $("#planTelefono").val(),
+                        costo : $("#costoTelefono").val(),
+                        fechaVencimientoPlan: $("#vencimientoTelefono").val(),
+                        correoGoogle:$("#correoGoogle").val(),
+                        contrasenaGoogle:$("#contrasenaGoogle").val(),
+                        usuarioAsignado:$("#usuarioTelefono").val(),
+                        estatus:$("#estatusTelefono").val(),
+                        comentarios:$("#comentariosTelefono").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("guardar_telefono", "Telefonos")',
+                        type: "POST",
+                        data: JSON.stringify({ Telefono: telefonoAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "IMEI/Número ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Telefono insertado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el telefono!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+            else {
+                if (isCorrect) {
+                    var telefonoAsignacion = {
+                        imei: $("#imeiTelefono").val(),
+                        modelo: $("#modeloTelefono").val(),
+                        idLinea: $("#lineaTelefono").val(),
+                        planContratado: $("#planTelefono").val(),
+                        costo: $("#costoTelefono").val(),
+                        fechaVencimientoPlan: $("#vencimientoTelefono").val(),
+                        correoGoogle: $("#correoGoogle").val(),
+                        contrasenaGoogle: $("#contrasenaGoogle").val(),
+                        usuarioAsignado: $("#usuarioTelefono").val(),
+                        estatus: $("#estatusTelefono").val(),
+                        comentarios: $("#comentariosTelefono").val(),
+                        idTelefono: $("#idTelefono").val(),
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("actualizar_telefono", "Telefonos")',
+                        type: "POST",
+                        data: JSON.stringify({ Telefono: telefonoAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "IMEI/Número ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Telefono actualizado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al actualizar el telefono!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+        }
+
+        /*****************************************************SITIOS*****************************************************/
+        $("#tablaSitios").on("click", '#btn-editar-sitio', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaSitios.row(filaseleccionada).data();
+            abrirDetalleSitio(datos);
+        });
+
+        function abrirDetalleSitio(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $("#usuarioSitio").val(datos.usuario);
+                        $("#contrasenaSitio").val(datos.contrasena);
+                        $("#direccionSitio").val(datos.direccion);
+                        $("#estatusSitio").val(datos.estatus);
+                        $("#comentarioSitio").val(datos.comentario);
+                        $("#idSitio").val(datos.idSitio);
+
+                        $("#modalDetalleSitio").modal("show");
+                        var element = document.getElementById("encabezadoDetalleSitio");
+
+                        if (datos.estatus == 1) {
+                            element.classList.add("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.remove("modal-header-inactivo");
+                        }
+                        else {
+                            element.classList.add("modal-header-inactivo");
+                            element.classList.remove("modal-header-inicial");
+                            element.classList.remove("modal-header-activo");
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        //LISTADO DE SITIOS
+        tablaSitios = $("#tablaSitios").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_sitios", "Sitios")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                { data: 'direccion' },
+                { data: 'usuario' },
+                { data: 'contrasena' },
+                { data: 'comentario' },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == 1) {
+                            return '<span class="badge badge-success">Activo</span>'
+                        }
+                        else if (estatus == 0) {
+                            return '<span class="badge badge-danger">Inactivo</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-sitio' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ]
+        });
+
+        function nuevoSitio() {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var element = document.getElementById("encabezadoDetalleSitio");
+                        $("#usuarioSitio").val("");
+                        $("#contrasenaSitio").val("");
+                        $("#direccionSitio").val("");
+                        $("#estatusSitio").val(1);
+                        $("#comentarioSitio").val("");
+                        $("#idSitio").val(0);
+                        element.classList.remove("modal-header-inactivo");
+                        element.classList.remove("modal-header-activo");
+                        element.classList.add("modal-header-inicial");
+                        $("#modalDetalleSitio").modal("show");
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        function guardarSitio()
+        {
+            var isCorrect = true;
+
+            if ($("#direccionSitio").val().length == 0) {
+                swal("", "Debes indicar un sitio", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#idSitio").val()==0) {
+                if (isCorrect) {
+
+                    var sitiosAsignacion = {
+                        usuario: $("#usuarioSitio").val(),
+                        contrasena: $("#contrasenaSitio").val(),
+                        direccion: $("#direccionSitio").val(),
+                        comentario: $("#comentarioSitio").val(),
+                        estatus: $("#estatusSitio").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("guardar_sitio", "Sitios")',
+                        type: "POST",
+                        data: JSON.stringify({ sitios: sitiosAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            swal("", "Sitio insertado correctamente!", "success")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el sitio!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    })
+                }
+            }
+            else {
+                if (isCorrect) {
+                    var sitiosAsignacion = {
+                        usuario: $("#usuarioSitio").val(),
+                        contrasena: $("#contrasenaSitio").val(),
+                        direccion: $("#direccionSitio").val(),
+                        comentario: $("#comentarioSitio").val(),
+                        estatus: $("#estatusSitio").val(),
+                        idSitio: $("#idSitio").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("actualizar_sitio", "Sitios")',
+                        type: "POST",
+                        data: JSON.stringify({ sitios: sitiosAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            swal("", "Sitio actualizado correctamente!", "success")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                        error: function () {
+                            swal("", "Error al actualizar el sitio!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    })
+                }
+            }
+        }
+
+        /*****************************************************CORREOS*****************************************************/
+        jQuery.ajax({
+            url: '@Url.Action("lista_usuarios", "Usuarios")',
+            type: "POST",
+            success: function (resultado) {
+                $('#usuarioCorreo').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al buscar los usuarios! Comuniquese a sistemas", "error");
+            },
+        });
+
+        $("#tablaCorreos").on("click", '#btn-editar-correo', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaCorreos.row(filaseleccionada).data();
+            abrirDetalleCorreo(datos);
+        });
+
+        function abrirDetalleCorreo(datos) {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $("#usuarioCorreo").val(datos.usuarioAsignado);
+                        $("#contrasenaCorreo").val(datos.contrasena);
+                        $("#correoElectronico").val(datos.correoElectronico);
+                        $("#estatusCorreo").val(datos.estatus);
+                        $("#idCorreo").val(datos.idCorreo);
+                        $("#comentarioCorreo").val(datos.comentarios);
+
+                        $("#modalDetalleCorreo").modal("show");
+                        var element = document.getElementById("encabezadoDetalleCorreo");
+
+                        if (datos.estatus == 1) {
+                            element.classList.add("modal-header-activo");
+                            element.classList.remove("modal-header-inicial");
+                        }
+                        else {
+                            element.classList.add("modal-header-inactivo");
+                            element.classList.remove("modal-header-inicial");
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        //LISTADO DE CORREOS
+        tablaCorreos = $("#tablaCorreos").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Inventario de equipos',
+                    exportOptions: {
+                        columns: [0, 1, 3, 4, 5]
+                    }
+                },
+            ],
+
+            "ajax": {
+                url: '@Url.Action("obtener_correos", "Correos")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                { data: 'correoElectronico' },
+                { data: 'nombreCompleto' },
+                { data: 'cantidadCorreo', visible: false },
+                {
+                    data: 'departamento', "render": function (condicion) {
+                        if (condicion == 1) {
+                            return "Sistemas"
+                        }
+                        else if (condicion == 2) {
+                            return "Ventas"
+                        }
+                        else if (condicion == 3) {
+                            return "Compras"
+                        }
+                        else if (condicion == 4) {
+                            return "Facturación"
+                        }
+                        else if (condicion == 5) {
+                            return "Recursos Humanos"
+                        }
+                        else {
+                            return "No asignado"
+                        }
+                    }
+                },
+                {
+                    data: 'ubicacion', "render": function (ubicacion) {
+                        if (ubicacion == 1) {
+                            return "Corporativo"
+                        }
+                        else if (ubicacion == 3) {
+                            return "Planta semillas"
+                        }
+                        else if (ubicacion == 2) {
+                            return "Planta cereales"
+                        }
+                        else if (ubicacion == 4) {
+                            return "Planta barras"
+                        }
+                        else {
+                            return "No asignado"
+                        }
+                    }
+                },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == 1) {
+                            return '<span class="badge badge-success">Activo</span>'
+                        }
+                        else if (estatus == 0) {
+                            return '<span class="badge badge-danger">Inactivo</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-correo' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ],
+            "createdRow": function (row, data, dataIndex) {
+                if (data.cantidadCorreo > 1) {
+                    $('td', row).css("background-color", "lightcoral");
+                }
+            },
+        });
+
+        function nuevoCorreo() {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var element = document.getElementById("encabezadoDetalleCorreo");
+                        $("#usuarioCorreo").val(0);
+                        $("#contrasenaCorreo").val("");
+                        $("#correoElectronico").val("");
+                        $("#estatusCorreo").val(1);
+                        $("#comentarioCorreo").val("");
+                        $("#idCorreo").val(0);
+                        element.classList.remove("modal-header-inactivo");
+                        element.classList.remove("modal-header-activo");
+                        element.classList.add("modal-header-inicial");
+                        $("#modalDetalleCorreo").modal("show");
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        function guardarCorreo()
+        {
+            var isCorrect = true;
+
+            if ($("#correoElectronico").val().length == 0) {
+                swal("", "Debes indicar un correo electrónico", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#idCorreo").val()==0) {
+                if (isCorrect) {
+                    var x = $("#contrasenaCorreo").val().length;
+                    var correoAsignacion = {
+                        contrasena: $("#contrasenaCorreo").val(),
+                        correoElectronico: $("#correoElectronico").val(),
+                        comentarios: $("#comentarioCorreo").val(),
+                        usuarioAsignado: $("#usuarioCorreo").val(),
+                        estatus: $("#estatusCorreo").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("guardar_correo", "Correos")',
+                        type: "POST",
+                        data: JSON.stringify({ correo: correoAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "Cuenta ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Correo insertado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el correo!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+            else {
+                if (isCorrect) {
+                    var correoAsignacion = {
+                        contrasena: $("#contrasenaCorreo").val(),
+                        correoElectronico: $("#correoElectronico").val(),
+                        usuarioAsignado: $("#usuarioCorreo").val(),
+                        comentarios: $("#comentarioCorreo").val(),
+                        estatus: $("#estatusCorreo").val(),
+                        idCorreo: $("#idCorreo").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("actualizar_correo", "Correos")',
+                        type: "POST",
+                        data: JSON.stringify({ correo: correoAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado.data == -1) {
+                                swal("", "Cuenta ya existente!", "error");
+                            }
+                            else {
+                                swal("", "Correo actualizado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al actualizar el correo!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                    $('#overlay').css('display', 'none');
+                }
+            }
+        }
+
+    </script>
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" Serie="COM" Folio="14991" Fecha="2025-02-14T14:46:40" FormaPago="99" Sello="i478va/LTWrp5tEsChN6ehdfa4DnVFjfvWZ2CyHO5y/drkajYFqVWqhDvSKvekJKcUDoz6jPuhGbi2VWABibhtweDPisv8OOo/MhibgmQaXYbcwBrvdOhln7A+OW6Fkf6hiyCjB4ppn3ir+maAyIX7+L3iWvohXxAzCxkyvwsjq4qn6T+TRb0FafW2Fz3aKDRyXeGI0ajz/XWXNCA0Z75IHV812iriJbwl1o2VAn01n+13DbetwiKrqZ26EEBEObJ7t634JFZOUT0jLn32rizBLpb31KiUg5D3MmZz/7bH+bLZVYE6dc0xMzU0bZvizioEd1RpTO5PA5p4phgqYSbg==" NoCertificado="00001000000710273106" Certificado="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" CondicionesDePago="Pago a 60 días" SubTotal="200250.00" Moneda="MXN" TipoCambio="1" Total="232290.00" TipoDeComprobante="I" Exportacion="01" MetodoPago="PPD" LugarExpedicion="55066">
+    <cfdi:Emisor Rfc="COM040607KQ1" Nombre="COMPERMEX" RegimenFiscal="601"/>
+    <cfdi:Receptor Rfc="NAT0104253X3" Nombre="NATURASOL" UsoCFDI="G03" DomicilioFiscalReceptor="53100" RegimenFiscalReceptor="601"/>
+    <cfdi:Conceptos>
+        <cfdi:Concepto ObjetoImp="02" ClaveProdServ="24112404" Cantidad="3000.00" ClaveUnidad="H87" Unidad="H87" Descripcion="237-CH. TOTOPO BOTANZ SAL DE MAR 1KG" ValorUnitario="32.60" Importe="97800.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="97800.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="15648.000000"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ObjetoImp="02" ClaveProdServ="24112404" Cantidad="6000.00" ClaveUnidad="H87" Unidad="H87" Descripcion="237-INS CORTO TOTOPO BOTANZ SAL DE MAR 1" ValorUnitario="7.65" Importe="45900.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="45900.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="7344.000000"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+        <cfdi:Concepto ObjetoImp="02" ClaveProdServ="24112404" Cantidad="3000.00" ClaveUnidad="H87" Unidad="H87" Descripcion="237-INS GDE TOTOPO BOTANZ SAL DE MAR 1KG" ValorUnitario="18.85" Importe="56550.00">
+            <cfdi:Impuestos>
+                <cfdi:Traslados>
+                    <cfdi:Traslado Base="56550.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="9048.000000"/>
+                </cfdi:Traslados>
+            </cfdi:Impuestos>
+        </cfdi:Concepto>
+    </cfdi:Conceptos>
+    <cfdi:Impuestos TotalImpuestosTrasladados="32040.00">
+        <cfdi:Traslados>
+            <cfdi:Traslado Impuesto="002" Base="200250.00" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="32040.00"/>
+        </cfdi:Traslados>
+    </cfdi:Impuestos>
+    <cfdi:Complemento>
+        <tfd:TimbreFiscalDigital xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="eeb94023-b832-422d-99de-4e05722a1a5e" FechaTimbrado="2025-02-14T14:51:43" RfcProvCertif="LSO1306189R5" SelloCFD="i478va/LTWrp5tEsChN6ehdfa4DnVFjfvWZ2CyHO5y/drkajYFqVWqhDvSKvekJKcUDoz6jPuhGbi2VWABibhtweDPisv8OOo/MhibgmQaXYbcwBrvdOhln7A+OW6Fkf6hiyCjB4ppn3ir+maAyIX7+L3iWvohXxAzCxkyvwsjq4qn6T+TRb0FafW2Fz3aKDRyXeGI0ajz/XWXNCA0Z75IHV812iriJbwl1o2VAn01n+13DbetwiKrqZ26EEBEObJ7t634JFZOUT0jLn32rizBLpb31KiUg5D3MmZz/7bH+bLZVYE6dc0xMzU0bZvizioEd1RpTO5PA5p4phgqYSbg==" NoCertificadoSAT="00001000000509846663" SelloSAT="O3u0MHdfgfK7BXuYt1Yq8N/iPKaiT+VBTBwLgqQkON6uh4rEz4+SOytD+A4TRUePBgkqTlDZHbh0XEZ1aQ7Dcnbfad+iBq6xakkzjWM/+LEktUMx/D6pN1veacgX0YYPiQlx0lNHBf3fH5fxCbLkpBtg9Bhn5OzH+LQlwlLXKQVNQ0KmTY/v1fruhnz3loURSMyxQdbibeAAN31SdEBSmqO4VstikpIoYW+mQomtZuKGWebEPS5NNMg4Oqe4d/XAPMfpxRjcE35kStY3mkGOtd8RvC/uP8XJQJGW2coFDF2BXAg1u3+3FpjRwAlgjTI9B0HJWvIIqZ2DxlCDOXqPvA==" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+    </cfdi:Complemento>
+</cfdi:Comprobante>

@@ -1,0 +1,229 @@
+﻿
+@{
+    ViewBag.Title = "mi_cuenta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="tab-content" id="pills-tabContent">
+                            <h3 align="center">Mi cuenta</h3>
+                            <br />
+                            <!--VISTA DE CREACION DE USUARIO-->
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                <div class="form-group row">
+                                    <label for="nombreUsuario" class="col-sm-3 col-form-label">*Nombre</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" disabled id="nombreUsuario" value=@Session["nombre"]>
+                                        <input type="text" hidden class="form-control" id="estatus" value=@Session["estatus"]>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Apellido paterno</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="paternoUsuario" disabled value=@Session["apellidoPaterno"]>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="maternoUsuario" class="col-sm-3 col-form-label">*Apellido materno</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="maternoUsuario" disabled value=@Session["apellidoMaterno"]>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="correoUsuario" class="col-sm-3 col-form-label">*ID usuario</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="nameUsuario" disabled value=@Session["nameUsuario"]>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="contrasenaUsuario" class="col-sm-3 col-form-label">*Correo electrónico</label>
+                                    <div class="col-sm-9">
+                                        <input type="email" class="form-control" id="correoUsuario" disabled value=@Session["correo"]>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="contrasenaUsuario" class="col-sm-3 col-form-label">*Contraseña</label>
+                                    <div class="col-sm-9">
+                                        <input type="password" class="form-control" id="contrasenaUsuario" disabled value=@Session["contrasena"]>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ubicacionUsuario" class="col-sm-3 col-form-label">*Ubicación</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" hidden class="form-control" id="ubicacion" value=@Session["ubicacion"]>
+                                        <select class="custom-select" id="ubicacionUsuario" disabled>
+                                            <option value="-1">Seleccione una opción</option>
+                                            <option value="0">Corporativo</option>
+                                            <option value="1">Planta miel</option>
+                                            <option value="2">Planta barras</option>
+                                            <option value="3">Planta semillas</option>
+                                            <option value="4">Planta untables</option>
+                                            <option value="5">Planta papas</option>
+                                            <option value="6">Planta sazonadores</option>
+                                            <option value="7">Planta cedis</option>
+                                            <option value="8">Planta maiz</option>
+                                            <option value="9">Planta tultepark</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="departamentoUsuario" class="col-sm-3 col-form-label">*Departamento</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" hidden class="form-control" disabled id="departamento" value=@Session["departamento"]>
+                                        <input type="text" hidden class="form-control" disabled id="idUsuario" value=@Session["usuarioId"]>
+                                        <select class="custom-select" id="departamentoUsuario" disabled>
+                                            <option value="9">Almacén</option>
+                                            <option value="12">Cobranza</option>
+                                            <option value="3">Compras</option>
+                                            <option value="4">Contabilidad</option>
+                                            <option value="14">Costos</option>
+                                            <option value="5">Importaciones</option>
+                                            <option value="7">Facturación</option>
+                                            <option value="13">Finanzas</option>
+                                            <option value="6">Logistica</option>
+                                            <option value="10">Producción</option>
+                                            <option value="8">Recursos Humanos</option>
+                                            <option value="1">Sistemas</option>
+                                            <option value="11">Tesoreria</option>
+                                            <option value="2">Ventas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="puestoUsuario" class="col-sm-3 col-form-label">*Puesto</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" hidden class="form-control" id="puesto" disabled value=@Session["puesto"]>
+                                        <select class="custom-select" id="puestoUsuario" disabled>
+                                            <option value="0">Personal de producción</option>
+                                            <option value="1">Supervisor de producción</option>
+                                            <option value="2">Gerente Planta</option>
+                                            <option value="3">Analista de producción</option>
+                                            <option value="4">Jefe/Gerente/Supervisor de costos</option>
+
+                                            <option value="10">KAM</option>
+                                            <option value="11">Jefe/Gerente/Director de Ventas</option>
+
+                                            <option value="90">Sistemas</option>
+                                            <option value="100">Administrador</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+                                <!--
+                                <button> class="btn btn-success float-sm-right" align="center" style="width: 15rem; height: 3rem" onclick="guardarUsuario()">Guardar</button>
+                                    -->
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $("#departamentoUsuario").val($("#departamento").val());
+        $("#ubicacionUsuario").val($("#ubicacion").val());
+        $("#puestoUsuario").val($("#puesto").val());
+        
+        function guardarUsuario()
+        {
+            var isCorrect = true;
+
+            if ($("#nombreUsuario").val().length == 0) {
+                swal("", "Debes indicar un nombre", "warning");
+                isCorrect = false;
+            }
+            if ($("#paternoUsuario").val().length == 0) {
+                swal("", "Debes indicar un paterno", "warning");
+                isCorrect = false;
+            }
+            if ($("#maternoUsuario").val().length == 0) {
+                swal("", "Debes indicar un materno", "warning");
+                isCorrect = false;
+            }
+            if ($("#nameUsuario").val().length == 0) {
+                swal("", "Debes indicar un ID", "warning");
+                isCorrect = false;
+            }
+            if ($("#correoUsuario").val().length == 0) {
+                swal("", "Debes indicar un correo", "warning");
+                isCorrect = false;
+            }
+            if ($("#contrasenaUsuario").val().length == 0) {
+                swal("", "Debes indicar una contraseña", "warning");
+                isCorrect = false;
+            }
+            if ($("#puestoUsuario").val().length == 0) {
+                swal("", "Debes indicar un puesto", "warning");
+                isCorrect = false;
+            }
+            if ($("#ubicacionUsuario").val() == 0) {
+                swal("", "Debes indicar una ubicación", "warning");
+                isCorrect = false;
+            }
+            if ($("#departamentoUsuario").val() == 0) {
+                swal("", "Debes indicar un departamento", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Usuario = {
+                    nombre: $("#nombreUsuario").val(),
+                    apellidoPaterno: $("#paternoUsuario").val(),
+                    apellidoMaterno: $("#maternoUsuario").val(),
+                    correo: $("#correoUsuario").val(),
+                    estatus: $("#estatus").val(),
+                    idUsuario: $("#idUsuario").val(),
+                    nameUsuario: $("#nameUsuario").val(),
+                    contrasena: $("#contrasenaUsuario").val(),
+                    puesto: $("#puestoUsuario").val(),
+                    telefono: $("#telefonoUsuario").val(),
+                    extension: $("#extensionUsuario").val(),
+                    departamento: $("#departamentoUsuario").val(),
+                    ubicacion: $("#ubicacionUsuario").val()
+                }
+
+                $('#overlay').css('display', 'flex');
+                //ACCION DE GUARDADO DE USUARIO
+                jQuery.ajax({
+                    url: '@Url.Action("actualizar_usuarios", "Usuarios")',
+                    type: "POST",
+                    data: JSON.stringify({ usuario: Usuario }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        $('#overlay').css('display', 'none');
+                        if ($("#estatus").val() == 3) {
+                            swal("", "Registro actualizado correctamente, inicie sesión con la nueva información!", "success")
+                                .then((value) => {
+                                    window.location.href = '/inicio/cerrar_sesion/';
+                                });
+                        }
+                        else {
+                            swal("", "Registro actualizado correctamente!", "success")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Hubo un error al realizar el registro!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+    </script>
+}

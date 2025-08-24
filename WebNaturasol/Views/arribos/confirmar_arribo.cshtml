@@ -1,0 +1,183 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Programación entregas</title>
+    <link rel="stylesheet" href="~/Content/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Content/css/vertical-layout-light/style.css">
+</head>
+
+<body>
+    <div id=overlay class="align-items-center h-100 justify-content-center" style="display:none">
+        <div class="row align-items-center" id="imgLoad">
+            <div class="offset-lg-6 col-lg-4 col-md-4 col-sm-12">
+                <img src="~/Content/images/loading.gif" alt="Cargando">
+            </div>
+        </div>
+    </div>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0" style="background-color: #e8eef1">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            <div class="text-center brand-logo">
+                                <img src="~/Content/images/logo.png" id="logomielmex" alt="logo" style="width:70px;display:none">
+                                <img src="~/Content/images/logobordes.png" id="logonaturasol" alt="logo" style="width:100px;display:none">
+                            </div>
+                            <h4 class="text-center">Bienvenido</h4>
+                            <h6 class="text-center font-weight-light">Confirma los datos para programar tu entrega</h6>
+                            <form class="pt-3">
+                                <div class="form-group row">
+
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Número de O.C.</label>
+                                    <div class="col-sm-9">
+                                        <label class="col-form-label" style="padding-top: 1.5rem; font-size: small;">@Session["docnum"]</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Proveedor.</label>
+                                    <div class="col-sm-9">
+                                        <label class="col-form-label" style="padding-top: 1.5rem; font-size: small;">@Session["cardcode"]  @Session["cardname"]</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ubicacionUsuario" class="col-sm-3 col-form-label">*Ubicación</label>
+                                    <div class="col-sm-9">
+                                        <label class="col-form-label" style="padding-top: 1.5rem; font-size: small;">@Session["ubicacion"]</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Fecha entrega.</label>
+                                    <div class="col-sm-9">
+                                        <label class="col-form-label" style="padding-top: 1.5rem; font-size: small;">@Session["docdate"]</label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Hora entrega.</label>
+                                    <div class="col-sm-9">
+                                        <label class="col-form-label" style="padding-top: 1.5rem; font-size: small;">@Session["doctime"]</label>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="confirmarArribo()">Confirmar arribo</a>
+                                </div>
+                                <div class="mt-3">
+                                    <a class="btn btn-block btn-danger btn-lg font-weight-medium auth-form-btn" onclick="cancelarArribo()">Cancelar arribo</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Content/js/off-canvas.js"></script>
+    <script src="~/Content/js/hoverable-collapse.js"></script>
+    <script src="~/Content/js/template.js"></script>
+    <script src="~/Content/js/settings.js"></script>
+    <script src="~/Content/js/todolist.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(document).ready(function () {
+                if (window.location.href.includes("mielmex")) {
+                    $("#logomielmex").show();
+                    $("#logonaturasol").hide();
+                }
+                else {
+
+                    $("#logonaturasol").show();
+                    $("#logomielmex").hide();
+                }
+            });
+        });
+
+        function cancelarArribo()
+        {
+            var isCorrect = true;
+
+            if (isCorrect) {
+
+                $('#overlay').css('display', 'flex');
+                //ACCION PARA VALIDAR LA OC
+                jQuery.ajax({
+                    url: '@Url.Action("cancelar_informacion", "arribos")',
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 0) {
+                            swal("", "Arribo cancelado!", "success")
+                                .then((value) => {
+                                    window.location.href = '/arribos/arribos/';
+                                });
+                        }
+                        else {
+                            swal("", "Datos incorrectos!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al cancelar arribo! Comuniquese a sistemas@naturasol.com.mx", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+
+        function confirmarArribo()
+        {
+            var isCorrect = true;
+
+            if (isCorrect) {
+
+                $('#overlay').css('display', 'flex');
+                //ACCION PARA VALIDAR LA OC
+                jQuery.ajax({
+                    url: '@Url.Action("confirmar_informacion", "arribos")',
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 0) {
+                            swal("", "Arribo confirmado!", "success")
+                                .then((value) => {
+                                    window.location.href = '/arribos/confirmar_arribo/';
+                                });
+                        }
+                        else {
+                            swal("", "Datos incorrectos!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al confirmar arribo! Comuniquese a sistemas@naturasol.com.mx", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+    </script>
+</body>
+</html>

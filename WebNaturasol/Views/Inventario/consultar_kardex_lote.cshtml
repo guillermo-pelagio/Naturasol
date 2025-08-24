@@ -1,0 +1,226 @@
+﻿
+@{
+    ViewBag.Title = "consultar_inventario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="text-align: center">Inventario</h3>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                <button type="button" class="btn btn-primary" onclick="buscarInventario()" data-dismiss="modal" style="width: 8rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="Buscar inventario">Filtrar</button>
+                                <div class="col-lg-12 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="tablaInventario" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sociedad</th>
+                                                            <th>Artículo</th>
+                                                            <th>Descripción</th>
+                                                            <th>Almácen</th>
+                                                            <th>Lote</th>
+                                                            <th>Caducidad</th>
+                                                            <th>Tipo caducidad</th>
+                                                            <th>Stock</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--VISTA DE MODAL-->
+<div class="modal fade" id="modalBuscarInventario" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            @if (Convert.ToString(Session["sociedad"]) == "MIEL MEX")
+            {
+                <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoBuscarInventario">
+                    <h5 class="modal-title" id="exampleModalLabel">Buscar inventario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="modal-header" style="background-color: lightgreen" id="encabezadoBuscarInventario">
+                    <h5 class="modal-title" id="exampleModalLabel">Buscar inventario</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            }
+
+
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Artículo:</label>
+                    <div class="col-sm-8">
+                        <input type="text" maxlength="12" class="form-control" id="articuloInventario">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Descripción:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="descripcionInventario">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Almácen:</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="almacenInventario">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Lote:</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="loteInventario">
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnBuscarInventario" onclick="busquedaInventario()" class="btn btn-success">Consultar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        /*
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                alert('Your Public IP Address: '+ data.ip);
+            })
+            .catch(error => {
+                console.error('Error fetching IP:', error);
+            });
+        */
+        function buscarInventario() {
+            $("#modalBuscarInventario").modal("show");
+        }
+
+        //LISTADO DE OF'S
+        tablaInventario = $("#tablaInventario").DataTable({
+                        paging: true,
+                        ordering: false,
+                        info: true,
+                        lengthChange: false,
+                        pageLength: 25,
+                        "language": {
+                            "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Inventario',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    }
+                },
+            ],
+
+                        "ajax": {
+                            url: '@Url.Action("obtener_inventario", "inventario")',
+                            type: "GET",
+                            dataType: "json",
+                        },
+                        "columns": [
+                            { data: 'Sociedad' },
+                            { data: 'Artículo' },
+                            { data: 'Descripción' },
+                            { data: 'Almacén' },
+                            { data: 'Lote' },
+                            { data: 'Caducidad' },
+                            {
+                                data: 'diasCaduco', "render": function (diasCaduco) {
+                                    if (diasCaduco == 'CADUCO') {
+                                        return '<span class="badge badge-danger">' + diasCaduco +'</span>'
+                                    }
+                                    else if (diasCaduco == 'DE 3 A 6 MESES') {
+                                        return '<span class="badge badge-primary">' + diasCaduco +'</span>'
+                                    }
+                                    else if (diasCaduco == 'MAYOR A 6 MESES') {
+                                        return '<span class="badge badge-success">' + diasCaduco +'</span>'
+                                    }
+                                    else {
+                                        return '<span class="badge badge-secondary">' + diasCaduco +'</span>'
+                                    }
+                                }
+                            },
+                            { data: 'Stock' }
+                        ],
+        });
+
+        function busquedaInventario()
+                            {
+                        jQuery.ajax({
+                            url: '@Url.Action("validar_sesion", "Inicio")',
+                            type: "POST",
+                            dataType: "json",
+                            success: function (resultado) {
+                                $('#overlay').css('display', 'none');
+                                if (resultado == 1) {
+                                    var busqueda = {
+                                        Artículo: $("#articuloInventario").val(),
+                                        Almacén: $("#almacenInventario").val(),
+                                        Descripción: $("#descripcionInventario").val(),
+                                        Lote: $("#loteInventario").val(),
+                                    }
+
+                                    jQuery.ajax({
+                                        url: '@Url.Action("obtener_inventario", "inventario")',
+                                        type: "POST",
+                                        data:  busqueda ,
+                                        success: function (resultado) {
+                                            window.location.reload(false);
+                                        },
+                                        error: function (xhr, status, error) {
+                                        },
+                                    })
+
+                                    $("#modalDetalleConsumos").modal("show");
+                                }
+                                else {
+                                    alert('Sesion caducada');
+                                    window.location.reload(false);
+                                }
+                            },
+                            error: function () {
+                                $('#overlay').css('display', 'none');
+                                swal("", "Sesión expirada!", "error")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            },
+                        })
+                    }
+    </script>
+}

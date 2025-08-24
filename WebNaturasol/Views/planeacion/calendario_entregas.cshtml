@@ -1,0 +1,166 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="~/Content/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/vendors/css/vendor.bundle.base.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
+    <script src="https://kit.fontawesome.com/e31b334914.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="~/Content/DataTables/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="~/Content/DataTables/css/responsive.dataTables.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/js/select.dataTables.min.css">
+    <link rel="stylesheet" href="~/Content/css/vertical-layout-light/style.css">
+
+    <script src="~/Content/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Content/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/Content/vendors/datatables.net/jquery.dataTables.js"></script>
+    <script src="~/Content/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
+    <script src="~/Content/js/dataTables.select.min.js"></script>
+    <script src="~/Content/js/off-canvas.js"></script>
+    <script src="~/Content/js/hoverable-collapse.js"></script>
+    <script src="~/Content/js/template.js"></script>
+    <script src="~/Content/js/settings.js"></script>
+    <script src="~/Content/js/todolist.js"></script>
+    <script src="~/Content/js/dashboard.js"></script>
+    <script src="~/Content/js/Chart.roundedBarCharts.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.responsive.js"></script>
+    <script src="~/Scripts/DataTables/dataTables.buttons.js"></script>
+
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+    <script src="https://cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css" rel="stylesheet" />
+    <link href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css" rel="stylesheet" media="print" />
+
+    <script>
+
+        $(document).ready(function () {
+            var events = [];
+            $.ajax({
+                type: "GET",
+                url: "GetEvents",
+                success: function (data) {
+                    console.log(JSON.stringify(data.data))
+                    $.each(data.data, function (i, v) {
+
+                        events.push({
+                            title: v.title,
+                            start: moment(v.start),
+                            end: v.End != null ? moment(v.end) : null,
+                            color: v.color,
+                            allDay: true
+                        });
+                    })
+
+                    //console.log(JSON.stringify(events));
+
+                    Generatecalendar(events);
+                },
+                error: function (error) {
+                    alert('failed');
+                }
+            })
+
+            function Generatecalendar(events) {
+
+
+                var names = events.map(function (item) {
+                    return item['color'];
+                });
+
+                //console.log(names.toString());
+
+                $('#calendar').fullCalendar('destroy');
+                $('#calendar').fullCalendar({
+                    contentHeight: 400,
+                    defaultDate: new Date(),
+                    timeFormat: 'h(:mm)a',
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,basicWeek,basicDay,agenda'
+                    },
+                    eventLimit: true,
+                    eventColor: '#378006',
+                    events: events,
+                    eventClick: function (calEvent, jsEvent, view) {
+                        $('#myModal #eventTitle').text(calEvent.title);
+                        var $description = $('<div/>');
+                        $description.append($('<p/>').html('<b>Start:</b>' + calEvent.start.format("DD-MMM-YYYY HH:mm a")));
+                        if (calEvent.end != null) {
+                            $description.append($('<p/>').html('<b>End:</b>' + calEvent.end.format("DD-MMM-YYYY HH:mm a")));
+                        }
+                        $description.append($('<p/>').html('<b>Description:</b>' + calEvent.description));
+                        $('#myModal #pDetails').empty().html($description);
+
+                        $('#myModal').modal();
+                    }
+                })
+            }
+        })
+
+
+    </script>
+
+    <style>
+        
+
+        .fc-view-container *, .fc-view-container :after, .fc-view-container :before {
+            overflow: visible !important;
+            height: auto !important
+        }
+
+        .fc-basic-view .fc-body .fc-row {
+            min-height: 20rem !important;
+        }
+
+        .fc-day-grid-event .fc-content {
+            overflow: hidden !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='calendar'></div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><span id="eventTitle"></span></h4>
+                </div>
+                <div class="modal-body">
+                    <p id="pDetails"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

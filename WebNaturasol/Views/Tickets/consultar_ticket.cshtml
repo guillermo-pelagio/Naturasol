@@ -1,0 +1,659 @@
+﻿
+@{
+    ViewBag.Title = "consultar_ticket";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Crear ticket</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Consultar ticket</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!--VISTA DE CREACION DE TICKET-->
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                <div class="form-group row">
+                                    <label for="nombreTicket" class="col-sm-3 col-form-label">Título</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="nombreTicket">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tipoTicket" class="col-sm-3 col-form-label">Categoría</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="tipoTicket">
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="1">SAP</option>
+                                            <option value="2">Solicitud de correo</option>
+                                            <option value="3">Problema de correo</option>
+                                            <option value="4">Solicitud de computadoras y accesorios</option>
+                                            <option value="5">Soporte técnico</option>
+                                            <option value="6">Impresoras</option>
+                                            <option value="7">Solicitud de accesos/software</option>
+                                            <option value="8">Problema de software</option>
+                                            <option value="9">Problema de internet</option>
+                                            <option value="10">Otro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="prioridadTicket" class="col-sm-3 col-form-label">Prioridad</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="prioridadTicket">
+                                            <option value="0">Baja</option>
+                                            <option value="1">Normal</option>
+                                            <option value="2">Alta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="nombreUsuario" class="col-sm-3 col-form-label">Nombre usuario</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="nombreUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ubicaciónTicket" class="col-sm-3 col-form-label">Ubicación</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="ubicaciónTicket">
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="1">Barras</option>
+                                            <option value="2">Cereales</option>
+                                            <option value="3">Corporativo</option>
+                                            <option value="4">Miel</option>
+                                            <option value="5">Semillas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="departamentoUsuario" class="col-sm-3 col-form-label">Departamento</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="departamentoUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="correoUsuario" class="col-sm-3 col-form-label">Correo electrónico</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="correoUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="padding-bottom: 2rem">
+                                    <label for="descripcionTicket" class="col-sm-3 col-form-label">Mensaje</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" id="descripcionTicket" rows="10"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" style="width: 10rem; height: 2rem" onclick="limpiarTicket()">Limpiar</button>
+                                    <button class="btn btn-success" style="width: 10rem; height: 2rem" onclick="guardarTicket()">Guardar</button>
+                                </div>
+                            </div>
+                            <!--VISTA LISTA DE TICKETS-->
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div>
+                                                    <div class="form-group row float-sm-left">
+                                                    </div>
+                                                    <div class="form-group row float-sm-right">
+                                                        <button type="button" id="btnGenerarExcel" onclick="exportarExcel()" class="btn btn-success">Descargar reporte</button>
+                                                    </div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaTickets" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Folio</th>
+                                                                <th>Fecha</th>
+                                                                <th>Departamento</th>
+                                                                <th>Tipo</th>
+                                                                <th>Atención</th>
+                                                                <th>Estatus</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div style="visibility: collapse">
+                                                    <table class="table table-hover" id="tablaTickets2" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Nombre</th>
+                                                                <th>Folio</th>
+                                                                <th>Titulo</th>
+                                                                <th>Fecha</th>
+                                                                <th>Mensaje</th>
+                                                                <th>Prioridad</th>
+                                                                <th>Departamento</th>
+                                                                <th>Tipo</th>
+                                                                <th>Atención</th>
+                                                                <th>Estatus</th>                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--VISTA DE MODAL DE EDICION DE TICKETS-->
+<div class="modal fade" id="modalDetalle" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" id="encabezadoDetalleTicket">
+                <h5 class="modal-title" id="exampleModalLabel">Detalle de ticket</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="nombreTicketEdit" class="col-sm-4 col-form-label">Nombre de usuario</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" class="form-control" id="idTicketEdit" readonly>
+                        <input type="text" class="form-control" id="nombreTicketEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Correo electrónico</label>
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" id="correoTicketEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Departamento</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="departamentoTicketEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tituloTicketEdit" class="col-sm-4 col-form-label">Título</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="tituloTicketEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="folioTicketEdit" class="col-sm-4 col-form-label">Folio</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="folioTicketEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fechaTicketEdit" class="col-sm-4 col-form-label">Fecha solicitud</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="fechaTicketEdit" readonly>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tipoTicketEdit" class="col-sm-4 col-form-label">Tipo de problema/solicitud</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="tipoTicketEdit" disabled>
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">SAP</option>
+                            <option value="2">Solicitud de correo</option>
+                            <option value="3">Problema de correo</option>
+                            <option value="4">Solicitud de computadoras y accesorios</option>
+                            <option value="5">Soporte técnico</option>
+                            <option value="6">Soporte técnico</option>
+                            <option value="7">Soporte técnico</option>
+                            <option value="8">Soporte técnico</option>
+                            <option value="9">Soporte técnico</option>
+                            <option value="10">Otro</option>
+                        </select>
+                    </div>
+                </div>
+                @if (Convert.ToInt32(Session["departamento"]) == 1)
+                {
+                    <div class="form-group row">
+                        <label for="estatusTicketEdit" class="col-sm-4 col-form-label">Estatus</label>
+                        <div class="col-sm-8">
+                            <select class="custom-select" id="estatusTicketEdit">
+                                <option value="1">Pendiente</option>
+                                <option value="3">En proceso</option>
+                                <option value="2">Resuelto</option>
+                                <option value="0">Cancelado</option>
+                            </select>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-group row">
+                        <label for="estatusTicketEdit2" class="col-sm-4 col-form-label">Estatus</label>
+                        <div class="col-sm-8">
+                            <input type="email" class="form-control" id="estatusTicketEdit2" readonly>
+                        </div>
+                    </div>
+                }
+                <div class="form-group row">
+                    <label for="descripcionTicket" class="col-sm-4 col-form-label">Descripción</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="descripcionTicketEdit" rows="10" readonly></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group row">
+                    <label for="soporteAsignado" class="col-sm-4 col-form-label">Asignado a:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="soporteAsignado">
+                        </select>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group row">
+                    <label for="finalizacionTicketEdit" class="col-sm-4 col-form-label">Comentarios de finalización</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="finalizacionTicketEdit" rows="10"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnCerrarModalTicket" onclick="actualizarTicket()" class="btn btn-success">Guardar</button>
+                </div>
+
+            </div>
+
+            @section scripts
+{
+                        <script>
+
+    var tablaTickets;
+
+        jQuery.ajax({
+            url: '@Url.Action("lista_usuarios_sistemas", "Usuarios")',
+            type: "POST",
+            success: function (resultado) {
+                $('#soporteAsignado').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al buscar los soportes! Comuniquese a sistemas", "error");
+            },
+        });
+
+        //LISTADO DE TICKETS
+        tablaTickets = $("#tablaTickets").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_tickets", "Tickets")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+
+                { data: 'nombreUsuario'  } ,
+                { data: 'folio' },
+                { data: 'fechaSolicitud' },
+                { data: 'departamentoTexto' },
+                {
+                    data: 'tipo', "render": function (titulo) {
+                        if (titulo == 1) {
+                            return "SAP"
+                        }
+                        else if (titulo == 2) {
+                            return "Solicitud de correo"
+                        }
+                        else if (titulo == 3) {
+                            return "Problema de correo"
+                        }
+                        else if (titulo == 4) {
+                            return "Solicitud de computadoras/accesorios"
+                        }
+                        else if (titulo == 5) {
+                            return "Servicio técnico"
+                        }
+                        else if (titulo == 6) {
+                            return "Impresoras"
+                        }
+                        else if (titulo == 7) {
+                            return "Solicitud de accesos / software"
+                        }
+                        else if (titulo == 8) {
+                            return "Problema de software"
+                        }
+                        else if (titulo == 9) {
+                            return "Problema de internet"
+                        }
+                        else if (titulo == 10) {
+                            return "Otro"
+                        }
+                    }
+                },
+                { data: 'nombreCompleto' },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == 1) {
+                            return '<span class="badge badge-warning">Pendiente</span>'
+                        }
+                        else if (estatus == 2) {
+                            return '<span class="badge badge-info">Resuelto</span>'
+                        }
+                        else if (estatus == 0) {
+                            return '<span class="badge badge-danger">Cancelado</span>'
+                        }
+                        else {
+                            return '<span class="badge badge-success">En proceso</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-ticket' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ]
+        });
+
+                            //LISTADO DE TICKETS
+        tablaTickets2 = $("#tablaTickets2").DataTable({
+            paging: false,
+            ordering: false,
+            info: false,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_tickets", "Tickets")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+
+                { data: 'nombreUsuario'  } ,
+                { data: 'folio' },
+                { data: 'titulo' },
+                { data: 'fechaSolicitud' },
+                { data: 'descripcion' },
+                { data: 'prioridad' },                
+                { data: 'departamentoTexto' },
+                {
+                    data: 'tipo', "render": function (titulo) {
+                        if (titulo == 1) {
+                            return "SAP"
+                        }
+                        else if (titulo == 2) {
+                            return "Solicitud de correo"
+                        }
+                        else if (titulo == 3) {
+                            return "Problema de correo"
+                        }
+                        else if (titulo == 4) {
+                            return "Solicitud de computadoras/accesorios"
+                        }
+                        else if (titulo == 5) {
+                            return "Servicio técnico"
+                        }
+                        else if (titulo == 6) {
+                            return "Impresoras"
+                        }
+                        else if (titulo == 7) {
+                            return "Solicitud de accesos / software"
+                        }
+                        else if (titulo == 8) {
+                            return "Problema de software"
+                        }
+                        else if (titulo == 9) {
+                            return "Problema de internet"
+                        }
+                        else if (titulo == 10) {
+                            return "Otro"
+                        }
+                    }
+                },
+                { data: 'nombreCompleto' },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == 1) {
+                            return '<span class="badge badge-warning">Pendiente</span>'
+                        }
+                        else if (estatus == 2) {
+                            return '<span class="badge badge-info">Resuelto</span>'
+                        }
+                        else if (estatus == 0) {
+                            return '<span class="badge badge-danger">Cancelado</span>'
+                        }
+                        else {
+                            return '<span class="badge badge-success">En proceso</span>'
+                        }
+                    }
+                }
+
+
+            ]
+        });
+                            
+
+        function limpiarTicket()
+        {
+            $("#tipoTicket").val(0);
+            $("#nombreTicket").val("");
+            $("#ubicaciónTicket").val(0);
+            $("#prioridadTicket").val(0);
+            $("#nombreUsuario").val("");
+            $("#departamentoUsuario").val("");
+            $("#correoUsuario").val("");
+            $("#descripcionTicket").val("");
+        }
+
+        function exportarExcel()
+        {
+
+            $("#tablaTickets2").table2excel({
+                filename: "Tickets.xls"
+            });
+
+            window.location.reload(false);
+        }
+
+        function abrirDetalle(datos)
+        {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        var estatusLeyenda;
+                        $("#nombreTicketEdit").val(datos.nombreUsuario);
+                        $("#correoTicketEdit").val(datos.correo);
+                        $("#departamentoTicketEdit").val(datos.departamentoTexto);
+                        $("#tipoTicketEdit").val(datos.tipo);
+                        $("#tituloTicketEdit").val(datos.titulo);
+                        $("#descripcionTicketEdit").val(datos.descripcion);
+                        $("#estatusTicketEdit").val(datos.estatus);
+                        $("#finalizacionTicketEdit").val(datos.comentarioFinalizacion);
+                        $("#idTicketEdit").val(datos.idTicket);
+                        $("#soporteAsignado").val(datos.idUsuarioFinalizo)
+                        $("#modalDetalle").modal("show");
+                        var element = document.getElementById("encabezadoDetalleTicket");
+                        if (datos.estatus == 1) {
+                            estatusLeyenda = "Pendiente";
+                            element.classList.add("modal-header-pendiente");
+                            $("#btnCerrarModalTicket").show();
+                        }
+                        else if (datos.estatus == 0) {
+                            estatusLeyenda = "Cancelado";
+                            element.classList.add("modal-header-inactivo");
+                            $("#btnCerrarModalTicket").hide();
+                        }
+                        else if (datos.estatus == 2) {
+                            estatusLeyenda = "Resuelto";
+                            element.classList.add("modal-header-realizado");
+                            $("#btnCerrarModalTicket").hide();
+                        }
+                        else {
+                            estatusLeyenda = "En proceso";
+                            element.classList.add("modal-header-activo");
+                            $("#btnCerrarModalTicket").show();
+                        }
+                        $("#estatusTicketEdit2").val(estatusLeyenda);
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        $("#tablaTickets").on("click", '#btn-editar-ticket', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaTickets.row(filaseleccionada).data();
+            abrirDetalle(datos);
+        })
+
+        function guardarTicket()
+        {
+            var isCorrect = true;
+
+            if ($("#tipoTicket").val() == 0) {
+                swal("", "Debes indicar un tipo de problema/solicitud", "warning");
+                isCorrect = false;
+            }
+            if ($("#ubicaciónTicket").val().length == 0) {
+                swal("", "Debes indicar una ubicación del usuario", "warning");
+                isCorrect = false;
+            }
+            if ($("#descripcionTicket").val().length == 0) {
+                swal("", "Debes indicar una descripción", "warning");
+                isCorrect = false;
+            }
+            if ($("#nombreTicket").val().length == 0) {
+                swal("", "Debes indicar un título", "warning");
+                isCorrect = false;
+            }
+            if ($("#nombreUsuario").val().length == 0) {
+                swal("", "Debes indicar el usuario", "warning");
+                isCorrect = false;
+            }
+            if ($("#departamentoUsuario").val().length == 0) {
+                swal("", "Debes indicar el departamento", "warning");
+                isCorrect = false;
+            }
+            if ($("#correoUsuario").val().length == 0) {
+                swal("", "Debes indicar el correo", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Ticket = {
+                    tipo: $("#tipoTicket").val(),
+                    descripcion: $("#descripcionTicket").val(),
+                    prioridad: $("#prioridadTicket").val(),
+                    titulo: $("#nombreTicket").val(),
+                    ubicacion: $("#ubicaciónTicket").val(),
+                    nombreUsuario: $("#nombreUsuario").val(),
+                    departamentoTexto: $("#departamentoUsuario").val(),
+                    correo: $("#correoUsuario").val()
+                }
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax({
+                    url: '@Url.Action("guardar_tickets", "Tickets")',
+                    type: "POST",
+                    data: JSON.stringify({ ticket: Ticket }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        swal("", "Ticket enviado correctamente! Su número de folio es: " + resultado, "success")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                    error: function (xhr, status, error) {
+                        swal("", "Ticket enviado correctamente! Su número de folio es: " + xhr.responseText, "success")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+
+        function actualizarTicket()
+        {
+            var isCorrect = true;
+
+            if ($("#idUsuarioFinalizo").val() == 0) {
+                swal("", "Debes indicar quien finalizo el ticket", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Ticket = {
+                    comentarioFinalizacion: $("#finalizacionTicketEdit").val() == "null" ? "" : $("#finalizacionTicketEdit").val(),
+                    estatus: $("#estatusTicketEdit").val(),
+                    idUsuarioFinalizo: $("#soporteAsignado").val(),
+                    idTicket: $("#idTicketEdit").val(),
+                }
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax({
+                    url: '@Url.Action("actualizar_tickets", "Tickets")',
+                    type: "POST",
+                    data: JSON.stringify({ ticket: Ticket }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Ticket actualizado correctamente!", "success")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al actualizar el ticket!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+
+
+                        </script>
+            }

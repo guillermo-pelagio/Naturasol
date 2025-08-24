@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante Certificado="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" Sello="cHZ6/9MtnLBT1o8t7ebWlNVj0tKxu9cuAoOQN7C4oh/RS+NIuSuRPsU+++ou94OX0wJqnnXaBO4lxhkOoiGumXXeCoNlwHSsrDOUCKQwghhQsuOUiQ9nAboCqPVPbNM8nRDcCswkkL90H9PNmbBG2CdX38pEoPcd9+QhF4D0rHKNf+VPnFTqANG+YQRRkLmsJytT3N0Ppt/vwZCiBriI7R2JObgjwDaDLYn0lk0Yb2wHLJHHzobDWPGCqL+l46HVC2lu/mSjJ2yKimW7YgQXBBymE2WQQMeGDVaukSqdKgjEfKJ+xXBOHucO97e8s1KJESEPpaZf7H8nR6voqJtTqQ==" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.0" Folio="23020" Fecha="2025-01-13T18:03:00" FormaPago="99" NoCertificado="00001000000710018924" SubTotal="20364.00" Moneda="MXN" Total="23622.24" TipoDeComprobante="I" Exportacion="01" MetodoPago="PPD" LugarExpedicion="02980" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/4">
+  <cfdi:Emisor Rfc="IME1608178W2" RegimenFiscal="601" Nombre="INGENIERIA-PAILERIA, METALMECANICA" />
+  <cfdi:Receptor Rfc="NAT0104253X3" Nombre="NATURASOL" DomicilioFiscalReceptor="53100" RegimenFiscalReceptor="601" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="4.000000" Unidad="Pieza" Descripcion="FABRICACIÒN DE BUJE CONFORME A DIBUJO DE MATERIAL PTFE+ACERO INOXIDABLE (BUJE/RODILLO/ALIMENTADOR/PA" ValorUnitario="520.000000" Importe="2080.000000" ClaveProdServ="31391500" ClaveUnidad="H87" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2080.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="332.80" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.000000" Unidad="Pieza" Descripcion="FABRICACIÒN DE BUJE CONFORME A DIBUJO MATERIAL PTFE+BISULFURO DE MOLIBDENO (BUJE/RODILLO/ALIMENTADOR" ValorUnitario="980.000000" Importe="3920.000000" ClaveProdServ="31391500" ClaveUnidad="H87" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="3920.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="627.20" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="8.000000" Unidad="Pieza" Descripcion="FABRICACIÒN DE PERNO CONFORME A DIBUJO MATERIAL INOX-304 (PLACA/ESPIGA_25mm/ALIMENTADOR/PAPAS)" ValorUnitario="1795.500000" Importe="14364.000000" ClaveProdServ="31391500" ClaveUnidad="H87" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="14364.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="2298.24" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="3258.24">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" Base="20364.00" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="3258.24" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"  xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="42a87d52-e81d-4ac8-a3b9-fe6799cecde0" FechaTimbrado="2025-01-13T18:03:01" RfcProvCertif="LSO1306189R5" SelloCFD="cHZ6/9MtnLBT1o8t7ebWlNVj0tKxu9cuAoOQN7C4oh/RS+NIuSuRPsU+++ou94OX0wJqnnXaBO4lxhkOoiGumXXeCoNlwHSsrDOUCKQwghhQsuOUiQ9nAboCqPVPbNM8nRDcCswkkL90H9PNmbBG2CdX38pEoPcd9+QhF4D0rHKNf+VPnFTqANG+YQRRkLmsJytT3N0Ppt/vwZCiBriI7R2JObgjwDaDLYn0lk0Yb2wHLJHHzobDWPGCqL+l46HVC2lu/mSjJ2yKimW7YgQXBBymE2WQQMeGDVaukSqdKgjEfKJ+xXBOHucO97e8s1KJESEPpaZf7H8nR6voqJtTqQ==" NoCertificadoSAT="00001000000509846663" SelloSAT="EjAXgqlTd6diftWKQxJLeZPIX9uTBtQUp/hY6o6RtNJkioaq5NVOF3z4XBmjcpVCprTIt3dj8ZhLJmuyGZ/0Off9tryrR+lxYESBD6MpunTsm/2F1/l1hpBoXo50k9ZO6LTLp7Ws5Bd6z75oLalqhyf9mlWWLWncuIjiJx20wWYIgFsbW58pyx97EXtAmEhVQpap6LwImPWwXGqF7jfPafOuKMJXKlfg+9icVPP3DmpU25M7MAcpJfvNgdr3B4HSmpaVqEU1wrGPI/RBO8uXhrq5ZUZvGZpgSXGxD/eEY70pZHKjPdELyS9GO2K7wx+7df51+PDWnvlWMTuNHF6FcQ==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

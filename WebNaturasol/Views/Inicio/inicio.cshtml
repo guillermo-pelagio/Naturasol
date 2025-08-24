@@ -1,0 +1,1211 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<!-- partial -->
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="row">
+            <div class="col-md-12 grid-margin">
+                <div class="row">
+                    <div class="col-12 col-xl-8 mb-4 mb-xl-0">
+                        <h3 class="font-weight-bold">Bienvenido @Session["nombreCompleto"]</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            
+        </div>
+
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <!--
+                    <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2022.  <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+            -->
+        </div>
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <!--
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
+            -->
+        </div>
+    </footer>
+    <!-- partial -->
+</div>
+<!-- main-panel ends -->
+    </div>
+<!-- page-body-wrapper ends -->
+    </div>
+
+@section scripts
+{
+    <!--
+    <script>
+        /**********************************************************VENTAS***********************************************************************/
+        jQuery.ajax(
+            {
+                url: '@Url.Action("estatus_cotizaciones", "ventas")',
+                type: "GET",
+
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (datas) {
+                    var titulos = [];
+                    var contenido = [];
+
+                    //console.log(JSON.parse((JSON.stringify(datas))).data[0].estatus);
+                    //console.log(JSON.parse((JSON.stringify(datas))).data.length);
+                    //console.log(datas.data.length);
+                    var colores = ["#f5b7b1", "#7fb3d5", "#7dcea0", "#f8c471", "#d7dbdd", "#85929e", "#bb8fce"];
+
+                    for (var i = 0; i < datas.data.length; i++) {
+                        titulos.push(datas.data[i].estatus);
+                        contenido.push(datas.data[i].sumaReporte);
+                    }
+
+                    var SalesChartCanvas = $("#cotizaciones-gral-chart").get(0).getContext("2d");
+                    var cotGral = new Chart(SalesChartCanvas, {
+                        type: 'bar',
+                        data: {
+                            labels: titulos,
+                            datasets: [{
+                                label: 'Estatus cotizaciones',
+                                data: contenido,
+                                backgroundColor: colores,
+                                datalabels: {
+                                    color: '#000',
+                                    font: {
+                                        weight: 'bold',
+                                    },
+                                    formatter: (value, context) => {
+                                        return parseInt(value).toLocaleString('en-US');
+                                    },
+                                    //Aqui controlo la ubicacion de mis labels encima del grafico
+                                    anchor: 'end',
+                                    align: 'top',
+                                    offset: 0,
+                                    display: true
+                                }
+                            }]
+                        },
+                        options: {
+                            cornerRadius: 5,
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            plugins: {
+                                datalabels: {
+                                    color: 'white',
+                                    display: function (context) {
+                                        return context.dataset.data[context.dataIndex] > 15;
+                                    },
+                                    font: {
+                                        weight: 'bold'
+                                    },
+                                    formatter: Math.round
+                                }
+                            },
+                            layout: {
+                                padding: {
+                                    left: 0,
+                                    right: 0,
+                                    top: 20,
+                                    bottom: 0
+                                }
+                            },
+                            scales: {
+                                yAxes: [{
+                                    display: true,
+                                    gridLines: {
+                                        display: true,
+                                        drawBorder: false,
+                                        color: "#F2F2F2"
+                                    },
+                                    ticks: {
+                                        display: true,
+                                        min: 0,
+                                        max: 100,
+                                        callback: function (value, index, values) {
+                                            return value;
+                                        },
+                                        autoSkip: true,
+                                        maxTicksLimit: 10,
+                                        fontColor: "#6C7383"
+                                    }
+                                }],
+                                xAxes: [{
+                                    stacked: true,
+                                    ticks: {
+                                        beginAtZero: true,
+                                        fontColor: "#6C7383"
+                                    },
+                                    gridLines: {
+                                        color: "rgba(0, 0, 0, 0)",
+                                        display: false
+                                    },
+                                    barPercentage: 1
+                                }]
+                            },
+                            legend: {
+                                display: false,
+                                labels: {
+                                    color: '#fff'
+                                }
+                            },
+                            elements: {
+                                point: {
+                                    radius: 0
+                                }
+                            }
+                        },
+                    });
+                    //document.getElementById('contizaciones-gral-legend').innerHTML = cotGral.generateLegend();
+                },
+                error: function () {
+                    swal("", "Error al obtener el gráfico!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("estatus_cotizaciones_kam", "ventas")',
+                type: "GET",
+
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (datas) {
+                    var titulos = ["SIN MOVIMIENTO", "APROBADO", "RECHAZADO", "EN REVISIÓN", "POR PRESENTAR", "SUSTITUIDO", "EN ESPERA DE MUESTRAS"];
+                    var karina = [];
+                    var samuel = [];
+                    var david = [];
+                    var eliu = [];
+                    var montserrat = [];
+                    var roberto = [];
+                    var lilia = [];
+                    var alberto = [];
+
+                    //console.log(JSON.parse((JSON.stringify(datas))).data[0]);
+                    //console.log(JSON.parse((JSON.stringify(datas))).data.length);
+
+
+                    for (var i = 0; i < datas.data.length; i++) {
+                        if (datas.data[i].KAM == 3) {
+                            for (var j = 0; j < titulos.length; j++) {
+                                    karina.push(0);
+                            }
+                            for (var j = 0; j < titulos.length; j++) {
+                                if (datas.data[i].estatus == j) {
+
+                                    karina[j]=(datas.data[i].sumaReporte)
+                                }
+                            }
+                        }
+                        if (datas.data[i].KAM == 4) {
+                            for (var j = 0; j < titulos.length; j++) {
+                                samuel.push(0);
+                            }
+                            for (var j = 0; j < titulos.length; j++) {
+                                if (datas.data[i].estatus == j) {
+                                    samuel[j]=(datas.data[i].sumaReporte)
+                                }
+                            }
+                        }
+                        if (datas.data[i].KAM == 5) {
+                            for (var j = 0; j < titulos.length; j++) {
+                                david.push(0);
+                            }
+                            for (var j = 0; j < titulos.length; j++) {
+                                if (datas.data[i].estatus == j) {
+                                    david[j]=(datas.data[i].sumaReporte)
+                                }
+                            }
+                        }
+                        if (datas.data[i].KAM == 6) {
+                            for (var j = 0; j < titulos.length; j++) {
+                                    roberto.push(0);
+                            }
+                            for (var j = 0; j < titulos.length; j++) {
+                                if (datas.data[i].estatus == j) {
+                                    roberto[j]=(datas.data[i].sumaReporte)
+                                }
+                            }
+                        }
+                        if (datas.data[i].KAM == 8) {
+                            for (var j = 0; j < titulos.length; j++) {
+                                    eliu.push(0);
+                            }
+                            for (var j = 0; j < titulos.length; j++) {
+                                if (datas.data[i].estatus == j) {
+                                    eliu[j]=(datas.data[i].sumaReporte)
+                                }
+                            }
+                        }
+                        if (datas.data[i].KAM == 9) {
+                            for (var j = 0; j < titulos.length; j++) {
+                                    montserrat.push(0);
+                            }
+                            for (var j = 0; j < titulos.length; j++) {
+                                if (datas.data[i].estatus == j) {
+                                    montserrat[j]=(datas.data[i].sumaReporte)
+                                }
+                            }
+                        }
+                        if (datas.data[i].KAM == 10) {
+                            for (var j = 0; j < titulos.length; j++) {
+                                lilia.push(0);
+                            }
+                            for (var j = 0; j < titulos.length; j++) {
+                                if (datas.data[i].estatus == j) {
+                                    lilia[j] = (datas.data[i].sumaReporte)
+                                }
+                            }
+                        }
+
+                        if (datas.data[i].KAM == 11) {
+                            for (var j = 0; j < titulos.length; j++) {
+                                alberto.push(0);
+                            }
+                            for (var j = 0; j < titulos.length; j++) {
+                                if (datas.data[i].estatus == j) {
+                                    alberto[j] = (datas.data[i].sumaReporte)
+                                }
+                            }
+                        }
+                    }
+
+                        var SalesChartCanvas = $("#cotizaciones-kam-chart").get(0).getContext("2d");
+                    var cotKAM = new Chart(SalesChartCanvas, {
+                            type: 'bar',
+                            data: {
+                                labels: titulos,
+                                datasets: [{
+                                    label: 'Karina',
+                                    data: karina,
+                                    backgroundColor: '#a93226',
+                                    datalabels: {
+                                        color: '#000',
+                                        font: {
+                                            weight: 'bold',
+                                        },
+                                        formatter: (value, context) => {
+                                            return parseInt(value).toLocaleString('en-US');
+                                        },
+                                        //Aqui controlo la ubicacion de mis labels encima del grafico
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 0,
+                                        display: true
+                                    }
+                                },
+                                {
+                                    label: 'Samuel',
+                                    data: samuel,
+                                    backgroundColor: '#839192',
+                                    datalabels: {
+                                        color: '#000',
+                                        font: {
+                                            weight: 'bold',
+                                        },
+                                        formatter: (value, context) => {
+                                            return parseInt(value).toLocaleString('en-US');
+                                        },
+                                        //Aqui controlo la ubicacion de mis labels encima del grafico
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 0,
+                                        display: true
+                                    }
+                                },
+                                {
+                                    label: 'David',
+                                    data: david,
+                                    backgroundColor: '#e67e22',
+                                    datalabels: {
+                                        color: '#000',
+                                        font: {
+                                            weight: 'bold',
+                                        },
+                                        formatter: (value, context) => {
+                                            return parseInt(value).toLocaleString('en-US');
+                                        },
+                                        //Aqui controlo la ubicacion de mis labels encima del grafico
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 0,
+                                        display: true
+                                    }
+                                },
+                                {
+                                    label: 'Roberto',
+                                    data: roberto,
+                                    backgroundColor: '#3498db',
+                                    datalabels: {
+                                        color: '#000',
+                                        font: {
+                                            weight: 'bold',
+                                        },
+                                        formatter: (value, context) => {
+                                            return parseInt(value).toLocaleString('en-US');
+                                        },
+                                        //Aqui controlo la ubicacion de mis labels encima del grafico
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 0,
+                                        display: true
+                                    }
+                                },
+                                {
+                                    label: 'Eliu',
+                                    data: eliu,
+                                    backgroundColor: '#8e44ad',
+                                    datalabels: {
+                                        color: '#000',
+                                        font: {
+                                            weight: 'bold',
+                                        },
+                                        formatter: (value, context) => {
+                                            return parseInt(value).toLocaleString('en-US');
+                                        },
+                                        //Aqui controlo la ubicacion de mis labels encima del grafico
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 0,
+                                        display: true
+                                    }
+                                },
+                                {
+                                    label: 'Montserrat',
+                                    data: montserrat,
+                                    backgroundColor: '#2e4053',
+                                    datalabels: {
+                                        color: '#000',
+                                        font: {
+                                            weight: 'bold',
+                                        },
+                                        formatter: (value, context) => {
+                                            return parseInt(value).toLocaleString('en-US');
+                                        },
+                                        //Aqui controlo la ubicacion de mis labels encima del grafico
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 0,
+                                        display: true
+                                    }
+                                    },
+                                    {
+                                        label: 'Lilia',
+                                        data: lilia,
+                                        backgroundColor: '#2e4053',
+                                        datalabels: {
+                                            color: '#000',
+                                            font: {
+                                                weight: 'bold',
+                                            },
+                                            formatter: (value, context) => {
+                                                return parseInt(value).toLocaleString('en-US');
+                                            },
+                                            //Aqui controlo la ubicacion de mis labels encima del grafico
+                                            anchor: 'end',
+                                            align: 'top',
+                                            offset: 0,
+                                            display: true
+                                        }
+                                    },
+                                    {
+                                        label: 'Alberto',
+                                        data: alberto,
+                                        backgroundColor: '#2e4053',
+                                        datalabels: {
+                                            color: '#000',
+                                            font: {
+                                                weight: 'bold',
+                                            },
+                                            formatter: (value, context) => {
+                                                return parseInt(value).toLocaleString('en-US');
+                                            },
+                                            //Aqui controlo la ubicacion de mis labels encima del grafico
+                                            anchor: 'end',
+                                            align: 'top',
+                                            offset: 0,
+                                            display: true
+                                        }
+                                    }
+                                ]
+                            },
+                            options: {
+                                cornerRadius: 5,
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                layout: {
+                                    padding: {
+                                        left: 0,
+                                        right: 0,
+                                        top: 20,
+                                        bottom: 0
+                                    }
+                                },
+                                plugins: {
+                                    datalabels: {
+                                        color: 'white',
+                                        display: function (context) {
+                                            return context.dataset.data[context.dataIndex] > 15;
+                                        },
+                                        font: {
+                                            weight: 'bold'
+                                        },
+                                        formatter: Math.round
+                                    }
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        display: true,
+                                        gridLines: {
+                                            display: true,
+                                            drawBorder: false,
+                                            color: "#F2F2F2"
+                                        },
+                                        ticks: {
+                                            display: true,
+                                            min: 0,
+                                            max: 100,
+                                            callback: function (value, index, values) {
+                                                return value;
+                                            },
+                                            autoSkip: true,
+                                            maxTicksLimit: 30,
+                                            fontColor: "#6C7383"
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        stacked: false,
+                                        ticks: {
+                                            beginAtZero: true,
+                                            fontColor: "#6C7383"
+                                        },
+                                        gridLines: {
+                                            color: "rgba(0, 0, 0, 0)",
+                                            display: false
+                                        },
+                                        barPercentage: 1
+                                    }]
+                                },
+                                legend: {
+                                    display: false,
+                                    labels: {
+                                        color: '#fff'
+                                    }
+                                },
+                                elements: {
+                                    point: {
+                                        radius: 0
+                                    }
+                                }
+                            },
+                        });
+                    document.getElementById('cotizaciones-kam-legend').innerHTML = cotKAM.generateLegend();
+
+
+                    /*
+                    if (resultado == -1)
+                    {
+                        swal("", "Datos incorrectos!", "error");
+                    }
+                    else
+                    {
+                        if ($("#idCotizacion").val() != 0) {
+                            swal("", "Cotización actualizada correctamente!", "success")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                        else {
+                            swal("", "Cotización insertada correctamente!", "success")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                    }
+                    */
+                },
+                error: function () {
+                    swal("", "Error al obtener el gráfico!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("obtener_motivo_rechazo", "ventas")',
+                type: "GET",
+
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (datas) {
+                    var titulos = [];
+                    var contenido = [];
+
+                    //console.log(JSON.parse((JSON.stringify(datas))).data[0].estatus);
+                    //console.log(JSON.parse((JSON.stringify(datas))).data.length);
+                    //console.log(datas.data.length);
+                    var colores = ["#cd6155", "#a569bd", "#5dade2", "#f4d03f"];
+
+                    for (var i = 0; i < datas.data.length; i++) {
+                        titulos.push(datas.data[i].estatus);
+                        contenido.push(datas.data[i].sumaReporte);
+                    }
+
+                    var RejectChartCanvas = $("#rechazo-gral-chart").get(0).getContext("2d");
+                    var cotGral = new Chart(RejectChartCanvas, {
+                            type: 'bar',
+                            data: {
+                                labels: titulos,
+                                datasets: [{
+                                    label: 'Motivos rechazo cotizaciones',
+                                    data: contenido,
+                                    backgroundColor: colores,
+                                    datalabels: {
+                                        color: '#000',
+                                        font: {
+                                            weight: 'bold',
+                                        },
+                                        formatter: (value, context) => {
+                                            return parseInt(value).toLocaleString('en-US');
+                                        },
+                                        //Aqui controlo la ubicacion de mis labels encima del grafico
+                                        anchor: 'end',
+                                        align: 'top',
+                                        offset: 0,
+                                        display: true
+                                    }}]
+                            },
+                            options: {
+                                cornerRadius: 5,
+                                responsive: true,
+                                maintainAspectRatio: true,
+                                plugins: {
+                                    datalabels: {
+                                        color: 'white',
+                                        display: function (context) {
+                                            return context.dataset.data[context.dataIndex] > 15;
+                                        },
+                                        font: {
+                                            weight: 'bold'
+                                        },
+                                        formatter: Math.round
+                                    }
+                                },
+                                layout: {
+                                    padding: {
+                                        left: 0,
+                                        right: 0,
+                                        top: 20,
+                                        bottom: 0
+                                    }
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        display: true,
+                                        gridLines: {
+                                            display: true,
+                                            drawBorder: false,
+                                            color: "#F2F2F2"
+                                        },
+                                        ticks: {
+                                            display: true,
+                                            min: 0,
+                                            max: 25,
+                                            callback: function (value, index, values) {
+                                                return value;
+                                            },
+                                            autoSkip: true,
+                                            maxTicksLimit: 10,
+                                            fontColor: "#6C7383"
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        stacked: true,
+                                        ticks: {
+                                            beginAtZero: true,
+                                            fontColor: "#6C7383"
+                                        },
+                                        gridLines: {
+                                            color: "rgba(0, 0, 0, 0)",
+                                            display: false
+                                        },
+                                        barPercentage: 1
+                                    }]
+                                },
+                                legend: {
+                                    display: false,
+                                    labels: {
+                                        color: '#fff'
+                                    }
+                                },
+                                elements: {
+                                    point: {
+                                        radius: 0
+                                    }
+                                }
+                            },
+                        });
+                    //document.getElementById('contizaciones-gral-legend').innerHTML = cotGral.generateLegend();
+                },
+                error: function () {
+                    swal("", "Error al obtener el gráfico!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_numero_ventas", "ventas")',
+                                type: "GET",
+                                dataType: "json",
+                                success: function (resultado) {
+                                    $('#ventasMes').text(resultado.data[0]);
+                                    $('#ventasHoy').text(resultado.data[1]);
+                                    $('#ventasAño').text(resultado.data[2]);
+                                    $('#acuerdosAño').text(resultado.data[3]);
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        /**********************************************************PRODUCCION***********************************************************************/
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_numero_paros", "produccion")',
+                                type: "GET",
+                                dataType: "json",
+                                success: function (resultado) {
+                                    $('#numeroParosHoy').text(resultado.data[0]);
+                                    $('#numeroParosMes').text(resultado.data[1] + ' (Mes actual)');
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_numero_liberaciones", "produccion")',
+                                type: "GET",
+                                dataType: "json",
+                                success: function (resultado) {
+                                    $('#numeroLiberacionesHoy').text(resultado.data[0]);
+                                    $('#numeroLiberacionesMes').text(resultado.data[1] +' (Mes actual)');
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function(resultado)
+                {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1)
+                    {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_numero_consumos", "produccion")',
+                                type: "GET",
+                                dataType: "json",
+                                success: function (resultado) {
+                                    $('#numeroConsumosHoy').text(resultado.data[0]);
+                                    $('#numeroConsumosMes').text(resultado.data[1] +' (Mes actual)');
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else
+                    {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function()
+                {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) =>
+                        {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_kg_producidos", "produccion")',
+                                type: "GET",
+                                dataType: "json",
+                                success: function (resultado) {
+
+                                    $('#kgMielHoy').text('Día: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgMielMes').text('Mes: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgMielSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(0));
+
+                                    $('#kgBarrasHoy').text('Día: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgBarrasMes').text('Mes: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgBarrasSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(0));
+
+                                    $('#kgUntablesHoy').text('Día: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgUntablesMes').text('Mes: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgUntablesSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(0));
+
+                                    $('#kgPapasHoy').text('Día: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgPapasMes').text('Mes: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgPapasSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(0));
+
+                                    $('#kgSazonadoresHoy').text('Día: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgSazonadoresMes').text('Mes: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgSazonadoresSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(0));
+
+                                    $('#kgCEDISHoy').text('Día: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgCEDISMes').text('Mes: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgCEDISSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(0));
+
+                                    $('#kgMaizHoy').text('Día: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgMaizMes').text('Mes: ' + Intl.NumberFormat('en-US').format(0));
+                                    $('#kgMaizSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(0));
+
+                                    for (let i = 0; i < resultado.data.length; i++) {
+                                        if (resultado.data[i].includes("MIEL")) {
+                                            if (resultado.data[i].includes("DIA")) {
+                                                $('#kgMielHoy').text('Día: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("MES")) {
+                                                $('#kgMielMes').text('Mes: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("SEMANA")) {
+                                                $('#kgMielSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                        }
+                                        if (resultado.data[i].includes("BARRAS")) {
+                                            if (resultado.data[i].includes("DIA")) {
+                                                $('#kgBarrasHoy').text('Día: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("MES")) {
+                                                $('#kgBarrasMes').text('Mes: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("SEMANA")) {
+                                                $('#kgBarrasSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                        }
+                                        if (resultado.data[i].includes("SEMILLAS")) {
+                                            if (resultado.data[i].includes("DIA")) {
+                                                $('#kgSemillasHoy').text('Día: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("MES")) {
+                                                $('#kgSemillasMes').text('Mes: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("SEMANA")) {
+                                                $('#kgSemillasSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                        }
+                                        if (resultado.data[i].includes("UNTABLES")) {
+                                            if (resultado.data[i].includes("DIA")) {
+                                                $('#kgUntablesHoy').text('Día: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("MES")) {
+                                                $('#kgUntablesMes').text('Mes: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("SEMANA")) {
+                                                $('#kgUntablesSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                        }
+                                        if (resultado.data[i].includes("PAPAS")) {
+                                            if (resultado.data[i].includes("DIA")) {
+                                                $('#kgPapasHoy').text('Día: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("MES")) {
+                                                $('#kgPapasMes').text('Mes: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("SEMANA")) {
+                                                $('#kgPapasSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                        }
+                                        if (resultado.data[i].includes("SAZONADORES")) {
+                                            if (resultado.data[i].includes("DIA")) {
+                                                $('#kgSazonadoresHoy').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("MES")) {
+                                                $('#kgSazonadoresMes').text('Mes: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("SEMANA")) {
+                                                $('#kgSazonadoresSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                        }
+                                        if (resultado.data[i].includes("CEDIS SF")) {
+                                            if (resultado.data[i].includes("DIA")) {
+                                                $('#kgCEDISHoy').text('Día: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("MES")) {
+                                                $('#kgCEDISMes').text('Mes: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("SEMANA")) {
+                                                $('#kgCEDISSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                        }
+                                        if (resultado.data[i].includes("MAIZ")) {
+                                            if (resultado.data[i].includes("DIA")) {
+                                                $('#kgMaizHoy').text('Día: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("MES")) {
+                                                $('#kgMaizMes').text('Mes: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                            if (resultado.data[i].includes("SEMANA")) {
+                                                $('#kgMaizSemana').text('Semana: ' + Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[1].split('-')[0]));
+                                            }
+                                        }
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_estatus_of", "produccion")',
+                                type: "GET",
+                                dataType: "json",
+                                success: function (resultado) {
+
+                                    var ma = 0;
+                                    var mc = 0;
+                                    var ba = 0;
+                                    var bc = 0;
+                                    var sa = 0;
+                                    var sc = 0;
+                                    var ua = 0;
+                                    var uc = 0;
+                                    var pa = 0;
+                                    var pc = 0;
+                                    var sa = 0;
+                                    var sc = 0;
+                                    var ca = 0;
+                                    var cc = 0;
+                                    var za = 0;
+                                    var zc = 0;
+
+                                    $('#mielabiertas').text('Abiertas: ' + 0);
+                                    $('#semillasabiertas').text('Abiertas: ' + 0);
+                                    $('#barrasabiertas').text('Abiertas: ' + 0);
+                                    $('#untablesabiertas').text('Abiertas: ' + 0);
+                                    $('#papasabiertas').text('Abiertas: ' + 0);
+                                    $('#sazonadoresabiertas').text('Abiertas: ' + 0);
+                                    $('#cedisabiertas').text('Abiertas: ' + 0);
+                                    $('#maizabiertas').text('Abiertas: ' + 0);
+
+                                    $('#pmiel').text(0 + '%');
+                                    $('#pbarras').text(0 + '%');
+                                    $('#psemillas').text(0 + '%');
+                                    $('#puntables').text(0 + '%');
+                                    $('#ppapas').text(0 + '%');
+                                    $('#psazonadores').text(0 + '%');
+                                    $('#pcedis').text(0 + '%');
+                                    $('#pmaiz').text(0 + '%');
+
+                                    for (let i = 0; i < resultado.data.length; i++) {
+                                        if (resultado.data[i].split('-')[0] == "33") {
+                                            if (resultado.data[i].includes("L")) {
+                                                mc = resultado.data[i].split('-')[2];
+                                            }
+                                            if (resultado.data[i].includes("R")) {
+                                                ma = resultado.data[i].split('-')[2];
+                                                $('#mielabiertas').text('Abiertas: ' + resultado.data[i].split('-')[2]);
+                                            }
+                                        }
+                                        if (resultado.data[i].split('-')[0] == "34") {
+                                            if (resultado.data[i].includes("L")) {
+                                                bc = resultado.data[i].split('-')[2];
+                                            }
+                                            if (resultado.data[i].includes("R")) {
+                                                ba = resultado.data[i].split('-')[2];
+                                                $('#semillasabiertas').text('Abiertas: ' + resultado.data[i].split('-')[2]);
+                                            }
+                                        }
+                                        if (resultado.data[i].split('-')[0] == "77") {
+                                            if (resultado.data[i].includes("L")) {
+                                                sc = resultado.data[i].split('-')[2];
+                                            }
+                                            if (resultado.data[i].includes("R")) {
+                                                sa = resultado.data[i].split('-')[2];
+                                                $('#barrasabiertas').text('Abiertas: ' + resultado.data[i].split('-')[2]);
+                                            }
+                                        }
+                                        if (resultado.data[i].split('-')[0] == "78") {
+                                            if (resultado.data[i].includes("L")) {
+                                                uc = resultado.data[i].split('-')[2];
+                                            }
+                                            if (resultado.data[i].includes("R")) {
+                                                ua = resultado.data[i].split('-')[2];
+                                                $('#untablesabiertas').text('Abiertas: ' + resultado.data[i].split('-')[2]);
+                                            }
+                                        }
+                                        if (resultado.data[i].split('-')[0] == "79") {
+                                            if (resultado.data[i].includes("L")) {
+                                                pc = resultado.data[i].split('-')[2];
+                                            }
+                                            if (resultado.data[i].includes("R")) {
+                                                pa = resultado.data[i].split('-')[2];
+                                                $('#papasabiertas').text('Abiertas: ' + resultado.data[i].split('-')[2]);
+                                            }
+                                        }
+                                        if (resultado.data[i].split('-')[0] == "80") {
+                                            if (resultado.data[i].includes("L")) {
+                                                sc = resultado.data[i].split('-')[2];
+                                            }
+                                            if (resultado.data[i].includes("R")) {
+                                                sa = resultado.data[i].split('-')[2];
+                                                $('#sazonadoresabiertas').text('Abiertas: ' + resultado.data[i].split('-')[2]);
+                                            }
+                                        }
+                                        if (resultado.data[i].split('-')[0] == "81") {
+                                            if (resultado.data[i].includes("L")) {
+                                                cc = resultado.data[i].split('-')[2];
+                                            }
+                                            if (resultado.data[i].includes("R")) {
+                                                ca = resultado.data[i].split('-')[2];
+                                                $('#cedisabiertas').text('Abiertas: ' + resultado.data[i].split('-')[2]);
+                                            }
+                                        }
+                                        if (resultado.data[i].split('-')[0] == "94") {
+                                            if (resultado.data[i].includes("L")) {
+                                                zc = resultado.data[i].split('-')[2];
+                                            }
+                                            if (resultado.data[i].includes("R")) {
+                                                za = resultado.data[i].split('-')[2];
+                                                $('#maizabiertas').text('Abiertas: ' + resultado.data[i].split('-')[2]);
+                                            }
+                                        }
+                                    }
+
+                                    $('#pmiel').text(100 - ((ma / mc) * 100).toFixed(2) + '%');
+                                    $('#pbarras').text(100 - ((ba / bc) * 100).toFixed(2) + '%');
+                                    $('#psemillas').text(100 - ((sa / sc) * 100).toFixed(2) + '%');
+                                    $('#puntables').text(100 - ((ua / uc) * 100).toFixed(2) + '%');
+                                    $('#ppapas').text(100 - ((pa / pc) * 100).toFixed(2) + '%');
+                                    $('#psazonadores').text(100 - ((sa / sc) * 100).toFixed(2) + '%');
+                                    $('#pcedis').text(100 - ((ca / cc) * 100).toFixed(2) + '%');
+                                    $('#pmaiz').text(100 - ((za / zc) * 100).toFixed(2) + '%');
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_kg_06", "produccion")',
+                                type: "GET",
+                                dataType: "json",
+                                success: function (resultado) {
+
+                                    $('#ptmiel').text(0);
+                                    $('#ptbarras').text(0);
+                                    $('#ptsemillas').text(0);
+                                    $('#ptuntables').text(0);
+                                    $('#ptpapas').text(0);
+                                    $('#ptsazonadores').text(0);
+                                    $('#ptcedis').text(0);
+                                    $('#ptmaiz').text(0);
+
+                                    for (let i = 0; i < resultado.data.length; i++) {
+                                        if (resultado.data[i].includes("-1506")) {
+                                            $('#ptmiel').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[0]));
+                                        }
+                                        if (resultado.data[i].includes("-1706")) {
+                                            $('#ptbarras').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[0]));
+                                        }
+                                        if (resultado.data[i].includes("-1806")) {
+                                            $('#ptsemillas').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[0]));
+                                        }
+                                        if (resultado.data[i].includes("-2106")) {
+                                            $('#ptuntables').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[0]));
+                                        }
+                                        if (resultado.data[i].includes("-1606")) {
+                                            $('#ptpapas').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[0]));
+                                        }
+                                        if (resultado.data[i].includes("-1906")) {
+                                            $('#ptsazonadores').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[0]));
+                                        }
+                                        if (resultado.data[i].includes("-1306")) {
+                                            $('#ptcedis').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[0]));
+                                        }
+                                        if (resultado.data[i].includes("-2206")) {
+                                            $('#ptmaiz').text(Intl.NumberFormat('en-US').format(resultado.data[i].split('-')[0]));
+                                        }
+                                    }
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+    </script>
+    -->
+}

@@ -1,0 +1,216 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Programación entregas</title>
+    <link rel="stylesheet" href="~/Content/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Content/css/vertical-layout-light/style.css">
+</head>
+
+<body>
+    <div id=overlay class="align-items-center h-100 justify-content-center" style="display:none">
+        <div class="row align-items-center" id="imgLoad">
+            <div class="offset-lg-6 col-lg-4 col-md-4 col-sm-12">
+                <img src="~/Content/images/loading.gif" alt="Cargando">
+            </div>
+        </div>
+    </div>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth px-0" style="background-color: #e8eef1">
+                <div class="row w-100 mx-0">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                            <div class="text-center brand-logo">
+                                <img src="~/Content/images/logo.png" id="logomielmex" alt="logo" style="width:70px;display:none">
+                                <img src="~/Content/images/logobordes.png" id="logonaturasol" alt="logo" style="width:100px;display:none">
+                            </div>
+                            <h4 class="text-center">Bienvenido</h4>
+                            <h6 class="text-center font-weight-light">Llena los datos para programar tu entrega</h6>
+                            <form class="pt-3">
+                                <div class="form-group row">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Número de O.C.</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="numerooc">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ubicacionUsuario" class="col-sm-3 col-form-label">*Ubicación</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="ubicacion">
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="1">Corporativo</option>
+                                            <option value="2">Planta cereales</option>
+                                            <option value="3">Planta semillas</option>
+                                            <option value="4">Planta barras</option>
+                                            <option value="5">CEDIS San Francisco</option>
+                                            <option value="6">Planta miel</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row" id="direccionDIV" style="display:none">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label"></label>
+                                    <div class="col-sm-9">
+                                        <label class="col-form-label" id="direccion" style="padding-top: 0; padding-bottom: 0; font-size: small;"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Fecha entrega.</label>
+                                    <div class="col-sm-9">
+                                        <input type="date" class="form-control" id="fechaEntrega">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="paternoUsuario" class="col-sm-3 col-form-label">*Hora entrega.</label>
+                                    <div class="col-sm-9">
+                                        <input type="time" class="form-control" id="horaEntrega">
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" onclick="validarInformacion()">Validar información</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Content/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Content/js/off-canvas.js"></script>
+    <script src="~/Content/js/hoverable-collapse.js"></script>
+    <script src="~/Content/js/template.js"></script>
+    <script src="~/Content/js/settings.js"></script>
+    <script src="~/Content/js/todolist.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+            $(document).ready(function () {
+                $(document).ready(function () {
+                    if (window.location.href.includes("mielmex")) {
+                        $("#logomielmex").show();
+                        $("#logonaturasol").hide();
+                    }
+                    else {
+                        $("#logonaturasol").show();
+                        $("#logomielmex").hide();
+                    }
+                });
+            });
+
+          document.querySelectorAll('select').forEach(select => {
+              select.addEventListener('change', function () {
+                  if (this.value == 1) {
+                      $("#direccion").text("Cto. Circunvalacion Pte. 9A, Cd. Satélite, 53100 Naucalpan de Juárez, Méx.");
+                      $("#direccionDIV").show();
+                  }
+                  if (this.value == 2) {
+                      $("#direccion").text("La Venta 14 Manzana 003, San Isidro, 54730 Cuautitlán Izcalli, Méx.");
+                      $("#direccionDIV").show();
+                  }
+                  if (this.value == 3) {
+                      $("#direccion").text("Calle Mariano Matamoros 38A, Tlacateco, 54605 Tepotzotlán, Méx.");
+                      $("#direccionDIV").show();
+                  }
+                  if (this.value == 4) {
+                      $("#direccion").text("Av. Libramiento Norte Manzana 002, Tlacateco, 54605 Tepotzotlán, Méx.");
+                      $("#direccionDIV").show();
+                  }
+                  if (this.value == 5) {
+                      $("#direccion").text("Mariano Abasolo 19, Tlacateco, 54605 Tepotzotlán, Méx.");
+                      $("#direccionDIV").show();
+                  }
+                  if (this.value == 6) {
+                      $("#direccion").text("Calle Mariano Matamoros 362, Tlacateco, 54605 Tepotzotlán, Méx.");
+                      $("#direccionDIV").show();
+                  }
+                  if (this.value == 0) {
+                      $("#direccion").text("");
+                      $("#direccionDIV").hide();
+                  }
+            });
+          });
+
+        function validarInformacion()
+        {
+            var isCorrect = true;
+
+            if ($("#numerooc").val().length == 0) {
+                swal("", "Debes indicar un numero de OC", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#ubicacion").val() == 0) {
+                swal("", "Debes indicar una ubicacion de entrega", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#fechaEntrega").val().length == 0) {
+                swal("", "Debes indicar una fecha de entrega", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#horaEntrega").val().length == 0) {
+                swal("", "Debes indicar una hora de entrega", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var SesionEntradaMaterial = {
+                    OCRelacionada: $("#numerooc").val(),
+                    Ubicacion: $("#direccion").text(),
+                    DocDate: $("#fechaEntrega").val(),
+                    DocTime: $("#horaEntrega").val(),
+                    Sociedad: "TSSL_Naturasol"
+                }
+
+                $('#overlay').css('display', 'flex');
+
+                //ACCION PARA VALIDAR LA OC
+                jQuery.ajax({
+                    url: '@Url.Action("validar_informacion", "arribos")',
+                    type: "POST",
+                    data: JSON.stringify({ entradas: SesionEntradaMaterial }),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1) {
+                            swal("", "Informacion correcta", "success")
+                                .then((value) => {
+                                    window.location.href = '/arribos/confirmar_arribo/';
+                                });
+                        }
+                        else if (resultado == 2) {
+                            swal("", "O.C. no encontrada!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                        else {
+                            swal("", "Datos incorrectos!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al validar información! Comuniquese a sistemas@naturasol.com.mx", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+﻿
+@{
+    ViewBag.Title = "rove";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-registro-tab" data-toggle="pill" href="#pills-registro" role="tab" aria-controls="pills-registro" aria-selected="false">Nuevo registro</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-consulta-tab" data-toggle="pill" href="#pills-consulta" role="tab" aria-controls="pills-consulta" aria-selected="false">Consultar</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+
+                            <div class="tab-pane fade show active" id="pills-registro" role="tabpanel" aria-labelledby="pills-registro-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="form-group row">
+                                                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label"># Empleado:</label>
+                                                    <div class="col-sm-4">
+                                                        <input type="number" class="form-control" id="numeroEmpleado">
+                                                    </div>
+                                                    <div class='col-sm-4'>                                                        
+                                                        <button type='button' id='btnGuardar' onclick='guardarRegistro()' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-floppy-disk'></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade " id="pills-consulta" role="tabpanel" aria-labelledby="pills-consulta-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div>
+                                                </div>
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaRegistros" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th># Empleado</th>
+                                                                <th>Nombre</th>
+                                                                <th>Fecha</th>
+                                                                <th>Ubicación</th>
+                                                                <th>Tipo</th>                                                                
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+{
+    <script>
+
+        tablaRegistros = $("#tablaRegistros").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_asistencia", "rrhh")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                { data: 'numeroEmpleado' },
+                { data: 'nombreEmpleado' },
+                { data: 'fechaRegistro' },
+                { data: 'ubicacion' },                
+                {
+                    data: 'tipo', "render": function (tipo) {
+                        if (tipo == 'E') {
+                            return '<span class="badge badge-success">Entrada</span>'
+                        }
+                        else if (estatus == 'S') {
+                            return '<span class="badge badge-danger">Salida</span>'
+                        }
+                        else if (estatus == 'C') {
+                            return '<span class="badge badge-warning">Comida</span>'
+                        }
+
+                    }
+                }
+            ],
+        });
+
+        /*
+        tablaRegistros = $("#tablaRegistros").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: 'Url.Action("obtener_asistencia", "rrhh")',
+                type: "GET",
+                dataType: "json",
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Registros',
+                    exportOptions:
+                    {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                },],
+            "columns": [
+                { data: 'numeroEmpleado' },
+                { data: 'nombreEmpleado' },
+                { data: 'fechaRegistro' },
+                { data: 'ubicacion' },
+                { data: 'tipo' },
+                {
+                    data: 'tipo', "render": function (estatus) {
+                        if (tipo == 'E') {
+                            return '<span class="badge badge-secondary">Entrada</span>'
+                        }
+                        else if (estatus == 'S') {
+                            return '<span class="badge badge-success">Salida</span>'
+                        }
+                        else if (estatus == 'C') {
+                            return '<span class="badge badge-danger">Comida</span>'
+                        }
+
+                    }
+                }
+            ],
+        });
+        */
+
+        function guardarRegistro() {
+
+            jQuery.ajax(
+                {
+                    url: '@Url.Action("validar_sesion", "Inicio")',
+                    type: "POST",
+                    dataType: "json",
+                    success: function (resultado) {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1) {
+                            $('#overlay').css('display', 'flex');
+                            var componente = {
+                                numeroEmpleado: $("#numeroEmpleado").val()
+                            }
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("guardar_asistencia", "rrhh")',
+                                    type: "POST",
+                                    data: componente,
+                                    success: function (resultado) {
+                                        swal("", "Asistencia registrada correctamente!", "success")
+                                            .then((value) => {
+                                                window.location.reload(false);
+                                            });
+                                    },
+                                    error: function (xhr, status, error) {
+                                        swal("", "Error al guardar la asistencia!", "error")
+                                            .then((value) => {
+                                                window.location.reload(false);
+                                            });
+                                    },
+                                });
+                        }
+                        else {
+                            alert('Sesion caducada');
+                            window.location.reload(false);
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Sesión expirada!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                });
+            $('#overlay').css('display', 'none');
+        }
+    </script>
+}

@@ -1,0 +1,418 @@
+﻿
+@{
+    ViewBag.Title = "inventario";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-modulos-tab" data-toggle="pill" href="#pills-modulos" role="tab" aria-controls="pills-modulos" aria-selected="true">Módulos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-permisos-tab" data-toggle="pill" href="#pills-permisos" role="tab" aria-controls="pills-permisos" aria-selected="false">Permisos</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!--VISTA DE LISTADO DE MODULOS-->
+                            <div class="tab-pane fade show active" id="pills-modulos" role="tabpanel" aria-labelledby="pills-modulos-tab">
+                                <button type="button" class="btn btn-primary" onclick="nuevoModulo()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                <div class="col-lg-12 grid-margin stretch-card">
+                                    <div class="card">
+                                        <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover" id="tablaModulos" style="width: 100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nombre</th>
+                                                            <th>Estatus</th>
+                                                            <th>Acciones</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE ACCESOS-->
+                            <div class="tab-pane fade" id="pills-permisos" role="tabpanel" aria-labelledby="pills-permisos-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-permisos-tab">
+                                    <button type="button" class="btn btn-primary" onclick="nuevoPermiso()" data-dismiss="modal" style="width: 8rem; height: 2rem;">Nuevo</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaPermisos" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Usuario</th>
+                                                                <th>Modulo</th>
+                                                                <th>Acciones</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE MODULOS-->
+<div class="modal fade" id="modalDetalleModulo" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetalleModulo" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel">Módulo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <input type="hidden" class="form-control" id="idModulo" readonly>
+                    <label for="nombreModulo" class="col-sm-4 col-form-label">Nombre del módulo</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="nombreModulo">
+                    </div>
+                    <label for="estatusEquipo" class="col-sm-4 col-form-label">Estatus</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusModulo">
+                            <option value="1">Activo</option>
+                            <option value="0">Inactivo</option>
+                        </select>
+                    </div>
+                    <label for="descripcion" class="col-sm-4 col-form-label">Descripción</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="descripcion" rows="5"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarModulo" onclick="guardarModulo()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--DETALLE DE PERMISOS-->
+<div class="modal fade" id="modalDetallePermiso" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-inicial" id="encabezadoDetallePermisos" style="color: white">
+                <h5 class="modal-title" id="exampleModalLabel">Permisos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="usuarioPermiso" class="col-sm-4 col-form-label">Usuario</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="usuarioPermiso">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="moduloPermiso" class="col-sm-4 col-form-label">Módulo</label>
+                    <div class=" col-sm-8">
+                        <select style="width: 100%;" class="custom-select" id="moduloPermiso">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button type="button" id="btnGuardarPermiso" onclick="guardarPermiso()" class="btn btn-success">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        var tablaModulos;
+        var tablaPermisos;
+
+        tablaModulos = $("#tablaModulos").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            "ajax": {
+                url: '@Url.Action("obtener_modulos", "Modulos")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+
+                { data: 'nombreModulo'},
+                {
+                    data: 'estatusModulo', "render": function (condicion) {
+                        if (condicion == 1) {
+                            return '<span class="badge badge-success">Activo</span>'
+                        }
+                        else {
+                            return '<span class="badge badge-danger">Inactivo</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-modulo' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ]
+        });
+
+        tablaPermisos = $("#tablaPermisos").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            "ajax": {
+                url: '@Url.Action("obtener_accesos", "Permisos")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+
+                { data: 'nameUsuario' },
+                { data: 'nombreModulo' },
+                {
+                    "defaultContent": "<button type='button' id='btn-eliminar-permiso' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ]
+        });
+
+        jQuery.ajax({
+            url: '@Url.Action("lista_usuarios", "Usuarios")',
+            type: "POST",
+            success: function (resultado) {
+                $('#usuarioPermiso').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al cargar los usuario! Comuniquese a sistemas", "error");
+            },
+        });
+
+        jQuery.ajax({
+            url: '@Url.Action("lista_modulos", "Modulos")',
+            type: "POST",
+            success: function (resultado) {
+                $('#moduloPermiso').append(resultado);
+            },
+            error: function () {
+                swal("", "Error al cargar los modulos! Comuniquese a sistemas", "error");
+            },
+        });
+
+        $("#tablaModulos").on("click", '#btn-editar-modulo', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaModulos.row(filaseleccionada).data();
+            abrirDetalleModulos(datos);
+        });
+
+        $("#tablaPermisos").on("click", '#btn-eliminar-permiso', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaPermisos.row(filaseleccionada).data();
+            eliminarPermiso(datos);
+        });
+
+        function abrirDetalleModulos(datos) {
+            $("#nombreModulo").val(datos.nombreModulo);
+            $("#descripcion").val(datos.descripcion);
+            $("#idModulo").val(datos.idModulo);
+
+            $("#modalDetalleModulo").modal("show");
+            var element = document.getElementById("encabezadoDetalleModulo");
+
+            if (datos.estatusModulo == 1) {
+                element.classList.add("modal-header-activo");
+                element.classList.remove("modal-header-inicial");
+            }
+            else {
+                element.classList.add("modal-header-inactivo");
+                element.classList.remove("modal-header-inicial");
+            }
+        }
+
+        function nuevoModulo() {
+            $("#modalDetalleModulo").modal("show");
+        }
+
+        function nuevoPermiso()  {
+            $("#modalDetallePermiso").modal("show");
+        }
+
+        function guardarModulo()
+        {
+            var isCorrect = true;
+
+            if ($("nombreModulo").val() == 0) {
+                swal("", "Debes indicar un nombre para el modulo", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#idModulo").val().length == 0) {
+                if (isCorrect) {
+                    var moduloAsignacion = {
+                        nombreModulo: $("#nombreModulo").val(),
+                        descripcion: $("#descripcion").val(),
+                        estatusModulo: $("#estatusModulo").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("guardar_modulo", "Modulos")',
+                        type: "POST",
+                        data: JSON.stringify({ modulo: moduloAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            swal("", "Modulo insertado correctamente!", "success")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el modulo!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    })
+                }
+            }
+            else {
+                if (isCorrect) {
+                    var moduloAsignacion = {
+                        nombreModulo: $("#nombreModulo").val(),
+                        descripcion: $("#descripcion").val(),
+                        idModulo: $("#idModulo").val(),
+                        estatusModulo: $("#estatusModulo").val()
+                    }
+                    $('#overlay').css('display', 'flex');
+                    jQuery.ajax({
+                        url: '@Url.Action("actualizar_modulo", "Modulos")',
+                        type: "POST",
+                        data: JSON.stringify({ modulo: moduloAsignacion }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function () {
+                            swal("", "Modulo actualizado correctamente!", "success")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                        error: function () {
+                            swal("", "Error al actualizar el modulo!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    })
+                }
+            }
+        }
+
+        function eliminarPermiso(datos)
+        {
+            var isCorrect = true;
+
+            $('#overlay').css('display', 'flex');
+            jQuery.ajax({
+                url: '@Url.Action("eliminar_acceso", "Permisos")',
+                type: "POST",
+                data: JSON.stringify({ permiso: datos }),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    swal("", "Permiso eliminado correctamente!", "success")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+                error: function () {
+                    swal("", "Error al eliminar el permiso!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+            $('#overlay').css('display', 'none');
+        }
+
+        function guardarPermiso()
+        {
+            var isCorrect = true;
+
+            if ($("usuarioPermiso").val() == 0) {
+                swal("", "Debes indicar un usuario", "warning");
+                isCorrect = false;
+            }
+
+            if ($("moduloPermiso").val() == 0) {
+                swal("", "Debes indicar un modulo", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var moduloAsignacion = {
+                    usuarioPermiso: $("#usuarioPermiso").val(),
+                    moduloPermiso: $("#moduloPermiso").val(),
+                    tipoPermiso: 1
+                }
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax({
+                    url: '@Url.Action("guardar_acceso", "Permisos")',
+                    type: "POST",
+                    data: JSON.stringify({ permiso: moduloAsignacion }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        swal("", "Permiso insertado correctamente!", "success")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                    error: function () {
+                        swal("", "Error al insertar el permiso!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+
+    </script>
+}

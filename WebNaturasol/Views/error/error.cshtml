@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mielmex</title>
+    <link rel="stylesheet" href="~/Content/vendors/feather/feather.css">
+    <link rel="stylesheet" href="~/Content/vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="~/Content/css/vertical-layout-light/style.css">
+    <link rel="shortcut icon" href="~/Content/images/logo.png" />
+</head>
+
+<body>
+    <div id=overlay class="align-items-center h-100 justify-content-center" style="display:none">
+        <div class="row align-items-center" id="imgLoad">
+            <div class="offset-lg-6 col-lg-4 col-md-4 col-sm-12">
+                <img src="~/Content/images/loading.gif" alt="Cargando">
+            </div>
+        </div>
+    </div>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center text-center error-page bg-dark">
+                <div class="row flex-grow">
+                    <div class="col-lg-7 mx-auto text-white">
+                        <div class="row align-items-center d-flex flex-row">
+                            <div class="col-lg-6 text-lg-right pr-lg-4">
+                                <h1 class="display-1 mb-0">:(</h1>
+                            </div>
+                            <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
+                                <h2>@ViewBag.Title</h2>
+                                <h3 class="font-weight-light">@ViewBag.Description</h3>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12 text-center mt-xl-2">
+                                <a class="text-white font-weight-medium" href="@Url.Action("inicio","inicio")">Ir al inicio</a>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12 mt-xl-2">
+                                <p class="text-white font-weight-medium text-center">Copyright &copy; 2022 Naturasol</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <script src="~/Content/vendors/js/vendor.bundle.base.js"></script>
+    <script src="~/Content/js/off-canvas.js"></script>
+    <script src="~/Content/js/hoverable-collapse.js"></script>
+    <script src="~/Content/js/template.js"></script>
+    <script src="~/Content/js/settings.js"></script>
+    <script src="~/Content/js/todolist.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script>
+        function iniciarsesion()
+        {
+            var isCorrect = true;
+
+            if ($("#passwordLogin").val().length == 0) {
+                swal("Espera", "Debes indicar una contraseña", "warning");
+                isCorrect = false;
+            }
+            if ($("#correoElectronicoLogin").val().length == 0) {
+                swal("Espera", "Debes indicar un correo", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Usuario = {
+                    correo: $("#correoElectronicoLogin").val(),
+                    contrasena: $("#passwordLogin").val()
+                }
+
+                $('#overlay').css('display', 'flex');
+                //ACCION PARA VALIDAR EL INICIO DE SESION
+                jQuery.ajax({
+                    url: '@Url.Action("inicio_sesion", "inicio")',
+                    type: "POST",
+                    data: JSON.stringify({ usuario: Usuario }),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        $('#overlay').css('display', 'none');
+                        if (resultado == 1) {
+                            swal("OK", "Bienvenido!", "success")
+                                .then((value) => {
+                                    window.location.href = '/inicio/login/';
+                                });
+                        }
+                        else if (resultado == 2) {
+                            swal("Error", "Usuario dado de baja!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                        else {
+                            swal("Error", "Datos incorrectos!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("Error", "Error al iniciar sesión! Comuniquese a sistemas", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>

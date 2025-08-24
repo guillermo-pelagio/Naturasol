@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante Certificado="MIIGODCCBCCgAwIBAgIUMDAwMDEwMDAwMDA3MTAwMTg5MjQwDQYJKoZIhvcNAQELBQAwggGVMTUwMwYDVQQDDCxBQyBERUwgU0VSVklDSU8gREUgQURNSU5JU1RSQUNJT04gVFJJQlVUQVJJQTEuMCwGA1UECgwlU0VSVklDSU8gREUgQURNSU5JU1RSQUNJT04gVFJJQlVUQVJJQTEaMBgGA1UECwwRU0FULUlFUyBBdXRob3JpdHkxMjAwBgkqhkiG9w0BCQEWI3NlcnZpY2lvc2FsY29udHJpYnV5ZW50ZUBzYXQuZ29iLm14MSYwJAYDVQQJDB1Bdi4gSGlkYWxnbyA3NywgQ29sLiBHdWVycmVybzEOMAwGA1UEEQwFMDYzMDAxCzAJBgNVBAYTAk1YMQ0wCwYDVQQIDARDRE1YMRMwEQYDVQQHDApDVUFVSFRFTU9DMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxXDBaBgkqhkiG9w0BCQITTXJlc3BvbnNhYmxlOiBBRE1JTklTVFJBQ0lPTiBDRU5UUkFMIERFIFNFUlZJQ0lPUyBUUklCVVRBUklPUyBBTCBDT05UUklCVVlFTlRFMB4XDTI0MDkxMDIxMjcxOFoXDTI4MDkxMDIxMjcxOFowgfUxNDAyBgNVBAMTK0lOR0VOSUVSSUEtUEFJTEVSSUEsIE1FVEFMTUVDQU5JQ0EgU0EgREUgQ1YxNDAyBgNVBCkTK0lOR0VOSUVSSUEtUEFJTEVSSUEsIE1FVEFMTUVDQU5JQ0EgU0EgREUgQ1YxNDAyBgNVBAoTK0lOR0VOSUVSSUEtUEFJTEVSSUEsIE1FVEFMTUVDQU5JQ0EgU0EgREUgQ1YxJTAjBgNVBC0THElNRTE2MDgxNzhXMiAvIFJFQUI3NTEwMzBHMzQxHjAcBgNVBAUTFSAvIFJFQUI3NTEwMzBNTU5WTEwwMzEKMAgGA1UECxMBMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAKye7yChA0Cpu2QFpexRJKLxw7zrLaxybDlRXFp48sm91lLGxvq1LGYpMAwDSYuw6Qv6FtXknP9OtWbOFYQiQSppB2fEFejobotoa2sNYLTDNFhDUlVg/F/HQdEncqGvxRIkexX5gkc0p3xnnq7gHSwtZKzmzH6M2HLoMsL/OUqG86U7PIxFpnlC3ePyNG+N/UUXBswJp9Bcsdm4OgdsPZY559ksocZSuZkOKj3nRUlVkp4YKswrxl/heYSZ4of9wom814av3Jekg9cyZlF5/Kb1SrvpKblJCUSTZXsIslM0J9cIPQ1o8fnRgAQ52OzW80TFwHdnqREeD6r5AnbmA98CAwEAAaMdMBswDAYDVR0TAQH/BAIwADALBgNVHQ8EBAMCBsAwDQYJKoZIhvcNAQELBQADggIBAK3w8YuMzBQ5QAE0UmU2pzE3k2cB6cbkXe2uTNC5VanvwxY9sPnnzJ+8OeEBdDUUZQhyNAyStvnoonMe5lEK7wpNwSXCsQZx7TVvq92st01aOp4xIwdls1Z6mpXQpDbY5xV4tHWx26siSC0/2PF2AoFazwrX00bb0U78s4JfE6ne09J7CJCkjAFypZS3LbTcEKpDvmUKiSW18tpAUeappOWSx2wIFbN1LzLfKh6mSMWtGBceTK7NfdsnTxjJroZR6QBUfG+YmyyrowrJVoQJSdZnuRdMeCxhSOsFRPnxIJH1bDqinYkkPMLOYyw+WxzGrEB6pzFt1FccvyZwWXvHPbqp+MMA44/TvihtF71ZZWyCKDHFRYjDkDwrCvyEKkp4wAs31rUMhCa70k8tWS+ibGjyxHjmLc28M9iviEB9wl6QmAy1Af89eDbi+uSp4tNOqdEl0+zpoEUfLL0glP64X6aUtx8Lw85QoOFlf1Baec35D17PFD5ftviwqgFgqdsf6uB4Xsak8GFxz/Z3qjEpFUW2JEiMm0wpwuy9h/mAHI0sVYQ3pSXLFacBbBT4XG2AK80fvryOlo02qcpRgJyrdKWr7JWj8AfVphWWSiEecfNejX5F/LgkodzVuy5IIVKyqwNo72I++hh97gU/wQJOl0WzcunkyEllaCP7m52VcCEo" Sello="rDGABTngTP6ahTdNzATZMDApnh6ww0AHZUrtIf4r0fVsoBrVlS3DDqd0cle5MwgQvDWY/f11lSztCiwvMltuRw/6+O6VNAU5eJPfdX1PdpuyNXLMLfwvF5UAM679rQZbwofFojePOdMgKp8r8lmMehoSDJErHZTNIyEFE1GogM6cgjzXNpKimMeHwugwDdDZy6QlRc5NdE2AFRTSX/FkmN1hSfx+4KXOqh7RoeNw9f1XLE6JVPoZYy/1nGhQsevJss58h2nBtEvbnwkRLoe7LK2wQ3zMLgB8duS+lyIgWs5F/6YbhEuPzBoFSiPH+V1UI/0DuhELXANyiCTfztSjyw==" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.0" Folio="24033" Fecha="2025-03-24T14:44:26" FormaPago="99" NoCertificado="00001000000710018924" SubTotal="231040.00" Moneda="MXN" Total="268006.40" TipoDeComprobante="I" Exportacion="01" MetodoPago="PPD" LugarExpedicion="02980" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/4">
+  <cfdi:Emisor Rfc="IME1608178W2" RegimenFiscal="601" Nombre="INGENIERIA-PAILERIA, METALMECANICA" />
+  <cfdi:Receptor Rfc="NAT0104253X3" Nombre="NATURASOL" DomicilioFiscalReceptor="53100" RegimenFiscalReceptor="601" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1.000000" Unidad="Unidad de servicio" Descripcion="SERVICIO DE REPARACION DE TAMBOR DE LÍNEA DE EVROSAN Y TODO LO QUE INCLUYE LA COTIZACION" ValorUnitario="140908.750000" Importe="140908.750000" ClaveProdServ="73181000" ClaveUnidad="E48" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="140908.750000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="22545.40" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" Unidad="Unidad de servicio" Descripcion="SERVICIO DE REPARACION DE TAMBOR CILINDRICO DE SAZONADOR DE CACAHUATE LINEA AUTOMATICA" ValorUnitario="90131.250000" Importe="90131.250000" ClaveProdServ="73181000" ClaveUnidad="E48" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="90131.250000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="14421.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="36966.40">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" Base="231040.00" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="36966.40" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital FechaTimbrado="2025-03-24T14:44:27" NoCertificadoSAT="00001000000712418445" RfcProvCertif="CCC1007293K0" SelloCFD="rDGABTngTP6ahTdNzATZMDApnh6ww0AHZUrtIf4r0fVsoBrVlS3DDqd0cle5MwgQvDWY/f11lSztCiwvMltuRw/6+O6VNAU5eJPfdX1PdpuyNXLMLfwvF5UAM679rQZbwofFojePOdMgKp8r8lmMehoSDJErHZTNIyEFE1GogM6cgjzXNpKimMeHwugwDdDZy6QlRc5NdE2AFRTSX/FkmN1hSfx+4KXOqh7RoeNw9f1XLE6JVPoZYy/1nGhQsevJss58h2nBtEvbnwkRLoe7LK2wQ3zMLgB8duS+lyIgWs5F/6YbhEuPzBoFSiPH+V1UI/0DuhELXANyiCTfztSjyw==" SelloSAT="anbbaUod8RJdX/kASX+QI/OV90U29eXfdy8Cxw05Sumce1Nr9tJaBBrqdi/1HHir8OaVGqk7q/J811xEaAtNrI9eKBv1u/WzjkP8qElgzbRgMmfaDtT+Zfz2iise05ho/j5o4ICfemqS8tx7+/fi/Y0ymzGPgQDAI/ThCGPVmOWzrg0HRAzMOBudpaTVa8aRuE3zrFhiCchj1g13l+fZqUYRRsPrYPMRbj+KpxdiPwF8YLL21eFJRGFq7v3hcHfd+8a7i8ESJeD3al4MdTKFrWfWUeQUTE2I2/UM0idBQMIN+lVYHlUczKatq6a9wvBfdXXlnhgK1ZESvEVx4m/oNw==" UUID="3344921e-7438-42b3-8029-8151be752e0e" Version="1.1" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"  />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

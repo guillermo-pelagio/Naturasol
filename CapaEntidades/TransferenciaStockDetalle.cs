@@ -1,0 +1,60 @@
+﻿namespace CapaEntidades
+{
+    public class TransferenciaStockDetalle
+    {
+        public string DocEntry
+        {
+            get; set;
+        }
+
+        public string DocNum
+        {
+            get; set;
+        }
+
+        public string Sociedad
+        {
+            get; set;
+        }
+
+        public string DocDueDate
+        {
+            get; set;
+        }
+
+        public string DocDate
+        {
+            get; set;
+        }
+
+        public string DocTime
+        {
+            get; set;
+        }
+
+        public string Filler
+        {
+            get; set;
+        }
+
+        public string ToWhsCode
+        {
+            get; set;
+        }
+
+        public string Quantity
+        {
+            get; set;
+        }
+
+        public string DistNumber
+        {
+            get; set;
+        }
+
+        public string ExpDate
+        {
+            get; set;
+        }
+    }
+}

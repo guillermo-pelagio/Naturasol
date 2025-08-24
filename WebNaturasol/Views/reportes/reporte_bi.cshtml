@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "reporte_bi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper" style="height: 100%">
+        <div class="row" style="height: 100%">
+            <div class="col-lg-12 grid-margin stretch-card" style="height: 100%">
+                <div class="card" style="height: 100%">
+                    <div class="card-body" style="height: 100%">
+                        <div class="tab-content" id="pills-tabContent" style="height: 100%">
+                            <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab" style="height: 100%">
+                                <div class="col-lg-12 grid-margin stretch-card" style="height: 100%">
+                                    <div class="card" style="height: 100%">
+                                        <div id="reportes" class="card-body" style="margin-top: 0rem; padding: 0rem; height: 100%">                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        
+        var componente = {
+            idReporte: document.location.href.split("idReporte=")[1]
+        }
+
+        jQuery.ajax(
+            {                
+                url: '@Url.Action("obtener_reporte", "reportes")',
+                type: "POST",
+                data: componente,
+                success: function (resultado50) {
+                    $('#reportes').append(resultado50);
+                },
+                error: function (xhr, status, error) {
+
+
+                },
+            });
+        
+    </script>
+}

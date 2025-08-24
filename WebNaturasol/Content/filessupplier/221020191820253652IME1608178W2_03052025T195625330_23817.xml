@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante Certificado="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" Sello="RqTK0mAZ/tcuMTMPUhKeJhlXdTm5kvD/76reXPLXfH2oTdhbbwgYw+8mIDSWewA+nrzUDBvPMOFL8RPPa0BMQ0R0mxQ0bD/2fBqxAoDBe6KcX/lpfTwMYKGzB+vVJGH2/AUredbvWWwWEXRfGED8kK3Co7pW6YPgLywjqK3RWK7wdfnLNVE9qP/dzwdHHWWTAmyCSqvH3bz8G9tfDejHOCr5elZ1uaNSBPRDAv+phE5nzLNHgyD0iLWq6eAgDlbM1ocMFjnNLSIicdvS6XjQ2uBQ9/YZ/+Xn69V/dYz3y4PhD2MViZRGsY469nRaOC7KlIRHKywVTbLHzcr+VnTa5Q==" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.0" Folio="23817" Fecha="2025-03-05T19:56:25" FormaPago="99" NoCertificado="00001000000710018924" SubTotal="28000.00" Moneda="MXN" Total="32480.00" TipoDeComprobante="I" Exportacion="01" MetodoPago="PPD" LugarExpedicion="02980" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" xmlns:cfdi="http://www.sat.gob.mx/cfd/4">
+  <cfdi:Emisor Rfc="IME1608178W2" RegimenFiscal="601" Nombre="INGENIERIA-PAILERIA, METALMECANICA" />
+  <cfdi:Receptor Rfc="NAT0104253X3" Nombre="NATURASOL" DomicilioFiscalReceptor="53100" RegimenFiscalReceptor="601" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="1.000000" Unidad="Unidad de servicio" Descripcion="Plataforma de inspección escalera fabricada" ValorUnitario="12000.000000" Importe="12000.000000" ClaveProdServ="73181000" ClaveUnidad="E48" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="12000.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1920.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" Unidad="Unidad de servicio" Descripcion="Plataforma de llenado de tolva vibratoria" ValorUnitario="12000.000000" Importe="12000.000000" ClaveProdServ="73181000" ClaveUnidad="E48" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="12000.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="1920.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="1.000000" Unidad="Unidad de servicio" Descripcion="Banco de inspección fabricado en acero inox" ValorUnitario="4000.000000" Importe="4000.000000" ClaveProdServ="73181000" ClaveUnidad="E48" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="4000.000000" Impuesto="002" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="640.00" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="4480.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado Impuesto="002" Base="28000.00" TipoFactor="Tasa" TasaOCuota="0.160000" Importe="4480.00" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital"  xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="65b6bcf1-5d7b-4450-a2e6-6360b2ba2b1b" FechaTimbrado="2025-03-05T19:56:26" RfcProvCertif="LSO1306189R5" SelloCFD="RqTK0mAZ/tcuMTMPUhKeJhlXdTm5kvD/76reXPLXfH2oTdhbbwgYw+8mIDSWewA+nrzUDBvPMOFL8RPPa0BMQ0R0mxQ0bD/2fBqxAoDBe6KcX/lpfTwMYKGzB+vVJGH2/AUredbvWWwWEXRfGED8kK3Co7pW6YPgLywjqK3RWK7wdfnLNVE9qP/dzwdHHWWTAmyCSqvH3bz8G9tfDejHOCr5elZ1uaNSBPRDAv+phE5nzLNHgyD0iLWq6eAgDlbM1ocMFjnNLSIicdvS6XjQ2uBQ9/YZ/+Xn69V/dYz3y4PhD2MViZRGsY469nRaOC7KlIRHKywVTbLHzcr+VnTa5Q==" NoCertificadoSAT="00001000000509846663" SelloSAT="EfFfq74ua1hOhfsZxZNgV2Wmh2U+5sugSSU8rGzvUovbbbSVFcz55+ISaORXqDAt3oP1EXk1ozOiTkKo9jQLDz7ZTiSBxmoICipYTRXC7RhuuhC6FtQC6NaaHKQ7CPdpqWTfciXU2hzNzYVZ0Vli6RWfj1qPybgqAKzs/jPyq9d1uidxEzyxHbMpjb1HvDytmv0os3VmobacVxaj98ebAB6fVah8gP4/nrFsr4XkcNpXAo380zcNnuJ+g9T7xRQaEsnrwj20ilrysEILAHLgXnoL5E545I25Orx4MpTKuRMGRbf/GJegJYQ2dTKufUxB6cM9a47z395fIofHO5K6lg==" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

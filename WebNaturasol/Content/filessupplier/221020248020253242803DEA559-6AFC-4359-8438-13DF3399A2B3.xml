@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Exportacion="01" Fecha="2025-03-18T12:10:57" Folio="2736" FormaPago="99" LugarExpedicion="06140" MetodoPago="PPD" Moneda="MXN" NoCertificado="00001000000515145222" Serie="A" SubTotal="33486.00" TipoDeComprobante="I" Total="38843.78" Version="4.0" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Sello="zPuZOOuVVVO20/ZTc9zBRSGekmo0Z9yh1t5iVEI1dnAa1JgFuKftI32oc4kFOy0MU35Q+mHQ5u2AJYjUM/tn3KjuqIfzzcThqP6FZOUqUAxUe/dK797gT9Am8afs4GyvPNeanpzt6dm1s5AFBl5UPo8kyGQV/N3YN5zbiXirufwW6RZcXInPa0T1O1smJILWbfB7RS96qVmpUrUqjyjGrT2JxpbMaRYe5GIGARV4GuoAaup8SvRkaamUDXnZ8vXnQIFO8vRHZ0zKbpdT63Yy7NRhWz745KCYiLSgJClQ1hPxF+sRxlIlISPNSlRQrBQVvP0T9djDvbggngfERu0FBQ==">
+  <cfdi:Emisor Nombre="SANITRAZA" RegimenFiscal="601" Rfc="SAN180724NR6" />
+  <cfdi:Receptor DomicilioFiscalReceptor="53100" Nombre="NATURASOL" RegimenFiscalReceptor="601" Rfc="NAT0104253X3" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Codo Acero Inoxidable 304 de 90° 1/2″" Importe="1098.00" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="36.60">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1098.00" Importe="175.68" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Codo Acero Inoxidable 304 de 90° 3/4″" Importe="1806.60" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="60.22">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1806.60" Importe="289.06" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Codo Acero Inoxidable 304 de 90° 1″" Importe="2586.30" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="86.21">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2586.30" Importe="413.81" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Tuerca Unión Acero Inoxidable 304 de 1/2″" Importe="2302.50" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="76.75">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2302.50" Importe="368.40" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Tuerca Unión Acero Inoxidable 304 de 3/4″" Importe="3773.10" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="125.77">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="3773.10" Importe="603.70" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Tuerca Unión Acero Inoxidable 304 de 1″" Importe="4871.10" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="162.37">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="4871.10" Importe="779.38" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Reducción Bushing Acero Inoxidable 304 de 1″ X 3/4″" Importe="1239.90" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="41.33">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1239.90" Importe="198.38" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Reducción Bushing Acero Inoxidable 304 de 3/4″ X 1/2″" Importe="849.90" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="28.33">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="849.90" Importe="135.98" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Cople Acero Inoxidable 304 de 1/2″" Importe="974.10" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="32.47">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="974.10" Importe="155.86" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Cople Acero Inoxidable 304 de 3/4″" Importe="1806.60" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="60.22">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1806.60" Importe="289.06" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Cople Acero Inoxidable 304 de 1″" Importe="2284.80" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="76.16">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="2284.80" Importe="365.57" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="15.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Válvula de esfera de latón, roscable 1/2', Foset" Importe="1260.00" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="84.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1260.00" Importe="201.60" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="15.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Válvula de esfera de latón, roscable 3/4', Foset" Importe="1785.00" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="119.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1785.00" Importe="285.60" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="15.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Válvula de esfera de latón, roscable 1', Foset" Importe="3075.00" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="205.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="3075.00" Importe="492.00" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="30.00" ClaveProdServ="40172600" ClaveUnidad="H87" Descripcion="Codo de Cobre CxC 90° x 1-1/2″ (38mm) D520738" Importe="3773.10" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="125.77">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="3773.10" Importe="603.70" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="5357.78">
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="33486.00" Importe="5357.78" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="03DEA559-6AFC-4359-8438-13DF3399A2B3" FechaTimbrado="2025-03-18T12:25:18" RfcProvCertif="SIF0403229F9" SelloCFD="zPuZOOuVVVO20/ZTc9zBRSGekmo0Z9yh1t5iVEI1dnAa1JgFuKftI32oc4kFOy0MU35Q+mHQ5u2AJYjUM/tn3KjuqIfzzcThqP6FZOUqUAxUe/dK797gT9Am8afs4GyvPNeanpzt6dm1s5AFBl5UPo8kyGQV/N3YN5zbiXirufwW6RZcXInPa0T1O1smJILWbfB7RS96qVmpUrUqjyjGrT2JxpbMaRYe5GIGARV4GuoAaup8SvRkaamUDXnZ8vXnQIFO8vRHZ0zKbpdT63Yy7NRhWz745KCYiLSgJClQ1hPxF+sRxlIlISPNSlRQrBQVvP0T9djDvbggngfERu0FBQ==" NoCertificadoSAT="00001000000508768672" SelloSAT="MMjbgUPFNyLpzyHQ+Zxz9Ukjw71MDpKBMORHCKnh3VPmmx7HCvAx7Ec91iVQmHzSsw6E5EKZGb+Bqr6VDYALqdcdVoPlZHSj15/hpOFmgU4AGsXj4l0bhJtZH9XeXCB4qHOSqLq1T7iyBifqpyG8QsL1QLbl8r8PJC4jUKFW2JM9/gvh3CM/izsq+gPvoGUNiJICh6h2W36dWekP0kR+SdtfjYz7rvgqWsq5TTe2Ml6Q+dXdHheX7mmxR4Sn4l6iCU2oEU3aIj+MZO3zHBWAIq25mQpP35TpRjrSb7t8uJWQf8mU0pW7tSNrY8wSWp4eelmIXyaoilJVxB6fXbzbUA==" /></cfdi:Complemento>
+</cfdi:Comprobante>

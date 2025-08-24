@@ -1,0 +1,491 @@
+﻿
+@{
+    ViewBag.Title = "usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Crear solvencia</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Consultar solvencia</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!--VISTA DE CREACION DE USUARIO-->
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                <div class="form-group row">
+                                    <label for="numeroOF" class="col-sm-3 col-form-label">*LPN</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="numeroLPN">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="numeroOF" class="col-sm-3 col-form-label">*OF</label> 
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="numeroOF">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="codigoArticulo" class="col-sm-3 col-form-label">*Codigo articulo</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="codigoArticulo">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="cantidad" class="col-sm-3 col-form-label">*Cantidad</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="cantidad">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lote" class="col-sm-3 col-form-label">*Lote</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="lote">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="fechaCaducidad" class="col-sm-3 col-form-label">*Fecha caducidad</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="fechaCaducidad">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-success" onclick="guardarSolvencia()">Guardar</button>
+                                    <button class="btn btn-danger" onclick="limpiarSolvencia()">Limpiar</button>
+                                </div>
+                            </div>
+                            <!--VISTA DE LISTADO DE GENERACIONES-->
+                            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaSolvencia" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>O.F.</th>
+                                                                <th>Material</th>
+                                                                <th>Cantidad</th>
+                                                                <th>Lote</th>
+                                                                <th>Caducidad</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        var tablaSolvencia;
+
+        tablaSolvencia = $("#tablaSolvencia").DataTable({
+            paging: true,
+            ordering: true,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+                "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            "ajax": {
+                url: '@Url.Action("generar_solvencia", "produccion")',
+                type: "GET",
+                dataType: "json",
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Usuarios',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4]
+                    }
+                },
+            ],
+            "columns": [
+
+                { data: 'nombreCompleto'},
+                { data: 'correo' },
+                {
+                    data: 'ubicacion', "render": function (ubicacion) {
+                        if (ubicacion == 1) {
+                            return "UNTABLES"
+                        }
+                        else if (ubicacion == 2) {
+                            return "BARRAS"
+                        }
+                        else if (ubicacion == 3) {
+                            return "SEMILLAS"
+                        }
+                        else if (ubicacion == 4) {
+                            return "CREMAS"
+                        }
+                        else if (ubicacion == 5) {
+                            return "PAPAS"
+                        }
+                        else if (ubicacion == 6) {
+                            return "SAZONADORES"
+                        }
+                        else if (ubicacion == 7) {
+                            return "CEDIS"
+                        }
+                        else if (ubicacion == 8) {
+                            return "MAIZ"
+                        }
+                        else if (ubicacion == 9) {
+                            return "VITROLEROS"
+                        }
+                        else if (ubicacion == 10) {
+                            return "ENVASADO"
+                        }
+                        else if (ubicacion == 11) {
+                            return "TPK PAPAS"
+                        }
+                        else if (ubicacion == 12) {
+                            return "TPK MAIZ"
+                        }
+                        else {
+                            return "SIN PLANTA"
+                        }
+                    }
+                },
+                {
+                    data: 'departamento', "render": function (departamento) {
+                        if (departamento == 1) {
+                            return "Sistemas"
+                        }
+                        else if (departamento == 2) {
+                            return "Ventas"
+                        }
+                        else if (departamento == 3) {
+                            return "Compras"
+                        }
+                        else if (departamento == 4) {
+                            return "Contabilidad"
+                        }
+                        else if (departamento == 5) {
+                            return "Importaciones"
+                        }
+                        else if (departamento == 6) {
+                            return "Logistica"
+                        }
+                        else if (departamento == 7) {
+                            return "Facturación"
+                        }
+                        else if (departamento == 8) {
+                            return "Recursos Humanos"
+                        }
+                        else if (departamento == 9) {
+                            return "Almacén"
+                        }
+                        else if (departamento == 10) {
+                            return "Producción"
+                        }
+                        else if (departamento == 11) {
+                            return "Tesoreria"
+                        }
+                        else if (departamento == 12) {
+                            return "Cobranza"
+                        }
+                        else if (departamento == 13) {
+                            return "Finanzas"
+                        }
+                        else if (departamento == 14) {
+                            return "Costos"
+                        }
+                        else {
+                            return "No asignado"
+                        }
+                    }
+                },
+                {
+                    data: 'estatus', "render": function (condicion) {
+                        if (condicion == 1) {
+                            return '<span class="badge badge-success">Activo</span>'
+                        }
+                        else if (condicion==2) {
+                            return '<span class="badge badge-warning">Pendiente activación</span>'
+                        }
+                        else {
+                            return '<span class="badge badge-danger">Baja</span>'
+                        }
+                    }
+                },
+                {
+                    "defaultContent": "<button type='button' id='btn-editar-usuario' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-pencil' aria-hidden='true'></i></button>"
+                    , orderable: false
+                    , searchable: false
+                }
+            ]
+        });
+
+        function abrirDetalle(datos)
+        {
+            jQuery.ajax({
+                url: '@Url.Action("validar_sesion", "Usuarios")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        $("#nombreUsuarioEdit").val(datos.nombre);
+                        $("#paternoUsuarioEdit").val(datos.apellidoPaterno);
+                        $("#maternoUsuarioEdit").val(datos.apellidoMaterno);
+                        $("#ubicacionUsuarioEdit").val(datos.ubicacion);
+                        $("#correoUsuarioEdit").val(datos.correo);
+                        $("#departamentoUsuarioEdit").val(datos.departamento);
+                        $("#contrasenaUsuarioEdit").val(datos.contrasena);
+                        $("#estatusUsuarioEdit").val(datos.estatus);
+                        $("#idUsuarioEdit").val(datos.idUsuario);
+                        $("#puestoUsuarioEdit").val(datos.puesto);
+                        $("#telefonoUsuarioEdit").val(datos.telefono);
+                        $("#extensionUsuarioEdit").val(datos.extension);
+
+                        $("#modalDetalle").modal("show");
+                        var element = document.getElementById("encabezadoDetalleUsuario");
+
+                        if (datos.estatus == 1) {
+                            element.classList.remove("modal-header-inactivo");
+                            element.classList.add("modal-header-activo");
+                        }
+                        else {
+                            element.classList.remove("modal-header-activo");
+                            element.classList.add("modal-header-inactivo");
+                        }
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Error al validar la sesión!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            })
+        }
+
+        $("#tablaSolvencia").on("click", '#btn-editar-usuario', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaSolvencia.row(filaseleccionada).data();
+            abrirDetalle(datos);
+        })
+
+        $('#tablaSolvencia').on('click', 'tbody tr', function () {
+            tablaSolvencia.row(this).edit();
+        });
+
+        function limpiarUsuario()
+        {
+            $("#contrasenaUsuario").val("");
+            $("#departamentoUsuario").val(0);
+            $("#ubicacionUsuario").val(0);
+            $("#correoUsuario").val("");
+            $("#maternoUsuario").val("");
+            $("#paternoUsuario").val("");
+            $("#puestoUsuario").val("");
+            $("#nombreUsuario").val("");
+            $("#telefonoUsuario").val("");
+            $("#extensionUsuario").val("");
+            $("#estatusUsuario").val(0);
+        }
+
+        function guardarUsuario()
+        {
+            var isCorrect = true;
+
+            if ($("#contrasenaUsuario").val().length == 0) {
+                swal("", "Debes indicar una contraseña", "warning");
+                isCorrect = false;
+            }
+            if ($("#correoUsuario").val().length == 0) {
+                swal("", "Debes indicar un correo", "warning");
+                isCorrect = false;
+            }
+            if ($("#maternoUsuario").val().length == 0) {
+                swal("", "Debes indicar un apellido materno", "warning");
+                isCorrect = false;
+            }
+            if ($("#paternoUsuario").val().length == 0) {
+                swal("", "Debes indicar un apellido paterno", "warning");
+                isCorrect = false;
+            }
+            if ($("#nombreUsuario").val().length == 0) {
+                swal("", "Debes indicar un nombre", "warning");
+                isCorrect = false;
+            }
+            if ($("#puestoUsuario").val().length == 0) {
+                swal("", "Debes indicar un puesto", "warning");
+                isCorrect = false;
+            }
+            if ($("#ubicacionUsuario").val().length == 0) {
+                swal("", "Debes indicar una ubicación", "warning");
+                isCorrect = false;
+            }
+            if ($("#departamentoUsuario").val().length == 0) {
+                swal("", "Debes indicar un departamento", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Usuario = {
+                    nombre: $("#nombreUsuario").val(),
+                    apellidoPaterno: $("#paternoUsuario").val(),
+                    apellidoMaterno: $("#maternoUsuario").val(),
+                    correo: $("#correoUsuario").val(),
+                    ubicacion: $("#ubicacionUsuario").val(),
+                    departamento: $("#departamentoUsuario").val(),
+                    contrasena: $("#contrasenaUsuario").val(),
+                    puesto: $("#puestoUsuario").val(),
+                    telefono: $("#telefonoUsuario").val(),
+                    extension: $("#extensionUsuario").val(),
+                    estatus: $("#estatusUsuario").val(),
+                    usuarioCreacion: 0
+                }
+
+                $('#overlay').css('display', 'flex');
+
+                jQuery.ajax({
+                    url: '@Url.Action("guardar_usuarios", "Usuarios")',
+                    type: "POST",
+                    data: JSON.stringify({ usuario: Usuario }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        if (resultado == 1) {
+                            $('#overlay').css('display', 'none');
+                            swal("", "Usuario registrado correctamente!", "success")
+                                .then((value) => {
+                                    window.location.href = '/inicio/login';
+                                });
+                        }
+                        else {
+                            $('#overlay').css('display', 'none');
+                            swal("", "Ya existe un usuario con ese correo!", "warning")
+                                .then((value) => {
+                                    window.location.href = '/inicio/login';
+                                });
+                        }
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al insertar el usuario!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+
+        function actualizarUsuario()
+        {
+            var isCorrect = true;
+
+            if ($("#contrasenaUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar una contraseña", "warning");
+                isCorrect = false;
+            }
+            if ($("#correoUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un correo", "warning");
+                isCorrect = false;
+            }
+            if ($("#nameUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un nombre de usuario", "warning");
+                isCorrect = false;
+            }
+            if ($("#maternoUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un apellido materno", "warning");
+                isCorrect = false;
+            }
+            if ($("#paternoUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un apellido paterno", "warning");
+                isCorrect = false;
+            }
+            if ($("#nombreUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un nombre", "warning");
+                isCorrect = false;
+            }
+            if ($("#puestoUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar un puesto", "warning");
+                isCorrect = false;
+            }
+            if ($("#ubicacionUsuarioEdit").val().length == 0) {
+                swal("", "Debes indicar una ubicación", "warning");
+                isCorrect = false;
+            }
+            if ($("#departamentoUsuarioEdit").val() == 0) {
+                swal("", "Debes indicar un departamento", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Usuario = {
+                    idUsuario: $("#idUsuarioEdit").val(),
+                    nombre: $("#nombreUsuarioEdit").val(),
+                    apellidoPaterno: $("#paternoUsuarioEdit").val(),
+                    apellidoMaterno: $("#maternoUsuarioEdit").val(),
+                    correo: $("#correoUsuarioEdit").val(),
+                    ubicacion: $("#ubicacionUsuarioEdit").val(),
+                    departamento: $("#departamentoUsuarioEdit").val(),
+                    puesto: $("#puestoUsuarioEdit").val(),
+                    telefono: $("#telefonoUsuarioEdit").val(),
+                    extension: $("#extensionUsuarioEdit").val(),
+                    contrasena: $("#contrasenaUsuarioEdit").val(),
+                    nameUsuario: $("#nameUsuarioEdit").val(),
+                    estatus: $("#estatusUsuarioEdit").val(),
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax({
+                    url: '@Url.Action("actualizar_usuarios", "Usuarios")',
+                    type: "POST",
+                    data: JSON.stringify({ usuario: Usuario }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Usuario actualizado correctamente!", "success")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                    error: function () {
+                        $('#overlay').css('display', 'none');
+                        swal("", "Error al actualizar el usuario!", "error")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+    </script>
+}

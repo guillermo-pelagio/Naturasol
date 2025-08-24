@@ -1,0 +1,255 @@
+﻿
+@{
+    ViewBag.Title = "cotizaciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="text-align: center">Catalogos</h3>
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-lineas-tab" data-toggle="pill" href="#pills-lineas" role="tab" aria-controls="pills-lineas" aria-selected="false">Lineas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-maquinas-tab" data-toggle="pill" href="#pills-maquinas" role="tab" aria-controls="pills-maquinas" aria-selected="false">Maquinas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-personal-tab" data-toggle="pill" href="#pills-personal" role="tab" aria-controls="pills-personal" aria-selected="false">Personal</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-lineas" role="tabpanel" aria-labelledby="pills-lineas-tab">
+                                <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                    <button type="button" class="btn btn-primary" onclick="crearLinea()" data-dismiss="modal" style="width: 10rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="NuevoRegistro">Nuevo registro</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaCotizacion" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Acciones</th>
+                                                                <th>Nombre</th>
+                                                                <th>Descripción</th>
+                                                                <th>Unidad de negocio</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-maquinas" role="tabpanel" aria-labelledby="pills-maquinas-tab">
+                                <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                    <button type="button" class="btn btn-primary" onclick="crearLinea()" data-dismiss="modal" style="width: 10rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="NuevoRegistro">Nuevo registro</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaCotizacion2025" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Acciones</th>
+                                                                <th>Nombre</th>
+                                                                <th>Descripción</th>
+                                                                <th>Linea</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-personal" role="tabpanel" aria-labelledby="pills-personal-tab">
+                                <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
+                                    <button type="button" class="btn btn-primary" onclick="crearPersonal()" data-dismiss="modal" style="width: 10rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="NuevoRegistro">Nuevo registro</button>
+                                    <div class="col-lg-12 grid-margin stretch-card">
+                                        <div class="card">
+                                            <div class="card-body" style="margin-top: 0rem; padding: 0rem">
+
+                                                <div class="table-responsive">
+                                                    <table class="table table-hover" id="tablaCotizacion2025" style="width: 100%">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Acciones</th>
+                                                                <th>Nombre</th>
+                                                                <th>Planta</th>
+                                                                <th>Perfil</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--VISTA DE MODAL-->
+<div class="modal fade" id="modalCrearCotizacion" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: lightskyblue" id="encabezadoCrearCotizacion">
+                <h5 class="modal-title" id="tituloModalCotizacion">Crear cotizacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha alta cotización:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="fechaAltaCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row" id="divKam">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">KAM:</label>
+                    <input type="hidden" class="form-control" id="idCotizacion">
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="kamCotizacion">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">HECTOR IBARROLA</option>
+                            <option value="2">GRECIA LEY</option>
+                            <option value="3">KARINA MONDRAGON</option>
+                            <option value="4">SAMUEL PEÑA</option>
+                            <option value="5">DAVID ALBA</option>
+                            <option value="6">ROBERTO CERVANTES</option>
+                            <option value="7">JAVIER CARRASCO</option>
+                            <option value="8">ELIU DOMINGUEZ</option>
+                            <!--option value="9">MONTSERRAT BUENDIA</option>->
+                            <option value="10">LILIA BECERRIL</option>
+                            <!--<option value="11">ALBERTO BECERRIL</option>-->
+                            <option value="12">IVAN CHAGOYA</option>
+                            <option value="13">CASIMIRO FLORES</option>
+                            <option value="14">LEONARDO YAÑEZ</option>
+                            <option value="15">ANDREA VILLANUEVA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" style="display:none" id="divKam2">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">KAM:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="kamCotizacion2">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Cliente:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="clienteCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Categoria:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="categoriaCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Descripción:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="descripcionCotizacion" rows="3"></textarea>
+                    </div>
+                </div>
+                </br>
+                <div class="form-group row" id="divFechaPresentacion" style="display:none">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha presentación:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="presentacionCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row" id="divEstatus" style="display:none">
+                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Estatus:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="estatusCotizacion">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">APROBADO</option>
+                            <option value="2">RECHAZADO</option>
+                            <option value="3">EN REVISIÓN</option>
+                            <option value="4">POR PRESENTAR</option>
+                            <option value="5">SUSTITUIDO</option>
+                            <option value="6">EN ESPERA DE MUESTRAS</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group row" style="display:none;" id="divRechazo">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Motivo rechazo:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="motivoRechazoCotizacion">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">NO DAMOS EL PERFIL</option>
+                            <option value="2">FALTA DE ESPACIO DE ANAQUEL</option>
+                            <option value="3">PRECIO</option>
+                            <option value="4">OTRO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row" id="divOtroMotivo" style="display:none">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Otro motivo:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosOtroMotivo" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row" style="display: none;" id="divFechaRespuesta">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha respuesta:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="respuestaCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row" style="display: none;" id="divFechaLanzamiento">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha lanzamiento:</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="lanzamientoCotizacion">
+                    </div>
+                </div>
+                <div class="form-group row" id="divComentarios" style="display:none">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Comentarios:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosCotizacion" rows="3"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    @if ((Convert.ToInt32(Session["puesto"]) == 10) || (Convert.ToInt32(Session["puesto"]) == 100))
+                    {
+                        <button type="button" id="btnGuardarCotizacion" onclick="guardadoCotizacion()" class="btn btn-success">Guardar</button>
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+    </script>
+}

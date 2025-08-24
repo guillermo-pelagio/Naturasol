@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Exportacion="01" Fecha="2024-12-27T16:16:26" Folio="1936" FormaPago="99" LugarExpedicion="59650" MetodoPago="PPD" Moneda="MXN" NoCertificado="00001000000513245680" Sello="SYRp/ZQPcn2Mt0CgoEFzi8AxE7svuA8BKzGvtMaEA82cKkojvP5XxiBI109ttgrnToPqwitUnwQ28ub1I01g2haMJu0pLohcawE7wjUGtf272Fk01OkwjkKn4d12UeiOscE7WXGkGZGnxxDLx0xy5WYlyX/tPUo/jwuj6YLS4calu+5gA3VP2eRb3WAsdWAwHXW1QfNtgBGiY+vh7XfrQdXbjrN0diTaUVcPRPnXmv0oz9dQZPig6wJdOZO1spFSpmHIGv+jTDJcGCqlc8Z2LgDAt0z8MvB2oiXyHsBjkqQqUv7vASlfFUA8mYkolHs+a8eh+zne5r88A+xk+HKluw==" Serie="A" SubTotal="474975.00" TipoDeComprobante="I" Total="474975.00" Version="4.0" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd">
+  <cfdi:Emisor Nombre="GRUPO ALIMENTARIO DOLCE TERRA" RegimenFiscal="601" Rfc="GAD180817DH4" />
+  <cfdi:Receptor DomicilioFiscalReceptor="53100" Nombre="NATURASOL" RegimenFiscalReceptor="601" Rfc="NAT0104253X3" UsoCFDI="G01" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="13944" ClaveProdServ="50346702" ClaveUnidad="KGM" Descripcion="Fresa sortout cubeta de 12 kg " Importe="348600" ObjetoImp="02" Unidad="Kg" ValorUnitario="25">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="348600" Importe="0.000000" Impuesto="002" TasaOCuota="0.000000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="5055" ClaveProdServ="50346702" ClaveUnidad="KGM" Descripcion="Fresa sortout caja de 15 kg" Importe="126375" ObjetoImp="02" Unidad="Kg" ValorUnitario="25">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="126375" Importe="0.000000" Impuesto="002" TasaOCuota="0.000000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="0.00">
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="474975.00" Importe="0.00" Impuesto="002" TasaOCuota="0.000000" TipoFactor="Tasa" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital FechaTimbrado="2024-12-27T16:16:36" NoCertificadoSAT="00001000000705928441" RfcProvCertif="PPD101129EA3" SelloCFD="SYRp/ZQPcn2Mt0CgoEFzi8AxE7svuA8BKzGvtMaEA82cKkojvP5XxiBI109ttgrnToPqwitUnwQ28ub1I01g2haMJu0pLohcawE7wjUGtf272Fk01OkwjkKn4d12UeiOscE7WXGkGZGnxxDLx0xy5WYlyX/tPUo/jwuj6YLS4calu+5gA3VP2eRb3WAsdWAwHXW1QfNtgBGiY+vh7XfrQdXbjrN0diTaUVcPRPnXmv0oz9dQZPig6wJdOZO1spFSpmHIGv+jTDJcGCqlc8Z2LgDAt0z8MvB2oiXyHsBjkqQqUv7vASlfFUA8mYkolHs+a8eh+zne5r88A+xk+HKluw==" SelloSAT="G29b5qvByeprmFYw5WN5Habjs2JzwZPlhrD2v8LMsQL1F6oEDykzZAlP9NSY2sCLC2joi1oQNV8fMXNZlNBLczLqQg6GOJ5VDT66NZyukjsfah3CkM9t5MLWn1pIV1kdCS6kluMwdpwljcCB9DwbfY3+7tESE6nUSnOPWBjI/Nr+VgV6/tx06LoQXlBQHUx/F9fykkw8hCQttKZFK247E5u/Its7udePVvB6TNEsulZjfjWWZe/AuiLQgx2E12DWbcDurOnr32bjawJhSagpJl+b81lel3z+450+laE0zKUA/kpjKLhN6giPSLLsr9iX6+rum8NHU+H+4XneZQskQw==" UUID="9BE7CE5D-3590-405F-8470-7B58213768F5" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

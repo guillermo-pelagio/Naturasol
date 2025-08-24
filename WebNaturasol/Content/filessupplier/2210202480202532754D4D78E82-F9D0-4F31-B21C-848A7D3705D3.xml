@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" Exportacion="01" Fecha="2025-03-26T11:53:02" Folio="2772" FormaPago="99" LugarExpedicion="06140" MetodoPago="PPD" Moneda="MXN" NoCertificado="00001000000515145222" Serie="A" SubTotal="25064.60" TipoDeComprobante="I" Total="29074.93" Version="4.0" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Sello="l7w1WKRt9MxdV1h+bnDpbHKVnreP+FCDgqILjeeGmhKaPI+wkTUaAKYxavEcWPLMf90vAind6xc/hnUGD9XymXn5b8DDu2BPpxrncOm9CE7CmI7+uRoQXIS10sNo75m+24FXgnedkH+rZcWG7ernY6LdRPkWnjNR6/KyVIcKfM1MmfhtSGjw98Z0FI7/owxouXWacp1T4ixUWz0/VfiBNBtJVY3/70tm6N9is3yc5W0itG1CnGsd1e8B2L6ZeevryvKmCM8tiZfaWjB6lT9C4E3uZHHML60AU6PUIQdAtRB4pMcn+6j39hCPMuWt9enkrAOsoqOPW/+MXPOAVpF+lw==">
+  <cfdi:Emisor Nombre="SANITRAZA" RegimenFiscal="601" Rfc="SAN180724NR6" />
+  <cfdi:Receptor DomicilioFiscalReceptor="53100" Nombre="NATURASOL" RegimenFiscalReceptor="601" Rfc="NAT0104253X3" UsoCFDI="G03" />
+  <cfdi:Conceptos>
+    <cfdi:Concepto Cantidad="8.00" ClaveProdServ="27112105" ClaveUnidad="H87" Descripcion="Pinza de punta y corte 8' mango de PVC, Truper" Importe="1160.00" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="145.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1160.00" Importe="185.60" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.00" ClaveProdServ="27112105" ClaveUnidad="H87" Descripcion="PINZA DE CORTE DIAGONAL URREA 6 1/4 206G" Importe="1150.96" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="287.74">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1150.96" Importe="184.15" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="8.00" ClaveProdServ="27112105" ClaveUnidad="H87" Descripcion="Pinza para electricista 8' mango de PVC, Truper" Importe="1352.00" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="169.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="1352.00" Importe="216.32" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="8.00" ClaveProdServ="41114201" ClaveUnidad="H87" Descripcion="Flexómetro Gripper contra impactos 5 m cinta 19 mm, Truper" Importe="806.88" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="100.86">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="806.88" Importe="129.10" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.00" ClaveProdServ="39111610" ClaveUnidad="H87" Descripcion="Linterna plástica 1 LED 200 lm recargable, Truper" Importe="672.40" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="168.10">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="672.40" Importe="107.58" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="8.00" ClaveProdServ="27111701" ClaveUnidad="H87" Descripcion="Juego 6 desarmadores dieléctricos y 1 probador de corriente" Importe="3320.00" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="415.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="3320.00" Importe="531.20" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.00" ClaveProdServ="27111707" ClaveUnidad="H87" Descripcion="JGO D/LLAVES STD. ESPAÑOLAS 10PZA 3000D URREA" Importe="5834.12" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="1458.53">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="5834.12" Importe="933.46" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.00" ClaveProdServ="22101502" ClaveUnidad="H87" Descripcion="Nivel ABS de alto impacto 24&quot; 42-468 Stanley" Importe="764.16" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="191.04">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="764.16" Importe="122.27" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.00" ClaveProdServ="20111608" ClaveUnidad="H87" Descripcion="MARRO DE BRONCE 29 ONZ 1430 URREA" Importe="3699.88" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="924.97">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="3699.88" Importe="591.98" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.00" ClaveProdServ="27111707" ClaveUnidad="H87" Descripcion="Juego de Llaves españolas standart 10 Pz 3000D Urrea" Importe="5703.64" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="1425.91">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="5703.64" Importe="912.58" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.00" ClaveProdServ="27111710" ClaveUnidad="H87" Descripcion="Juego 10 llaves allen mm punta hexagonal con organizador" Importe="460.00" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="115.00">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="460.00" Importe="73.60" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto Cantidad="4.00" ClaveProdServ="31162800" ClaveUnidad="H87" Descripcion="Juego de 3 espátulas de plástico TR6912 Corona" Importe="140.56" ObjetoImp="02" Unidad="PIEZA" ValorUnitario="35.14">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado Base="140.56" Importe="22.49" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="4010.33">
+    <cfdi:Traslados>
+      <cfdi:Traslado Base="25064.60" Importe="4010.33" Impuesto="002" TasaOCuota="0.160000" TipoFactor="Tasa" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" Version="1.1" UUID="D4D78E82-F9D0-4F31-B21C-848A7D3705D3" FechaTimbrado="2025-03-26T11:53:35" RfcProvCertif="SIF0403229F9" SelloCFD="l7w1WKRt9MxdV1h+bnDpbHKVnreP+FCDgqILjeeGmhKaPI+wkTUaAKYxavEcWPLMf90vAind6xc/hnUGD9XymXn5b8DDu2BPpxrncOm9CE7CmI7+uRoQXIS10sNo75m+24FXgnedkH+rZcWG7ernY6LdRPkWnjNR6/KyVIcKfM1MmfhtSGjw98Z0FI7/owxouXWacp1T4ixUWz0/VfiBNBtJVY3/70tm6N9is3yc5W0itG1CnGsd1e8B2L6ZeevryvKmCM8tiZfaWjB6lT9C4E3uZHHML60AU6PUIQdAtRB4pMcn+6j39hCPMuWt9enkrAOsoqOPW/+MXPOAVpF+lw==" NoCertificadoSAT="00001000000508768672" SelloSAT="iRGaKV1aJcmWIxdnRUYyhHTaAwnFcwfTcMb7y71ilKInounG33fftxMIM2w515op8bb+Ffs552/yPS/iDN8ovIokSMzXBQA/o+9mGqAzCGRupOg6f5zfFx3YPrSIPrpoYoXLE9dTU7wmewNp4ffw884tiywtd0mYmWxWb0FgXEslygQrScZ5+Y6VnreedZALYwip1puydAEKD/F1DNUP4541wvPKzCqmvQcJ4nB9E2ALHNx/DK0xFk5ikzWWKreSdEsQ3rEXSeX2WTJ/EWXErRpYvtMMKrDjaLHtACSnbylEOhk/fajonf14VK47YpWfVd4ZZzXc0M+AUMk4kH2rdQ==" /></cfdi:Complemento>
+</cfdi:Comprobante>

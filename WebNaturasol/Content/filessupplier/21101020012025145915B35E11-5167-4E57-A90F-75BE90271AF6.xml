@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd" Version="4.0" NoCertificado="00001000000508136321" LugarExpedicion="54040" MetodoPago="PPD" Certificado="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" TipoCambio="20.1547" TipoDeComprobante="I" FormaPago="99" CondicionesDePago="FINANCIERA NAFIN" Folio="24081" Moneda="USD" Serie="A" Exportacion="01" Fecha="2024-12-09T16:26:39" Total="81444.60" SubTotal="70210.86" Sello="eWUyCao2QNteDa57cBMr6jrPzFlR7q/4AWAakKxhVQAMK1DGkO94t/yRNd/8fhWKs5Zn5RUBCOywFAbQWc76p/bT8sCOGCAJzi8npwua9cOR8FyH7ERXWXUXJ3ppVhcHZJcBYrB9GciJg0EHMWrhT/2kTLTj9fdnkoYMrzNFS7rpSFjLbRMYS3y6SIQf0PyWT6AKIwoayHYiOKCsOBSziq3HKB0RWseuX2nehA5ab/CnhAXs2cyFUphN0Lr+vXEH0yJyHxHWw0FbodqdMa2pY3HLloYNIBnPz7n0ieZZ4NqJLeQGd6lwM7LbVtYs+9YxkMoxl6wRlciJ4dalMMswIQ==">
+  <cfdi:Emisor RegimenFiscal="601" Nombre="LX PACK MEXICO" Rfc="LPM2103113N6"/>
+  <cfdi:Receptor UsoCFDI="G01" Nombre="NATURASOL" Rfc="NAT0104253X3" DomicilioFiscalReceptor="53100" RegimenFiscalReceptor="601"/>
+  <cfdi:Conceptos>
+    <cfdi:Concepto NoIdentificacion="POUCH FLAT BOTTOM NAC" ClaveProdServ="24111503" Descripcion="POUCH FLAT BOTTOM" ClaveUnidad="H87" Unidad="MILLAR" ValorUnitario="176.6" Cantidad="113.2" Importe="19991.12" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado TipoFactor="Tasa" TasaOCuota="0.160000" Impuesto="002" Base="19991.12" Importe="3198.58"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto NoIdentificacion="POUCH FLAT BOTTOM NAC" ClaveProdServ="24111503" Descripcion="POUCH FLAT BOTTOM" ClaveUnidad="H87" Unidad="MILLAR" ValorUnitario="176.6" Cantidad="77.8" Importe="13739.48" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado TipoFactor="Tasa" TasaOCuota="0.160000" Impuesto="002" Base="13739.48" Importe="2198.32"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+    <cfdi:Concepto NoIdentificacion="POUCH FLAT BOTTOM NAC" ClaveProdServ="24111503" Descripcion="POUCH FLAT BOTTOM" ClaveUnidad="H87" Unidad="MILLAR" ValorUnitario="176.6" Cantidad="206.57" Importe="36480.262" ObjetoImp="02">
+      <cfdi:Impuestos>
+        <cfdi:Traslados>
+          <cfdi:Traslado TipoFactor="Tasa" TasaOCuota="0.160000" Impuesto="002" Base="36480.262" Importe="5836.84"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos>
+  <cfdi:Impuestos TotalImpuestosTrasladados="11233.74">
+    <cfdi:Traslados>
+      <cfdi:Traslado TipoFactor="Tasa" TasaOCuota="0.160000" Impuesto="002" Base="70210.86" Importe="11233.74"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd" NoCertificadoSAT="00001000000709182898" RfcProvCertif="MAS0810247C0" SelloSAT="BpmAeDxZ78SbLWL1j/dMxwBTsAbIMz0G6lCFCrPAYPWVkx+PDOtwUhNZtJ4ZdBsb16Nqc4kuEzCq6tSGogZiVB3UsmU4FpUxiUWFAVsZkgiJ47NUdtAtpMAxRnnwNbc3AV3NSGSc/tWICZ4RW3GqVcLWnAxPRGVD3FSQ6pqOTd/Q2xfuHDgamfJqFywruqixHnURfPW4dfRulCsyjh1ShsNG7zHMQcoD/YrAM+ONr7paQorUl/sMeNP9cHzDeEY8N/EchFGAsZe/iC2Pm3w9CgJX0yBaWxN2CzGugryIpeAVLf+tdUlBveqS7Sc9LCamiaSZ5IlMRbYcPr9MK6j2Vg==" SelloCFD="eWUyCao2QNteDa57cBMr6jrPzFlR7q/4AWAakKxhVQAMK1DGkO94t/yRNd/8fhWKs5Zn5RUBCOywFAbQWc76p/bT8sCOGCAJzi8npwua9cOR8FyH7ERXWXUXJ3ppVhcHZJcBYrB9GciJg0EHMWrhT/2kTLTj9fdnkoYMrzNFS7rpSFjLbRMYS3y6SIQf0PyWT6AKIwoayHYiOKCsOBSziq3HKB0RWseuX2nehA5ab/CnhAXs2cyFUphN0Lr+vXEH0yJyHxHWw0FbodqdMa2pY3HLloYNIBnPz7n0ieZZ4NqJLeQGd6lwM7LbVtYs+9YxkMoxl6wRlciJ4dalMMswIQ==" UUID="15B35E11-5167-4E57-A90F-75BE90271AF6" Version="1.1" FechaTimbrado="2024-12-09T16:36:39"/>
+  </cfdi:Complemento>
+</cfdi:Comprobante>

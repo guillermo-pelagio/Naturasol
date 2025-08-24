@@ -1,0 +1,365 @@
+﻿
+@{
+    ViewBag.Title = "ausencias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="text-align: center">Ausencias</h3>
+                        <div>
+                            <button type="button" id="btnNuevaAusencia" onclick="crearNuevaAusencia()" class="btn btn-success">Solicitar ausencia</button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="tablaAusencias" style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th>Acciones</th>
+                                        <th>Estatus</th>
+                                        <th>Empleado</th>
+                                        <th>Autorizante</th>
+                                        <th>Fecha inicio</th>
+                                        <th>Fecha fin</th>
+                                        <th>Tipo ausencia</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalDetalleAusencia" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" id="encabezadoDetalleAusencia" style="background-color: lightgreen">
+                <h5 class="modal-title" id="exampleModalLabel">Nueva ausencia</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="fechaInicioAusencia" class="col-sm-4 col-form-label">Fecha de inicio</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="fechaInicioAusencia">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fechaFinAusencia" class="col-sm-4 col-form-label">Fecha de fin</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" id="fechaFinAusencia">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tipoAusencia" class="col-sm-4 col-form-label">Tipo de ausencia:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="tipoAusencia">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">Vacaciones</option>
+                            <option value="2">Asunto legal</option>
+                            <option value="3">Defunción de un familiar no directo</option>
+                            <option value="4">Problema personal</option>
+                            <option value="5">Consulta médica</option>
+                            <option value="6">Matrimonio</option>
+                            <option value="7">Defunción de un familiar directo</option>
+                            <option value="8">Paternidad</option>
+                            <option value="9">Incapacidad</option>
+                            <option value="10">Premios</option>
+                            <option value="11">Cumpleaños</option>
+                            <option value="12">Visita a clientes</option>
+                            <option value="13">Visita a proveedores</option>
+                            <option value="14">Visita a tiendas</option>
+                            <option value="15">Exposiciones</option>
+                            <option value="16">Salidas temprano</option>
+                            <option value="17">Llegadas tarde</option>
+                            <option value="18">Otros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="comentariosAusencia" class="col-sm-4 col-form-label">Comentarios:</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosAusencia" rows="10"></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="archivosEntrada" class="col-sm-4 col-form-label">Archivos:</label>
+                    <div class="col-sm-8">
+                        <input type="file" accept=".pdf" class="form-control" id="archivosEntrada">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnCerrarModalAusencia" onclick="guardarAusencia()" class="btn btn-success">Guardar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modalEmpleadoAusencia" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" id="encabezadoDetalleEmpleado" style="background-color: lightgreen">
+                <h5 class="modal-title" id="exampleModalLabel">Registro de numero de empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="fechaInicioAusencia" class="col-sm-4 col-form-label"># de empleado</label>
+                    <div class="col-sm-8">
+                        <input type="number" class="form-control" id="numeroEmpleadoAusencia">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnCerrarModalEmpleadoAusencia" onclick="guardarEmpleado()" class="btn btn-success">Guardar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+            {
+    <script>
+
+        function crearNuevaAusencia() {
+            $("#modalDetalleAusencia").modal("show");
+        }
+
+        function guardarEmpleado() {
+            var isCorrect = true;
+
+            if ($("#numeroEmpleadoAusencia").val() == 0) {
+                swal("", "Debes indicar un numero de empleado", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+
+                var ausencia = {
+                    inicioAusencia: $("#fechaInicioAusencia").val(),
+                    finAusencia: $("#fechaFinAusencia").val(),
+                    tipoAusencia: $("#tipoAusencia").val(),
+                    Comentarios: $("#comentariosAusencia").val(),
+                    numeroEmpleado: $("#numeroEmpleadoAusencia").val()
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                    {
+                        url: '@Url.Action("guardar_ausencia", "rrhh")',
+                        type: "POST",
+                        data: ausencia,
+                        success: function (resultado) {
+                            alert(resultado);
+                            if (resultado == -1) {
+                                swal("", "Datos incorrectos!", "error");
+                            }
+                            else if (resultado == -2) {
+                                $('#modalDetalleAusencia').modal('hide')
+                                swal("", "Numero de empleado requerido para continuar!", "warning")
+                                    .then((value) => {
+                                        $('#modalEmpleadoAusencia').modal({ backdrop: 'static', keyboard: false })
+                                    });
+                            }
+                            else {
+                                swal("", "Solicitud insertada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al insertar la solicitud!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                $('#overlay').css('display', 'none');
+            }
+        }
+
+        function guardarAusencia() {
+            var isCorrect = true;
+
+            if ($("#fechaInicioAusencia").val() == 0) {
+                swal("", "Debes indicar fecha de inicio", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#fechaFinAusencia").val() == 0) {
+                swal("", "Debes indicar fecha de fín", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#tipoAusencia").val() == 0) {
+                swal("", "Debes indicar tipo de ausencia", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+
+                var ausencia = {
+                    inicioAusencia: $("#fechaInicioAusencia").val(),
+                    finAusencia: $("#fechaFinAusencia").val(),
+                    tipoAusencia: $("#tipoAusencia").val(),
+                    Comentarios: $("#comentariosAusencia").val(),
+                    numeroEmpleado : ""
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                    {
+                        url: '@Url.Action("guardar_ausencia", "rrhh")',
+                        type: "POST",
+                        data: ausencia,
+                        success: function (resultado) {
+                            alert(resultado);
+                            if (resultado == -1) {
+                                swal("", "Datos incorrectos!", "error");
+                            }
+                            else if (resultado == -2) {
+                                $('#modalDetalleAusencia').modal('hide')
+                                swal("", "Numero de empleado requerido para continuar!", "warning")
+                                    .then((value) => {
+                                        $('#modalEmpleadoAusencia').modal({ backdrop: 'static', keyboard: false })
+                                    });
+                            }
+                            else {
+                                swal("", "Solicitud insertada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+                        },
+                        error: function () {
+                            swal("", "Error al insertar la solicitud!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                $('#overlay').css('display', 'none');
+            }
+        }
+
+        tablaAusencias = $("#tablaAusencias").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_ausencias", "rrhh")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                {
+                    data: 'acciones',
+                    orderable: false,
+                    searchable: false
+                },
+                {
+                    data: 'estatus', "render": function (estatus) {
+                        if (estatus == "") {
+                            return '<span class="badge badge-warning">PENDIENTE</span>'
+                        }
+                        else if (estatus == "1") {
+                            return '<span class="badge badge-success">AUTORIZADO</span>'
+                        }
+                        else if (estatus == "0") {
+                            return '<span class="badge badge-outline-danger">RECHAZADO</span>'
+                        }
+                    }
+                },
+                { data: 'nombreEmpleado' },
+                { data: 'autorizante' },
+                { data: 'inicioAusencia' },
+                { data: 'finAusencia' },
+                {
+                    data: 'tipoAusencia', "render": function (estatus) {
+                        if (estatus == "1") {
+                            return '<span class="badge badge-light">Vacaciones</span>'
+                        }
+                        if (estatus == "2") {
+                            return '<span class="badge badge-light">Asunto legal</span>'
+                        }
+                        else if (estatus == "3") {
+                            return '<span class="badge badge-light">Defunción de un familiar no directo</span>'
+                        }
+                        else if (estatus == "4") {
+                            return '<span class="badge badge-light">Problema personal</span>'
+                        }
+                        else if (estatus == "5") {
+                            return '<span class="badge badge-light">Consulta médica</span>'
+                        }
+                        else if (estatus == "6") {
+                            return '<span class="badge badge-outline-light">Matrimonio</span>'
+                        }
+                        else if (estatus == "7") {
+                            return '<span class="badge badge-outline-light">Defunción de un familiar directo</span>'
+                        }
+                        else if (estatus == "8") {
+                            return '<span class="badge badge-outline-light">Paternidad</span>'
+                        }
+                        else if (estatus == "9") {
+                            return '<span class="badge badge-outline-light">Incapacidad</span>'
+                        }
+                        else if (estatus == "10") {
+                            return '<span class="badge badge-outline-light">Premios</span>'
+                        }
+                        else if (estatus == "11") {
+                            return '<span class="badge badge-outline-light">Cumpleaños</span>'
+                        }
+                        else if (estatus == "12") {
+                            return '<span class="badge badge-outline-light">Visita a clientes</span>'
+                        }
+                        else if (estatus == "13") {
+                            return '<span class="badge badge-outline-light">Visita a proveedores</span>'
+                        }
+                        else if (estatus == "14") {
+                            return '<span class="badge badge-outline-light">Visita a tiendas</span>'
+                        }
+                        else if (estatus == "15") {
+                            return '<span class="badge badge-outline-light">Exposiciones</span>'
+                        }
+                        else if (estatus == "16") {
+                            return '<span class="badge badge-outline-light">Salidas temprano</span>'
+                        }
+                        else if (estatus == "17") {
+                            return '<span class="badge badge-outline-light">Llegadas tarde/span>'
+                        }
+                        else if (estatus == "18") {
+                            return '<span class="badge badge-outline-light">Otros</span>'
+                        }
+                    }
+                },
+            ],
+        });
+
+    </script>
+}

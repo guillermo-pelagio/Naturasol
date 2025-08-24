@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewBag.Title = "inventario";
+    Layout = "~/Views/Shared/_Layout_ticket.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Crear ticket</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <!--VISTA DE CREACION DE TICKET-->
+                            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                                <div class="form-group row">
+                                    <label for="nombreTicket" class="col-sm-3 col-form-label">Título</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="nombreTicket">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="tipoTicket" class="col-sm-3 col-form-label">Categoría</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="tipoTicket">
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="1">SAP</option>
+                                            <option value="2">Solicitud de correo</option>
+                                            <option value="3">Problema de correo</option>
+                                            <option value="4">Solicitud de computadoras y accesorios</option>
+                                            <option value="5">Soporte técnico</option>
+                                            <option value="6">Impresoras</option>
+                                            <option value="7">Solicitud de accesos/software</option>
+                                            <option value="8">Problema de software</option>
+                                            <option value="9">Problema de internet</option>
+                                            <option value="10">Otro</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="prioridadTicket" class="col-sm-3 col-form-label">Prioridad</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="prioridadTicket">
+                                            <option value="0">Baja</option>
+                                            <option value="1">Normal</option>
+                                            <option value="2">Alta</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="nombreUsuario" class="col-sm-3 col-form-label">Nombre usuario</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="nombreUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="ubicaciónTicket" class="col-sm-3 col-form-label">Ubicación</label>
+                                    <div class="col-sm-9">
+                                        <select class="custom-select" id="ubicaciónTicket">
+                                            <option value="0">Seleccione una opción</option>
+                                            <option value="1">Barras</option>
+                                            <option value="2">Cereales</option>
+                                            <option value="3">Corporativo</option>
+                                            <option value="4">Miel</option>                                            
+                                            <option value="5">Semillas</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="departamentoUsuario" class="col-sm-3 col-form-label">Departamento</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="departamentoUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="correoUsuario" class="col-sm-3 col-form-label">Correo electrónico</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" id="correoUsuario">
+                                    </div>
+                                </div>
+                                <div class="form-group row" style="padding-bottom: 2rem">
+                                    <label for="descripcionTicket" class="col-sm-3 col-form-label">Mensaje</label>
+                                    <div class="col-sm-9">
+                                        <textarea class="form-control" id="descripcionTicket" rows="10"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-danger" style="width: 10rem; height: 2rem" onclick="limpiarTicket()">Limpiar</button>
+                                    <button class="btn btn-success" style="width: 10rem; height: 2rem" onclick="guardarTicket()">Guardar</button>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        var tablaTickets;
+        
+        function limpiarTicket()
+        {
+            $("#tipoTicket").val(0);
+            $("#nombreTicket").val("");
+            $("#ubicaciónTicket").val(0);
+            $("#prioridadTicket").val(0);
+            $("#nombreUsuario").val("");
+            $("#departamentoUsuario").val("");
+            $("#correoUsuario").val("");
+            $("#descripcionTicket").val("");
+        }
+
+        function guardarTicket()
+        {
+            var isCorrect = true;
+
+            if ($("#tipoTicket").val() == 0) {
+                swal("", "Debes indicar un tipo de problema/solicitud", "warning");
+                isCorrect = false;
+            }
+            if ($("#ubicaciónTicket").val().length == 0) {
+                swal("", "Debes indicar una ubicación del usuario", "warning");
+                isCorrect = false;
+            }
+            if ($("#descripcionTicket").val().length == 0) {
+                swal("", "Debes indicar una descripción", "warning");
+                isCorrect = false;
+            }
+            if ($("#nombreTicket").val().length == 0) {
+                swal("", "Debes indicar un título", "warning");
+                isCorrect = false;
+            }
+            if ($("#nombreUsuario").val().length == 0) {
+                swal("", "Debes indicar el usuario", "warning");
+                isCorrect = false;
+            }
+            if ($("#departamentoUsuario").val().length == 0) {
+                swal("", "Debes indicar el departamento", "warning");
+                isCorrect = false;
+            }
+            if ($("#correoUsuario").val().length == 0) {
+                swal("", "Debes indicar el correo", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var Ticket = {
+                    tipo: $("#tipoTicket").val(),
+                    descripcion: $("#descripcionTicket").val(),
+                    prioridad: $("#prioridadTicket").val(),
+                    titulo: $("#nombreTicket").val(),
+                    ubicacion: $("#ubicaciónTicket").val(),
+                    nombreUsuario: $("#nombreUsuario").val(),
+                    departamentoTexto: $("#departamentoUsuario").val(),
+                    correo: $("#correoUsuario").val()
+                }
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax({
+                    url: '@Url.Action("guardar_tickets", "Tickets")',
+                    type: "POST",
+                    data: JSON.stringify({ ticket: Ticket }),
+                    dataType: "json",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (resultado) {
+                        swal("", "Ticket enviado correctamente! Su número de folio es: " + resultado, "success")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                    error: function (xhr, status, error) {
+                        swal("", "Ticket enviado correctamente! Su número de folio es: " + xhr.responseText, "success")
+                            .then((value) => {
+                                window.location.reload(false);
+                            });
+                    },
+                })
+            }
+        }
+
+    </script>
+}

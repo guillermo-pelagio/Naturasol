@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewBag.Title = "estatus";
+    Layout = "~/Views/Shared/_LayoutProveedores.cshtml";
+}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 style="text-align: center">Estatus facturas</h3>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="col-lg-12 grid-margin stretch-card">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover" id="tablaFacturas" style="width: 100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No. factura</th>
+                                                        <th>UUID/Referencia</th>
+                                                        <th>Estatus</th>
+                                                        <th>Fecha pago</th>
+                                                        <th>Monto factura</th>
+                                                        <th>Monto pendiente pago</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+
+        tablaFacturas = $("#tablaFacturas").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+
+            "ajax": {
+                url: '@Url.Action("obtener_facturas", "proveedores")',
+                type: "GET",
+                dataType: "json",
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Estatus facturas',
+                    exportOptions:
+                    {
+                        columns: [0, 1, 2, 3, 4, 5]
+                    }
+                },],
+            "columns": [                                                        
+                { data: 'DocNum' },
+                { data: 'NumAtCard' },
+                {
+                    data: 'estatusPago', "render": function (estatusPago) {
+                        if (estatusPago == "PAGADO") {
+                            return '<span class="badge badge-success">PAGADO</span>'
+                        }
+                        else if (estatusPago == "PENDIENTE") {
+                            return '<span class="badge badge-danger">PENDIENTE PAGO</span>'
+                        }
+                        else if (estatusPago == "PARCIAL") {
+                            return '<span class="badge badge-warning">PARCIALMENTE PAGADO</span>'
+                        }
+                        else {
+                            return '<span class="badge badge-light"></span>'
+                        }
+                    }
+                },
+                { data: 'FechaPago' },
+                { data: 'montoTotal' },
+                { data: 'montoPendiente' }
+            ]/*,
+            "createdRow": function (row, data, dataIndex) {
+                if (data.PCO < data.POF) {
+                    $('td', row).css("background-color", "#e7a3a3");
+                }
+            },*/
+        });
+
+        $(document).ready(function () {
+            $('#btnUpload').click(function () {
+
+                if ($("#montoEntrada").val() == "") {
+                    swal("", "Debes indicar un monto", "warning");
+                    isCorrect = false;
+                }
+
+                if ($("#monedaEntrada").val() ==0) {
+                    swal("", "Debes indicar una moneda", "warning");
+                    isCorrect = false;
+                }
+
+                if ($("#numeroEntrada").val() == "") {
+                    swal("", "Debes indicar un número de entrada", "warning");
+                    isCorrect = false;
+                }
+
+                if (window.FormData !== undefined) {
+
+                    var fileUpload = $("#archivosEntrada").get(0);
+                    var files = fileUpload.files;
+
+                    var fileData = new FormData();
+
+                    var busqueda = {
+                        DocNum: $("#numeroEntrada").val(),
+                        montoPortal: $("#montoEntrada").val(),
+                        monedaPortal: $("#monedaEntrada").val(),
+                    };
+
+                    jQuery.ajax({
+                        url: '@Url.Action("guardar_registro", "proveedores")',
+                        type: "POST",
+                        data: busqueda,
+                        success: function (resultado2) {
+
+                            for (var i = 0; i < files.length; i++) {
+                                fileData.append(files[i].name, files[i]);
+                            }
+
+                            $.ajax({
+                                url: '/proveedores/UploadFiles',
+                                type: "POST",
+                                contentType: false, // Not to set any content header
+                                processData: false, // Not to process data
+                                data: fileData,
+                                success: function (result) {
+
+                                    swal("", "Registro insertado correctamente!", "success")
+                                        .then((value) => {
+                                            window.location.reload(false);
+                                        });
+
+                                },
+                                error: function (err) {
+                                    swal("", err.statusText, "error")
+                                        .then((value) => {
+                                            window.location.reload(false);
+                                        });
+                                }
+                            });
+                        },
+                        error: function (xhr, status, error) {
+                        },
+                    });
+
+
+                } else {
+                    alert("FormData is not supported.");
+                }
+            });
+        });
+
+    </script>
+}

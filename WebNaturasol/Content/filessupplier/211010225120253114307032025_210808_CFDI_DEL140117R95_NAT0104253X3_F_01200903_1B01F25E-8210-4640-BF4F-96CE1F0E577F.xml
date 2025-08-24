@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/4" xmlns:catCFDI="http://www.sat.gob.mx/sitio_internet/cfd/catalogos" xmlns:tdCFDI="http://www.sat.gob.mx/sitio_internet/cfd/tipoDatos/tdCFDI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Certificado="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" CondicionesDePago="90 dias - cadenas productivas" Descuento="0.00" Exportacion="01" Fecha="2025-03-07T21:03:55" Folio="01200903" FormaPago="99" LugarExpedicion="44470" MetodoPago="PPD" Moneda="MXN" NoCertificado="00001000000507960390" Sello="aPhcOA+HfmfylHG6BAdsm6nfW3DhauBpRRUPFGukkkokuvoKCy32FJpf0r9Z/xeVBVxejEzyYhaPQMJ5IO/dFA/9WrPMJbi1SW+SBxGoh0JGQLGUnKODvmJjJizFOdx3Me07M1ZDMBKAE/6sWyLf6ikky52CqHozBYq52iizJKT/Tz5iERLJaUm9978ZyLn/x3+Nj0nB5ghVgCdZqHDrSiB7j2C+LLW2uhp6TfczWB65ByQHTGhiYy03t0h6+kgGS4VUYq6iFPBu8F8r0q6epxfmCIE8jrkb3+GIUUbaiViWO8wAZfTJC7Vjj37w0G8T/wX8wzrakDVnhpn+8qOXDg==" Serie="F" SubTotal="285600.00" TipoDeComprobante="I" Total="285600.00" Version="4.0" xsi:schemaLocation="http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd"><cfdi:Emisor Nombre="MINSA COMERCIAL" RegimenFiscal="601" Rfc="DEL140117R95"/><cfdi:Receptor DomicilioFiscalReceptor="53100" Nombre="NATURASOL" RegimenFiscalReceptor="601" Rfc="NAT0104253X3" UsoCFDI="G01"/><cfdi:Conceptos><cfdi:Concepto Cantidad="24.00" ClaveProdServ="50221300" ClaveUnidad="TNE" Descripcion="Super Yellow Chip 1000 Kg" Descuento="0.00" Importe="285600.00" NoIdentificacion="124208011004" ObjetoImp="02" Unidad="TN" ValorUnitario="11900.00"><cfdi:Impuestos><cfdi:Traslados><cfdi:Traslado Base="285600.00" Importe="0.00" Impuesto="002" TasaOCuota="0.000000" TipoFactor="Tasa"/>
+        </cfdi:Traslados>
+      </cfdi:Impuestos>
+    </cfdi:Concepto>
+  </cfdi:Conceptos><cfdi:Impuestos TotalImpuestosTrasladados="0.00"><cfdi:Traslados><cfdi:Traslado Base="285600.00" Importe="0.00" Impuesto="002" TasaOCuota="0.000000" TipoFactor="Tasa"/>
+    </cfdi:Traslados>
+  </cfdi:Impuestos><cfdi:Complemento><tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" FechaTimbrado="2025-03-07T21:04:36" NoCertificadoSAT="00001000000712418361" RfcProvCertif="LEV031201SE6" SelloCFD="aPhcOA+HfmfylHG6BAdsm6nfW3DhauBpRRUPFGukkkokuvoKCy32FJpf0r9Z/xeVBVxejEzyYhaPQMJ5IO/dFA/9WrPMJbi1SW+SBxGoh0JGQLGUnKODvmJjJizFOdx3Me07M1ZDMBKAE/6sWyLf6ikky52CqHozBYq52iizJKT/Tz5iERLJaUm9978ZyLn/x3+Nj0nB5ghVgCdZqHDrSiB7j2C+LLW2uhp6TfczWB65ByQHTGhiYy03t0h6+kgGS4VUYq6iFPBu8F8r0q6epxfmCIE8jrkb3+GIUUbaiViWO8wAZfTJC7Vjj37w0G8T/wX8wzrakDVnhpn+8qOXDg==" SelloSAT="OAcZ16nI/X2NfvrVzhpfZGBTbUh47CswRU3Vm8kbgshbZrm6JSQNDLMY0UwEOGTPclK8Pt1uh+ZnSOHxadC4EXxCCal4nS6HA2QKFI9mYlL4XkWvPNUTfMhqUGKgSgHm1HYG3rRwitHoCH4H7zYNxyfCumMTBD6jCpb0HELbicQ2j/8dQxZHA8B1OOGvcOB7XUtG/AQYda0M92HncbU5tPvglPWBoRkyIqB4G2Sizy+AV71yS+wrmD+gU+Tga4vPuvbqr80ZG/iXLkdGB+SpN/ahatufzFDSv5RZuf79B0SaPe5nrJSP/7keRxXwbOMGQjqV2//Z9jiLkobf0mDiEw==" UUID="1B01F25E-8210-4640-BF4F-96CE1F0E577F" Version="1.1" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd"/></cfdi:Complemento><cfdi:Addenda><lev1add:EDCINVOICE xmlns:lev1add="http://www.edcinvoice.com/lev1add" xsi:schemaLocation="http://www.edcinvoice.com/lev1add http://www.edcinvoice.com/lev1add/lev1add.xsd">[H0C_Generales]|NAT0104253X3|935862|4.0||00001000000507960390|I05|P|
+[H1F_Comprobante]|4.0|F|01200903|2025-03-07T21:03:55|99|90 dias - cadenas productivas|285600.00|0.00|MXN||285600.00|I|PPD|44470|NO/NO|||01|||||||||||||||||
+[H1C_Comprobante]|OV-01149588||||||ORIGINAL|||0.000000||||||||||||||||||I05|P|(DOSCIENTOS OCHENTA Y CINCO MIL SEISCIENTOS  PESOS 00/100 M.N.)|||||||||||||76AM4A|NATURASOL|OV-01149588|||||||Factura|GUADALAJARA,JALISCO|05/06/2025|||||||||||
+[H1-2F_InformacionGlobal]||||||||
+[H1-2C_InformacionGlobal]||||||||
+[H3F_Emisor]|DEL140117R95|MINSA COMERCIAL|601|||||||||||||||||
+[H3C_Emisor]|7504009463000||cfdi@minsa.com.mx||018007125050||CESAR ESQUIVEL|TORRRES TRANSPORTES TERRESTRES SA DE CV|76AM4A|0.00|||||||||||||||||||||||
+[H3-1C_EmisorDomFiscal]|TOLTECAS N 4|||COL. LOS REYES IXTACALA|||TLALNEPANTLA DE BAZ|ESTADO DE MEXICO|México|54090|||||||||||||||
+[H3-2C_EmisorDomExped]|Planta Occidente|DEL140117R95||AVE. 18 DE MARZO NO. 546|||LA NOGALERA|||GUADALAJARA|JALISCO|MEXICO|44470|||||||||||||||
+[H4F_Receptor]|NAT0104253X3|NATURASOL|||G01|53100|601||||||||||||||||||
+[H4C_Receptor]|||ivan.aviles@naturasol.com.mx||5555626587||||||||2OCC|17937400-4|||MARIO IVAN LOPEZ ESTRADA||||||||||
+[H4-1C_ReceptorDom]|CIRCUITO CIRCUNVALACIÓN PONIENTE|9A||CIUDAD SATÉLITE|||NAUCALPAN DE JUAREZ|ESTADO DE MEXICO|MEXICO|53100|||||||||||||||
+[H4-2C_ReceptorEntrega]|NATURASOL|NAT0104253X3||||Ivan.aviles@naturasol.com.mx|5555626587|MARIANO ABASOLO 03|||BARRIO DE TLACATECO|||TEPOTZOTLAN|ESTADO DE MEXICO|MEXICO|54605||||||||||||||||||
+[D1F_Detalle]|50221300|124208011004|24.00|TNE|TN|Super Yellow Chip 1000 Kg|11900.00|285600.00|0.00|02||||||||||||||||||||
+[D1C_Detalle]|||||285600.00|||||022725ms12-1|||24.00|||11900.00|285600.00||||||||||||||||||||||||||||||||||||||TN||||||||||||||||||||||||^$|^$|^
+[D2F_ImpTrasladosTraslado]|285600.00|002|Tasa|0.000000|0.00|||||
+[D2C_ImpTrasladosTraslado]||||||||||
+[D3F_ImpRetencionesRetencion]||||||||||
+[D3C_ImpRetencionesRetencion]||||||||||
+[D3-3F_ACuentaTerceros]||||||||
+[D3-3C_ACuentaTerceros]||||||||
+[D4F_InformacionAduanera]|||||
+[D4C_InformacionAduanera]|||||
+[D5F_CuentaPredial]|||||
+[D5C_CuentaPredial]|||||
+[D6F_Parte]||||||||||
+[D6C_Parte]||||||||||
+[D7F_ParteInfAduanera]|||||
+[D7C_ParteInfAduanera]|||||
+[I1F_Impuestos]||0.00||||||||
+[I1C_Impuestos]||||||||||
+[I2F_Retencion]||||||||||
+[I2C_Retencion]||||||||||
+[I3F_Trasladado]|002|Tasa|0.000000|0.00|285600.00|||||
+[I3C_Trasladado]||||||||||
+[SC_Sumario]|285600.00||||||0.00|0.00|285600.00|285600.00||0.000000|0.00|||||||||||||||||1|0.000000|0.00||||||||||||||||||||
+[CO]|||4.0|F|01200903|2025-03-07T21:03:55|99|00001000000507960390|90 dias - cadenas productivas|285600.00|0.00|MXN|285600.00|I|01|PPD|44470|DEL140117R95|MINSA COMERCIAL|601|NAT0104253X3|NATURASOL|53100|601|G01|50221300|124208011004|24.00|TNE|TN|Super Yellow Chip 1000 Kg|11900.00|285600.00|0.00|02|28|
+[CO]|5600.00|002|Tasa|0.000000|0.00|285600.00|002|Tasa|0.000000|0.00|0.00|||
+[SE]|aPhcOA+HfmfylHG6BAdsm6nfW3DhauBpRRUPFGukkkokuvoKCy32FJpf0r9Z/xeVBVxejEzyYhaPQMJ5IO/dFA/9WrPMJbi1SW+SBxGoh0JGQLGUnKODvmJjJizFOdx3Me07M1ZDMBKAE/6sWyLf6ikky52CqHozBYq52iizJKT/Tz5iERLJaUm9978ZyLn/x3+Nj0nB5ghVgCdZqHDrSiB7j2C+LLW2uhp6TfczWB65ByQHTGhiYy03t0h6+kgGS4VUYq6iFPBu8F8r0q6epxfmCIE8jrkb3+GIUUbaiViWO8wAZfTJC7Vjj37w0G8T/wX8wzrakDVnhpn+8qOXDg==</lev1add:EDCINVOICE>
+  </cfdi:Addenda>
+</cfdi:Comprobante>
