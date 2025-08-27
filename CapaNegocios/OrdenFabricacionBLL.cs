@@ -155,12 +155,12 @@ namespace CapaNegocios
                 for (int i = 0; i < basesDatos.Length; i++)
                 {
                     materialesROVE = ordenFabricacionDAL.buscarConsumosROVEAutorizados();
-
+                    DIAPIBLL.conectarDIAPI("TSSL_NATURASOL");
                     for (int j = 0; j < materialesROVE.Count; j++)
                     {
                         Console.WriteLine("OF ACTUALIZADA");
 
-                        DIAPIBLL.conectarDIAPI("TSSL_NATURASOL");
+                        
                         Documents oInventoryGenExit;
                         oInventoryGenExit = DIAPIDAL.company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oInventoryGenExit);
 
@@ -198,7 +198,9 @@ namespace CapaNegocios
                             Console.WriteLine(DateTime.Now + " Error al crear el CONSUMO " + DIAPIDAL.company.GetLastErrorDescription() + " EN LA OF " + materialesROVE[j].DocEntry);
                             if (DIAPIDAL.company.GetLastErrorDescription().Contains("P053"))
                             {
-
+                                consumosROVE.estatus = "3";
+                                consumosROVE.idConsumoROVE = materialesROVE[j].U_LINEA;
+                                validarConsumoROVE(consumosROVE);
                             }
                             else
                             {
@@ -209,8 +211,9 @@ namespace CapaNegocios
                                 validarConsumoROVE(consumosROVE);
                             }
                         }
-                        DIAPIBLL.desconectarDIAPI();
+                        
                     }
+                    DIAPIBLL.desconectarDIAPI();
                 }
             }
             catch (Exception ex)
@@ -232,11 +235,12 @@ namespace CapaNegocios
                 {
                     ordenFabricacion = ordenFabricacionDAL.buscarGeneracionesROVEAutorizados();
 
+                    DIAPIBLL.conectarDIAPI("TSSL_NATURASOL");
                     for (int j = 0; j < ordenFabricacion.Count; j++)
                     {
                         Console.WriteLine("OF ACTUALIZADA");
 
-                        DIAPIBLL.conectarDIAPI("TSSL_NATURASOL");
+                        
                         SAPbobsCOM.Documents inventoryGenEntry;
                         inventoryGenEntry = DIAPIDAL.company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oInventoryGenEntry);
 
@@ -275,7 +279,9 @@ namespace CapaNegocios
 
                             if (DIAPIDAL.company.GetLastErrorDescription().Contains("P054"))
                             {
-
+                                liberacionesROVE.estatus = "3";
+                                liberacionesROVE.idLiberacionROVE = ordenFabricacion[j].U_LINEA;
+                                validarGeneracionROVE(liberacionesROVE);
                             }
                             else
                             {
@@ -286,8 +292,9 @@ namespace CapaNegocios
                                 validarGeneracionROVE(liberacionesROVE);
                             }
                         }
-                        DIAPIBLL.desconectarDIAPI();
+                        
                     }
+                    DIAPIBLL.desconectarDIAPI();
                 }
             }
             catch (Exception ex)

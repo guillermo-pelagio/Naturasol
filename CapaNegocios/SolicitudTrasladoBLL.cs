@@ -17,9 +17,10 @@ namespace CapaNegocios
 
         //S16-ACTUALIZACION-METODO PARA CERRA LAS ST ABIERTAS DESPUES DE 2 DIAS
         public void cerrarSTAbiertas(string DocEntry)
-        {
+        {            
             try
             {
+                DIAPIBLL.conectarDIAPI("TSSL_NATURASOL");
                 SAPbobsCOM.StockTransfer oStock;
                 oStock = DIAPIDAL.company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oInventoryTransferRequest);
                 oStock.GetByKey(Convert.ToInt32(DocEntry));
@@ -35,12 +36,12 @@ namespace CapaNegocios
                 {
                     Console.WriteLine("Error al cerrar la ST " + DIAPIDAL.company.GetLastErrorDescription());
                 }
+                DIAPIBLL.desconectarDIAPI();
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error al cerrar la ST " + ex);
-            }
-
+            }            
         }
     }
 }

@@ -58,7 +58,7 @@ namespace CapaPresentacion.Controllers
                 {
                     listaEntradas[i].acciones = "<button type='button' id='btn-resumen-lote' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-book' aria-hidden='true'></i></button><button type='button' id='btnAceptar' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button><button type='button' id='btnRechazar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
                 }
-                else if ((Convert.ToInt32(Session["puesto"]) == 60))
+                else if ((Convert.ToInt32(Session["puesto"]) == 60) || (Convert.ToInt32(Session["puesto"]) == 65))
                 {
                     listaEntradas[i].acciones = "<button type='button' id='btn-resumen-lote' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa fa-book' aria-hidden='true'></i></button><button type='button' id='btnAceptar' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button><button type='button' id='btnRechazar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
                 }
@@ -107,17 +107,17 @@ namespace CapaPresentacion.Controllers
                         listaEntradas[i].acciones += "<button type='button' id='btnRechazar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
                     }
                     else if (listaEntradas[i].analisisMicro == "1" && listaEntradas[i].Status == "2")
-                        {
+                    {
                         listaEntradas[i].acciones += "<button type='button' id='btnAceptar' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
                         listaEntradas[i].acciones += "<button type='button' id='btnRechazar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
                     }
-                    
+
                 }
                 else if ((Convert.ToInt32(Session["puesto"]) == 60))
                 {
                     if (listaEntradas[i].analisisMicro == "1" && listaEntradas[i].Status == "1")
                     {
-                        
+
                     }
                     else if (listaEntradas[i].analisisMicro != "1" && listaEntradas[i].Status == "2")
                     {
@@ -139,11 +139,11 @@ namespace CapaPresentacion.Controllers
                     }
                     else if (listaEntradas[i].analisisMicro != "1" && listaEntradas[i].Status == "2")
                     {
-                        
+
                     }
                     else if (listaEntradas[i].analisisMicro == "1" && listaEntradas[i].Status == "2")
                     {
-                        
+
                     }
                 }
                 else

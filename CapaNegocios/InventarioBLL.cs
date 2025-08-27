@@ -349,6 +349,123 @@ namespace CapaNegocios
             return respuestafinal;
         }
 
+        public string crearTransferenciaSTTS()
+        {
+            string respuestafinal = "0";
+            string respuesta = "";
+            OrdenFabricacionDAL ordenFabricacionDAL = new OrdenFabricacionDAL();
+
+            List<SolicitudTrasladoDetalle> solicitudTrasladoDetalle = new List<SolicitudTrasladoDetalle>();
+            solicitudTrasladoDetalle = inventarioDAL.buscarSTTSPendientes();            
+
+            for (int i = 0; i < solicitudTrasladoDetalle.Count; i++)
+            {
+                solicitudTrasladoDetalle[i].estatusSurtido = "W";
+                solicitudTrasladoDetalle[i].status = "3";
+                try
+                {
+                    List<SolicitudTrasladoDetalle> solicitudTraslados = new List<SolicitudTrasladoDetalle>();
+                    solicitudTraslados = confirmarExistenciaLote(solicitudTrasladoDetalle[i]);
+
+                    if (buscarMovimientoSAP(solicitudTrasladoDetalle[i].idSurtido) == null)
+                    {
+                        if ((solicitudTraslados != null))
+                        {
+                            if (solicitudTraslados.Count > 0)
+                            {
+                                if (solicitudTrasladoDetalle[i].estatusSurtido == "W")
+                                {
+                                    DIAPIBLL.conectarDIAPI("TSSL_NATURASOL");
+                                    SAPbobsCOM.StockTransfer stockTransferPT;
+                                    stockTransferPT = DIAPIDAL.company.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oStockTransfer);
+
+                                    stockTransferPT.DocDate = DateTime.Now;
+                                    stockTransferPT.PriceList = 12;
+
+                                    stockTransferPT.ToWarehouse = solicitudTrasladoDetalle[i].ToWhsCodeST;
+                                    stockTransferPT.FromWarehouse = solicitudTrasladoDetalle[i].FillerST;
+                                    stockTransferPT.ShipToCode = null;
+                                    stockTransferPT.UserFields.Fields.Item("U_ListaPesos").Value = solicitudTrasladoDetalle[i].idSurtido;
+
+                                    stockTransferPT.Lines.ItemCode = solicitudTrasladoDetalle[i].ItemCodeST;
+                                    stockTransferPT.Lines.BaseEntry = Convert.ToInt32(solicitudTrasladoDetalle[i].DocEntry.Split('-')[0]);
+                                    stockTransferPT.Lines.BaseLine = Convert.ToInt32(solicitudTrasladoDetalle[i].DocEntry.Split('-')[1]);
+                                    stockTransferPT.Lines.BaseType = SAPbobsCOM.InvBaseDocTypeEnum.InventoryTransferRequest;
+                                    /*stockTransferPT.Lines.DistributionRule = "TULTEPK";
+                                    stockTransferPT.Lines.DistributionRule3 = "MANUFAC";*/
+                                    stockTransferPT.Lines.WarehouseCode = solicitudTrasladoDetalle[i].ToWhsCodeST;
+                                    stockTransferPT.Lines.FromWarehouseCode = solicitudTrasladoDetalle[i].FillerST;
+                                    stockTransferPT.Lines.Quantity = Convert.ToDouble(solicitudTrasladoDetalle[i].QuantityST);
+
+                                    stockTransferPT.Lines.BatchNumbers.BatchNumber = solicitudTrasladoDetalle[i].DistNumber;
+                                    stockTransferPT.Lines.BatchNumbers.Quantity = Convert.ToDouble(solicitudTrasladoDetalle[i].QuantityST);
+                                    stockTransferPT.Lines.BatchNumbers.Add();
+
+                                    stockTransferPT.Lines.BinAllocations.BinActionType = SAPbobsCOM.BinActionTypeEnum.batFromWarehouse;
+                                    stockTransferPT.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = 0;
+                                    stockTransferPT.Lines.BinAllocations.BinAbsEntry = Convert.ToInt32(ordenFabricacionDAL.buscarUbicacionOrigen(solicitudTrasladoDetalle[i].FillerST, solicitudTrasladoDetalle[i].DistNumber, solicitudTrasladoDetalle[i].ItemCodeST)[0].BinCode);
+                                    stockTransferPT.Lines.BinAllocations.Quantity = Convert.ToDouble(solicitudTrasladoDetalle[i].QuantityST);
+                                    stockTransferPT.Lines.BinAllocations.Add();
+
+
+                                    stockTransferPT.Lines.BinAllocations.BinActionType = SAPbobsCOM.BinActionTypeEnum.batToWarehouse;
+                                    stockTransferPT.Lines.BinAllocations.SerialAndBatchNumbersBaseLine = 0;
+                                    stockTransferPT.Lines.BinAllocations.BinAbsEntry = Convert.ToInt32(ordenFabricacionDAL.buscarUbicacionDestino("TSSL_NATURASOL", solicitudTrasladoDetalle[i].ToWhsCodeST)[0].BinCode);
+                                    stockTransferPT.Lines.BinAllocations.Quantity = Convert.ToDouble(solicitudTrasladoDetalle[i].QuantityST);
+                                    stockTransferPT.Lines.BinAllocations.Add();
+
+
+                                    stockTransferPT.Lines.Add();
+
+                                    stockTransferPT.Comments = "TRANSFERENCIA INTRANET" + solicitudTrasladoDetalle[i].idSurtido;
+                                    respuestafinal = Convert.ToString(stockTransferPT.Add());
+
+                                    if (respuestafinal == "0")
+                                    {
+                                        Console.WriteLine("TRANSFERENCIA CREADA");
+
+
+
+
+
+                                    }
+                                    else
+                                    {
+                                        respuesta = DIAPIDAL.company.GetLastErrorDescription();
+                                        Console.WriteLine("Error al crear el TRASPASO a produccion " + DIAPIDAL.company.GetLastErrorDescription());
+                                        respuestafinal = respuesta;
+
+                                    }
+                                    DIAPIBLL.desconectarDIAPI();
+                                }
+                                else
+                                {
+                                    respuestafinal = "2";
+                                }
+                            }
+                            else
+                            {
+                                respuestafinal = "-1";
+                            }
+                        }
+                        else
+                        {
+                            respuestafinal = "-1";
+                        }
+                    }
+                    else
+                    {
+                        respuestafinal = "-2";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("error" + ex);
+                }
+            }
+            return respuestafinal;
+        }
+
         public string buscarMovimientoSAP(string idSurtido)
         {
             string resultado;

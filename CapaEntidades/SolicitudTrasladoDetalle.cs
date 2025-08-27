@@ -266,5 +266,10 @@
         {
             get; set;
         }
+
+        public string idEmpleado
+        {
+            get; set;
+        }
     }
 }

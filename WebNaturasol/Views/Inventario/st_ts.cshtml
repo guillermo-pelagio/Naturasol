@@ -387,6 +387,7 @@
         });
 
         function ConfirmarConsumoLinea(linea) {
+            $('#overlay').css('display', 'flex');
             jQuery.ajax({
                 url: '@Url.Action("validar_sesion", "Inicio")',
                 type: "POST",
@@ -432,7 +433,7 @@
                         }
 
                         if (isCorrect) {
-                            $('#overlay').css('display', 'flex');
+                            
 
                             $("#btnGuardarConfirmar" + linea).remove();
                             $("#btnRechazarConfirmar" + linea).remove();
@@ -449,11 +450,12 @@
                                     dataType: "json",
                                     contentType: "application/json; charset=utf-8",
                                     success: function (resultado) {
+                                        
                                         if (resultado == -1) {
                                             swal("", "Lote insuficiente!", "error");
                                         }
                                         if (resultado == 2) {
-                                            $('#overlay').css('display', 'flex');
+                                            
                                             jQuery.ajax(
                                                 {
                                                     url: '@Url.Action("actualizar_estatus_surtido_parcial", "inventario")',
@@ -465,11 +467,12 @@
                                                     dataType: "json",
                                                     contentType: "application/json; charset=utf-8",
                                                     success: function (resultado) {
+                                                        
                                                         if (resultado == -1) {
                                                             swal("", "Datos incorrectos!", "error");
                                                         }
                                                         else {
-                                                            swal("", "Estatus actualizado", "success")
+                                                            swal("", "Estatus actualizado ++", "success")
                                                                 .then((value) => {
                                                                 });
                                                         }
@@ -477,8 +480,7 @@
                                                     error: function () {
                                                         swal("", resultado, "error");
                                                     },
-                                                });
-                                            $('#overlay').css('display', 'none');
+                                                });                                            
                                             swal("", "Validación realizada!", "success")
                                                 .then((value) => {
                                                     window.location.reload(false);
@@ -487,7 +489,7 @@
                                         else {
 
                                             if (resultado == 0) {
-                                                $('#overlay').css('display', 'flex');
+                                                
                                             jQuery.ajax(
                                                 {
                                                     url: '@Url.Action("actualizar_estatus_surtido_parcial", "inventario")',
@@ -499,11 +501,12 @@
                                                     dataType: "json",
                                                     contentType: "application/json; charset=utf-8",
                                                     success: function (resultado) {
+                                                        
                                                         if (resultado == -1) {
                                                             swal("", "Datos incorrectos!", "error");
                                                         }
                                                         else {
-                                                            swal("", "Estatus actualizado", "success")
+                                                            swal("", "Estatus actualizado --", "success")
                                                                 .then((value) => {
                                                                 });
                                                         }
@@ -512,7 +515,7 @@
                                                         swal("", resultado, "error");
                                                     },
                                                 });
-                                                $('#overlay').css('display', 'none');
+                                                
 
                                                 swal("", "Transferencia realizada", "success").then((value) => {
                                                     window.location.reload(false);
@@ -560,7 +563,7 @@
                                     },
                                 });
 
-                            $('#overlay').css('display', 'none');
+                            
                         }
 
                     }
@@ -1153,6 +1156,14 @@
             cambiarEstatus(datos, "X");
         });
 
+        $("#tablaSTTS").on("click", '#btnCancelar', function () {
+            var filaseleccionada = $(this).closest("tr");
+            var datos = tablaSTTS.row(filaseleccionada).data();
+            $("#numeroDocentry").val(datos.DocEntry);
+            datos.estatusSurtido = "M";
+            cambiarEstatus(datos, "M");
+        });
+
 
         function buscarSurtidor() {
             $("#modalBuscarSurtidor").modal("show");
@@ -1172,12 +1183,8 @@
                 url: '@Url.Action("validar_sesion", "Inicio")',
                 type: "POST",
                 dataType: "json",
-                success: function (resultado) {
-                    $('#overlay').css('display', 'none');
-                    if (resultado == 1) {
-                        $('#overlay').css('display', 'flex');
-
-
+                success: function (resultado) {                    
+                    if (resultado == 1) {                        
 
                         /*jQuery.ajax(
                             {
@@ -1195,265 +1202,290 @@
                                         swal("", "Datos incorrectos!", "error");
                                     }
                                     else {*/
-                                        if (estatus == "S") {
-                                            jQuery.ajax(
-                                                {
-                                                    url: '@Url.Action("obtener_surtidores", "inventario")',
-                                                    type: "POST",
-                                                    success: function (resultado) {
-                                                        $('#numeroSurtidor').append(resultado);
-                                                        /*
-                                                        jQuery.ajax(
-                                                            {
-                                                                url: 'Url.Action("actualizar_estatus", "inventario")',
-                                                                type: "POST",
-                                                                data: JSON.stringify(
-                                                                    {
-                                                                        solicitudTraslado: datos
-                                                                    }),
-                                                                dataType: "json",
-                                                                contentType: "application/json; charset=utf-8",
-                                                                success: function (resultado) {
-                                                                    if (resultado == -1) {
-                                                                        swal("", "Datos incorrectos!", "error");
-                                                                    }
-                                                                    else {
-                                                                        swal("", "Estatus actualizado", "success")
-                                                                            .then((value) => {
-                                                                                window.location.reload(false);
-                                                                            });
-                                                                    }
-                                                                },
-                                                                error: function () {
-                                                                    swal("", "Error al actualizar el estatus!", "error");
-                                                                },
+                        if (estatus == "S") {
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("obtener_surtidores", "inventario")',
+                                    type: "POST",
+                                    success: function (resultado) {
+                                        $('#numeroSurtidor').append(resultado);
+                                        /*
+                                        jQuery.ajax(
+                                            {
+                                                url: 'Url.Action("actualizar_estatus", "inventario")',
+                                                type: "POST",
+                                                data: JSON.stringify(
+                                                    {
+                                                        solicitudTraslado: datos
+                                                    }),
+                                                dataType: "json",
+                                                contentType: "application/json; charset=utf-8",
+                                                success: function (resultado) {
+                                                    if (resultado == -1) {
+                                                        swal("", "Datos incorrectos!", "error");
+                                                    }
+                                                    else {
+                                                        swal("", "Estatus actualizado", "success")
+                                                            .then((value) => {
+                                                                window.location.reload(false);
                                                             });
-                                                            */
-                                                    },
-                                                    error: function (xhr, status, error) {
+                                                    }
+                                                },
+                                                error: function () {
+                                                    swal("", "Error al actualizar el estatus!", "error");
+                                                },
+                                            });
+                                            */
+                                    },
+                                    error: function (xhr, status, error) {
 
-                                                    },
-                                                });
-                                            buscarSurtidor();
+                                    },
+                                });
+                            buscarSurtidor();
+                        }
+                        if (estatus == "M") {
+                            $('#overlay').css('display', 'flex');
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("cerrar_st", "inventario")',
+                                    type: "POST",
+                                    data: JSON.stringify(
+                                        {
+                                            DocEntry: $("#numeroDocentry").val(),
+                                        }),
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (resultado) {
+                                        $('#overlay').css('display', 'none');
+                                        if (resultado == -1) {
+                                            swal("", "Datos incorrectos!", "error");
                                         }
-                                        else if (estatus == "D") {
-                                            if (datos.FillerST == "1703") {
-                                                jQuery.ajax(
-                                                    {
-                                                        url: '@Url.Action("actualizar_estatus3", "inventario")',
-                                                        type: "POST",
-                                                        data: JSON.stringify(
-                                                            {
-                                                                DocEntry: $("#numeroDocentry").val() + "#D",
-                                                            }),
-                                                        dataType: "json",
-                                                        contentType: "application/json; charset=utf-8",
-                                                        success: function (resultado) {
-                                                            if (resultado == -1) {
-                                                                swal("", "Datos incorrectos!", "error");
-                                                            }
-                                                            else {
-                                                                swal("", "Surtido guardado", "success");
-                                                            }
-                                                        },
-                                                        error: function () {
-                                                            swal("", "Error al actualizar el estatus!", "error");
-                                                        },
-                                                    });
+                                        else {
+                                            swal("", "ST cerrada", "success");
+                                        }
+                                    },
+                                    error: function (xhr, status, error) {
+
+                                    },
+                                });
+                        }
+                        else if (estatus == "D") {
+                            if (datos.FillerST == "1703") {
+                                jQuery.ajax(
+                                    {
+                                        url: '@Url.Action("actualizar_estatus3", "inventario")',
+                                        type: "POST",
+                                        data: JSON.stringify(
+                                            {
+                                                DocEntry: $("#numeroDocentry").val() + "#D",
+                                            }),
+                                        dataType: "json",
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (resultado) {
+                                            if (resultado == -1) {
+                                                swal("", "Datos incorrectos!", "error");
                                             }
                                             else {
-                                                jQuery.ajax(
-                                                    {
-                                                        url: '@Url.Action("obtener_lotes", "inventario")',
-                                                        type: "POST",
-                                                        data: JSON.stringify(
-                                                            {
-                                                                solicitudTrasladoDetalle: datos
-                                                            }),
-                                                        contentType: "application/json; charset=utf-8",
-                                                        success: function (resultado5) {
-                                                            $('#lotesProductoSurtir').empty();
-                                                            $('#lotesProductoSurtir').append(resultado5);
-                                                            /*
-                                                            jQuery.ajax(
-                                                                {
-                                                                    url: 'Url.Action("obtener_confirmados", "inventario")',
-                                                                    type: "POST",
-                                                                    data: JSON.stringify(
-                                                                        {
-                                                                            solicitudTrasladoDetalle: datos
-                                                                        }),
-                                                                    contentType: "application/json; charset=utf-8",
-                                                                    success: function (resultado6) {
-                                                                        $("#confirmaciones").text(resultado6.split('__')[0]);
-                                                                    },
-                                                                    error: function (xhr, status, error) {
-
-                                                                    },
-                                                                });
-                                                                */
-
-                                                        },
-                                                        error: function (xhr, status, error) {
-
-                                                        },
-                                                    });
-                                                buscarConfirmar();
+                                                swal("", "Surtido guardado", "success");
                                             }
-                                        }
-                                        else if (estatus == "F") {
-                                            if (datos.FillerST == "1703") {
-                                                jQuery.ajax(
-                                                    {
-                                                        url: '@Url.Action("actualizar_estatus4", "inventario")',
-                                                        type: "POST",
-                                                        data: JSON.stringify(
-                                                            {
-                                                                DocEntry: $("#numeroDocentry").val() + "#V",
-                                                            }),
-                                                        dataType: "json",
-                                                        contentType: "application/json; charset=utf-8",
-                                                        success: function (resultado) {
-                                                            if (resultado == -1) {
-                                                                swal("", "Datos incorrectos!", "error");
-                                                            }
-                                                            else {
-                                                                swal("", "Surtido guardado", "success");
-                                                            }
-                                                        },
-                                                        error: function () {
-                                                            swal("", "Error al actualizar el estatus!", "error");
-                                                        },
-                                                    });
-                                            }
-                                            else {
-                                                jQuery.ajax(
-                                                    {
-                                                        url: '@Url.Action("obtener_confirmaciones", "inventario")',
-                                                        type: "POST",
-                                                        data: JSON.stringify(
-                                                            {
-                                                                solicitudTrasladoDetalle: datos
-                                                            }),
-                                                        contentType: "application/json; charset=utf-8",
-                                                        success: function (resultado5) {
-                                                            $('#divConfirmar').empty();
-                                                            $('#tituloModalConfirmar').text(datos.DocNumST);
-                                                            $('#docEntryFinalizar').val(datos.DocEntry);
-                                                            $('#almacenFinalizar').val(datos.FillerST);
-                                                            $('#estatusActual').val("Z");
-                                                            $('#divConfirmar').append(resultado5);
-
-                                                            /*
-                                                            jQuery.ajax(
-                                                                {
-                                                                    url: 'Url.Action("obtener_confirmados", "inventario")',
-                                                                    type: "POST",
-                                                                    data: JSON.stringify(
-                                                                        {
-                                                                            solicitudTrasladoDetalle: datos
-                                                                        }),
-                                                                    contentType: "application/json; charset=utf-8",
-                                                                    success: function (resultado6) {
-                                                                        $("#confirmaciones").text(resultado6.split('__')[0]);
-                                                                    },
-                                                                    error: function (xhr, status, error) {
-
-                                                                    },
-                                                                });
-                                                                */
-
-                                                        },
-                                                        error: function (xhr, status, error) {
-
-                                                        },
-                                                    });
-                                                buscarFinalizar();
-                                            }
-                                        }
-                                        else if (estatus == "W") {
+                                        },
+                                        error: function () {
+                                            swal("", "Error al actualizar el estatus!", "error");
+                                        },
+                                    });
+                            }
+                            else {
+                                jQuery.ajax(
+                                    {
+                                        url: '@Url.Action("obtener_lotes", "inventario")',
+                                        type: "POST",
+                                        data: JSON.stringify(
+                                            {
+                                                solicitudTrasladoDetalle: datos
+                                            }),
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (resultado5) {
+                                            $('#lotesProductoSurtir').empty();
+                                            $('#lotesProductoSurtir').append(resultado5);
+                                            /*
                                             jQuery.ajax(
                                                 {
-                                                    url: '@Url.Action("obtener_confirmaciones_2", "inventario")',
+                                                    url: 'Url.Action("obtener_confirmados", "inventario")',
                                                     type: "POST",
                                                     data: JSON.stringify(
                                                         {
                                                             solicitudTrasladoDetalle: datos
                                                         }),
                                                     contentType: "application/json; charset=utf-8",
-                                                    success: function (resultado5) {
-                                                        $('#divConfirmar').empty();
-                                                        $('#tituloModalConfirmar').text(datos.DocNumST);
-                                                        $('#docEntryFinalizar').val(datos.DocEntry);
-                                                        $('#almacenFinalizar').val(datos.FillerST);
-                                                        $('#almacenFinalizar2').val(datos.ToWhsCodeST);
-                                                        $('#estatusActual').val("W");
-                                                        $('#divConfirmar').append(resultado5);
-
-
-                                                        /*
-                                                        jQuery.ajax(
-                                                            {
-                                                                url: 'Url.Action("obtener_confirmados", "inventario")',
-                                                                type: "POST",
-                                                                data: JSON.stringify(
-                                                                    {
-                                                                        solicitudTrasladoDetalle: datos
-                                                                    }),
-                                                                contentType: "application/json; charset=utf-8",
-                                                                success: function (resultado6) {
-                                                                    $("#confirmaciones").text(resultado6.split('__')[0]);
-                                                                },
-                                                                error: function (xhr, status, error) {
-
-                                                                },
-                                                            });
-                                                            */
-
+                                                    success: function (resultado6) {
+                                                        $("#confirmaciones").text(resultado6.split('__')[0]);
                                                     },
                                                     error: function (xhr, status, error) {
 
                                                     },
                                                 });
-                                            buscarFinalizar();
-                                        }
-                                        else {
+                                                */
+
+                                        },
+                                        error: function (xhr, status, error) {
+
+                                        },
+                                    });
+                                buscarConfirmar();
+                            }
+                        }
+                        else if (estatus == "F") {
+                            if (datos.FillerST == "1703") {
+                                jQuery.ajax(
+                                    {
+                                        url: '@Url.Action("actualizar_estatus4", "inventario")',
+                                        type: "POST",
+                                        data: JSON.stringify(
+                                            {
+                                                DocEntry: $("#numeroDocentry").val() + "#V",
+                                            }),
+                                        dataType: "json",
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (resultado) {
+                                            if (resultado == -1) {
+                                                swal("", "Datos incorrectos!", "error");
+                                            }
+                                            else {
+                                                swal("", "Surtido guardado", "success");
+                                            }
+                                        },
+                                        error: function () {
+                                            swal("", "Error al actualizar el estatus!", "error");
+                                        },
+                                    });
+                            }
+                            else {
+                                jQuery.ajax(
+                                    {
+                                        url: '@Url.Action("obtener_confirmaciones", "inventario")',
+                                        type: "POST",
+                                        data: JSON.stringify(
+                                            {
+                                                solicitudTrasladoDetalle: datos
+                                            }),
+                                        contentType: "application/json; charset=utf-8",
+                                        success: function (resultado5) {
+                                            $('#divConfirmar').empty();
+                                            $('#tituloModalConfirmar').text(datos.DocNumST);
+                                            $('#docEntryFinalizar').val(datos.DocEntry);
+                                            $('#almacenFinalizar').val(datos.FillerST);
+                                            $('#estatusActual').val("Z");
+                                            $('#divConfirmar').append(resultado5);
+
+                                            /*
                                             jQuery.ajax(
                                                 {
-                                                    url: '@Url.Action("actualizar_estatus", "inventario")',
+                                                    url: 'Url.Action("obtener_confirmados", "inventario")',
                                                     type: "POST",
                                                     data: JSON.stringify(
                                                         {
-                                                            solicitudTraslado: datos
+                                                            solicitudTrasladoDetalle: datos
                                                         }),
-                                                    dataType: "json",
                                                     contentType: "application/json; charset=utf-8",
-                                                    success: function (resultado) {
-                                                        if (resultado == -1) {
-                                                            swal("", "Datos incorrectos!", "error");
-                                                        }
-                                                        else {
-
-                                                            swal("", "Estatus actualizado", "success")
-                                                                .then((value) => {
-                                                                    //window.location.reload(false);
-
-
-                                                                });
-                                                        }
+                                                    success: function (resultado6) {
+                                                        $("#confirmaciones").text(resultado6.split('__')[0]);
                                                     },
-                                                    error: function () {
-                                                        swal("", "Error al actualizar el estatus!", "error");
+                                                    error: function (xhr, status, error) {
+
                                                     },
                                                 });
+                                                */
+
+                                        },
+                                        error: function (xhr, status, error) {
+
+                                        },
+                                    });
+                                buscarFinalizar();
+                            }
+                        }
+                        else if (estatus == "W") {
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("obtener_confirmaciones_2", "inventario")',
+                                    type: "POST",
+                                    data: JSON.stringify(
+                                        {
+                                            solicitudTrasladoDetalle: datos
+                                        }),
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (resultado5) {
+                                        $('#divConfirmar').empty();
+                                        $('#tituloModalConfirmar').text(datos.DocNumST);
+                                        $('#docEntryFinalizar').val(datos.DocEntry);
+                                        $('#almacenFinalizar').val(datos.FillerST);
+                                        $('#almacenFinalizar2').val(datos.ToWhsCodeST);
+                                        $('#estatusActual').val("W");
+                                        $('#divConfirmar').append(resultado5);
+
+
+                                        /*
+                                        jQuery.ajax(
+                                            {
+                                                url: 'Url.Action("obtener_confirmados", "inventario")',
+                                                type: "POST",
+                                                data: JSON.stringify(
+                                                    {
+                                                        solicitudTrasladoDetalle: datos
+                                                    }),
+                                                contentType: "application/json; charset=utf-8",
+                                                success: function (resultado6) {
+                                                    $("#confirmaciones").text(resultado6.split('__')[0]);
+                                                },
+                                                error: function (xhr, status, error) {
+
+                                                },
+                                            });
+                                            */
+
+                                    },
+                                    error: function (xhr, status, error) {
+
+                                    },
+                                });
+                            buscarFinalizar();
+                        }
+                        else {
+                            jQuery.ajax(
+                                {
+                                    url: '@Url.Action("actualizar_estatus", "inventario")',
+                                    type: "POST",
+                                    data: JSON.stringify(
+                                        {
+                                            solicitudTraslado: datos
+                                        }),
+                                    dataType: "json",
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (resultado) {
+                                        if (resultado == -1) {
+                                            swal("", "Datos incorrectos!", "error");
                                         }
-                                    /*}
-                                },
-                                error: function () {
-                                    swal("", "Error al actualizar el estatus!", "error");
-                                },
-                            });*/
-                        $('#overlay').css('display', 'none');
+                                        else {
+
+                                            swal("", "Estatus actualizado", "success")
+                                                .then((value) => {
+                                                    //window.location.reload(false);
+
+
+                                                });
+                                        }
+                                    },
+                                    error: function () {
+                                        swal("", "Error al actualizar el estatus!", "error");
+                                    },
+                                });
+                        }
+                        /*}
+                    },
+                    error: function () {
+                        swal("", "Error al actualizar el estatus!", "error");
+                    },
+                });*/
                     }
                     else {
                         alert('Sesion caducada');

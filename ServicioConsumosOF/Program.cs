@@ -14,7 +14,7 @@ namespace ServicioConsumosOF
                     OrdenFabricacionBLL ordenFabricacionBLL = new OrdenFabricacionBLL();
                     ////ordenFabricacionBLL.crearConsumoAutomatico();
                     ordenFabricacionBLL.crearConsumoAutomaticoROVE();
-                    ordenFabricacionBLL.crearGeneracionAutomaticoROVE();
+                    ordenFabricacionBLL.crearGeneracionAutomaticoROVE();                    
                 }
             }
         }

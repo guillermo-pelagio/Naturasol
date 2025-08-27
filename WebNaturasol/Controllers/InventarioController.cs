@@ -13,6 +13,7 @@ namespace CapaPresentacion.Controllers
     {
         InventarioBLL inventarioBLL = new InventarioBLL();
         ReportesBLL reportesBLL = new ReportesBLL();
+        SolicitudTrasladoBLL solicitudTrasladoBLL = new SolicitudTrasladoBLL();
 
         // GET: Inventario
         public ActionResult Index()
@@ -115,6 +116,7 @@ namespace CapaPresentacion.Controllers
             if (Convert.ToInt32(Session["puesto"]) == 32)
             {
                 kardex = inventarioBLL.obteneSTTS(Convert.ToString((Session["ubicacion"])), Convert.ToString(Session["puesto"]), Convert.ToString(Session["articulo"]), Convert.ToString(Session["descripcion"]), Convert.ToString(Session["almacen1"]), Convert.ToString(Session["almacen2"]), Convert.ToString(Session["fecha1"]), Convert.ToString(Session["fecha2"]));
+
             }
             if (Convert.ToInt32(Session["puesto"]) == 33 || Convert.ToInt32(Session["puesto"]) == 2 || Convert.ToInt32(Session["puesto"]) == 1)
             {
@@ -125,141 +127,53 @@ namespace CapaPresentacion.Controllers
                 kardex = inventarioBLL.obteneSTTS(Convert.ToString((Session["ubicacion"])), Convert.ToString(Session["puesto"]), Convert.ToString(Session["articulo"]), Convert.ToString(Session["descripcion"]), Convert.ToString(Session["almacen1"]), Convert.ToString(Session["almacen2"]), Convert.ToString(Session["fecha1"]), Convert.ToString(Session["fecha2"]));
             }
 
-            for (int i = 0; i < kardex.Count; i++)
+            for (int i = kardex.Count - 1; i >= 0; i--)
             {
-                kardex[i].botonArticulo += "<button type='button' id='btnDetalle' class='btn btn-link' style='padding: 0.5rem; border-radius: 5px;'>" + kardex[i].ItemCodeST + "</button>";
-                kardex[i].botonTransferencias += "<button type='button' id='btnDetalleTRF' class='btn btn-link' style='padding: 0.5rem; border-radius: 5px;'>" + kardex[i].DocNumST + "</button>";
-                kardex[i].botonSurtidor += "<button type='button' id='btnSurtidorS' class='btn btn-link' style='padding: 0.5rem; border-radius: 5px;'>" + kardex[i].nombreS + "</button>";
-
-                int sociedad;
-                if (kardex[i].Sociedad == "Mielmex")
+                if (((Convert.ToInt32(Session["puesto"]) == 32) && (Convert.ToString((Session["empleado"])) != "") && (Convert.ToString((Session["empleado"])) != kardex[i].idEmpleado)))
                 {
-                    sociedad = 0;
+                    kardex.RemoveAt(i);
                 }
                 else
                 {
-                    sociedad = 1;
-                }
+                    kardex[i].botonArticulo += "<button type='button' id='btnDetalle' class='btn btn-link' style='padding: 0.5rem; border-radius: 5px;'>" + kardex[i].ItemCodeST + "</button>";
+                    kardex[i].botonTransferencias += "<button type='button' id='btnDetalleTRF' class='btn btn-link' style='padding: 0.5rem; border-radius: 5px;'>" + kardex[i].DocNumST + "</button>";
+                    kardex[i].botonSurtidor += "<button type='button' id='btnSurtidorS' class='btn btn-link' style='padding: 0.5rem; border-radius: 5px;'>" + kardex[i].nombreS + "</button>";
 
-                if ((kardex[i].ToWhsCodeST == "2306") || (kardex[i].ToWhsCodeST == "1406") || (kardex[i].ToWhsCodeST == "1106") || (kardex[i].ToWhsCodeST == "1606") || (kardex[i].ToWhsCodeST == "1706") || (kardex[i].ToWhsCodeST == "1806")
-                    || (kardex[i].ToWhsCodeST == "1906") || (kardex[i].ToWhsCodeST == "2006") || (kardex[i].ToWhsCodeST == "2106") || (kardex[i].ToWhsCodeST == "2206"))
-                {
-                    if (kardex[i].status == "C")
+                    int sociedad;
+                    if (kardex[i].Sociedad == "Mielmex")
                     {
-                        kardex[i].estatusSurtido = "C";
+                        sociedad = 0;
                     }
-                    if (kardex[i].status == "")
+                    else
                     {
-                        kardex[i].estatusSurtido = "O";
-                    }
-                    if (kardex[i].status == "O" && kardex[i].estatusSurtido == "")
-                    {
-                        kardex[i].estatusSurtido = "O";
+                        sociedad = 1;
                     }
 
-                    if ((Convert.ToInt32(Session["puesto"]) == 100) && kardex[i].status == "O")
+                    if ((kardex[i].ToWhsCodeST == "2306") || (kardex[i].ToWhsCodeST == "1406") || (kardex[i].ToWhsCodeST == "1106") || (kardex[i].ToWhsCodeST == "1606") || (kardex[i].ToWhsCodeST == "1706") || (kardex[i].ToWhsCodeST == "1806")
+                        || (kardex[i].ToWhsCodeST == "1906") || (kardex[i].ToWhsCodeST == "2006") || (kardex[i].ToWhsCodeST == "2106") || (kardex[i].ToWhsCodeST == "2206"))
                     {
-                        kardex[i].acciones = "";
-                        if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
+                        if (kardex[i].status == "C")
                         {
-                            kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                            kardex[i].estatusSurtido = "C";
                         }
-                        else if (kardex[i].estatusSurtido == "D")
+                        if (kardex[i].status == "")
                         {
-                            if (kardex[i].FechaMC2 != "")
-                            {
-                                kardex[i].acciones += "";
-                            }
-                            else
-                            {
-                                kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
-                            }
+                            kardex[i].estatusSurtido = "O";
                         }
-                        else
+                        if (kardex[i].status == "O" && kardex[i].estatusSurtido == "")
                         {
-                            if (kardex[i].estatusSurtido != "P" && kardex[i].FechaSurtir == "" && kardex[i].estatusSurtido != "D")
-                            {
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "T" && kardex[i].FechaTraspaso == "" && kardex[i].estatusSurtido != "D")
-                            {
-                                //kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "S" && kardex[i].FechaSurtiendo == "" && kardex[i].estatusSurtido != "D")
-                            {
-                                kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
-                            }
-                            //if (kardex[i].estatusSurtido != "D" && kardex[i].FechaSurtido == "")
-                            {
-                                kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                            }
+                            kardex[i].estatusSurtido = "O";
                         }
-                    }
-                    else if ((Convert.ToInt32(Session["puesto"]) == 31) && kardex[i].status == "O")
-                    {
-                        kardex[i].acciones = "";
-                        if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
-                        {
-                            kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                        }
-                        else if (kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "X")
-                        {
-                            if (kardex[i].FechaMC2 != "")
-                            {
-                                kardex[i].acciones += "";
-                            }
-                            else
-                            {
-                                kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
-                            }
-                        }
-                        else
+
+                        if ((Convert.ToInt32(Session["puesto"]) == 100) && kardex[i].status == "O")
                         {
                             kardex[i].acciones = "";
-                            /*
-                            if (kardex[i].estatusSurtido != "P")
+                            if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
                             {
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>" +
+                                    "<button title='Cancelar' type='button' id='btnCancelar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-ban'></i></button>";
                             }
-                            if (kardex[i].estatusSurtido != "T")
-                            {
-                                kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "S")
-                            {
-                                kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "D")
-                            {
-                                kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                            }
-                            */
-                        }
-                    }
-                    else if ((Convert.ToInt32(Session["puesto"]) == 32) && kardex[i].status == "O")
-                    {
-                        kardex[i].acciones = "";
-                        if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
-                        {
-                            kardex[i].acciones = "";
-                            //kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                        }
-                        else
-                        {
-                            if (kardex[i].estatusSurtido != "P" && kardex[i].FechaSurtir == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido != "X")
-                            {
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "T" && kardex[i].FechaTraspaso == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido == "P" && kardex[i].estatusSurtido != "X")
-                            {
-                                //kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "S" && kardex[i].FechaSurtiendo == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido == "P" && kardex[i].estatusSurtido != "X")
-                            {
-                                kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
-                            }
-                            if ((kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "S") && kardex[i].estatusSurtido != "X")
+                            else if (kardex[i].estatusSurtido == "D")
                             {
                                 if (kardex[i].FechaMC2 != "")
                                 {
@@ -267,219 +181,341 @@ namespace CapaPresentacion.Controllers
                                 }
                                 else
                                 {
-                                    kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                                    //kardex[i].acciones += "<button title='Cerrar' type='button' id='btnCerrado' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                    kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>" +
+                                        "<button title='Cancelar' type='button' id='btnCancelar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-ban'></i></button>";
                                 }
-                            }
-                        }
-                    }
-
-                    else if (((Convert.ToInt32(Session["puesto"]) == 33) || Convert.ToInt32(Session["puesto"]) == 2 || Convert.ToInt32(Session["puesto"]) == 1) && kardex[i].status == "O")
-                    {
-                        kardex[i].acciones = "";
-                        if (kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "X")
-                        {
-                            if (kardex[i].FechaMC2 != "")
-                            {
-                                kardex[i].acciones += "";
                             }
                             else
                             {
-                                kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar2' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
+                                if (kardex[i].estatusSurtido != "P" && kardex[i].FechaSurtir == "" && kardex[i].estatusSurtido != "D")
+                                {
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "T" && kardex[i].FechaTraspaso == "" && kardex[i].estatusSurtido != "D")
+                                {
+                                    //kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "S" && kardex[i].FechaSurtiendo == "" && kardex[i].estatusSurtido != "D")
+                                {
+                                    kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                }
+                                //if (kardex[i].estatusSurtido != "D" && kardex[i].FechaSurtido == "")
+                                {
+                                    kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                }
+                            }
+                        }
+                        else if ((Convert.ToInt32(Session["puesto"]) == 31) && kardex[i].status == "O")
+                        {
+                            kardex[i].acciones = "";
+                            if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
+                            {
+                                kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>" +
+                                    "<button title='Cancelar' type='button' id='btnCancelar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-ban'></i></button>";
+                            }
+                            else if (kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "X")
+                            {
+                                if (kardex[i].FechaMC2 != "")
+                                {
+                                    kardex[i].acciones += "";
+                                }
+                                else
+                                {
+                                    kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>" +
+                                        "<button title='Cancelar' type='button' id='btnCancelar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-ban'></i></button>";
+                                }
+                            }
+                            else
+                            {
+                                kardex[i].acciones = "";
+                                /*
+                                if (kardex[i].estatusSurtido != "P")
+                                {
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "T")
+                                {
+                                    kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "S")
+                                {
+                                    kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "D")
+                                {
+                                    kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                }
+                                */
+                            }
+                        }
+                        else if ((Convert.ToInt32(Session["puesto"]) == 32) && kardex[i].status == "O")
+                        {
+                            kardex[i].acciones = "";
+                            if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
+                            {
+                                kardex[i].acciones = "";
+                                //kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                            }
+                            else
+                            {
+                                if (kardex[i].estatusSurtido != "P" && kardex[i].FechaSurtir == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido != "X")
+                                {
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "T" && kardex[i].FechaTraspaso == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido == "P" && kardex[i].estatusSurtido != "X")
+                                {
+                                    //kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "S" && kardex[i].FechaSurtiendo == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido == "P" && kardex[i].estatusSurtido != "X")
+                                {
+                                    kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                }
+                                if ((kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "S") && kardex[i].estatusSurtido != "X")
+                                {
+                                    if (kardex[i].FechaMC2 != "")
+                                    {
+                                        kardex[i].acciones += "";
+                                    }
+                                    else
+                                    {
+                                        kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                        //kardex[i].acciones += "<button title='Cerrar' type='button' id='btnCerrado' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                    }
+                                }
+                            }
+
+                        }
+
+                        else if (((Convert.ToInt32(Session["puesto"]) == 33) || Convert.ToInt32(Session["puesto"]) == 2 || Convert.ToInt32(Session["puesto"]) == 1) && kardex[i].status == "O")
+                        {
+                            kardex[i].acciones = "";
+                            if (kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "X")
+                            {
+                                if (kardex[i].FechaMC2 != "")
+                                {
+                                    kardex[i].acciones += "";
+                                }
+                                else
+                                {
+                                    kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar2' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
+                                }
+                            }
+                            else
+                            {
+                                kardex[i].acciones = "";
+                                /*
+                                if (kardex[i].estatusSurtido != "P")
+                                {
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "T")
+                                {
+                                    kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "S")
+                                {
+                                    kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "D")
+                                {
+                                    kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                }
+                                */
                             }
                         }
                         else
                         {
                             kardex[i].acciones = "";
-                            /*
-                            if (kardex[i].estatusSurtido != "P")
+                        }
+                    }
+                    else if ((kardex[i].FillerST == "2306") || (kardex[i].FillerST == "1406") || (kardex[i].FillerST == "1106") || (kardex[i].FillerST == "1606") || (kardex[i].FillerST == "1706") || (kardex[i].FillerST == "1806") || (kardex[i].FillerST == "1906")
+                        || (kardex[i].FillerST == "2006") || (kardex[i].FillerST == "2106") || (kardex[i].FillerST == "2206"))
+                    {
+                        if (kardex[i].status == "C")
+                        {
+                            kardex[i].estatusSurtido = "C";
+                        }
+                        if (kardex[i].status == "")
+                        {
+                            kardex[i].estatusSurtido = "O";
+                        }
+                        if (kardex[i].status == "O" && kardex[i].estatusSurtido == "")
+                        {
+                            kardex[i].estatusSurtido = "O";
+                        }
+
+                        if ((Convert.ToInt32(Session["puesto"]) == 100) && kardex[i].status == "O")
+                        {
+                            kardex[i].acciones = "";
+                            if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
                             {
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
                             }
-                            if (kardex[i].estatusSurtido != "T")
+                            else if (kardex[i].estatusSurtido == "D")
                             {
-                                kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
                             }
-                            if (kardex[i].estatusSurtido != "S")
+                            else
                             {
-                                kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                if (kardex[i].estatusSurtido != "P" && kardex[i].FechaSurtir == "" && kardex[i].estatusSurtido != "D")
+                                {
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "T" && kardex[i].FechaTraspaso == "" && kardex[i].estatusSurtido != "D")
+                                {
+                                    //kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "S" && kardex[i].FechaSurtiendo == "" && kardex[i].estatusSurtido != "D")
+                                {
+                                    kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                }
+                                //if (kardex[i].estatusSurtido != "D" && kardex[i].FechaSurtido == "")
+                                {
+                                    kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                }
                             }
-                            if (kardex[i].estatusSurtido != "D")
+                        }
+                        else if ((Convert.ToInt32(Session["puesto"]) == 31) && kardex[i].status == "O")
+                        {                            
+                            kardex[i].acciones = "";
+                            if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
                             {
-                                kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>" +
+                                    "<button title='Cancelar' type='button' id='btnCancelar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-ban'></i></button>";
                             }
-                            */
+                            else if (kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "X")
+                            {
+                                if (kardex[i].FechaMC2 != "")
+                                {
+                                    kardex[i].acciones += "";
+                                }
+                                else
+                                {
+                                    kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>" +
+                                        "<button title='Cancelar' type='button' id='btnCancelar' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-ban'></i></button>";
+                                }
+                            }
+                            else
+                            {
+                                kardex[i].acciones = "";
+                                /*
+                                if (kardex[i].estatusSurtido != "P")
+                                {
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "T")
+                                {
+                                    kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "S")
+                                {
+                                    kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "D")
+                                {
+                                    kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                }
+                                */
+                            }
+                        }
+                        else if ((Convert.ToInt32(Session["puesto"]) == 32) && kardex[i].status == "O")
+                        {
+                            kardex[i].acciones = "";
+                            if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
+                            {
+                                kardex[i].acciones = "";
+                                //kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                            }
+                            else
+                            {
+                                if (kardex[i].estatusSurtido != "P" && kardex[i].FechaSurtir == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido != "X")
+                                {
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "T" && kardex[i].FechaTraspaso == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido == "P" && kardex[i].estatusSurtido != "X")
+                                {
+                                    //kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "S" && kardex[i].FechaSurtiendo == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido == "P" && kardex[i].estatusSurtido != "X")
+                                {
+                                    kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                }
+                                if ((kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "S") && kardex[i].estatusSurtido != "X")
+                                {
+                                    if (kardex[i].FechaMC2 != "")
+                                    {
+                                        kardex[i].acciones += "";
+                                    }
+                                    else
+                                    {
+                                        kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                        //kardex[i].acciones += "<button title='Cerrar' type='button' id='btnCerrado' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                    }
+                                }
+                            }
+                        }
+
+                        else if (((Convert.ToInt32(Session["puesto"]) == 33) || Convert.ToInt32(Session["puesto"]) == 2 || Convert.ToInt32(Session["puesto"]) == 1) && kardex[i].status == "O")
+                        {
+                            kardex[i].acciones = "";
+                            if (kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "X")
+                            {
+                                if (kardex[i].FechaMC2 != "")
+                                {
+                                    kardex[i].acciones += "";
+                                }
+                                else
+                                {
+                                    kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar2' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
+                                }
+                            }
+                            else
+                            {
+                                kardex[i].acciones = "";
+                                /*
+                                if (kardex[i].estatusSurtido != "P")
+                                {
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                    kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "T")
+                                {
+                                    kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "S")
+                                {
+                                    kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
+                                }
+                                if (kardex[i].estatusSurtido != "D")
+                                {
+                                    kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                                }
+                                */
+                            }
+                        }
+                        else
+                        {
+                            kardex[i].acciones = "";
                         }
                     }
                     else
                     {
                         kardex[i].acciones = "";
-                    }
-                }
-                else if ((kardex[i].FillerST == "2306") || (kardex[i].FillerST == "1406") || (kardex[i].FillerST == "1106") || (kardex[i].FillerST == "1606") || (kardex[i].FillerST == "1706") || (kardex[i].FillerST == "1806") || (kardex[i].FillerST == "1906")
-                    || (kardex[i].FillerST == "2006") || (kardex[i].FillerST == "2106") || (kardex[i].FillerST == "2206"))
-                {
-                    if (kardex[i].status == "C")
-                    {
-                        kardex[i].estatusSurtido = "C";
-                    }
-                    if (kardex[i].status == "")
-                    {
-                        kardex[i].estatusSurtido = "O";
-                    }
-                    if (kardex[i].status == "O" && kardex[i].estatusSurtido == "")
-                    {
-                        kardex[i].estatusSurtido = "O";
-                    }
-
-                    if ((Convert.ToInt32(Session["puesto"]) == 100) && kardex[i].status == "O")
-                    {
-                        kardex[i].acciones = "";
-                        if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
+                        if (kardex[i].status == "C")
                         {
-                            kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
+                            kardex[i].estatusSurtido = "C";
                         }
-                        else if (kardex[i].estatusSurtido == "D")
+                        if (kardex[i].status == "")
                         {
-                            kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
+                            kardex[i].estatusSurtido = "O";
                         }
-                        else
+                        if (kardex[i].status == "O" && kardex[i].estatusSurtido == "")
                         {
-                            if (kardex[i].estatusSurtido != "P" && kardex[i].FechaSurtir == "" && kardex[i].estatusSurtido != "D")
-                            {
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "T" && kardex[i].FechaTraspaso == "" && kardex[i].estatusSurtido != "D")
-                            {
-                                //kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "S" && kardex[i].FechaSurtiendo == "" && kardex[i].estatusSurtido != "D")
-                            {
-                                kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
-                            }
-                            //if (kardex[i].estatusSurtido != "D" && kardex[i].FechaSurtido == "")
-                            {
-                                kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                            }
+                            kardex[i].estatusSurtido = "O";
                         }
-                    }
-                    else if ((Convert.ToInt32(Session["puesto"]) == 31) && kardex[i].status == "O")
-                    {
-                        kardex[i].acciones = "";
-                        /*if (kardex[i].estatusSurtido == "O" && kardex[i].FechaMC1 == "")
-                        {
-                            kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                        }
-                        else if (kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "X")
-                        {
-                            kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
-                        }
-                        else*/
-                        {
-                            kardex[i].acciones = "";
-                            /*
-                            if (kardex[i].estatusSurtido != "P")
-                            {
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "T")
-                            {
-                                kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "S")
-                            {
-                                kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "D")
-                            {
-                                kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                            }
-                            */
-                        }
-                    }
-                    else if ((Convert.ToInt32(Session["puesto"]) == 32) && kardex[i].status == "O")
-                    {
-                        kardex[i].acciones = "";
-                        if (kardex[i].estatusSurtido == "O" && kardex[i].FechaSurtir == "")
-                        {
-                            kardex[i].acciones = "";
-                            //kardex[i].acciones += "<button title='Validar' type='button' id='btnValidar' class='btn btn-dark' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                            kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                        }
-                        else
-                        {
-                            if (kardex[i].estatusSurtido != "P" && kardex[i].FechaSurtir == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido != "X")
-                            {
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "T" && kardex[i].FechaTraspaso == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido == "P" && kardex[i].estatusSurtido != "X")
-                            {
-                                //kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "S" && kardex[i].FechaSurtiendo == "" && kardex[i].estatusSurtido != "D" && kardex[i].estatusSurtido == "P" && kardex[i].estatusSurtido != "X")
-                            {
-                                kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
-                            }
-                            if ((kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "S") && kardex[i].estatusSurtido != "X")
-                            {
-                                kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                                //kardex[i].acciones += "<button title='Cerrar' type='button' id='btnCerrado' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                            }
-                        }
-                    }
-
-                    else if (((Convert.ToInt32(Session["puesto"]) == 33) || Convert.ToInt32(Session["puesto"]) == 2 || Convert.ToInt32(Session["puesto"]) == 1) && kardex[i].status == "O")
-                    {
-                        kardex[i].acciones = "";
-                        if (kardex[i].estatusSurtido == "D" || kardex[i].estatusSurtido == "X")
-                        {
-                            kardex[i].acciones += "<button title='Validar' type='button' id='btnFinalizar2' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-circle-check'></i></button>";
-                        }
-                        else
-                        {
-                            kardex[i].acciones = "";
-                            /*
-                            if (kardex[i].estatusSurtido != "P")
-                            {
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                                kardex[i].acciones += "<button title='Por surtir' type='button' id='btnSurtir' class='btn btn-warning' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "T")
-                            {
-                                kardex[i].acciones += "<button title='De traspaso'  type='button' id='btnTraspaso' class='btn btn-secondary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-truck'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "S")
-                            {
-                                kardex[i].acciones += "<button title='Surtiendo' type='button' id='btnSurtiendo' class='btn btn-outline-primary' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-spinner'></i></button>";
-                            }
-                            if (kardex[i].estatusSurtido != "D")
-                            {
-                                kardex[i].acciones += "<button title='Surtido' type='button' id='btnSurtido' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button>";
-                            }
-                            */
-                        }
-                    }
-                    else
-                    {
-                        kardex[i].acciones = "";
-                    }
-                }
-                else
-                {
-                    kardex[i].acciones = "";
-                    if (kardex[i].status == "C")
-                    {
-                        kardex[i].estatusSurtido = "C";
-                    }
-                    if (kardex[i].status == "")
-                    {
-                        kardex[i].estatusSurtido = "O";
-                    }
-                    if (kardex[i].status == "O" && kardex[i].estatusSurtido == "")
-                    {
-                        kardex[i].estatusSurtido = "O";
                     }
                 }
             }
@@ -827,6 +863,17 @@ namespace CapaPresentacion.Controllers
             return Json(new
             {
                 data = idConsumoROVE
+            }, JsonRequestBehavior.AllowGet);
+        }
+        
+        [HttpPost]
+        public JsonResult cerrar_st(string DocEntry)
+        {
+            solicitudTrasladoBLL.cerrarSTAbiertas(DocEntry.Split('-')[0]);
+
+            return Json(new
+            {
+                data = 1
             }, JsonRequestBehavior.AllowGet);
         }
 

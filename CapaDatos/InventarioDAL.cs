@@ -383,6 +383,46 @@ namespace CapaDatos
             return id;
         }
 
+
+        public List<SolicitudTrasladoDetalle> buscarSTTSPendientes()
+        {
+            List<SolicitudTrasladoDetalle> listaDocumentos = new List<SolicitudTrasladoDetalle>();
+            try
+            {
+                using (SqlConnection conexionDB = new SqlConnection(ConexionDAL.conexionWeb))
+                {
+                    string consulta = "select T1.docEntry,T1.[Origen ST], T1.[Destino ST], T0.itemCode, T0.batchNum, T0.idSurtidoParcial, T0.quantity  from DesarrolloWeb.dbo.surtidoParcial T0 join DesarrolloWeb.dbo.[A1 - ST_TS2] T1 on concat(T0.DocEntry,'-',T0.lineNum)=T1.docEntry where estatus=3 ";
+
+                    SqlCommand comando = new SqlCommand(consulta, conexionDB);
+                    comando.CommandType = CommandType.Text;
+                    conexionDB.Open();
+
+                    using (SqlDataReader datareader = comando.ExecuteReader())
+                    {
+                        while (datareader.Read())
+                        {
+                            listaDocumentos.Add(new SolicitudTrasladoDetalle()
+                            {
+                                FillerST = datareader["Origen ST"].ToString(),
+                                ToWhsCodeST = datareader["Destino ST"].ToString(),
+                                ItemCodeST = datareader["itemCode"].ToString(),
+                                DistNumber = datareader["batchNum"].ToString(),
+                                idSurtido = datareader["idSurtidoParcial"].ToString(),
+                                QuantityST = datareader["quantity"].ToString(),
+                                DocEntry = datareader["DocEntry"].ToString()
+                            });
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                listaDocumentos = new List<SolicitudTrasladoDetalle>();
+            }
+
+            return listaDocumentos;
+        }
+
         //S8-REQUERIDO
         public List<Inventario> obtenerExistenciasCaducadas(int tipoProducto)
         {
@@ -963,7 +1003,7 @@ namespace CapaDatos
 
                     if ((puesto == "32"))
                     {
-                        consulta = "select * FROM DESARROLLOWEB.DBO.[A1 - ST_TS2] where [Articulo ST] LIKE '%" + articulo + "%' and [Descripcion ST] LIKE '%" + descripcion + "%' and [Origen ST] LIKE '%" + almacen1 + "%'  and [Destino ST] LIKE '%" + almacen2 + "%' ";
+                        consulta = "select * FROM DESARROLLOWEB.DBO.[A1 - ST_TS2] TSTTS left join DesarrolloWeb.dbo.surtidores TS on TS.nombreSurtidor=TSTTS.nombreSurtidor where [Articulo ST] LIKE '%" + articulo + "%' and [Descripcion ST] LIKE '%" + descripcion + "%' and [Origen ST] LIKE '%" + almacen1 + "%'  and [Destino ST] LIKE '%" + almacen2 + "%' ";
 
                         if (fechaInicio != "")
                         {
@@ -988,7 +1028,7 @@ namespace CapaDatos
                         }
                         if (ubicacion == "1")
                         {
-                            consulta = consulta + " AND [U_listapesos] is not null AND [Estatus ST] ='O' AND(([Origen ST]='1403' AND [Destino ST]='1406') OR ([Origen ST]='1420' AND [Destino ST]='1406') OR ([Origen ST]='1405' AND [Destino ST]='1406') OR ([Origen ST]='1406' AND [Destino ST]='1402'))";
+                            consulta = consulta + " AND [U_listapesos] is not null AND [Estatus ST] ='O' AND(([Origen ST]='1403' AND [Destino ST]='1406') OR ([Origen ST]='1420' AND [Destino ST]='1406') OR ([Origen ST]='1421' AND [Destino ST]='1406') OR ([Origen ST]='1405' AND [Destino ST]='1406') OR ([Origen ST]='1406' AND [Destino ST]='1403') OR ([Origen ST]='1406' AND [Destino ST]='1420') OR ([Origen ST]='1406' AND [Destino ST]='1405') OR ([Origen ST]='1406' AND [Destino ST]='1421'))";
                         }
                         else
                         {
@@ -999,7 +1039,7 @@ namespace CapaDatos
                     }
                     else if ((puesto == "31") || (puesto == "33") || (puesto == "2") || (puesto == "1"))
                     {
-                        consulta = "select * FROM DESARROLLOWEB.DBO.[A1 - ST_TS2] where [Articulo ST] LIKE '%" + articulo + "%' and [Descripcion ST] LIKE '%" + descripcion + "%' ";
+                        consulta = "select * FROM DESARROLLOWEB.DBO.[A1 - ST_TS2] TSTTS left join DesarrolloWeb.dbo.surtidores TS on TS.nombreSurtidor=TSTTS.nombreSurtidor where [Articulo ST] LIKE '%" + articulo + "%' and [Descripcion ST] LIKE '%" + descripcion + "%' ";
 
                         if (fechaInicio != "")
                         {
@@ -1027,7 +1067,7 @@ namespace CapaDatos
                         else if (ubicacion == "1")
                         {
                             //consulta = consulta + " AND ([U_listapesos] ='D' OR [U_listapesos] ='X') AND [Estatus ST] ='O' AND [Origen ST]='1703' ";
-                            consulta = consulta + " AND(([Origen ST]='1403' AND [Destino ST]='1406') OR ([Origen ST]='1420' AND [Destino ST]='1406') OR ([Origen ST]='1405' AND [Destino ST]='1406') OR ([Origen ST]='1406' AND [Destino ST]='1402'))";
+                            consulta = consulta + " AND(([Origen ST]='1403' AND [Destino ST]='1406') OR ([Origen ST]='1420' AND [Destino ST]='1406') OR ([Origen ST]='1421' AND [Destino ST]='1406') OR ([Origen ST]='1405' AND [Destino ST]='1406') OR ([Origen ST]='1406' AND [Destino ST]='1403') OR ([Origen ST]='1406' AND [Destino ST]='1405') OR ([Origen ST]='1406' AND [Destino ST]='1420') OR ([Origen ST]='1406' AND [Destino ST]='1421') )";
                         }
                         else
                         {
@@ -1040,11 +1080,11 @@ namespace CapaDatos
                     {
                         if (articulo == "" && almacen1 == "" && almacen2 == "" && descripcion == "" && fechaInicio == "" && fechaFin == "")
                         {
-                            consulta = "select TOP 0 * FROM DESARROLLOWEB.DBO.[A1 - ST_TS2]";
+                            consulta = "select TOP 0 * FROM DESARROLLOWEB.DBO.[A1 - ST_TS2] TSTTS left join DesarrolloWeb.dbo.surtidores TS on TS.nombreSurtidor=TSTTS.nombreSurtidor";
                         }
                         else
                         {
-                            consulta = "select * FROM DESARROLLOWEB.DBO.[A1 - ST_TS2] where [Articulo ST] LIKE '%" + articulo + "%' and [Descripcion ST] LIKE '%" + descripcion + "%' and [Origen ST] LIKE '%" + almacen1 + "%'  and [Destino ST] LIKE '%" + almacen2 + "%' ";
+                            consulta = "select * FROM DESARROLLOWEB.DBO.[A1 - ST_TS2] TSTTS left join DesarrolloWeb.dbo.surtidores TS on TS.nombreSurtidor=TSTTS.nombreSurtidor where [Articulo ST] LIKE '%" + articulo + "%' and [Descripcion ST] LIKE '%" + descripcion + "%' and [Origen ST] LIKE '%" + almacen1 + "%'  and [Destino ST] LIKE '%" + almacen2 + "%' ";
 
                             if (fechaInicio != "")
                             {
@@ -1089,6 +1129,7 @@ namespace CapaDatos
                                 QuantityST = datareader["Cantidad ST"].ToString(),
                                 OpenQuantityST = datareader["Pendiente ST"].ToString(),
                                 UMST = datareader["UM ST"].ToString(),
+                                idEmpleado = datareader["idSurtidor"].ToString(),
                                 //DocNumTS = datareader["Folio TS"].ToString(),
                                 //DocDateTS = datareader["Fecha creacion TS"].ToString() == "" ? "-" : Convert.ToDateTime(datareader["Fecha creacion TS"].ToString()).ToShortDateString(),
                                 //DocTimeTS = datareader["Hora creacion TS"].ToString(),
@@ -1171,6 +1212,7 @@ namespace CapaDatos
 
         public int actualizarEstatus(SolicitudTrasladoDetalle solicitudTraslado)
         {
+            DateTime fecha = new DateTime();
             int docEntry = 0;
             string sociedad = "";
             try
@@ -1189,15 +1231,15 @@ namespace CapaDatos
 
                     if (solicitudTraslado.estatusSurtido == "V")
                     {
-                        consulta = consulta + ", u_fechamc1 = getdate(), u_usuariomc1=@usuario ";
+                        consulta = consulta + ", u_fechamc1 = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', u_usuariomc1=@usuario ";
                     }
                     if (solicitudTraslado.estatusSurtido == "P")
                     {
-                        consulta = consulta + ", u_fechasurtir = getdate(), u_usuariosurtir=@usuario ";
+                        consulta = consulta + ", u_fechasurtir = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', u_usuariosurtir=@usuario ";
                     }
                     if (solicitudTraslado.estatusSurtido == "T")
                     {
-                        consulta = consulta + ", u_fechatraspaso = getdate(), u_usuariotraspaso=@usuario ";
+                        consulta = consulta + ", u_fechatraspaso = '" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', u_usuariotraspaso=@usuario ";
                     }
 
                     consulta = consulta + " where DocEntry = @docentry and linenum=@linenum";
@@ -1235,7 +1277,7 @@ namespace CapaDatos
             {
                 using (SqlConnection conexionDB = new SqlConnection(ConexionDAL.conexionWeb))
                 {
-                    string consulta = "update tssl_naturasol.DBO.WTQ1 set U_listapesos='S', u_fechasurtiendo=getdate(), u_usuariosurtiendo=@usuario ";
+                    string consulta = "update tssl_naturasol.DBO.WTQ1 set U_listapesos='S', u_fechasurtiendo='" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', u_usuariosurtiendo = @usuario ";
 
                     consulta = consulta + " where DocEntry = @docentry and linenum=@linenum";
 
@@ -1274,7 +1316,7 @@ namespace CapaDatos
                     sociedad = "TSSL_NATURASOL";
                     string consulta = "update " + sociedad + ".DBO.WTQ1 set u_listapesos=@u_listapesos, ";
 
-                    consulta = consulta + " U_proveedordiot=@idSurtidor, u_fechasurtiendo=getdate(), u_usuariosurtiendo=@usuario ";
+                    consulta = consulta + " U_proveedordiot=@idSurtidor, u_fechasurtiendo='" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', u_usuariosurtiendo=@usuario ";
 
                     consulta = consulta + "where DocEntry = @docentry and linenum=@linenum";
 
@@ -1314,7 +1356,7 @@ namespace CapaDatos
                     sociedad = "TSSL_NATURASOL";
                     string consulta = "update " + sociedad + ".DBO.WTQ1 set ";
 
-                    consulta = consulta + " u_fechamc2=getdate(), u_usuariomc2=@usuario ";
+                    consulta = consulta + " u_fechamc2='" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', u_usuariomc2=@usuario ";
 
                     consulta = consulta + "where DocEntry = @docentry and linenum=@linenum";
 
@@ -1356,7 +1398,7 @@ namespace CapaDatos
                     sociedad = "TSSL_NATURASOL";
                     string consulta = "update " + sociedad + ".DBO.WTQ1 set u_listapesos=@u_listapesos, ";
 
-                    consulta = consulta + " u_fechasurtido=getdate(), u_usuariosurtido=@usuario ";
+                    consulta = consulta + " u_fechasurtido='" + DateTime.Now.ToString("MM/dd/yyyy HH:mm") + "', u_usuariosurtido=@usuario ";
 
                     consulta = consulta + "where DocEntry = @docentry and linenum=@linenum";
 
