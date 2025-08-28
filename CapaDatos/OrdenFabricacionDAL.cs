@@ -2048,7 +2048,7 @@ namespace CapaDatos
             {
                 using (SqlConnection conexionDB = new SqlConnection(ConexionDAL.conexionWeb))
                 {
-                    string consulta = "SELECT * FROM DESARROLLOWEB.DBO.[PRUEBACONSUMO] T2 ";
+                    string consulta = "SELECT TOP (3000) * FROM DESARROLLOWEB.DBO.[PRUEBACONSUMO] T2 ";
 
                     if (ubicacion == "1")
                     {
@@ -2120,29 +2120,26 @@ namespace CapaDatos
             {
                 using (SqlConnection conexionDB = new SqlConnection(ConexionDAL.conexionWeb))
                 {
-                    string consulta = "SELECT T1.Uom, T0.Merma, T1.ocrcode, T1.series, T0.Linea, T0.Comentarios, case when DATEPART(HOUR, fechaCreacion) between 6 and 13 then 'Turno 1' when DATEPART(HOUR, fechaCreacion) between 14 and 21 then 'Turno 2' else 'Turno 3' end as 'Turno', T0.estatus, T1.ItemCode ,T1.ProdName , [idLiberacionROVE],T0.[DocNum],[BatchNumber],[Quantity],T0.[DocEntry],[Supervisor],[Operador],[Headcount],[Headcount2],Eficiencia, [VelocidadLinea], Format([fechaCreacion], N'dd/MM/yyyy HH:mm') as 'fechaCreacion'   " +
-                        "FROM desarrolloweb.dbo.[liberacionesROVE] T0 " +
-                        "JOIN TSSL_NATURASOL.dbo.OWOR T1 ON T1.DocNum=T0.DocNum COLLATE SQL_Latin1_General_CP850_CI_AS " +
-                        "WHERE T1.Status='R' ";
+                    string consulta = "SELECT * from DESARROLLOWEB.DBO.[PRUEBALIBERACIONES] T1 ";
 
                     if (ubicacion == "1")
                     {
-                        consulta = consulta + " and T1.series IN (97) ";
+                        consulta = consulta + " WHERE T1.series IN (97) ";
                     }
 
                     if (ubicacion == "2")
                     {
-                        consulta = consulta + " and T1.series IN(77,78,33,79,80,94,99,101) ";
+                        consulta = consulta + " WHERE T1.series IN(77,78,33,79,80,94,99,101) ";
                     }
 
                     if (ubicacion == "3")
                     {
-                        consulta = consulta + " and T1.series IN (77,78,33,79,80,94,99,101) ";
+                        consulta = consulta + " WHERE T1.series IN (77,78,33,79,80,94,99,101) ";
                     }
 
                     if (ubicacion == "5")
                     {
-                        consulta = consulta + " and T1.series IN (104,106,110) ";
+                        consulta = consulta + " WHERE T1.series IN (104,106,110) ";
                     }
 
                     consulta = consulta + " order by idLiberacionROVE desc";

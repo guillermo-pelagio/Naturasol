@@ -447,6 +447,13 @@
     </Compile>
     <Compile Include="Models\Archivo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\images\inicio\01.jpg" />
+    <Content Include="Content\images\inicio\02.jpg" />
+    <Content Include="Content\images\inicio\03.jpg" />
+    <Content Include="Content\images\inicio\04.jpg" />
+    <Content Include="Content\images\inicio\05.jpg" />
+    <Content Include="Content\images\inicio\06.jpg" />
+    <Content Include="Content\images\inicio\07.jpg" />
     <Content Include="Content\js\index.global.js" />
     <Content Include="Content\js\jquery.js" />
     <Content Include="Content\js\moment.js" />

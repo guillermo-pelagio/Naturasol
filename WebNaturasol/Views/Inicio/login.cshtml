@@ -26,13 +26,13 @@
     </div>
     <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth px-0" style="background-color: #e8eef1">
+            <div class="content-wrapper d-flex align-items-center auth px-0" id="divInicio">
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
-                        <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                        <div class="auth-form-light text-left py-5 px-4 px-sm-5" style="border-radius: 25px">
                             <div class="text-center brand-logo">
                                 <img src="~/Content/images/logo.png" id="logomielmex" alt="logo" style="width:70px;display:none">
-                                <img src="~/Content/images/logobordes.png" id="logonaturasol" alt="logo" style="width:100px;display:none">
+                                <img src="~/Content/images/logobordes.png" id="logonaturasol" alt="logo" style="width:8rem;display:none">
                             </div>
                             <h4 class="text-center">Bienvenido</h4>
                             <h6 class="text-center font-weight-light">Inicia sesión para continuar.</h6>
@@ -75,10 +75,34 @@
 
     <script>
 
+        getRandomImage();
+
         var onloadCallback = function() {
-                
+
         };
-    
+
+        function getRandomImage() {
+            //declare an array to store images
+            var randomImage = new Array();
+            //0,1,2,3,4,5
+            randomImage[0] = "url('/Content/images/inicio/001.png')";
+            randomImage[1] = "url('/Content/images/inicio/002.png')";
+            randomImage[2] = "url('/Content/images/inicio/003.png')";
+            randomImage[3] = "url('/Content/images/inicio/004.png')";
+            randomImage[4] = "url('/Content/images/inicio/005.png')";
+            randomImage[5] = "url('/Content/images/inicio/006.png')";
+            randomImage[6] = "url('/Content/images/inicio/007.png')";
+
+            // genrate a number and provide to genrate image accordingly
+            var number = Math.floor(Math.random() * randomImage.length);
+            // return the images which are genrated
+
+
+            document.getElementById("divInicio").style.backgroundImage = randomImage[number];
+            document.getElementById("divInicio").style.backgroundRepeat = "no-repeat";
+            document.getElementById("divInicio").style.backgroundSize = "cover";
+        }
+
         var ipvalida = 0;
         /*
         fetch('https://api.ipify.org?format=json')
@@ -200,6 +224,15 @@
         }
 
     </script>
+
+    <style>
+        input::placeholder {
+            color: red;
+            font-size: 1.2em;
+            font-style: italic;
+            opacity: 1;
+        }
+    </style>
 </body>
 
 </html>
