@@ -56,8 +56,6 @@
     </div>
 </div>
 
-
-<!--VISTA DE MODAL-->
 <div class="modal fade" id="modalBuscarKardex" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
@@ -83,7 +81,7 @@
 
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Sociedad:</label>
+                    <label for="sociedadInventario" class="col-sm-4 col-form-label">Sociedad:</label>
                     <div class="col-sm-8">
                         <select class="custom-select" id="sociedadInventario">
                             <option value="0">Naturasol</option>
@@ -92,31 +90,31 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Artículo:</label>
+                    <label for="articuloInventario" class="col-sm-4 col-form-label">Artículo:</label>
                     <div class="col-sm-8">
                         <input type="text" maxlength="12" class="form-control" id="articuloInventario">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Descripción:</label>
+                    <label for="descripcionInventario" class="col-sm-4 col-form-label">Descripción:</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="descripcionInventario">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Almácen:</label>
+                    <label for="almacenInventario" class="col-sm-4 col-form-label">Almácen:</label>
                     <div class="col-sm-8">
                         <input type="number" class="form-control" id="almacenInventario">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Lote:</label>
+                    <label for="loteInventario" class="col-sm-4 col-form-label">Lote:</label>
                     <div class="col-sm-8">
                         <input type="email" class="form-control" id="loteInventario">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">De / a:</label>
+                    <label class="col-sm-4 col-form-label">De / a:</label>
                     <div class="col-sm-4">
                         <input type="date" class="form-control" id="fechaInicio">
                     </div>
@@ -152,7 +150,6 @@
             $("#modalBuscarKardex").modal("show");
         }
 
-        //LISTADO DE OF'S
         tablaKardex = $("#tablaKardex").DataTable({
             paging: true,
             ordering: false,
@@ -178,7 +175,7 @@
                 type: "GET",
                 dataType: "json",
             },
-            "columns": [                
+            "columns": [
                 { data: 'Sociedad' },
                 { data: 'DocNum' },
                 { data: 'Tipo' },
@@ -207,7 +204,7 @@
                     $('#overlay').css('display', 'none');
                     if (resultado == 1) {
                         var busqueda = {
-                            Sociedad: $("#sociedadInventario").val(),                            
+                            Sociedad: $("#sociedadInventario").val(),
                             Artículo: $("#articuloInventario").val(),
                             Almacen: $("#almacenInventario").val(),
                             Descripción: $("#descripcionInventario").val(),

@@ -175,7 +175,6 @@ namespace WebArribosPlanta.Controllers
                             Session["cotizacionPMuestras"] = sesionGraficos.cotizacionPMuestras;
                             Session["cotizacionPSinMovimiento"] = sesionGraficos.cotizacionPSinMovimiento;
 
-
                             return 1;
                         }
                         else

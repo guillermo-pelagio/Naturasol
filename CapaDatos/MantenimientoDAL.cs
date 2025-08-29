@@ -25,7 +25,7 @@ namespace CapaDatos
                     }
                     else
                     {
-                        consulta = "select * FROM DESARROLLOWEB.DBO.[M1 - Inventario] where [Artículo] LIKE '%" + articulo + "%' and [Descripción del Artículo] LIKE '%" + descripcion + "%' and [Almacén] LIKE '%" + almacen + "%'  ORDER BY [Artículo], [Almacén], [Fecha de Caducidad] ASC ";
+                        consulta = "select * FROM DESARROLLOWEB.DBO.[M1 - Inventario] where [Articulo] LIKE '%" + articulo + "%' and [Descripción Articulo] LIKE '%" + descripcion + "%' and [Almacén] LIKE '%" + almacen + "%'  ORDER BY [Articulo], [Almacén] ASC ";
                     }
 
                     SqlCommand comando = new SqlCommand(consulta, conexionDB);
@@ -39,12 +39,9 @@ namespace CapaDatos
                             listaSemanasStock.Add(new Inventario()
                             {
                                 //Sociedad = datareader["Sociedad"].ToString(),
-                                Artículo = datareader["ArtIculo"].ToString(),
-                                Sociedad = datareader["Sociedad"].ToString(),
+                                Artículo = datareader["Articulo"].ToString(),
                                 Descripción = datareader["Descripción Articulo"].ToString(),
-                                Almacén = datareader["Almacén"].ToString(),
-                                Stock = datareader["En Stock"].ToString(),
-                                UM = datareader["UM"].ToString()                                
+                                Almacén = datareader["Almacén"].ToString()                     
                             });
                         }
                     }

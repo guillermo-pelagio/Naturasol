@@ -31,7 +31,7 @@
                                             <div class="card-body" style="margin-top: 0rem; padding: 0rem">
 
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover" id="tablaCotizacion" style="width: 100%">
+                                                    <table class="table table-hover" id="tablaLinea" style="width: 100%">
                                                         <thead>
                                                             <tr>
                                                                 <th>Acciones</th>
@@ -51,13 +51,13 @@
                             </div>
                             <div class="tab-pane fade" id="pills-maquinas" role="tabpanel" aria-labelledby="pills-maquinas-tab">
                                 <div class="tab-pane fade show active" id="pills-resumen" role="tabpanel" aria-labelledby="pills-resumen-tab">
-                                    <button type="button" class="btn btn-primary" onclick="crearLinea()" data-dismiss="modal" style="width: 10rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="NuevoRegistro">Nuevo registro</button>
+                                    <button type="button" class="btn btn-primary" onclick="crearMaquina()" data-dismiss="modal" style="width: 10rem; height: 2rem;" data-toggle="tooltip" data-placement="top" title="NuevoRegistro">Nuevo registro</button>
                                     <div class="col-lg-12 grid-margin stretch-card">
                                         <div class="card">
                                             <div class="card-body" style="margin-top: 0rem; padding: 0rem">
 
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover" id="tablaCotizacion2025" style="width: 100%">
+                                                    <table class="table table-hover" id="tablaMaquinas" style="width: 100%">
                                                         <thead>
                                                             <tr>
                                                                 <th>Acciones</th>
@@ -83,7 +83,7 @@
                                             <div class="card-body" style="margin-top: 0rem; padding: 0rem">
 
                                                 <div class="table-responsive">
-                                                    <table class="table table-hover" id="tablaCotizacion2025" style="width: 100%">
+                                                    <table class="table table-hover" id="tablaPersonal" style="width: 100%">
                                                         <thead>
                                                             <tr>
                                                                 <th>Acciones</th>
@@ -109,13 +109,12 @@
     </div>
 </div>
 
-
 <!--VISTA DE MODAL-->
-<div class="modal fade" id="modalCrearCotizacion" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="modalCrearLinea" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: lightskyblue" id="encabezadoCrearCotizacion">
-                <h5 class="modal-title" id="tituloModalCotizacion">Crear cotizacion</h5>
+            <div class="modal-header" style="background-color: lightskyblue" id="encabezadoCrearLinea">
+                <h5 class="modal-title" id="tituloModalCotizacion">Crear Linea</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -123,126 +122,135 @@
 
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha alta cotización:</label>
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Unidad de negocio:</label>
                     <div class="col-sm-8">
-                        <input type="date" class="form-control" id="fechaAltaCotizacion">
-                    </div>
-                </div>
-                <div class="form-group row" id="divKam">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">KAM:</label>
-                    <input type="hidden" class="form-control" id="idCotizacion">
-                    <div class="col-sm-8">
-                        <select class="custom-select" id="kamCotizacion">
+                        <select class="custom-select" id="idNegocio">
                             <option value="0">Seleccione una opción</option>
                             <option value="1">HECTOR IBARROLA</option>
                             <option value="2">GRECIA LEY</option>
                             <option value="3">KARINA MONDRAGON</option>
                             <option value="4">SAMUEL PEÑA</option>
-                            <option value="5">DAVID ALBA</option>
-                            <option value="6">ROBERTO CERVANTES</option>
-                            <option value="7">JAVIER CARRASCO</option>
-                            <option value="8">ELIU DOMINGUEZ</option>
-                            <!--option value="9">MONTSERRAT BUENDIA</option>->
-                            <option value="10">LILIA BECERRIL</option>
-                            <!--<option value="11">ALBERTO BECERRIL</option>-->
-                            <option value="12">IVAN CHAGOYA</option>
-                            <option value="13">CASIMIRO FLORES</option>
-                            <option value="14">LEONARDO YAÑEZ</option>
-                            <option value="15">ANDREA VILLANUEVA</option>
+                            <option value="5">
+                                DAVID ALBA
+                            </option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group row" style="display:none" id="divKam2">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">KAM:</label>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Nombre linea:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="kamCotizacion2">
+                        <input type="text" class="form-control" id="idLinea">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Cliente:</label>
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Descripción::</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="clienteCotizacion">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Categoria:</label>
-                    <div class="col-sm-8">
-                        <input type="text" class="form-control" id="categoriaCotizacion">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Descripción:</label>
-                    <div class="col-sm-8">
-                        <textarea class="form-control" id="descripcionCotizacion" rows="3"></textarea>
-                    </div>
-                </div>
-                </br>
-                <div class="form-group row" id="divFechaPresentacion" style="display:none">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha presentación:</label>
-                    <div class="col-sm-8">
-                        <input type="date" class="form-control" id="presentacionCotizacion">
-                    </div>
-                </div>
-                <div class="form-group row" id="divEstatus" style="display:none">
-                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Estatus:</label>
-                    <div class="col-sm-8">
-                        <select class="custom-select" id="estatusCotizacion">
-                            <option value="0">Seleccione una opción</option>
-                            <option value="1">APROBADO</option>
-                            <option value="2">RECHAZADO</option>
-                            <option value="3">EN REVISIÓN</option>
-                            <option value="4">POR PRESENTAR</option>
-                            <option value="5">SUSTITUIDO</option>
-                            <option value="6">EN ESPERA DE MUESTRAS</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row" style="display:none;" id="divRechazo">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Motivo rechazo:</label>
-                    <div class="col-sm-8">
-                        <select class="custom-select" id="motivoRechazoCotizacion">
-                            <option value="0">Seleccione una opción</option>
-                            <option value="1">NO DAMOS EL PERFIL</option>
-                            <option value="2">FALTA DE ESPACIO DE ANAQUEL</option>
-                            <option value="3">PRECIO</option>
-                            <option value="4">OTRO</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group row" id="divOtroMotivo" style="display:none">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Otro motivo:</label>
-                    <div class="col-sm-8">
-                        <textarea class="form-control" id="comentariosOtroMotivo" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="form-group row" style="display: none;" id="divFechaRespuesta">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha respuesta:</label>
-                    <div class="col-sm-8">
-                        <input type="date" class="form-control" id="respuestaCotizacion">
-                    </div>
-                </div>
-                <div class="form-group row" style="display: none;" id="divFechaLanzamiento">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Fecha lanzamiento:</label>
-                    <div class="col-sm-8">
-                        <input type="date" class="form-control" id="lanzamientoCotizacion">
-                    </div>
-                </div>
-                <div class="form-group row" id="divComentarios" style="display:none">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Comentarios:</label>
-                    <div class="col-sm-8">
-                        <textarea class="form-control" id="comentariosCotizacion" rows="3"></textarea>
+                        <textarea class="form-control" id="idDescripción" rows="3"></textarea>
                     </div>
                 </div>
                 <br />
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    @if ((Convert.ToInt32(Session["puesto"]) == 10) || (Convert.ToInt32(Session["puesto"]) == 100))
-                    {
-                        <button type="button" id="btnGuardarCotizacion" onclick="guardadoCotizacion()" class="btn btn-success">Guardar</button>
-                    }
+                    <button type="button" id="btnGuardarCotizacion" onclick="guardarLinea()" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--VISTA DE MODAL-->
+<div class="modal fade" id="modalCrearMaquina" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: lightskyblue" id="encabezadoCrearMaquina">
+                <h5 class="modal-title" id="tituloModalCotizacion">Crear Maquina</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Linea:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="idLineas">
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Nombre maquina:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="idMaquina">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Descripción::</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="idDescripción" rows="3"></textarea>
+                    </div>
+                </div>
+                <br />
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Frecuencia mantenimiento:</label>
+                    <div class="col-sm-4">
+                        <input type="number" class="form-control" id="frecuenciaMtto">                        
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="custom-select" id="idTiempoMtto">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">Dias</option>
+                            <option value="2">Semanas</option>
+                            <option value="3">Meses</option>
+                        </select>
+                    </div>
                 </div>
 
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnGuardarCotizacion" onclick="guardarMaquin()" class="btn btn-success">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--VISTA DE MODAL-->
+<div class="modal fade" id="modalCrearPersonal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 50rem">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: lightskyblue" id="encabezadoCrearPersonal">
+                <h5 class="modal-title" id="tituloModalCotizacion">Crear Personal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group row" id="divKam">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Planta:</label>
+                    <div class="col-sm-8">
+                        <select class="custom-select" id="idNegocio">
+                            <option value="0">Seleccione una opción</option>
+                            <option value="1">UNTABLES</option>
+                            <option value="2">BARRAS</option>
+                            <option value="3">SEMILLAS</option>
+                            <option value="4">CEDIS</option>
+                            <option value="5">TULTEPARK</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Nombre:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="idLinea">
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                    <button type="button" id="btnGuardarCotizacion" onclick="guardarPersonal()" class="btn btn-success">Guardar</button>
+                </div>
             </div>
         </div>
     </div>
@@ -251,5 +259,17 @@
 @section scripts
 {
     <script>
+        function crearLinea() {
+            $("#modalCrearLinea").modal("show");
+        }
+
+        function crearMaquina() {
+            $("#modalCrearMaquina").modal("show");
+        }
+
+        function crearPersonal() {
+            $("#modalCrearPersonal").modal("show");
+        }
+
     </script>
 }
