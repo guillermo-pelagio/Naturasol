@@ -18,5 +18,27 @@ namespace CapaNegocios
             inventario = mantenimientoDAL.obtenerInventarioMantenimiento(sociedad, articulo, descripcion, almacen);
             return inventario;
         }
+
+        public int guardarLinea(LineaMtto cotizacionWEB)
+        {
+            return mantenimientoDAL.guardarLinea(cotizacionWEB);
+        }
+
+        public List<LineaMtto> obtenerLineas()
+        {
+            List<LineaMtto> lineas = new List<LineaMtto>();
+            lineas = mantenimientoDAL.obtenerLineas();
+            return lineas;
+        }
+
+        public int guardarMaquina(MaquinasMtto cotizacionWEB)
+        {
+            return mantenimientoDAL.guardarMaquina(cotizacionWEB);
+        }
+
+        public int guardarPersonal(PersonalMtto cotizacionWEB)
+        {
+            return mantenimientoDAL.guardarPersonal(cotizacionWEB);
+        }
     }
 }

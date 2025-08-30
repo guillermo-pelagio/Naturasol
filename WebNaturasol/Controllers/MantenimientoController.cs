@@ -76,5 +76,62 @@ namespace CapaPresentacion.Controllers
 
             return "1";
         }
+
+        [HttpPost]
+        public JsonResult guardar_linea(LineaMtto lineasMTTO)
+        {
+            lineasMTTO.idUsuario = Convert.ToInt32(Session["usuarioId"]);
+            int idLinea = mantenimientoBLL.guardarLinea(lineasMTTO);
+
+            return Json(new
+            {
+                data = idLinea
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult obtener_lineas()
+        {
+            List<LineaMtto> lineas = new List<LineaMtto>();
+            
+            lineas = mantenimientoBLL.obtenerLineas();
+
+            for (int i = 0; i < lineas.Count; i++)
+            {
+                lineas[i].acciones = "<button type='button' id='btnEditar" + lineas[i].idLinea + "' onclick='validarConsumo(" + lineas[i].idLinea + ")' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button><button type='button' id='btnEliminarLinea" + lineas[i].idLinea + "' onclick='validarConsumo(" + lineas[i].idLinea + ",-1 )' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+            }
+
+            var jsonResult = Json(new
+            {
+                data = lineas
+            }, JsonRequestBehavior.AllowGet);
+
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult guardar_maquina(MaquinasMtto maquinasMtto)
+        {
+            maquinasMtto.idUsuario = Convert.ToInt32(Session["usuarioId"]);
+            int idMaquina = mantenimientoBLL.guardarMaquina(maquinasMtto);
+
+            return Json(new
+            {
+                data = idMaquina
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult guardar_personal(PersonalMtto personalMtto)
+        {
+            personalMtto.idUsuario = Convert.ToInt32(Session["usuarioId"]);
+            int idPersonal = mantenimientoBLL.guardarPersonal(personalMtto);
+
+            return Json(new
+            {
+                data = idPersonal
+            }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

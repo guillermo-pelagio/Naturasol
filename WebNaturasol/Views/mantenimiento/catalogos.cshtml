@@ -124,7 +124,7 @@
                 <div class="form-group row">
                     <label for="correoTicketEdit" class="col-sm-4 col-form-label">Unidad de negocio:</label>
                     <div class="col-sm-8">
-                        <select class="custom-select" id="idNegocio">
+                        <select class="custom-select" id="idNegocioLinea">
                             <option value="0">Seleccione una opción</option>
                             <option value="1">HECTOR IBARROLA</option>
                             <option value="2">GRECIA LEY</option>
@@ -139,26 +139,25 @@
                 <div class="form-group row">
                     <label for="correoTicketEdit" class="col-sm-4 col-form-label">Nombre linea:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="idLinea">
+                        <input type="text" class="form-control" id="nombreLinea">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="loteEdit" class="col-sm-4 col-form-label">Descripción::</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control" id="idDescripción" rows="3"></textarea>
+                        <textarea class="form-control" id="descripcionLinea" rows="3"></textarea>
                     </div>
                 </div>
                 <br />
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="btnGuardarCotizacion" onclick="guardarLinea()" class="btn btn-success">Guardar</button>
+                    <button type="button" id="btnGuardarLinea" onclick="guardarLinea()" class="btn btn-success">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!--VISTA DE MODAL-->
 <div class="modal fade" id="modalCrearMaquina" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
@@ -173,7 +172,7 @@
                 <div class="form-group row">
                     <label for="correoTicketEdit" class="col-sm-4 col-form-label">Linea:</label>
                     <div class="col-sm-8">
-                        <select class="custom-select" id="idLineas">
+                        <select class="custom-select" id="idLineaMaquina">
                         </select>
                     </div>
                 </div>
@@ -186,17 +185,17 @@
                 <div class="form-group row">
                     <label for="loteEdit" class="col-sm-4 col-form-label">Descripción::</label>
                     <div class="col-sm-8">
-                        <textarea class="form-control" id="idDescripción" rows="3"></textarea>
+                        <textarea class="form-control" id="descripcionMaquina" rows="3"></textarea>
                     </div>
                 </div>
                 <br />
                 <div class="form-group row">
                     <label for="correoTicketEdit" class="col-sm-4 col-form-label">Frecuencia mantenimiento:</label>
                     <div class="col-sm-4">
-                        <input type="number" class="form-control" id="frecuenciaMtto">                        
+                        <input type="number" class="form-control" id="frecuenciaMttoMaquina">
                     </div>
                     <div class="col-sm-4">
-                        <select class="custom-select" id="idTiempoMtto">
+                        <select class="custom-select" id="idTiempoMttoMaquina">
                             <option value="0">Seleccione una opción</option>
                             <option value="1">Dias</option>
                             <option value="2">Semanas</option>
@@ -208,14 +207,13 @@
                 <br />
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="btnGuardarCotizacion" onclick="guardarMaquin()" class="btn btn-success">Guardar</button>
+                    <button type="button" id="btnGuardarMaquina" onclick="guardarMaquina()" class="btn btn-success">Guardar</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-<!--VISTA DE MODAL-->
 <div class="modal fade" id="modalCrearPersonal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
@@ -230,7 +228,7 @@
                 <div class="form-group row" id="divKam">
                     <label for="correoTicketEdit" class="col-sm-4 col-form-label">Planta:</label>
                     <div class="col-sm-8">
-                        <select class="custom-select" id="idNegocio">
+                        <select class="custom-select" id="idPlantaPersonal">
                             <option value="0">Seleccione una opción</option>
                             <option value="1">UNTABLES</option>
                             <option value="2">BARRAS</option>
@@ -241,15 +239,15 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Nombre:</label>
+                    <label for="nombrePersonal" class="col-sm-4 col-form-label">Nombre:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="idLinea">
+                        <input type="text" class="form-control" id="nombrePersonal">
                     </div>
                 </div>
                 <br />
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="btnGuardarCotizacion" onclick="guardarPersonal()" class="btn btn-success">Guardar</button>
+                    <button type="button" id="btnGuardarPersonal" onclick="guardarPersonal()" class="btn btn-success">Guardar</button>
                 </div>
             </div>
         </div>
@@ -269,6 +267,226 @@
 
         function crearPersonal() {
             $("#modalCrearPersonal").modal("show");
+        }
+
+        function guardarLinea() {
+            var isCorrect = true;
+
+            var currentDate = new Date();
+
+            if ($("#nombreLinea").val() == "") {
+                swal("", "Nombre de la linea no puede ser vacio", "warning");
+                isCorrect = false;
+            }
+
+            if (($("#idNegocioLinea").val() == 0)) {
+                swal("", "Debes indicar una unidad de negocio", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#descripciónLinea").val() == 0) {
+                swal("", "Debes indicar una descripción", "warning");
+                isCorrect = false;
+            }
+
+
+            if (isCorrect) {
+
+                var lineaData = {
+                    nombreLinea: $("#nombreLinea").val(),
+                    idNegocioLinea: $("#idNegocioLinea").val(),
+                    descripcionLinea: $("#descripcionLinea").val()
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                    {
+                        url: '@Url.Action("guardar_linea", "mantenimiento")',
+                        type: "POST",
+                        data: JSON.stringify(
+                            {
+                                lineasMTTO: lineaData
+                            }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado == -1) {
+                                swal("", "Datos incorrectos!", "error");
+                            }
+                            else {
+                                swal("", "Linea insertada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+
+                        },
+                        error: function () {
+                            swal("", "Error al insertar la linea!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                $('#overlay').css('display', 'none');
+            }
+        }
+
+        tablaLinea = $("#tablaLinea").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Inventario',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    }
+                },
+            ],
+
+            "ajax": {
+                url: '@Url.Action("obtener_lineas", "mantenimiento")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                { data: 'acciones'},
+                { data: 'nombreLinea' },
+                { data: 'descripcionLinea' },
+                { data: 'idNegocioLinea' }
+            ],
+        });
+
+        function guardarMaquina() {
+            var isCorrect = true;
+
+            var currentDate = new Date();
+
+            if ($("#idMaquina").val() == "") {
+                swal("", "Nombre de la maquina no puede ser vacio", "warning");
+                isCorrect = false;
+            }
+
+            if (($("#frecuenciaMttoMaquina").val() == 0)) {
+                swal("", "Debes indicar una frecuencia de mantenimiento", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#descripcionMaquina").val() == 0) {
+                swal("", "Debes indicar una descripción", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#idTiempoMttoMaquina").val() == 0) {
+                swal("", "Debes indicar una frecuencia de mantenimiento", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+
+                var maquinaMtto = {
+                    idMaquina: $("#idMaquina").val(),
+                    frecuenciaMttoMaquina: $("#frecuenciaMttoMaquina").val(),
+                    descripcionMaquina: $("#descripcionMaquina").val(),
+                    idTiempoMttoMaquina: $("#idTiempoMttoMaquina").val()
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                    {
+                        url: '@Url.Action("guardar_maquina", "mantenimiento")',
+                        type: "POST",
+                        data: JSON.stringify(
+                            {
+                                maquinaMTTO: maquinaMtto
+                            }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado == -1) {
+                                swal("", "Datos incorrectos!", "error");
+                            }
+                            else {
+                                swal("", "Maquina insertada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+
+                        },
+                        error: function () {
+                            swal("", "Error al insertar la maquina!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                $('#overlay').css('display', 'none');
+            }
+        }
+
+        function guardarPersonal() {
+            var isCorrect = true;
+
+            var currentDate = new Date();
+
+            if ($("#idPlantaPersonal").val() == "") {
+                swal("", "Nombre de la maquina no puede ser vacio", "warning");
+                isCorrect = false;
+            }
+
+            if (($("#nombrePersonal").val() == 0)) {
+                swal("", "Debes indicar una frecuencia de mantenimiento", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+
+                var personalMtto = {
+                    idPlantaPersonal: $("#idPlantaPersonal").val(),
+                    nombrePersonal: $("#nombrePersonal").val()
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                    {
+                        url: '@Url.Action("guardar_personal", "mantenimiento")',
+                        type: "POST",
+                        data: JSON.stringify(
+                            {
+                                personalMTTO: personalMtto
+                            }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado == -1) {
+                                swal("", "Datos incorrectos!", "error");
+                            }
+                            else {
+                                swal("", "Personal insertada correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el personal!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                $('#overlay').css('display', 'none');
+            }
         }
 
     </script>

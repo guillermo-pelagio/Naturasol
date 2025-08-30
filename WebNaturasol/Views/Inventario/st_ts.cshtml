@@ -71,7 +71,7 @@
 <div class="modal fade" id="modalBuscarSTTS" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoBuscarInventario">
+            <div class="modal-header" style="background-color: lightgreen" id="encabezadoBuscarInventario">
                 <h5 class="modal-title" id="exampleModalLabel">Buscar</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -80,31 +80,31 @@
 
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Artículo:</label>
+                    <label for="articuloInventario" class="col-sm-4 col-form-label">Artículo:</label>
                     <div class="col-sm-8">
                         <input type="text" maxlength="12" class="form-control" id="articuloInventario">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Descripción:</label>
+                    <label for="descripcionInventario" class="col-sm-4 col-form-label">Descripción:</label>
                     <div class="col-sm-8">
                         <input type="text" class="form-control" id="descripcionInventario">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Almácen O.:</label>
+                    <label for="almacenInventario1" class="col-sm-4 col-form-label">Almácen O.:</label>
                     <div class="col-sm-8">
                         <input type="number" class="form-control" id="almacenInventario1">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">Almacen D.:</label>
+                    <label for="almacenInventario2" class="col-sm-4 col-form-label">Almacen D.:</label>
                     <div class="col-sm-8">
                         <input type="email" class="form-control" id="almacenInventario2">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="loteEdit" class="col-sm-4 col-form-label">De / a:</label>
+                    <label for="fechaInicio" class="col-sm-4 col-form-label">De / a:</label>
                     <div class="col-sm-4">
                         <input type="date" class="form-control" id="fechaInicio">
                     </div>
@@ -126,7 +126,7 @@
 <div class="modal fade" id="modalBuscarSurtidor" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoBuscarSurtidor">
+            <div class="modal-header" style="background-color: lightgreen" id="encabezadoBuscarSurtidor">
                 <h5 class="modal-title" id="exampleModalLabel">Surtidor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -135,7 +135,7 @@
 
             <div class="modal-body">
                 <div class="form-group row">
-                    <label for="correoTicketEdit" class="col-sm-4 col-form-label">Surtidor:</label>
+                    <label for="numeroSurtidor" class="col-sm-4 col-form-label">Surtidor:</label>
                     <div class="col-sm-8">
                         <input style="display:none" class="form-control" id="numeroLinea" readonly>
                         <select class="custom-select" id="numeroSurtidor">
@@ -156,7 +156,7 @@
 <div class="modal fade" id="modalDetalleInventario" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoBuscarSurtidor">
+            <div class="modal-header" style="background-color: lightgreen" id="encabezadoBuscarSurtidor">
                 <h5 class="modal-title" id="exampleModalLabel">Inventario</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -183,7 +183,7 @@
 <div class="modal fade" id="modalDetalleTransferencias" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoBuscarSurtidor">
+            <div class="modal-header" style="background-color: lightgreen" id="encabezadoBuscarSurtidor">
                 <h5 class="modal-title" id="exampleModalLabel">Transferencias realizadas</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -210,7 +210,7 @@
 <div class="modal fade" id="modalBuscarConfirmar" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoConfirmar">
+            <div class="modal-header" style="background-color: lightgreen" id="encabezadoConfirmar">
                 <h5 class="modal-title" id="tituloModalConfirmar2">Confirmar cantidades</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -226,7 +226,7 @@
                     <div class="col-sm-8">
                         <input type="number" class="form-control" id="cantidadSurtir">
                     </div>
-                    <label for="cantidadSurtir" class="col-sm-4 col-form-label">Lote:</label>
+                    <label for="lotesProductoSurtir" class="col-sm-4 col-form-label">Lote:</label>
                     <div class="col-sm-8">
                         <input style="display:none" class="form-control" id="numeroDocentry" readonly>
                         <select class="custom-select" id="lotesProductoSurtir">
@@ -247,7 +247,7 @@
 <div class="modal fade" id="modalBuscarFinalizar" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoFinalizar">
+            <div class="modal-header" style="background-color: lightgreen" id="encabezadoFinalizar">
                 <h5 class="modal-title" id="tituloModalConfirmar"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -397,7 +397,7 @@
                     if (resultado == 1) {
                         var isCorrect = true;
 
-                        if ($("#cantidadConfirmar"+linea).val() == 0) {
+                        if ($("#cantidadConfirmar" + linea).val() == 0) {
                             swal("", "Debes indicar una cantidad", "warning");
                             isCorrect = false;
                         }
@@ -427,13 +427,13 @@
                                 DistNumber: $('#loteConfirmar' + linea).val(),
                                 idSurtido: $('#idSurtidoParcial' + linea).val(),
                                 estatusSurtido: "W",
-                                status:"3",
+                                status: "3",
                                 QuantityST: $('#cantidadConfirmar' + linea).val()
                             }
                         }
 
                         if (isCorrect) {
-                            
+
 
                             $("#btnGuardarConfirmar" + linea).remove();
                             $("#btnRechazarConfirmar" + linea).remove();
@@ -450,12 +450,12 @@
                                     dataType: "json",
                                     contentType: "application/json; charset=utf-8",
                                     success: function (resultado) {
-                                        
+
                                         if (resultado == -1) {
                                             swal("", "Lote insuficiente!", "error");
                                         }
                                         if (resultado == 2) {
-                                            
+
                                             jQuery.ajax(
                                                 {
                                                     url: '@Url.Action("actualizar_estatus_surtido_parcial", "inventario")',
@@ -467,7 +467,7 @@
                                                     dataType: "json",
                                                     contentType: "application/json; charset=utf-8",
                                                     success: function (resultado) {
-                                                        
+
                                                         if (resultado == -1) {
                                                             swal("", "Datos incorrectos!", "error");
                                                         }
@@ -480,7 +480,7 @@
                                                     error: function () {
                                                         swal("", resultado, "error");
                                                     },
-                                                });                                            
+                                                });
                                             swal("", "Validación realizada!", "success")
                                                 .then((value) => {
                                                     window.location.reload(false);
@@ -489,33 +489,33 @@
                                         else {
 
                                             if (resultado == 0) {
-                                                
-                                            jQuery.ajax(
-                                                {
-                                                    url: '@Url.Action("actualizar_estatus_surtido_parcial", "inventario")',
-                                                    type: "POST",
-                                                    data: JSON.stringify(
-                                                        {
-                                                            solicitudTraslado: datos
-                                                        }),
-                                                    dataType: "json",
-                                                    contentType: "application/json; charset=utf-8",
-                                                    success: function (resultado) {
-                                                        
-                                                        if (resultado == -1) {
-                                                            swal("", "Datos incorrectos!", "error");
-                                                        }
-                                                        else {
-                                                            swal("", "Estatus actualizado --", "success")
-                                                                .then((value) => {
-                                                                });
-                                                        }
-                                                    },
-                                                    error: function () {
-                                                        swal("", resultado, "error");
-                                                    },
-                                                });
-                                                
+
+                                                jQuery.ajax(
+                                                    {
+                                                        url: '@Url.Action("actualizar_estatus_surtido_parcial", "inventario")',
+                                                        type: "POST",
+                                                        data: JSON.stringify(
+                                                            {
+                                                                solicitudTraslado: datos
+                                                            }),
+                                                        dataType: "json",
+                                                        contentType: "application/json; charset=utf-8",
+                                                        success: function (resultado) {
+
+                                                            if (resultado == -1) {
+                                                                swal("", "Datos incorrectos!", "error");
+                                                            }
+                                                            else {
+                                                                swal("", "Estatus actualizado --", "success")
+                                                                    .then((value) => {
+                                                                    });
+                                                            }
+                                                        },
+                                                        error: function () {
+                                                            swal("", resultado, "error");
+                                                        },
+                                                    });
+
 
                                                 swal("", "Transferencia realizada", "success").then((value) => {
                                                     window.location.reload(false);
@@ -563,7 +563,7 @@
                                     },
                                 });
 
-                            
+
                         }
 
                     }
@@ -594,11 +594,11 @@
                         var isCorrect = true;
 
                         var datos = {
-                            DocEntry : $('#docEntryFinalizar').val(),
-                            FillerST : $('#almacenFinalizar').val(),
-                            ItemCodeST : $('#articuloConfirmar' + linea).val(),
-                            DistNumber : $('#loteConfirmar' + linea).val(),
-                            QuantityST : $('#cantidadConfirmar' + linea).val()
+                            DocEntry: $('#docEntryFinalizar').val(),
+                            FillerST: $('#almacenFinalizar').val(),
+                            ItemCodeST: $('#articuloConfirmar' + linea).val(),
+                            DistNumber: $('#loteConfirmar' + linea).val(),
+                            QuantityST: $('#cantidadConfirmar' + linea).val()
                         }
 
                         if (isCorrect) {
@@ -660,10 +660,10 @@
 
                         var isCorrect = true;
                         var datos = {
-                            DocEntry : $('#docEntryFinalizar').val(),
-                            FillerST : $('#almacenFinalizar').val(),
-                            ItemCodeST : $('#articuloConfirmar' + linea).val(),
-                            DistNumber : $('#loteConfirmar' + linea).val(),
+                            DocEntry: $('#docEntryFinalizar').val(),
+                            FillerST: $('#almacenFinalizar').val(),
+                            ItemCodeST: $('#articuloConfirmar' + linea).val(),
+                            DistNumber: $('#loteConfirmar' + linea).val(),
                             QuantityST: $('#cantidadConfirmar' + linea).val(),
                             status: '1'
                         }
@@ -761,13 +761,11 @@
         function GuardarSurtidor() {
             //var filaseleccionada = $(this).closest("tr");
             var isCorrect = true;
-            if ($("#numeroSurtidor").val() == 0)
-            {
+            if ($("#numeroSurtidor").val() == 0) {
                 swal("", "Debes indicar un surtidor", "warning");
                 isCorrect = false;
             }
-            if (isCorrect)
-            {
+            if (isCorrect) {
                 jQuery.ajax(
                     {
                         url: '@Url.Action("actualizar_estatus2", "inventario")',
@@ -935,58 +933,49 @@
             else
             {
                 jQuery.ajax(
-                {
-                    url: '@Url.Action("validar_sesion", "Inicio")',
-                    type: "POST",
-                    dataType: "json",
-                    success: function(resultado)
                     {
-                        $('#overlay').css('display', 'none');
-                        if (resultado == 1)
-                        {
-                            if ($("#componenteOFEdit").val() != null)
-                            {
-                                var busqueda = {
-                                    Artículo: $("#componenteOFEdit").val().substring(0, 12),
-                                    Almacén: "",
-                                    Lote: "",
-                                }
+                        url: '@Url.Action("validar_sesion", "Inicio")',
+                        type: "POST",
+                        dataType: "json",
+                        success: function (resultado) {
+                            $('#overlay').css('display', 'none');
+                            if (resultado == 1) {
+                                if ($("#componenteOFEdit").val() != null) {
+                                    var busqueda = {
+                                        Artículo: $("#componenteOFEdit").val().substring(0, 12),
+                                        Almacén: "",
+                                        Lote: "",
+                                    }
 
-                                jQuery.ajax(
-                                {
-                                    url: '@Url.Action("obtener_inventario", "inventario")',
-                                    type: "POST",
-                                    data: busqueda,
-                                    success: function(resultado)
-                                    {
-                                        window.open('/inventario/consultar_inventario/', "_blank");
-                                    },
-                                    error: function(xhr, status, error) {},
-                                });
+                                    jQuery.ajax(
+                                        {
+                                            url: '@Url.Action("obtener_inventario", "inventario")',
+                                            type: "POST",
+                                            data: busqueda,
+                                            success: function (resultado) {
+                                                window.open('/inventario/consultar_inventario/', "_blank");
+                                            },
+                                            error: function (xhr, status, error) { },
+                                        });
+                                }
+                                else {
+                                    swal("", "Elige un artículo!", "warning")
+                                        .then((value) => { });
+                                }
                             }
-                            else
-                            {
-                                swal("", "Elige un artículo!", "warning")
-                                    .then((value) =>
-                                    {});
-                            }
-                        }
-                        else
-                        {
-                            alert('Sesion caducada');
-                            window.location.reload(false);
-                        }
-                    },
-                    error: function()
-                    {
-                        $('#overlay').css('display', 'none');
-                        swal("", "Sesión expirada!", "error")
-                            .then((value) =>
-                            {
+                            else {
+                                alert('Sesion caducada');
                                 window.location.reload(false);
-                            });
-                    },
-                });
+                            }
+                        },
+                        error: function () {
+                            $('#overlay').css('display', 'none');
+                            swal("", "Sesión expirada!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
             }
         }
 
@@ -1183,8 +1172,8 @@
                 url: '@Url.Action("validar_sesion", "Inicio")',
                 type: "POST",
                 dataType: "json",
-                success: function (resultado) {                    
-                    if (resultado == 1) {                        
+                success: function (resultado) {
+                    if (resultado == 1) {
 
                         /*jQuery.ajax(
                             {

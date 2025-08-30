@@ -523,8 +523,7 @@
         });
 
         //GUARDADO DE COTIZACION
-        function guardadoCotizacion()
-        {
+        function guardadoCotizacion() {
             var isCorrect = true;
 
             var currentDate = new Date();
@@ -533,54 +532,50 @@
 
 
             if ($("#fechaAltaCotizacion").val() == "") {
-            swal("", "La fecha de alta no puede ser vacia", "warning");
-            isCorrect = false;
-        }
-
-        if (selectedDate>currentDate) {
-            swal("", "La fecha de alta no puede ser posterior a hoy", "warning");
-            isCorrect = false;
-        }
-
-        if (selectedDate < olderDate) {
-            swal("", "La fecha de alta no puede ser inferior a 2024", "warning");
-            isCorrect = false;
-        }
-
-        if (($("#kamCotizacion").val() == 0) && ($("#idCotizacion").val() == 0))
-            {
-            swal("", "Debes indicar un KAM", "warning");
-            isCorrect = false;
-        }
-
-        if ($("#clienteCotizacion").val() == 0)
-            {
-            swal("", "Debes indicar un cliente", "warning");
-            isCorrect = false;
-        }
-
-        if ($("#descripcionCotizacion").val() == 0)
-            {
-            swal("", "Debes indicar una descripción", "warning");
-            isCorrect = false;
-        }
-
-        if ($("#categoriaCotizacion").val() == 0) {
-            swal("", "Debes indicar una categoria", "warning");
-            isCorrect = false;
-        }
-
-        if (isCorrect)
-        {
-            var kamSleccionado = 0;
-            if ($("#idCotizacion").val() != 0) {
-                kamSleccionado = $("#kamCotizacion2").val();
+                swal("", "La fecha de alta no puede ser vacia", "warning");
+                isCorrect = false;
             }
+
+            if (selectedDate > currentDate) {
+                swal("", "La fecha de alta no puede ser posterior a hoy", "warning");
+                isCorrect = false;
+            }
+
+            if (selectedDate < olderDate) {
+                swal("", "La fecha de alta no puede ser inferior a 2024", "warning");
+                isCorrect = false;
+            }
+
+            if (($("#kamCotizacion").val() == 0) && ($("#idCotizacion").val() == 0)) {
+                swal("", "Debes indicar un KAM", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#clienteCotizacion").val() == 0) {
+                swal("", "Debes indicar un cliente", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#descripcionCotizacion").val() == 0) {
+                swal("", "Debes indicar una descripción", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#categoriaCotizacion").val() == 0) {
+                swal("", "Debes indicar una categoria", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                var kamSleccionado = 0;
+                if ($("#idCotizacion").val() != 0) {
+                    kamSleccionado = $("#kamCotizacion2").val();
+                }
                 else {
-                kamSleccionado = $("#kamCotizacion").val();
-            }
+                    kamSleccionado = $("#kamCotizacion").val();
+                }
 
-            var cotizacionData = {
+                var cotizacionData = {
                     KAM: kamSleccionado,
                     idCotizacion: $("#idCotizacion").val(),
                     fechaCreacion: $("#fechaAltaCotizacion").val(),
@@ -598,43 +593,43 @@
                 }
 
                 $('#overlay').css('display', 'flex');
-            jQuery.ajax(
-                {
-                    url: '@Url.Action("guardar_cotizacion", "ventas")',
-                    type: "POST",
-                    data: JSON.stringify(
-                        {
-                            cotizacionWEB: cotizacionData
-                        }),
-                    dataType: "json",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (resultado) {
-                        if (resultado == -1) {
-                            swal("", "Datos incorrectos!", "error");
-                        }
-                        else {
-                            if ($("#idCotizacion").val() != 0) {
-                                swal("", "Cotización actualizada correctamente!", "success")
-                                    .then((value) => {
-                                        window.location.reload(false);
-                                    });
+                jQuery.ajax(
+                    {
+                        url: '@Url.Action("guardar_cotizacion", "ventas")',
+                        type: "POST",
+                        data: JSON.stringify(
+                            {
+                                cotizacionWEB: cotizacionData
+                            }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado == -1) {
+                                swal("", "Datos incorrectos!", "error");
                             }
                             else {
-                                swal("", "Cotización insertada correctamente!", "success")
-                                    .then((value) => {
-                                        window.location.reload(false);
-                                    });
+                                if ($("#idCotizacion").val() != 0) {
+                                    swal("", "Cotización actualizada correctamente!", "success")
+                                        .then((value) => {
+                                            window.location.reload(false);
+                                        });
+                                }
+                                else {
+                                    swal("", "Cotización insertada correctamente!", "success")
+                                        .then((value) => {
+                                            window.location.reload(false);
+                                        });
+                                }
                             }
-                        }
 
-                    },
-                    error: function () {
-                        swal("", "Error al insertar el paro!", "error")
-                            .then((value) => {
-                                window.location.reload(false);
-                            });
-                    },
-                });
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el paro!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
                 $('#overlay').css('display', 'none');
             }
         }
