@@ -59,6 +59,7 @@
     <Compile Include="ConsumosROVE.cs" />
     <Compile Include="LiberacionesROVE.cs" />
     <Compile Include="LineaMtto.cs" />
+    <Compile Include="Mantenimiento.cs" />
     <Compile Include="MaquinasMtto.cs" />
     <Compile Include="Modulos.cs" />
     <Compile Include="OrdenVentaDetalle.cs" />

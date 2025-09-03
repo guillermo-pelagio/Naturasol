@@ -55,8 +55,8 @@
                                                         </div>
                                                         <label class="col-sm-3 col-form-label"></label>
                                                         <!--<div class="col-sm-3">
-                                                            <label class="col-form-label" id="lineaOFInicial" style="padding-top: 0; padding-bottom: 0; font-size: small; color: green; font-weight: bold;"></label>
-                                                        </div>-->
+            <label class="col-form-label" id="lineaOFInicial" style="padding-top: 0; padding-bottom: 0; font-size: small; color: green; font-weight: bold;"></label>
+        </div>-->
                                                         <div class="col-sm-3">
                                                             <select class="custom-select" id="lineaOFInicial">
                                                             </select>
@@ -120,6 +120,17 @@
                                                         </div>
                                                         <div class="col-sm-3">
                                                             <input type="text" class="form-control" id="uomEditLiberacion" readonly>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="pesoPromedioInicial" class="col-sm-3 col-form-label">Peso promedio (kg):</label>
+                                                        <div class="col-sm-3">
+                                                            <input type="number" class="form-control" id="pesoPromedioInicial">
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            
                                                         </div>
                                                     </div>
                                                     <div class="form-group row">
@@ -301,8 +312,8 @@
                                                     <table class="table table-hover" id="tablaLiberacionesROVE" style="width: 100%">
                                                         <thead>
                                                             <tr>
-                                                                <th>Acciones</th>
-                                                                <th>Estatus</th>
+                                                                <th></th>
+                                                                <th></th>
                                                                 <th>Creacion</th>
                                                                 <th>Turno</th>
                                                                 <th>Documento</th>
@@ -316,6 +327,7 @@
                                                                 <th>Merma</th>
                                                                 <th>Operador</th>
                                                                 <th>Supervisor</th>
+                                                                <th>Peso promedio</th>
                                                                 <th>Tiempo perdido</th>
                                                                 <th>Headcount Op</th>
                                                                 <th>HeadcountAy</th>
@@ -1596,6 +1608,11 @@
                 isCorrect = false;
             }
 
+            if ($("#pesoPromedioInicial").val() == 0) {
+                swal("", "Debes indicar un peso promedio", "warning");
+                isCorrect = false;
+            }
+
             if (isCorrect)
             {
 
@@ -1617,10 +1634,11 @@
                     Eficiencia: $("#eficienciaP").val(),
                     VelocidadLinea: $("#tiempoPerdido").val(),
                     Merma: $("#mermaProducidaInicial").val(),
+                    Peso: $("#pesoPromedioInicial").val()
                     /*MermaP: $("#mermapLiberacionEdit").val(),
                     Eficiencia: $("#eficienciaLiberacionEdit").val(),
                     Cajas: $("#cajasLiberacionEdit").val(),
-                    Peso: $("#pesoEdit").val(),
+                    
                     Sobrepeso: $("#sobrepesoEdit").val(),
                     Headcount: $("#headcountEdit").val()
                     */
@@ -1691,7 +1709,7 @@
                         title: 'Liberaciones producción',
                         exportOptions:
                         {
-                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15,16,17,18]
+                            columns: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12,13,14,15,16,17,18, 19]
                         }
                     },],
                 "columns": [
@@ -1760,6 +1778,9 @@
                     },
                     {
                         data: 'Supervisor'
+                    },
+                    {
+                        data: 'Peso'
                     },
                     {
                         data: 'VelocidadLinea'

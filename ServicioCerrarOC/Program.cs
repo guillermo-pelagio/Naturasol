@@ -47,11 +47,13 @@ namespace ServicioCerrarOC
                                 body = body.Replace("valorPendiente", listaOCAbiertas[j].Pendiente);
                                 body = body.Replace("valorAnticipo", listaOCAbiertas[j].Anticipo);
                                 body = body.Replace("valorTipo", listaOCAbiertas[j].DocType);
-                                /*
+
                                 if (DateTime.Now.Hour >= 19)
                                 {
                                     enviaCorreo = false;
-
+                                    /*
+                                    ordenesCompraBLL.cerrarOCAbiertas(listaOCAbiertas[j].DocEntry);
+                                    
                                     if (DateTime.Compare(DateTime.Today.AddDays(0), Convert.ToDateTime(listaOCAbiertas[j].TaxDate)) < 0)
                                     {
                                         Console.WriteLine("no cierro oc" + listaOCAbiertas[j].DocNum + Convert.ToDateTime(listaOCAbiertas[j].TaxDate).ToShortDateString());
@@ -75,8 +77,9 @@ namespace ServicioCerrarOC
                                             ordenesCompraBLL.cerrarOCAbiertas(listaOCAbiertas[j].DocEntry);
                                         }
                                     }
+                                    */
                                 }
-                                */
+
                             }
                         }
 

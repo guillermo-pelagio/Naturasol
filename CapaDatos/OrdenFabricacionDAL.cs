@@ -2170,6 +2170,7 @@ namespace CapaDatos
                                 Headcount2 = datareader["Headcount2"].ToString(),
                                 Headcount = datareader["Headcount"].ToString(),
                                 estatus = datareader["estatus"].ToString(),
+                                Peso = datareader["peso"].ToString(),
                                 turno = datareader["Turno"].ToString(),
                                 Merma = datareader["Merma"].ToString(),
                                 Comentarios = datareader["Comentarios"].ToString(),

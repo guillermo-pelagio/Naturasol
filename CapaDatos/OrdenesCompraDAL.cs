@@ -625,7 +625,7 @@ namespace CapaDatos
                     comANDo.Parameters.AddWithValue("@slpname", slpname);
                     comANDo.CommandType = CommandType.Text;
                     conexionDB.Open();
-
+                    
                     using (SqlDataReader datareader = comANDo.ExecuteReader())
                     {
                         while (datareader.Read())
@@ -641,6 +641,7 @@ namespace CapaDatos
                                 TaxDate = datareader["docduedate"].ToString(),
                                 DocTotal = datareader["doctotal"].ToString(),
                                 DocCur = datareader["doccur"].ToString(),
+                                Linea = datareader["doccur"].ToString(),
                                 Pendiente = datareader["Pendiente"].ToString(),
                                 Anticipo = datareader["Anticipo"].ToString(),
                                 DocType = datareader["DocType"].ToString(),

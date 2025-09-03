@@ -93,7 +93,7 @@ namespace CapaPresentacion.Controllers
         public JsonResult obtener_lineas()
         {
             List<LineaMtto> lineas = new List<LineaMtto>();
-            
+
             lineas = mantenimientoBLL.obtenerLineas();
 
             for (int i = 0; i < lineas.Count; i++)
@@ -111,10 +111,10 @@ namespace CapaPresentacion.Controllers
         }
 
         [HttpPost]
-        public JsonResult guardar_maquina(MaquinasMtto maquinasMtto)
+        public JsonResult guardar_maquina(MaquinasMtto maquinaMTTO)
         {
-            maquinasMtto.idUsuario = Convert.ToInt32(Session["usuarioId"]);
-            int idMaquina = mantenimientoBLL.guardarMaquina(maquinasMtto);
+            maquinaMTTO.idUsuario = Convert.ToInt32(Session["usuarioId"]);
+            int idMaquina = mantenimientoBLL.guardarMaquina(maquinaMTTO);
 
             return Json(new
             {
@@ -122,15 +122,124 @@ namespace CapaPresentacion.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+
         [HttpPost]
-        public JsonResult guardar_personal(PersonalMtto personalMtto)
+        public string obtener_linas_maquinas()
         {
-            personalMtto.idUsuario = Convert.ToInt32(Session["usuarioId"]);
-            int idPersonal = mantenimientoBLL.guardarPersonal(personalMtto);
+            List<LineaMtto> lineas = new List<LineaMtto>();
+            lineas = mantenimientoBLL.obtenerLineas();
+
+            string select = "<option value='0'>Selecciona una opción</option>";
+
+            for (int i = 0; i < lineas.Count; i++)
+            {
+                select = select + "<option value=" + lineas[i].idLinea + ">" + lineas[i].nombreLinea + " </option>";
+            }
+
+            return select;
+        }
+
+        [HttpGet]
+        public JsonResult obtener_maquinas()
+        {
+            List<MaquinasMtto> maquinas = new List<MaquinasMtto>();
+
+            maquinas = mantenimientoBLL.obtenerMaquinas();
+
+            for (int i = 0; i < maquinas.Count; i++)
+            {
+                maquinas[i].acciones = "<button type='button' id='btnEditar" + maquinas[i].idMaquina + "' onclick='validarConsumo(" + maquinas[i].idMaquina + ")' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button><button type='button' id='btnEliminarLinea" + maquinas[i].idMaquina + "' onclick='validarConsumo(" + maquinas[i].idMaquina + ",-1 )' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+            }
+
+            var jsonResult = Json(new
+            {
+                data = maquinas
+            }, JsonRequestBehavior.AllowGet);
+
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public JsonResult guardar_personal(PersonalMtto personalMTTOS)
+        {
+            personalMTTOS.idUsuario = Convert.ToInt32(Session["usuarioId"]);
+            int idPersonal = mantenimientoBLL.guardarPersonal(personalMTTOS);
 
             return Json(new
             {
                 data = idPersonal
+            }, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public JsonResult obtener_personal()
+        {
+            List<PersonalMtto> personal = new List<PersonalMtto>();
+
+            personal = mantenimientoBLL.obtenerPersonal();
+
+            for (int i = 0; i < personal.Count; i++)
+            {
+                personal[i].acciones = "<button type='button' id='btnEditar" + personal[i].idPersonal + "' onclick='validarConsumo(" + personal[i].idPersonal + ")' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button><button type='button' id='btnEliminarLinea" + personal[i].idPersonal + "' onclick='validarConsumo(" + personal[i].idPersonal + ",-1 )' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+            }
+
+            var jsonResult = Json(new
+            {
+                data = personal
+            }, JsonRequestBehavior.AllowGet);
+
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+        [HttpPost]
+        public string obtener_equipos_mtto()
+        {
+            List<MaquinasMtto> maquinas = new List<MaquinasMtto>();
+            maquinas = mantenimientoBLL.obtenerMaquinas();
+
+            string select = "<option value='0'>Selecciona una opción</option>";
+
+            for (int i = 0; i < maquinas.Count; i++)
+            {
+                select = select + "<option value=" + maquinas[i].idMaquina + ">" + maquinas[i].nombreMaquina + " </option>";
+            }
+
+            return select;
+        }
+
+        [HttpGet]
+        public JsonResult obtener_mantenimiento()
+        {
+            List<Mantenimiento> mantenimiento = new List<Mantenimiento>();
+
+            mantenimiento = mantenimientoBLL.obtenerMantenimiento();
+
+            for (int i = 0; i < mantenimiento.Count; i++)
+            {
+                mantenimiento[i].acciones = "<button type='button' id='btnEditar" + mantenimiento[i].idMantenimiento + "' onclick='validarConsumo(" + mantenimiento[i].idMantenimiento + ")' class='btn btn-info' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-check'></i></button><button type='button' id='btnEliminarLinea" + mantenimiento[i].idMantenimiento + "' onclick='validarConsumo(" + mantenimiento[i].idMantenimiento + ",-1 )' class='btn btn-danger' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-xmark'></i></button>";
+            }
+
+            var jsonResult = Json(new
+            {
+                data = mantenimiento
+            }, JsonRequestBehavior.AllowGet);
+
+            jsonResult.MaxJsonLength = int.MaxValue;
+            return jsonResult;
+        }
+
+
+        [HttpPost]
+        public JsonResult guardar_mtto(Mantenimiento dataMTTO)
+        {
+            dataMTTO.idUsuario = Convert.ToInt32(Session["usuarioId"]);
+            int idMtto = mantenimientoBLL.guardarMantenimiento(dataMTTO);
+
+            return Json(new
+            {
+                data = idMtto
             }, JsonRequestBehavior.AllowGet);
         }
     }

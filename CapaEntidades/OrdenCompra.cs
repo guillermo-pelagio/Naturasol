@@ -205,6 +205,10 @@
         public string ShipDate
         {
             get; set;
-        }        
+        }
+        public string Linea
+        {
+            get; set;
+        }
     }
 }

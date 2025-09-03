@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "rove";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    <meta http-equiv="refresh" content="180">
 }
 
 <div class="main-panel">
@@ -10,6 +11,7 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                        <h3 style="text-align: center">Registro comedor</h3>
                         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" id="pills-registro-tab" data-toggle="pill" href="#pills-registro" role="tab" aria-controls="pills-registro" aria-selected="false">Nuevo registro</a>
@@ -28,9 +30,9 @@
                                                 <div class="form-group row">
                                                     <label for="departamentoTicketEdit" class="col-sm-4 col-form-label"># Empleado:</label>
                                                     <div class="col-sm-4">
-                                                        <input type="number" class="form-control" id="numeroEmpleado">
+                                                        <input type="number" class="form-control" id="numeroEmpleado" autofocus>
                                                     </div>
-                                                    <div class='col-sm-4'>                                                        
+                                                    <div class='col-sm-4'>
                                                         <button type='button' id='btnGuardar' onclick='guardarRegistro()' class='btn btn-success' style='padding: 0.5rem; border-radius: 5px;'><i class='fa-solid fa-floppy-disk'></i></button>
                                                     </div>
                                                 </div>
@@ -55,7 +57,7 @@
                                                                 <th>Nombre</th>
                                                                 <th>Fecha</th>
                                                                 <th>Ubicación</th>
-                                                                <th>Tipo</th>                                                                
+                                                                <th>Tipo</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -78,6 +80,15 @@
 {
     <script>
 
+        $(document).ready(function () {
+            $('#numeroEmpleado').keypress(function (event) {
+                var keycode = (event.keyCode ? event.keyCode : event.which);
+                if (keycode == '13') {
+                    guardarRegistro();
+                }
+            });
+        });
+
         tablaRegistros = $("#tablaRegistros").DataTable({
             paging: true,
             ordering: false,
@@ -97,17 +108,14 @@
                 { data: 'numeroEmpleado' },
                 { data: 'nombreEmpleado' },
                 { data: 'fechaRegistro' },
-                { data: 'ubicacion' },                
+                { data: 'ubicacion' },
                 {
                     data: 'tipo', "render": function (tipo) {
-                        if (tipo == 'E') {
-                            return '<span class="badge badge-success">Entrada</span>'
+                        if (tipo == 'D') {
+                            return '<span class="badge badge-success">Desayuno</span>'
                         }
-                        else if (estatus == 'S') {
-                            return '<span class="badge badge-danger">Salida</span>'
-                        }
-                        else if (estatus == 'C') {
-                            return '<span class="badge badge-warning">Comida</span>'
+                        else if (tipo == 'C') {
+                            return '<span class="badge badge-danger">Comida</span>'
                         }
 
                     }
@@ -167,51 +175,69 @@
 
         function guardarRegistro() {
 
-            jQuery.ajax(
-                {
-                    url: '@Url.Action("validar_sesion", "Inicio")',
-                    type: "POST",
-                    dataType: "json",
-                    success: function (resultado) {
-                        $('#overlay').css('display', 'none');
-                        if (resultado == 1) {
-                            $('#overlay').css('display', 'flex');
-                            var componente = {
-                                numeroEmpleado: $("#numeroEmpleado").val()
+            var isCorrect = true;
+
+            if ($("#numeroEmpleado").val().length == 0) {
+                swal("", "Debes indicar un número de empleado", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+                jQuery.ajax(
+                    {
+                        url: '@Url.Action("validar_sesion", "Inicio")',
+                        type: "POST",
+                        dataType: "json",
+                        success: function (resultado) {
+                            $('#overlay').css('display', 'none');
+                            if (resultado == 1) {
+                                $('#overlay').css('display', 'flex');
+                                var componente = {
+                                    numeroEmpleado: $("#numeroEmpleado").val()
+                                }
+                                jQuery.ajax(
+                                    {
+                                        url: '@Url.Action("guardar_asistencia", "rrhh")',
+                                        type: "POST",
+                                        data: componente,
+                                        success: function (resultado) {
+                                            swal({
+                                                title: "",
+                                                text: "Registro correcto!",
+                                                type: "success",
+                                                timer: 500
+                                            }).then((value) => {
+                                                window.location.reload(false);
+                                            });
+                                            /*
+                                            swal("", "Registro correcto!", "success")
+                                                .then((value) => {
+                                                    window.location.reload(false);
+                                                });
+                                                */
+                                        },
+                                        error: function (xhr, status, error) {
+                                            swal("", "Error al guardar el registro!", "error")
+                                                .then((value) => {
+                                                    window.location.reload(false);
+                                                });
+                                        },
+                                    });
                             }
-                            jQuery.ajax(
-                                {
-                                    url: '@Url.Action("guardar_asistencia", "rrhh")',
-                                    type: "POST",
-                                    data: componente,
-                                    success: function (resultado) {
-                                        swal("", "Asistencia registrada correctamente!", "success")
-                                            .then((value) => {
-                                                window.location.reload(false);
-                                            });
-                                    },
-                                    error: function (xhr, status, error) {
-                                        swal("", "Error al guardar la asistencia!", "error")
-                                            .then((value) => {
-                                                window.location.reload(false);
-                                            });
-                                    },
-                                });
-                        }
-                        else {
-                            alert('Sesion caducada');
-                            window.location.reload(false);
-                        }
-                    },
-                    error: function () {
-                        $('#overlay').css('display', 'none');
-                        swal("", "Sesión expirada!", "error")
-                            .then((value) => {
+                            else {
+                                alert('Sesion caducada');
                                 window.location.reload(false);
-                            });
-                    },
-                });
-            $('#overlay').css('display', 'none');
+                            }
+                        },
+                        error: function () {
+                            $('#overlay').css('display', 'none');
+                            swal("", "Sesión expirada!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+            }
         }
     </script>
 }

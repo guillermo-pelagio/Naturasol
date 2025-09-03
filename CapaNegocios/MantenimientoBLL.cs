@@ -40,5 +40,31 @@ namespace CapaNegocios
         {
             return mantenimientoDAL.guardarPersonal(cotizacionWEB);
         }
+
+        public List<MaquinasMtto> obtenerMaquinas()
+        {
+            List<MaquinasMtto> lineas = new List<MaquinasMtto>();
+            lineas = mantenimientoDAL.obtenerMaquinas();
+            return lineas;
+        }
+
+        public List<PersonalMtto> obtenerPersonal()
+        {
+            List<PersonalMtto> lineas = new List<PersonalMtto>();
+            lineas = mantenimientoDAL.obtenerPersonal();
+            return lineas;
+        }
+
+        public int guardarMantenimiento(Mantenimiento mantenimientos)
+        {
+            return mantenimientoDAL.guardarMantenimiento(mantenimientos);
+        }
+
+        public List<Mantenimiento> obtenerMantenimiento()
+        {
+            List<Mantenimiento> lineas = new List<Mantenimiento>();
+            lineas = mantenimientoDAL.obtenerMantenimiento();
+            return lineas;
+        }
     }
 }

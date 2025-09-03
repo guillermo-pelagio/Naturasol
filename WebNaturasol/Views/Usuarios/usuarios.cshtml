@@ -96,6 +96,23 @@
                                     <label for="puestoUsuario" class="col-sm-3 col-form-label">*Perfil</label>
                                     <div class="col-sm-9">
                                         <select class="custom-select" id="puestoUsuario">
+                                            <option value="-1">Seleccione una opción</option>
+                                            <option value="0">0-OPERADOR DE PRODUCCION</option>
+                                            <option value="1">1-SUPERVISOR</option>
+                                            <option value="2">2-ANALISTA DE PRODUCCION</option>
+                                            <option value="4">4-SUPERVISOR DE COSTOS</option>
+                                            <option value="10">10-KAM</option>
+                                            <option value="11">11-DIRECTOR COMERCIAL</option>
+                                            <option value="27">27-SUPERVISOR DE LOGISTICA</option>
+                                            <option value="30">30-SUPERVISOR DE ALMACEN</option>
+                                            <option value="31">31-MESA DE CONTROL COSTOS</option>
+                                            <option value="32">32-MESA DE CONTROL ALMACEN</option>
+                                            <option value="33">33-MESA DE CONTROL PRODUCCION</option>
+                                            <option value="40">40-COMPRADOR</option>
+                                            <option value="60">60-CALIDAD</option>
+                                            <option value="65">65-MICROBIOLOGIA</option>
+                                            <option value="99">99-ANALISTA DE SISTEMAS</option>
+                                            <option value="100">100-ADMINISTRADOR</option>
                                         </select>
                                     </div>
                                 </div>
@@ -228,7 +245,25 @@
                 <div class="form-group row">
                     <label for="puestoUsuarioEdit" class="col-sm-4 col-form-label">*Perfil</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="puestoUsuarioEdit">
+                        <select class="custom-select" id="puestoUsuarioEdit">
+                            <option value="-1">Seleccione una opción</option>
+                            <option value="0">0-OPERADOR DE PRODUCCION</option>
+                            <option value="1">1-SUPERVISOR</option>
+                            <option value="2">2-ANALISTA DE PRODUCCION</option>
+                            <option value="4">4-SUPERVISOR DE COSTOS</option>
+                            <option value="10">10-KAM</option>
+                            <option value="11">11-DIRECTOR COMERCIAL</option>
+                            <option value="27">27-SUPERVISOR DE LOGISTICA</option>
+                            <option value="30">30-SUPERVISOR DE ALMACEN</option>
+                            <option value="31">31-MESA DE CONTROL COSTOS</option>
+                            <option value="32">32-MESA DE CONTROL ALMACEN</option>
+                            <option value="33">33-MESA DE CONTROL PRODUCCION</option>
+                            <option value="40">40-COMPRADOR</option>
+                            <option value="60">60-CALIDAD</option>
+                            <option value="65">65-MICROBIOLOGIA</option>
+                            <option value="99">99-ANALISTA DE SISTEMAS</option>
+                            <option value="100">100-ADMINISTRADOR</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -356,7 +391,7 @@
                         $("#estatusUsuarioEdit").val(datos.estatus);
                         $("#idUsuarioEdit").val(datos.idUsuario);
                         $("#puestoUsuarioEdit").val(datos.puesto);
-                        
+
                         $("#modalDetalle").modal("show");
                         var element = document.getElementById("encabezadoDetalleUsuario");
 
@@ -402,7 +437,7 @@
             $("#correoUsuario").val("");
             $("#maternoUsuario").val("");
             $("#paternoUsuario").val("");
-            $("#puestoUsuario").val("");
+            $("#puestoUsuario").val(-1);
             $("#nombreUsuario").val("");
             $("#estatusUsuario").val(0);
         }
@@ -435,7 +470,7 @@
                 swal("", "Debes indicar un nombre", "warning");
                 isCorrect = false;
             }
-            if ($("#puestoUsuario").val().length == 0) {
+            if ($("#puestoUsuario").val() == -1) {
                 swal("", "Debes indicar un puesto", "warning");
                 isCorrect = false;
             }
@@ -526,7 +561,7 @@
                 swal("", "Debes indicar un nombre", "warning");
                 isCorrect = false;
             }
-            if ($("#puestoUsuarioEdit").val().length == 0) {
+            if ($("#puestoUsuarioEdit").val() == 0) {
                 swal("", "Debes indicar un puesto", "warning");
                 isCorrect = false;
             }

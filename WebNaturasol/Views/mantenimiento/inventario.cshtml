@@ -50,25 +50,12 @@
 <div class="modal fade" id="modalBuscarInventario" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            @if (Convert.ToString(Session["sociedad"]) == "MIEL MEX")
-            {
-                <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoBuscarInventario">
-                    <h5 class="modal-title" id="exampleModalLabel">Buscar inventario</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            }
-            else
-            {
-                <div class="modal-header" style="background-color: lightgreen" id="encabezadoBuscarInventario">
-                    <h5 class="modal-title" id="exampleModalLabel">Buscar inventario</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-            }
-
+            <div class="modal-header" style="background-color: #bdbdbd" id="encabezadoBuscarInventario">
+                <h5 class="modal-title" id="exampleModalLabel">Buscar inventario</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
 
             <div class="modal-body">
                 <div class="form-group row">
@@ -133,7 +120,7 @@
                     extend: 'excelHtml5',
                     title: 'Inventario',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        columns: [0, 1, 2, 3, 4]
                     }
                 },
             ],
@@ -147,7 +134,7 @@
                             { data: 'Sociedad' },
                             { data: 'Artículo' },
                             { data: 'Descripción' },
-                            { data: 'Almacén' },                            
+                            { data: 'Almacén' },
                             { data: 'Stock' }
                         ],
         });
@@ -164,7 +151,7 @@
                         var busqueda = {
                             Artículo: $("#articuloInventario").val(),
                             Almacén: $("#almacenInventario").val(),
-                            Descripción: $("#descripcionInventario").val()                            
+                            Descripción: $("#descripcionInventario").val()
                         }
 
                         jQuery.ajax({

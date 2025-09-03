@@ -434,6 +434,7 @@
     <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\RRHHController.cs" />
     <Compile Include="Controllers\InternacionalController.cs" />
+    <Compile Include="Controllers\SistemasController.cs" />
     <Compile Include="Controllers\TransportesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\CXPController.cs" />
@@ -2452,6 +2453,7 @@
     <Content Include="Views\mantenimiento\catalogos.cshtml" />
     <Content Include="Views\mantenimiento\mantenimientos.cshtml" />
     <Content Include="Views\Calidad\entradas_lote.cshtml" />
+    <Content Include="Views\sistemas\tickets.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

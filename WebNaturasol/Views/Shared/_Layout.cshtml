@@ -611,7 +611,22 @@
                             </div>
                         </li>
                     }
-                    @if ((Convert.ToString(Session["permisosArea"]).Contains("RRHH")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    @if ((Convert.ToString(Session["permisosArea"]).Contains("SISTEMAS")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#sistemas" aria-expanded="false" aria-controls="sistemas">
+                                <i class="fa-solid fa-laptop menu-icon"></i>
+                                <span class="menu-title">Sistemas</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="sistemas">
+                                <ul class="nav flex-column sub-menu">                                    
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("tickets", "sistemas")">Tickets</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    }
+                    @if ((Convert.ToString(Session["permisosArea"]).Contains("SISTEMAS")) || ((Convert.ToInt32(Session["puesto"]) == 100) && (Convert.ToInt32(Session["departamento"]) == 1)))
                     {
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="collapse" href="#rrhh" aria-expanded="false" aria-controls="rrhh">
@@ -624,7 +639,7 @@
                                     <li class="nav-item"> <a class="nav-link" href="@Url.Action("ausencias", "rrhh")">Ausencias</a></li>
                                 </ul>
                                 <ul class="nav flex-column sub-menu">
-                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("asistencia", "rrhh")">Asistencia</a></li>
+                                    <li class="nav-item"> <a class="nav-link" href="@Url.Action("asistencia", "rrhh")">Registro comedor</a></li>
                                 </ul>
                             </div>
                         </li>

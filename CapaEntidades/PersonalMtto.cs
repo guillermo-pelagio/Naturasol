@@ -6,18 +6,28 @@
         {
             get; set;
         }
-        
+
+        public int idPersonal
+        {
+            get; set;
+        }
+
         public int idPlantaPersonal
         {
             get; set;
         }
 
-        public int nombrePersonal
+        public int estatusPersonal
         {
             get; set;
         }
 
-        public int acciones
+        public string nombrePersonal
+        {
+            get; set;
+        }
+
+        public string acciones
         {
             get; set;
         }

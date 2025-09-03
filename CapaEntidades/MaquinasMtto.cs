@@ -12,6 +12,16 @@
             get; set;
         }
 
+        public int idLinea
+        {
+            get; set;
+        }
+
+        public string nombreMaquina
+        {
+            get; set;
+        }
+        
         public int frecuenciaMttoMaquina
         {
             get; set;
@@ -22,7 +32,17 @@
             get; set;
         }
 
-        public int descripcionMaquina
+        public string descripcionMaquina
+        {
+            get; set;
+        }
+
+        public int estatusMaquina
+        {
+            get; set;
+        }
+
+        public string acciones
         {
             get; set;
         }

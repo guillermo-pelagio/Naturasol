@@ -63,7 +63,7 @@
             "columns": [
                 {
                     data: 'queryReporte', "render": function (queryReporte) {
-                        if (queryReporte.includes("app.powerbi.com"))  {
+                        if (queryReporte.includes("https://"))  {
                             return '<button type="button" id="btn-visualizar-reporte" class="btn btn-warning" style="padding: 0.5rem; border-radius: 5px;"><i class="fa fa-chart-simple" aria-hidden="true"></i></button>'
                         }
                         if (queryReporte.includes(".xlsx")) {

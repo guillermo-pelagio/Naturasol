@@ -21,8 +21,7 @@
                                             <div class="table-responsive">
                                                 <table class="table table-hover" id="tablaMantenimientos" style="width: 100%">
                                                     <thead>
-                                                        <tr>
-                                                            <th>Planta</th>
+                                                        <tr>                                                            
                                                             <th>Tipo</th>
                                                             <th>Equipo</th>
                                                             <th>Estatus</th>
@@ -51,7 +50,7 @@
 <div class="modal fade" id="modalCrearMantenimiento" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" style="max-width: 50rem">
         <div class="modal-content">
-            <div class="modal-header" style="background-color: #ffa5008c" id="encabezadoMantenimiento">
+            <div class="modal-header" style="background-color: #bdbdbd" id="encabezadoMantenimiento">
                 <h5 class="modal-title" id="exampleModalLabel">Nuevo mantenimiento</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -88,15 +87,22 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label for="loteEdit" class="col-sm-4 col-form-label">Comentarios::</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" id="comentariosMtto" rows="5"></textarea>
+                    </div>
+                </div>
+                <!--<div class="form-group row">
                     <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">Componentes:</label>
                     <div class="col-sm-4">
                         <input type="text" class="form-control" id="componenteMtto">
                     </div>
                     <div class="col-sm-4">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Agregar</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Agregar</button>
+                        <button type="button" class="btn btn-info" data-dismiss="modal"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal"><i class="fa-solid fa-plus"></i></button>
                     </div>
                 </div>
+
                 <div class="form-group row">
                     <label for="departamentoTicketEdit" class="col-sm-4 col-form-label">SDC:</label>
                     <div class="col-sm-4">
@@ -107,10 +113,11 @@
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Agregar</button>
                     </div>
                 </div>
+                    -->
                 <br />
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
-                    <button type="button" id="btnBuscarInventario" onclick="busquedaInventario()" class="btn btn-success">Consultar</button>
+                    <button type="button" id="btnBuscarInventario" onclick="agregarMtto()" class="btn btn-success">Agregar</button>
                 </div>
 
             </div>
@@ -124,5 +131,144 @@
         function nuevoMantenimiento() {
             $("#modalCrearMantenimiento").modal("show");
         }
+
+        jQuery.ajax(
+            {
+                url: '@Url.Action("validar_sesion", "Inicio")',
+                type: "POST",
+                dataType: "json",
+                success: function (resultado) {
+                    $('#overlay').css('display', 'none');
+                    if (resultado == 1) {
+                        jQuery.ajax(
+                            {
+                                url: '@Url.Action("obtener_equipos_mtto", "mantenimiento")',
+                                type: "POST",
+                                success: function (resultado) {
+                                    $('#idEquipoMtto').append(resultado);
+                                },
+                                error: function (xhr, status, error) {
+
+                                },
+                            });
+                    }
+                    else {
+                        alert('Sesion caducada');
+                        window.location.reload(false);
+                    }
+                },
+                error: function () {
+                    $('#overlay').css('display', 'none');
+                    swal("", "Sesión expirada!", "error")
+                        .then((value) => {
+                            window.location.reload(false);
+                        });
+                },
+            });
+
+        function agregarMtto() {
+            var isCorrect = true;
+
+            var currentDate = new Date();
+
+            if ($("#idTipoMtto").val() == "") {
+                swal("", "Se requiere un tipo de mantenimiento", "warning");
+                isCorrect = false;
+            }
+
+            if (($("#idEquipoMtto").val() == 0)) {
+                swal("", "Debes indicar un equipo", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#inicioMtto").val() == 0) {
+                swal("", "Debes indicar el inicio del mantenimiento", "warning");
+                isCorrect = false;
+            }
+
+            if ($("#finMtto").val() == 0) {
+                swal("", "Debes indicar el fin del mantenimiento", "warning");
+                isCorrect = false;
+            }
+
+            if (isCorrect) {
+
+                var mttoData = {
+                    idTipoMtto: $("#idTipoMtto").val(),
+                    idEquipoMtto: $("#idEquipoMtto").val(),
+                    inicioMtto: $("#inicioMtto").val(),
+                    finMtto: $("#finMtto").val(),
+                    comentariosMtto: $("#comentariosMtto").val()
+                }
+
+                $('#overlay').css('display', 'flex');
+                jQuery.ajax(
+                    {
+                        url: '@Url.Action("guardar_mtto", "mantenimiento")',
+                        type: "POST",
+                        data: JSON.stringify(
+                            {
+                                dataMTTO: mttoData
+                            }),
+                        dataType: "json",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (resultado) {
+                            if (resultado == -1) {
+                                swal("", "Datos incorrectos!", "error");
+                            }
+                            else {
+                                swal("", "Mantenimiento insertado correctamente!", "success")
+                                    .then((value) => {
+                                        window.location.reload(false);
+                                    });
+                            }
+
+                        },
+                        error: function () {
+                            swal("", "Error al insertar el mantenimiento!", "error")
+                                .then((value) => {
+                                    window.location.reload(false);
+                                });
+                        },
+                    });
+                $('#overlay').css('display', 'none');
+            }
+        }
+
+        tablaMantenimientos = $("#tablaMantenimientos").DataTable({
+            paging: true,
+            ordering: false,
+            info: true,
+            lengthChange: false,
+            pageLength: 25,
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json"
+            },
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'excelHtml5',
+                    title: 'Lineas',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    }
+                },
+            ],
+
+            "ajax": {
+                url: '@Url.Action("obtener_mantenimiento", "mantenimiento")',
+                type: "GET",
+                dataType: "json",
+            },
+            "columns": [
+                
+                { data: 'idTipoMtto' },
+                { data: 'idEquipoMtto' },
+                { data: 'estatusMantenimiento' },
+                { data: 'inicioMtto' },                
+                { data: 'acciones' }
+            ],
+        });
+
     </script>
 }

@@ -86,8 +86,16 @@ namespace CapaPresentacion.Controllers
 
             for (int i = 0; i < empleados.Count; i++)
             {
-                empleados[i].tipo = "E";
-                empleados[i].ubicacion = "SEMILLAS";
+                if(Convert.ToDateTime(empleados[i].fechaRegistro).Hour<12)
+                {
+                    empleados[i].tipo = "D";
+                }
+                else
+                {
+                    empleados[i].tipo = "C";
+                }
+                
+                empleados[i].ubicacion = "SATELITE";
             }
 
             return Json(new
